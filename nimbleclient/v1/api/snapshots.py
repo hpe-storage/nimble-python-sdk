@@ -50,45 +50,6 @@ class Snapshot(Resource):
     - force                       : Forcibly delete the specified snapshot even if it is the last replicated collection. Doing so could lead to full re-seeding at the next replication.
     """
 
-    def cksum(self):
-        """
-        Computes checksum of snapshot which can be used to verify data integrity. Checksum computation is a long running operation and can take several minutes.
-
-        Parameters:
-        - id : ID of the snapshot to take a checksum of.
-        """
-
-        return self.collection.cksum(self.id)
-
-    def get_allocated_bitmap(self, chunk_size_bytes, segment_length_bytes, segment_start_offset_bytes, timeout_secs):
-        """
-        Scan a segment within a snapshot and return a bitmap of the non-zero chunks.
-
-        Parameters:
-        - id                         : ID of the snapshot to scan.
-        - segment_start_offset_bytes : The starting byte offset of the segment to scan. Must be a multiple of the chunk size.
-        - segment_length_bytes       : The length in bytes of the segment to scan. Must be a multiple of the chunk size.
-        - chunk_size_bytes           : The number of bytes represented by a bit in the bitmap. Must be a multiple of the snapshot's block size.
-        - timeout_secs               : A limit on the time (in seconds) to generate a result. If a full result cannot be computed in this time, a partial result will be returned instead. The bitmap for a partial result will be shorter than expected and will comprise whole bytes.
-        """
-
-        return self.collection.get_allocated_bitmap(self.id, chunk_size_bytes, segment_length_bytes, segment_start_offset_bytes, timeout_secs)
-
-    def get_unshared_bitmap(self, base_id, chunk_size_bytes, segment_length_bytes, segment_start_offset_bytes, timeout_secs):
-        """
-        Compare a segment of two related snapshots and return a bitmap of the differing chunks.
-
-        Parameters:
-        - id                         : ID of the derived snapshot. This snapshot must be a descendent of the base snapshot, and they must be the same size.
-        - base_id                    : ID of the base snapshot. This snapshot must be an ancestor of the derived snapshot, and they must be the same size.
-        - segment_start_offset_bytes : The starting byte offset of the segment to compare. Must be a multiple of the chunk size.
-        - segment_length_bytes       : The length in bytes of the segment to compare. Must be a multiple of the chunk size.
-        - chunk_size_bytes           : The number of bytes represented by a bit in the bitmap. Must be a multiple of the snapshot's block size.
-        - timeout_secs               : A limit on the time (in seconds) to generate a result. If a full result cannot be computed in this time, a partial result will be returned instead. The bitmap for a partial result will be shorter than expected and will comprise whole bytes.
-        """
-
-        return self.collection.get_unshared_bitmap(self.id, base_id, chunk_size_bytes, segment_length_bytes, segment_start_offset_bytes, timeout_secs)
-
     def bulk_create(self, replicate, snap_vol_list, vss_snap):
         """
         Create snapshots on the given set of volumes.
@@ -101,68 +62,9 @@ class Snapshot(Resource):
 
         return self.collection.bulk_create(self.id, replicate, snap_vol_list, vss_snap)
 
-    def bulk_async_create(self, list):
-        """
-        Create a snapshot of a number of volumes. Each volume will have a crash consistent snapshot, but they are not consistent with each other.
-
-        Parameters:
-        - list : List of volumes to snapshot.
-        """
-
-        return self.collection.bulk_async_create(self.id, list)
-
-    def bulk_async_delete(self, list):
-        """
-        Delete a number of snapshots asynchronously.
-
-        Parameters:
-        - list : List of snapshot to delete.
-        """
-
-        return self.collection.bulk_async_delete(self.id, list)
-
 class SnapshotList(Collection):
     resource = Snapshot
     resource_type = "snapshots"
-
-    def cksum(self, id):
-        """
-        Computes checksum of snapshot which can be used to verify data integrity. Checksum computation is a long running operation and can take several minutes.
-
-        Parameters:
-        - id : ID of the snapshot to take a checksum of.
-        """
-
-        return self._client.perform_resource_action(self.resource_type, id, 'cksum', id=id)
-
-    def get_allocated_bitmap(self, chunk_size_bytes, id, segment_length_bytes, segment_start_offset_bytes, timeout_secs):
-        """
-        Scan a segment within a snapshot and return a bitmap of the non-zero chunks.
-
-        Parameters:
-        - id                         : ID of the snapshot to scan.
-        - segment_start_offset_bytes : The starting byte offset of the segment to scan. Must be a multiple of the chunk size.
-        - segment_length_bytes       : The length in bytes of the segment to scan. Must be a multiple of the chunk size.
-        - chunk_size_bytes           : The number of bytes represented by a bit in the bitmap. Must be a multiple of the snapshot's block size.
-        - timeout_secs               : A limit on the time (in seconds) to generate a result. If a full result cannot be computed in this time, a partial result will be returned instead. The bitmap for a partial result will be shorter than expected and will comprise whole bytes.
-        """
-
-        return self._client.perform_resource_action(self.resource_type, id, 'get_allocated_bitmap', chunk_size_bytes=chunk_size_bytes, id=id, segment_length_bytes=segment_length_bytes, segment_start_offset_bytes=segment_start_offset_bytes, timeout_secs=timeout_secs)
-
-    def get_unshared_bitmap(self, base_id, chunk_size_bytes, id, segment_length_bytes, segment_start_offset_bytes, timeout_secs):
-        """
-        Compare a segment of two related snapshots and return a bitmap of the differing chunks.
-
-        Parameters:
-        - id                         : ID of the derived snapshot. This snapshot must be a descendent of the base snapshot, and they must be the same size.
-        - base_id                    : ID of the base snapshot. This snapshot must be an ancestor of the derived snapshot, and they must be the same size.
-        - segment_start_offset_bytes : The starting byte offset of the segment to compare. Must be a multiple of the chunk size.
-        - segment_length_bytes       : The length in bytes of the segment to compare. Must be a multiple of the chunk size.
-        - chunk_size_bytes           : The number of bytes represented by a bit in the bitmap. Must be a multiple of the snapshot's block size.
-        - timeout_secs               : A limit on the time (in seconds) to generate a result. If a full result cannot be computed in this time, a partial result will be returned instead. The bitmap for a partial result will be shorter than expected and will comprise whole bytes.
-        """
-
-        return self._client.perform_resource_action(self.resource_type, id, 'get_unshared_bitmap', base_id=base_id, chunk_size_bytes=chunk_size_bytes, id=id, segment_length_bytes=segment_length_bytes, segment_start_offset_bytes=segment_start_offset_bytes, timeout_secs=timeout_secs)
 
     def bulk_create(self, replicate, snap_vol_list, vss_snap):
         """
@@ -175,23 +77,3 @@ class SnapshotList(Collection):
         """
 
         return self._client.perform_resource_action(self.resource_type, id, 'bulk_create', replicate=replicate, snap_vol_list=snap_vol_list, vss_snap=vss_snap)
-
-    def bulk_async_create(self, list):
-        """
-        Create a snapshot of a number of volumes. Each volume will have a crash consistent snapshot, but they are not consistent with each other.
-
-        Parameters:
-        - list : List of volumes to snapshot.
-        """
-
-        return self._client.perform_resource_action(self.resource_type, id, 'bulk_async_create', list=list)
-
-    def bulk_async_delete(self, list):
-        """
-        Delete a number of snapshots asynchronously.
-
-        Parameters:
-        - list : List of snapshot to delete.
-        """
-
-        return self._client.perform_resource_action(self.resource_type, id, 'bulk_async_delete', list=list)

@@ -33,15 +33,8 @@ class FibreChannelInterface(Resource):
     - fabric_info          : Fibre Channel fabric information.
     """
 
-    def bulk_update(self, fc_interface_list):
-        """
-        Modify the online attributes (i.e., the administrative states) for a list of Fibre Channel interfaces.
-
-        Parameters:
-        - fc_interface_list : List of Fibre Channel interfaces to update and corresponding online attributes (i.e., the administrative states).
-        """
-
-        return self.collection.bulk_update(self.id, fc_interface_list)
+    def create(self, **kwargs):
+        raise NimOSAPIOperationUnsupported("create operation not supported")
 
     def delete(self, **kwargs):
         raise NimOSAPIOperationUnsupported("delete operation not supported")
@@ -49,16 +42,6 @@ class FibreChannelInterface(Resource):
 class FibreChannelInterfaceList(Collection):
     resource = FibreChannelInterface
     resource_type = "fibre_channel_interfaces"
-
-    def bulk_update(self, fc_interface_list):
-        """
-        Modify the online attributes (i.e., the administrative states) for a list of Fibre Channel interfaces.
-
-        Parameters:
-        - fc_interface_list : List of Fibre Channel interfaces to update and corresponding online attributes (i.e., the administrative states).
-        """
-
-        return self._client.perform_resource_action(self.resource_type, id, 'bulk_update', fc_interface_list=fc_interface_list)
 
     def create(self, **kwargs):
         raise NimOSAPIOperationUnsupported("create operation not supported")

@@ -18,6 +18,9 @@ class FibreChannelInitiatorAlias(Resource):
     - source : Source of the Fibre Channel initiator alias.
     """
 
+    def create(self, **kwargs):
+        raise NimOSAPIOperationUnsupported("create operation not supported")
+
     def delete(self, **kwargs):
         raise NimOSAPIOperationUnsupported("delete operation not supported")
 

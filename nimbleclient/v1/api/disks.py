@@ -46,6 +46,9 @@ class Disk(Resource):
     - partial_response_ok       : Indicate that it is okay to provide partially available response.
     """
 
+    def create(self, **kwargs):
+        raise NimOSAPIOperationUnsupported("create operation not supported")
+
     def delete(self, **kwargs):
         raise NimOSAPIOperationUnsupported("delete operation not supported")
 

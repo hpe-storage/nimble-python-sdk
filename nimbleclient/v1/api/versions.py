@@ -16,6 +16,9 @@ class Version(Resource):
     - software_version : Software version of the group.
     """
 
+    def create(self, **kwargs):
+        raise NimOSAPIOperationUnsupported("create operation not supported")
+
     def delete(self, **kwargs):
         raise NimOSAPIOperationUnsupported("delete operation not supported")
 

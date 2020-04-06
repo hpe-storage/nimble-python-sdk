@@ -139,22 +139,6 @@ class Volume(Resource):
 
         return self.collection.move(self.id, dest_pool_id, force_vvol)
 
-    def get_sorted_by_metadata(self, key, ascending=False, case_sensitive=False, endRow=None, fields=None, greater_than_value=None, less_than_value=None):
-        """
-        Read volumes sorted and filtered by a metadata key.
-
-        Parameters:
-        - key                : Metadata key.
-        - greater_than_value : Value that the value-part of metadata kv has to be larger than.
-        - less_than_value    : Value that the value-part of metadata kv has to be smaller than.
-        - case_sensitive     : True for case-sensitive filter and sort, false for case-insensitive.
-        - ascending          : True for ascending, false for descending.
-        - fields             : Vector of selected fields.
-        - endRow             : Index of the final row, use to limit result size.
-        """
-
-        return self.collection.get_sorted_by_metadata(self.id, key, ascending, case_sensitive, endRow, fields, greater_than_value, less_than_value)
-
     def bulk_move(self, dest_pool_id, vol_ids, force_vvol=False):
         """
         Move volumes and their related volumes to another pool. To change a single volume's folder assignment (while remaining in the same pool), use a volume update operation to change the folder_id attribute.
@@ -198,55 +182,6 @@ class Volume(Resource):
         """
 
         return self.collection.bulk_set_online_and_offline(self.id, online, vol_ids)
-
-    def get_allocated_bitmap(self, chunk_size_bytes, segment_length_bytes, segment_start_offset_bytes, timeout_secs):
-        """
-        Scan a segment within a volume and return a bitmap of the non-zero chunks.
-
-        Parameters:
-        - id                         : ID of the volume to scan.
-        - segment_start_offset_bytes : The starting byte offset of the segment to scan. Must be a multiple of the chunk size.
-        - segment_length_bytes       : The length in bytes of the segment to scan. Must be a multiple of the chunk size.
-        - chunk_size_bytes           : The number of bytes represented by a bit in the bitmap. Must be a multiple of the volume's block size.
-        - timeout_secs               : A limit on the time (in seconds) to generate a result. If a full result cannot be computed in this time, a partial result will be returned instead. The bitmap for a partial result will be shorter than expected and will comprise whole bytes.
-        """
-
-        return self.collection.get_allocated_bitmap(self.id, chunk_size_bytes, segment_length_bytes, segment_start_offset_bytes, timeout_secs)
-
-    def get_unshared_bitmap(self, base_id, chunk_size_bytes, segment_length_bytes, segment_start_offset_bytes, timeout_secs):
-        """
-        Compare a segment of a volume and a related snapshot and return a bitmap of the differing chunks.
-
-        Parameters:
-        - id                         : ID of the volume. This volume must be a descendent of the snapshot, and they must be the same size.
-        - base_id                    : ID of the snapshot. This snapshot must be an ancestor of the volume, and they must be the same size.
-        - segment_start_offset_bytes : The starting byte offset of the segment to compare. Must be a multiple of the chunk size.
-        - segment_length_bytes       : The length in bytes of the segment to compare. Must be a multiple of the chunk size.
-        - chunk_size_bytes           : The number of bytes represented by a bit in the bitmap. Must be a multiple of the snapshot's block size.
-        - timeout_secs               : A limit on the time (in seconds) to generate a result. If a full result cannot be computed in this time, a partial result will be returned instead. The bitmap for a partial result will be shorter than expected and will comprise whole bytes.
-        """
-
-        return self.collection.get_unshared_bitmap(self.id, base_id, chunk_size_bytes, segment_length_bytes, segment_start_offset_bytes, timeout_secs)
-
-    def bulk_async_delete(self, list):
-        """
-        Asynchronous operation to delete a number of volumes.
-
-        Parameters:
-        - list : List of volume ids to delete.
-        """
-
-        return self.collection.bulk_async_delete(self.id, list)
-
-    def bulk_async_update(self, list):
-        """
-        Asynchronous operation to update a number of volumes.
-
-        Parameters:
-        - list : List of volumes to be updated.
-        """
-
-        return self.collection.bulk_async_update(self.id, list)
 
     def online(self):
         """Bring volume online."""
@@ -299,22 +234,6 @@ class VolumeList(Collection):
 
         return self._client.perform_resource_action(self.resource_type, id, 'move', dest_pool_id=dest_pool_id, id=id, force_vvol=force_vvol)
 
-    def get_sorted_by_metadata(self, key, ascending=False, case_sensitive=False, endRow=None, fields=None, greater_than_value=None, less_than_value=None):
-        """
-        Read volumes sorted and filtered by a metadata key.
-
-        Parameters:
-        - key                : Metadata key.
-        - greater_than_value : Value that the value-part of metadata kv has to be larger than.
-        - less_than_value    : Value that the value-part of metadata kv has to be smaller than.
-        - case_sensitive     : True for case-sensitive filter and sort, false for case-insensitive.
-        - ascending          : True for ascending, false for descending.
-        - fields             : Vector of selected fields.
-        - endRow             : Index of the final row, use to limit result size.
-        """
-
-        return self._client.perform_resource_action(self.resource_type, id, 'get_sorted_by_metadata', key=key, ascending=ascending, case_sensitive=case_sensitive, endRow=endRow, fields=fields, greater_than_value=greater_than_value, less_than_value=less_than_value)
-
     def bulk_move(self, dest_pool_id, vol_ids, force_vvol=False):
         """
         Move volumes and their related volumes to another pool. To change a single volume's folder assignment (while remaining in the same pool), use a volume update operation to change the folder_id attribute.
@@ -358,55 +277,6 @@ class VolumeList(Collection):
         """
 
         return self._client.perform_resource_action(self.resource_type, id, 'bulk_set_online_and_offline', online=online, vol_ids=vol_ids)
-
-    def get_allocated_bitmap(self, chunk_size_bytes, id, segment_length_bytes, segment_start_offset_bytes, timeout_secs):
-        """
-        Scan a segment within a volume and return a bitmap of the non-zero chunks.
-
-        Parameters:
-        - id                         : ID of the volume to scan.
-        - segment_start_offset_bytes : The starting byte offset of the segment to scan. Must be a multiple of the chunk size.
-        - segment_length_bytes       : The length in bytes of the segment to scan. Must be a multiple of the chunk size.
-        - chunk_size_bytes           : The number of bytes represented by a bit in the bitmap. Must be a multiple of the volume's block size.
-        - timeout_secs               : A limit on the time (in seconds) to generate a result. If a full result cannot be computed in this time, a partial result will be returned instead. The bitmap for a partial result will be shorter than expected and will comprise whole bytes.
-        """
-
-        return self._client.perform_resource_action(self.resource_type, id, 'get_allocated_bitmap', chunk_size_bytes=chunk_size_bytes, id=id, segment_length_bytes=segment_length_bytes, segment_start_offset_bytes=segment_start_offset_bytes, timeout_secs=timeout_secs)
-
-    def get_unshared_bitmap(self, base_id, chunk_size_bytes, id, segment_length_bytes, segment_start_offset_bytes, timeout_secs):
-        """
-        Compare a segment of a volume and a related snapshot and return a bitmap of the differing chunks.
-
-        Parameters:
-        - id                         : ID of the volume. This volume must be a descendent of the snapshot, and they must be the same size.
-        - base_id                    : ID of the snapshot. This snapshot must be an ancestor of the volume, and they must be the same size.
-        - segment_start_offset_bytes : The starting byte offset of the segment to compare. Must be a multiple of the chunk size.
-        - segment_length_bytes       : The length in bytes of the segment to compare. Must be a multiple of the chunk size.
-        - chunk_size_bytes           : The number of bytes represented by a bit in the bitmap. Must be a multiple of the snapshot's block size.
-        - timeout_secs               : A limit on the time (in seconds) to generate a result. If a full result cannot be computed in this time, a partial result will be returned instead. The bitmap for a partial result will be shorter than expected and will comprise whole bytes.
-        """
-
-        return self._client.perform_resource_action(self.resource_type, id, 'get_unshared_bitmap', base_id=base_id, chunk_size_bytes=chunk_size_bytes, id=id, segment_length_bytes=segment_length_bytes, segment_start_offset_bytes=segment_start_offset_bytes, timeout_secs=timeout_secs)
-
-    def bulk_async_delete(self, list):
-        """
-        Asynchronous operation to delete a number of volumes.
-
-        Parameters:
-        - list : List of volume ids to delete.
-        """
-
-        return self._client.perform_resource_action(self.resource_type, id, 'bulk_async_delete', list=list)
-
-    def bulk_async_update(self, list):
-        """
-        Asynchronous operation to update a number of volumes.
-
-        Parameters:
-        - list : List of volumes to be updated.
-        """
-
-        return self._client.perform_resource_action(self.resource_type, id, 'bulk_async_update', list=list)
 
     def online(self, id):
         """Bring volume online.

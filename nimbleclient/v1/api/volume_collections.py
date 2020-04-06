@@ -115,46 +115,6 @@ class VolumeCollection(Resource):
 
         return self.collection.validate(self.id)
 
-    def bulk_async_delete(self, list):
-        """
-        Delete a number of volume collections.
-
-        Parameters:
-        - list : List of volume collections to delete.
-        """
-
-        return self.collection.bulk_async_delete(self.id, list)
-
-    def bulk_async_promote(self, list):
-        """
-        Promote a number of volume collections.
-
-        Parameters:
-        - list : List of volume collections to promote.
-        """
-
-        return self.collection.bulk_async_promote(self.id, list)
-
-    def bulk_async_demote(self, list):
-        """
-        Demote a number of volume collections.
-
-        Parameters:
-        - list : List of volume collections to demote.
-        """
-
-        return self.collection.bulk_async_demote(self.id, list)
-
-    def bulk_async_handover(self, list):
-        """
-        Handover a number of volume collections.
-
-        Parameters:
-        - list : List of volume collections to handover.
-        """
-
-        return self.collection.bulk_async_handover(self.id, list)
-
 class VolumeCollectionList(Collection):
     resource = VolumeCollection
     resource_type = "volume_collections"
@@ -214,43 +174,3 @@ class VolumeCollectionList(Collection):
         """
 
         return self._client.perform_resource_action(self.resource_type, id, 'validate', id=id)
-
-    def bulk_async_delete(self, list):
-        """
-        Delete a number of volume collections.
-
-        Parameters:
-        - list : List of volume collections to delete.
-        """
-
-        return self._client.perform_resource_action(self.resource_type, id, 'bulk_async_delete', list=list)
-
-    def bulk_async_promote(self, list):
-        """
-        Promote a number of volume collections.
-
-        Parameters:
-        - list : List of volume collections to promote.
-        """
-
-        return self._client.perform_resource_action(self.resource_type, id, 'bulk_async_promote', list=list)
-
-    def bulk_async_demote(self, list):
-        """
-        Demote a number of volume collections.
-
-        Parameters:
-        - list : List of volume collections to demote.
-        """
-
-        return self._client.perform_resource_action(self.resource_type, id, 'bulk_async_demote', list=list)
-
-    def bulk_async_handover(self, list):
-        """
-        Handover a number of volume collections.
-
-        Parameters:
-        - list : List of volume collections to handover.
-        """
-
-        return self._client.perform_resource_action(self.resource_type, id, 'bulk_async_handover', list=list)

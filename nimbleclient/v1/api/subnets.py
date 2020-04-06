@@ -29,6 +29,9 @@ class Subnet(Resource):
     - failover_enable_time : Failover for this subnet will be enabled again at the time specified by failover_enable_time.
     """
 
+    def create(self, **kwargs):
+        raise NimOSAPIOperationUnsupported("create operation not supported")
+
     def delete(self, **kwargs):
         raise NimOSAPIOperationUnsupported("delete operation not supported")
 

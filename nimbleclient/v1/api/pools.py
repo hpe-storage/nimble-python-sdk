@@ -73,17 +73,6 @@ class Pool(Resource):
 
         return self.collection.merge(self.id, target_pool_id, force)
 
-    def set_dedupe(self, dedupe_enabled):
-        """
-        Set dedupe enabled/disabled for all applicable volumes inside a pool.
-
-        Parameters:
-        - dedupe_enabled : Enable/disable dedupe.
-        - id             : Pool containing the volumes to enable/disable dedupe on.
-        """
-
-        return self.collection.set_dedupe(self.id, dedupe_enabled)
-
 class PoolList(Collection):
     resource = Pool
     resource_type = "pools"
@@ -99,14 +88,3 @@ class PoolList(Collection):
         """
 
         return self._client.perform_resource_action(self.resource_type, id, 'merge', id=id, target_pool_id=target_pool_id, force=force)
-
-    def set_dedupe(self, dedupe_enabled, id):
-        """
-        Set dedupe enabled/disabled for all applicable volumes inside a pool.
-
-        Parameters:
-        - dedupe_enabled : Enable/disable dedupe.
-        - id             : Pool containing the volumes to enable/disable dedupe on.
-        """
-
-        return self._client.perform_resource_action(self.resource_type, id, 'set_dedupe', dedupe_enabled=dedupe_enabled, id=id)

@@ -70,16 +70,6 @@ class Folder(Resource):
 
         return self.collection.set_dedupe(self.id, dedupe_enabled)
 
-    def bulk_async_delete(self, list):
-        """
-        Delete a number of folders asynchronously.
-
-        Parameters:
-        - list : List of folder objects.
-        """
-
-        return self.collection.bulk_async_delete(self.id, list)
-
 class FolderList(Collection):
     resource = Folder
     resource_type = "folders"
@@ -94,13 +84,3 @@ class FolderList(Collection):
         """
 
         return self._client.perform_resource_action(self.resource_type, id, 'set_dedupe', dedupe_enabled=dedupe_enabled, id=id)
-
-    def bulk_async_delete(self, list):
-        """
-        Delete a number of folders asynchronously.
-
-        Parameters:
-        - list : List of folder objects.
-        """
-
-        return self._client.perform_resource_action(self.resource_type, id, 'bulk_async_delete', list=list)

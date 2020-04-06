@@ -55,55 +55,8 @@ class Alarm(Resource):
 
         return self.collection.unacknowledge(self.id)
 
-    def get_summary(self):
-        """
-        Get alarm count of every category.
-
-        Parameters:
-        - id : ID of the alarm.
-        """
-
-        return self.collection.get_summary(self.id)
-
-    def bulk_async_acknowledge(self, list):
-        """
-        Acknowledge a number of alarms.
-
-        Parameters:
-        - list : List of alarm objects.
-        """
-
-        return self.collection.bulk_async_acknowledge(self.id, list)
-
-    def bulk_async_unacknowledge(self, list):
-        """
-        Unacknowledge a number of alarms.
-
-        Parameters:
-        - list : List of alarm objects with an id for each.
-        """
-
-        return self.collection.bulk_async_unacknowledge(self.id, list)
-
-    def bulk_async_update(self, list):
-        """
-        Update a number of alarms.
-
-        Parameters:
-        - list : List of alarm objects to be updated.
-        """
-
-        return self.collection.bulk_async_update(self.id, list)
-
-    def bulk_async_delete(self, list):
-        """
-        Delete a number of alarms.
-
-        Parameters:
-        - list : List of alarm objects to be deleted.
-        """
-
-        return self.collection.bulk_async_delete(self.id, list)
+    def create(self, **kwargs):
+        raise NimOSAPIOperationUnsupported("create operation not supported")
 
 class AlarmList(Collection):
     resource = Alarm
@@ -130,56 +83,6 @@ class AlarmList(Collection):
         """
 
         return self._client.perform_resource_action(self.resource_type, id, 'unacknowledge', id=id)
-
-    def get_summary(self, id):
-        """
-        Get alarm count of every category.
-
-        Parameters:
-        - id : ID of the alarm.
-        """
-
-        return self._client.perform_resource_action(self.resource_type, id, 'get_summary', id=id)
-
-    def bulk_async_acknowledge(self, list):
-        """
-        Acknowledge a number of alarms.
-
-        Parameters:
-        - list : List of alarm objects.
-        """
-
-        return self._client.perform_resource_action(self.resource_type, id, 'bulk_async_acknowledge', list=list)
-
-    def bulk_async_unacknowledge(self, list):
-        """
-        Unacknowledge a number of alarms.
-
-        Parameters:
-        - list : List of alarm objects with an id for each.
-        """
-
-        return self._client.perform_resource_action(self.resource_type, id, 'bulk_async_unacknowledge', list=list)
-
-    def bulk_async_update(self, list):
-        """
-        Update a number of alarms.
-
-        Parameters:
-        - list : List of alarm objects to be updated.
-        """
-
-        return self._client.perform_resource_action(self.resource_type, id, 'bulk_async_update', list=list)
-
-    def bulk_async_delete(self, list):
-        """
-        Delete a number of alarms.
-
-        Parameters:
-        - list : List of alarm objects to be deleted.
-        """
-
-        return self._client.perform_resource_action(self.resource_type, id, 'bulk_async_delete', list=list)
 
     def create(self, **kwargs):
         raise NimOSAPIOperationUnsupported("create operation not supported")

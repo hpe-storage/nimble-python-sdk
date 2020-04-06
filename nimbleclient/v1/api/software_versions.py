@@ -25,6 +25,9 @@ class SoftwareVersion(Resource):
     - no_partial_response    : Indicate that it is not ok to provide partially available response.
     """
 
+    def create(self, **kwargs):
+        raise NimOSAPIOperationUnsupported("create operation not supported")
+
     def delete(self, **kwargs):
         raise NimOSAPIOperationUnsupported("delete operation not supported")
 
