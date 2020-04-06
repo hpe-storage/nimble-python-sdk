@@ -39,6 +39,9 @@ class FibreChannelConfig(Resource):
 
         return self.collection.hw_upgrade(self.id)
 
+    def create(self, **kwargs):
+        raise NimOSAPIOperationUnsupported("create operation not supported")
+
     def delete(self, **kwargs):
         raise NimOSAPIOperationUnsupported("delete operation not supported")
 

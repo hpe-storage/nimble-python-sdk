@@ -28,6 +28,9 @@ class Event(Resource):
     - tenant_id   : Tenant ID of the event. This is used to determine what tenant context the event belongs to.
     """
 
+    def create(self, **kwargs):
+        raise NimOSAPIOperationUnsupported("create operation not supported")
+
     def delete(self, **kwargs):
         raise NimOSAPIOperationUnsupported("delete operation not supported")
 
@@ -37,6 +40,9 @@ class Event(Resource):
 class EventList(Collection):
     resource = Event
     resource_type = "events"
+
+    def create(self, **kwargs):
+        raise NimOSAPIOperationUnsupported("create operation not supported")
 
     def delete(self, **kwargs):
         raise NimOSAPIOperationUnsupported("delete operation not supported")

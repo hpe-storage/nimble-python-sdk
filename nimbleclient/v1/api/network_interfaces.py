@@ -30,6 +30,9 @@ class NetworkInterface(Resource):
     - nic_type             : Interface type.
     """
 
+    def create(self, **kwargs):
+        raise NimOSAPIOperationUnsupported("create operation not supported")
+
     def delete(self, **kwargs):
         raise NimOSAPIOperationUnsupported("delete operation not supported")
 

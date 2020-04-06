@@ -62,6 +62,9 @@ class Shelf(Resource):
 
         return self.collection.evacuate(self.id, driveset, cancel, dry_run, pause, resume, start)
 
+    def create(self, **kwargs):
+        raise NimOSAPIOperationUnsupported("create operation not supported")
+
     def delete(self, **kwargs):
         raise NimOSAPIOperationUnsupported("delete operation not supported")
 

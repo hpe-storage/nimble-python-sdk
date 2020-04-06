@@ -32,25 +32,8 @@ class Job(Resource):
     - total_phases              : Total number of phases of the job.
     """
 
-    def cancel(self):
-        """
-        Cancel bulk job. Only parent jobs can be canceled.
-
-        Parameters:
-        - id : ID of the bulk job to be canceled.
-        """
-
-        return self.collection.cancel(self.id)
-
-    def reap(self, force):
-        """
-        Garbage collection canceled and done jobs.
-
-        Parameters:
-        - force : Garbage collecting is done automatically, confirm that you wish to force.
-        """
-
-        return self.collection.reap(self.id, force)
+    def create(self, **kwargs):
+        raise NimOSAPIOperationUnsupported("create operation not supported")
 
     def delete(self, **kwargs):
         raise NimOSAPIOperationUnsupported("delete operation not supported")
@@ -61,26 +44,6 @@ class Job(Resource):
 class JobList(Collection):
     resource = Job
     resource_type = "jobs"
-
-    def cancel(self, id):
-        """
-        Cancel bulk job. Only parent jobs can be canceled.
-
-        Parameters:
-        - id : ID of the bulk job to be canceled.
-        """
-
-        return self._client.perform_resource_action(self.resource_type, id, 'cancel', id=id)
-
-    def reap(self, force):
-        """
-        Garbage collection canceled and done jobs.
-
-        Parameters:
-        - force : Garbage collecting is done automatically, confirm that you wish to force.
-        """
-
-        return self._client.perform_resource_action(self.resource_type, id, 'reap', force=force)
 
     def create(self, **kwargs):
         raise NimOSAPIOperationUnsupported("create operation not supported")

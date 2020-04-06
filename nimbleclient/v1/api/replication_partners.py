@@ -89,28 +89,6 @@ class ReplicationPartner(Resource):
 
         return self.collection.test(self.id)
 
-    def delete_replica_volume(self, vol_id):
-        """
-        Delete a replica volume and all associated replica snapshots stored on the given downstream partner. The replica must be owned by this group (the upstream partner) and must not be in a volume collection. The original volume, which may or may not still exist on the upstream partner, is not affected by this operation.
-
-        Parameters:
-        - id     : ID of the downstream partner storing the replica.
-        - vol_id : ID of the replica volume to delete.
-        """
-
-        return self.collection.delete_replica_volume(self.id, vol_id)
-
-    def delete_replica_snapshot(self, snap_id):
-        """
-        Delete a replica snapshot stored on the given downstream partner. The replica must be owned by this group (the upstream partner). The original snapshot, which may or may not still exist on the upstream partner, is not affected by this operation.
-
-        Parameters:
-        - id      : ID of the downstream partner storing the replica.
-        - snap_id : ID of the replica snapshot to delete.
-        """
-
-        return self.collection.delete_replica_snapshot(self.id, snap_id)
-
 class ReplicationPartnerList(Collection):
     resource = ReplicationPartner
     resource_type = "replication_partners"
@@ -144,25 +122,3 @@ class ReplicationPartnerList(Collection):
         """
 
         return self._client.perform_resource_action(self.resource_type, id, 'test', id=id)
-
-    def delete_replica_volume(self, id, vol_id):
-        """
-        Delete a replica volume and all associated replica snapshots stored on the given downstream partner. The replica must be owned by this group (the upstream partner) and must not be in a volume collection. The original volume, which may or may not still exist on the upstream partner, is not affected by this operation.
-
-        Parameters:
-        - id     : ID of the downstream partner storing the replica.
-        - vol_id : ID of the replica volume to delete.
-        """
-
-        return self._client.perform_resource_action(self.resource_type, id, 'delete_replica_volume', id=id, vol_id=vol_id)
-
-    def delete_replica_snapshot(self, id, snap_id):
-        """
-        Delete a replica snapshot stored on the given downstream partner. The replica must be owned by this group (the upstream partner). The original snapshot, which may or may not still exist on the upstream partner, is not affected by this operation.
-
-        Parameters:
-        - id      : ID of the downstream partner storing the replica.
-        - snap_id : ID of the replica snapshot to delete.
-        """
-
-        return self._client.perform_resource_action(self.resource_type, id, 'delete_replica_snapshot', id=id, snap_id=snap_id)

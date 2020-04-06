@@ -25,6 +25,9 @@ class FibreChannelPort(Resource):
     - tx_power             : SFP TX power in uW.
     """
 
+    def create(self, **kwargs):
+        raise NimOSAPIOperationUnsupported("create operation not supported")
+
     def delete(self, **kwargs):
         raise NimOSAPIOperationUnsupported("delete operation not supported")
 

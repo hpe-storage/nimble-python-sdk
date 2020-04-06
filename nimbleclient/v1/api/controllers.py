@@ -36,25 +36,8 @@ class Controller(Resource):
     - asup_time           : Time of the last autosupport by the controller.
     """
 
-    def halt(self):
-        """
-        Halt the specified controller. Restarting the controller will require physically powering it back on.
-
-        Parameters:
-        - id : ID of the controller to halt.
-        """
-
-        return self.collection.halt(self.id)
-
-    def reboot(self):
-        """
-        Reboot the specified controller.
-
-        Parameters:
-        - id : ID of the controller to reboot.
-        """
-
-        return self.collection.reboot(self.id)
+    def create(self, **kwargs):
+        raise NimOSAPIOperationUnsupported("create operation not supported")
 
     def delete(self, **kwargs):
         raise NimOSAPIOperationUnsupported("delete operation not supported")
@@ -65,26 +48,6 @@ class Controller(Resource):
 class ControllerList(Collection):
     resource = Controller
     resource_type = "controllers"
-
-    def halt(self, id):
-        """
-        Halt the specified controller. Restarting the controller will require physically powering it back on.
-
-        Parameters:
-        - id : ID of the controller to halt.
-        """
-
-        return self._client.perform_resource_action(self.resource_type, id, 'halt', id=id)
-
-    def reboot(self, id):
-        """
-        Reboot the specified controller.
-
-        Parameters:
-        - id : ID of the controller to reboot.
-        """
-
-        return self._client.perform_resource_action(self.resource_type, id, 'reboot', id=id)
 
     def create(self, **kwargs):
         raise NimOSAPIOperationUnsupported("create operation not supported")

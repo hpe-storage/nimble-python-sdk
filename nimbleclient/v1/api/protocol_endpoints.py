@@ -32,6 +32,24 @@ class ProtocolEndpoint(Resource):
     - access_protocol        : Access protocol of the protocol endpoint. Only initiator groups with the same access protocol can access the protocol endpoint. If not specified in the creation request, it will be the access protocol supported by the group. If the group supports multiple protocols, the default will be Fibre Channel.
     """
 
+    def create(self, **kwargs):
+        raise NimOSAPIOperationUnsupported("create operation not supported")
+
+    def delete(self, **kwargs):
+        raise NimOSAPIOperationUnsupported("delete operation not supported")
+
+    def update(self, **kwargs):
+        raise NimOSAPIOperationUnsupported("update operation not supported")
+
 class ProtocolEndpointList(Collection):
     resource = ProtocolEndpoint
     resource_type = "protocol_endpoints"
+
+    def create(self, **kwargs):
+        raise NimOSAPIOperationUnsupported("create operation not supported")
+
+    def delete(self, **kwargs):
+        raise NimOSAPIOperationUnsupported("delete operation not supported")
+
+    def update(self, **kwargs):
+        raise NimOSAPIOperationUnsupported("update operation not supported")

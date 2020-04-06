@@ -41,8 +41,14 @@ class SpaceDomain(Resource):
     - clone_ratio              : Clone savings for the space domain expressed as ratio.
     """
 
+    def create(self, **kwargs):
+        raise NimOSAPIOperationUnsupported("create operation not supported")
+
     def delete(self, **kwargs):
         raise NimOSAPIOperationUnsupported("delete operation not supported")
+
+    def update(self, **kwargs):
+        raise NimOSAPIOperationUnsupported("update operation not supported")
 
 class SpaceDomainList(Collection):
     resource = SpaceDomain
@@ -53,3 +59,6 @@ class SpaceDomainList(Collection):
 
     def delete(self, **kwargs):
         raise NimOSAPIOperationUnsupported("delete operation not supported")
+
+    def update(self, **kwargs):
+        raise NimOSAPIOperationUnsupported("update operation not supported")

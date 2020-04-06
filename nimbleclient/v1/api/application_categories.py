@@ -19,6 +19,9 @@ class ApplicationCategory(Resource):
     - last_modified  : Time when this application category was last modified.
     """
 
+    def create(self, **kwargs):
+        raise NimOSAPIOperationUnsupported("create operation not supported")
+
     def delete(self, **kwargs):
         raise NimOSAPIOperationUnsupported("delete operation not supported")
 

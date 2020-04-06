@@ -35,6 +35,9 @@ class AuditLog(Resource):
     - activity            : Description of activity performed and recorded in audit log.
     """
 
+    def create(self, **kwargs):
+        raise NimOSAPIOperationUnsupported("create operation not supported")
+
     def delete(self, **kwargs):
         raise NimOSAPIOperationUnsupported("delete operation not supported")
 

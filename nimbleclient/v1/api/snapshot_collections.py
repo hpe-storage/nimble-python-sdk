@@ -52,26 +52,6 @@ class SnapshotCollection(Resource):
     - force                      : Forcibly delete the specified snapshot collection even if it is the last replicated snapshot. Doing so could lead to full re-seeding at the next replication.
     """
 
-    def bulk_async_delete(self, list):
-        """
-        Delete many snapshot collections asynchronously.
-
-        Parameters:
-        - list : List of snapshot collection objects.
-        """
-
-        return self.collection.bulk_async_delete(self.id, list)
-
 class SnapshotCollectionList(Collection):
     resource = SnapshotCollection
     resource_type = "snapshot_collections"
-
-    def bulk_async_delete(self, list):
-        """
-        Delete many snapshot collections asynchronously.
-
-        Parameters:
-        - list : List of snapshot collection objects.
-        """
-
-        return self._client.perform_resource_action(self.resource_type, id, 'bulk_async_delete', list=list)

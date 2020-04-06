@@ -279,17 +279,6 @@ class Group(Resource):
 
         return self.collection.merge(self.id, src_group_ip, src_group_name, src_password, src_username, force, skip_secondary_mgmt_ip, src_passphrase)
 
-    def clear_merge(self, src_group_name):
-        """
-        Clear group merge with the specified group.
-
-        Parameters:
-        - id             : ID of the group.
-        - src_group_name : Name of the source group.
-        """
-
-        return self.collection.clear_merge(self.id, src_group_name)
-
     def get_eula(self, force=False, format=None, locale=None, phase=None):
         """
         Get URL to download EULA contents.
@@ -303,31 +292,6 @@ class Group(Resource):
         """
 
         return self.collection.get_eula(self.id, force, format, locale, phase)
-
-    def complete_setup(self, access_protocol_list, dns_servers, netconfig, ntp_server, timezone, alert_from_email_addr=None, alert_to_email_addrs=None, allow_analytics_gui=False, autosupport_enabled=False, domain_name=None, proxy_password=None, proxy_port=None, proxy_server=None, proxy_username=None, send_alert_to_support=False, smtp_server=None):
-        """
-        Creates full complete configuration for group, array and network.
-
-        Parameters:
-        - domain_name           : Domain name for this group.
-        - ntp_server            : Either IP address or host name of the NTP server for this group.
-        - timezone              : Timezone in which this group is located.
-        - dns_servers           : IP addresses for this group's dns servers.
-        - access_protocol_list  : Type of interface connection.
-        - netconfig             : Netconfig information in completesetup.
-        - smtp_server           : Host name of IP address of the smtp server.
-        - allow_analytics_gui   : Specify whether to allow HPE Nimble Storage to use Google Analytics in the GUI.  HPE Nimble Storage uses Google Analytics to gather data related to GUI usage.  The data gathered is used to evaluate and improve the product.
-        - autosupport_enabled   : Whether to send autosupport.
-        - proxy_server          : Host name of IP address of HTTP proxy server. Setting this attribute to an empty string will unset all proxy settings.
-        - proxy_port            : Proxy port of HTTP proxy server.
-        - proxy_username        : Username to authenticate with HTTP proxy server.
-        - proxy_password        : Passport to authenticate HTTP proxy server.
-        - alert_to_email_addrs  : Comma-separated list of email addresses to receive alert emails.
-        - send_alert_to_support : Whether send alert to support.
-        - alert_from_email_addr : From email address to use while sending emails.
-        """
-
-        return self.collection.complete_setup(self.id, access_protocol_list, dns_servers, netconfig, ntp_server, timezone, alert_from_email_addr, alert_to_email_addrs, allow_analytics_gui, autosupport_enabled, domain_name, proxy_password, proxy_port, proxy_server, proxy_username, send_alert_to_support, smtp_server)
 
     def check_migrate(self):
         """
@@ -359,16 +323,8 @@ class Group(Resource):
 
         return self.collection.get_timezone_list(self.id)
 
-    def sync_files(self, type):
-        """
-        Sync the files from GL to BGL.
-
-        Parameters:
-        - id   : ID of the group.
-        - type : Type of data to be synced. Array of either {users | certs | truststores}.
-        """
-
-        return self.collection.sync_files(self.id, type)
+    def create(self, **kwargs):
+        raise NimOSAPIOperationUnsupported("create operation not supported")
 
     def delete(self, **kwargs):
         raise NimOSAPIOperationUnsupported("delete operation not supported")
@@ -507,17 +463,6 @@ class GroupList(Collection):
 
         return self._client.perform_resource_action(self.resource_type, id, 'merge', id=id, src_group_ip=src_group_ip, src_group_name=src_group_name, src_password=src_password, src_username=src_username, force=force, skip_secondary_mgmt_ip=skip_secondary_mgmt_ip, src_passphrase=src_passphrase)
 
-    def clear_merge(self, id, src_group_name):
-        """
-        Clear group merge with the specified group.
-
-        Parameters:
-        - id             : ID of the group.
-        - src_group_name : Name of the source group.
-        """
-
-        return self._client.perform_resource_action(self.resource_type, id, 'clear_merge', id=id, src_group_name=src_group_name)
-
     def get_eula(self, id, force=False, format=None, locale=None, phase=None):
         """
         Get URL to download EULA contents.
@@ -531,31 +476,6 @@ class GroupList(Collection):
         """
 
         return self._client.perform_resource_action(self.resource_type, id, 'get_eula', id=id, force=force, format=format, locale=locale, phase=phase)
-
-    def complete_setup(self, access_protocol_list, dns_servers, netconfig, ntp_server, timezone, alert_from_email_addr=None, alert_to_email_addrs=None, allow_analytics_gui=False, autosupport_enabled=False, domain_name=None, proxy_password=None, proxy_port=None, proxy_server=None, proxy_username=None, send_alert_to_support=False, smtp_server=None):
-        """
-        Creates full complete configuration for group, array and network.
-
-        Parameters:
-        - domain_name           : Domain name for this group.
-        - ntp_server            : Either IP address or host name of the NTP server for this group.
-        - timezone              : Timezone in which this group is located.
-        - dns_servers           : IP addresses for this group's dns servers.
-        - access_protocol_list  : Type of interface connection.
-        - netconfig             : Netconfig information in completesetup.
-        - smtp_server           : Host name of IP address of the smtp server.
-        - allow_analytics_gui   : Specify whether to allow HPE Nimble Storage to use Google Analytics in the GUI.  HPE Nimble Storage uses Google Analytics to gather data related to GUI usage.  The data gathered is used to evaluate and improve the product.
-        - autosupport_enabled   : Whether to send autosupport.
-        - proxy_server          : Host name of IP address of HTTP proxy server. Setting this attribute to an empty string will unset all proxy settings.
-        - proxy_port            : Proxy port of HTTP proxy server.
-        - proxy_username        : Username to authenticate with HTTP proxy server.
-        - proxy_password        : Passport to authenticate HTTP proxy server.
-        - alert_to_email_addrs  : Comma-separated list of email addresses to receive alert emails.
-        - send_alert_to_support : Whether send alert to support.
-        - alert_from_email_addr : From email address to use while sending emails.
-        """
-
-        return self._client.perform_resource_action(self.resource_type, id, 'complete_setup', access_protocol_list=access_protocol_list, dns_servers=dns_servers, netconfig=netconfig, ntp_server=ntp_server, timezone=timezone, alert_from_email_addr=alert_from_email_addr, alert_to_email_addrs=alert_to_email_addrs, allow_analytics_gui=allow_analytics_gui, autosupport_enabled=autosupport_enabled, domain_name=domain_name, proxy_password=proxy_password, proxy_port=proxy_port, proxy_server=proxy_server, proxy_username=proxy_username, send_alert_to_support=send_alert_to_support, smtp_server=smtp_server)
 
     def check_migrate(self, id):
         """
@@ -586,17 +506,6 @@ class GroupList(Collection):
         """
 
         return self._client.perform_resource_action(self.resource_type, id, 'get_timezone_list', id=id)
-
-    def sync_files(self, id, type):
-        """
-        Sync the files from GL to BGL.
-
-        Parameters:
-        - id   : ID of the group.
-        - type : Type of data to be synced. Array of either {users | certs | truststores}.
-        """
-
-        return self._client.perform_resource_action(self.resource_type, id, 'sync_files', id=id, type=type)
 
     def create(self, **kwargs):
         raise NimOSAPIOperationUnsupported("create operation not supported")
