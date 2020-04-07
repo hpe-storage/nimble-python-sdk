@@ -20,4 +20,4 @@ Working with Resources
 Errors
 ======
 
-TODO: Add more details under each section
+TODO: [Add more details under each section]
