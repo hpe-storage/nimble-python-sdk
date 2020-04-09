@@ -9,7 +9,8 @@ import unittest
 nimosClientPackagePath =    os.path.join(os.path.abspath(os.path.dirname(__file__)),"..\\")
 sys.path.append(nimosClientPackagePath) #need this path to search modules when debugging from editor
 
-from testcase import NimbleClientbase as nimosclientBase
+import tests.NimbleClientbase as nimosclientBase
+from tests.NimbleClientbase import SKIPTEST
 from nimbleclient.v1 import exceptions
 
 # below code is needed for debugging.
@@ -21,13 +22,6 @@ CHAP_NAME_1 = nimosclientBase.getUniqueString("ChapUserTC-1")
 CHAP_PASSWORD = "password_25-24"
 
 chapuser_to_delete = []
-#the below variable "SKIPTEST" is to be used if a user wants to just run one particular function .
-#they should set the value of this to 1  on command prompt and then change the value of SKIPTEST to flase for the function they wish to debug.
-#if they want to skip the entire tests in this testcase, then easiest way is to change the value os.getenv('SKIPTEST', '0') TO os.getenv('SKIPTEST', '1')
-#"set SKIPTEST=1"
-SKIPTEST = int(os.getenv('SKIPTEST', '0'))
-
-
 
 
 class ChapUsersTestCase(nimosclientBase.NimosClientbaseTestCase):
@@ -37,11 +31,15 @@ class ChapUsersTestCase(nimosclientBase.NimosClientbaseTestCase):
     print("**** Running Tests for ChapUsersTestCase *****")
     def __init__(self, x):
             super().__init__(x)
+            
+    def setUp(self):
+            self.printHeader(self.id())
 
     def tearDown(self):
         # very last, tear down base class
         super(ChapUsersTestCase, self).tearDown() 
         self.deleteTestChapUser()
+        self.printFooter(self.id())
         
     
     def deleteTestChapUser(self):
@@ -51,6 +49,7 @@ class ChapUsersTestCase(nimosclientBase.NimosClientbaseTestCase):
         
         
     def createTestChapUser(self,username,password,**kwargs):
+        print(f"Creating Chap User with name '{username}'")
         resp =nimosclientBase.getNimosClient().chap_users.create(name=username,password=password,**kwargs)
         chapuser_to_delete.append(resp.attrs.get("id"))
         self.assertIsNotNone(resp)
@@ -60,21 +59,21 @@ class ChapUsersTestCase(nimosclientBase.NimosClientbaseTestCase):
     @unittest.skipIf(SKIPTEST == True, "skipping this test as SKIPTEST variable is true")
     def test_get_chapUsers(self):
                 
-        self.printHeader('test_get_chapUsers')
+        #self.printheader('test_get_chapUsers')
         resp = self.createTestChapUser(username=CHAP_NAME_1,
                                                      password=CHAP_PASSWORD,
                                                      description="created by testcase"
                                                      )
         resp =nimosclientBase.getNimosClient().chap_users.list(detail=True,pageSize=2)
         self.assertIsNotNone(resp)        
-        self.printFooter('test_get_chapUsers')
+        #self.printfooter('test_get_chapUsers')
         
         
         
     @unittest.skipIf(SKIPTEST == True, "skipping this test as SKIPTEST variable is true")
     def test_create_chapUser(self):
                 
-        self.printHeader('test_create_chapUser')
+        #self.printheader('test_create_chapUser')
       
         resp = self.createTestChapUser(username=CHAP_NAME_1,
                                                      password=CHAP_PASSWORD,
@@ -84,14 +83,14 @@ class ChapUsersTestCase(nimosclientBase.NimosClientbaseTestCase):
         self.assertEqual(resp.attrs.get("name"),CHAP_NAME_1)
         self.assertEqual(resp.attrs.get("description"),"created by testcase")
                              
-        self.printFooter('test_create_chapUser')
+        #self.printfooter('test_create_chapUser')
         
         
         
     @unittest.skipIf(SKIPTEST == True, "skipping this test as SKIPTEST variable is true")
     def test_create_chapUser_using_invalid_password(self):
                         
-        self.printHeader('test_create_chapUser_using_invalid_password')
+        #self.printheader('test_create_chapUser_using_invalid_password')
         try:
             resp = self.createTestChapUser(username=CHAP_NAME_1,
                                                         password="sadhs",
@@ -103,14 +102,14 @@ class ChapUsersTestCase(nimosclientBase.NimosClientbaseTestCase):
               print("Failed as expected. Password length short")
           else:
               print(ex)      
-        self.printFooter('test_create_chapUser_using_invalid_password')
+        #self.printfooter('test_create_chapUser_using_invalid_password')
         
         
         
     @unittest.skipIf(SKIPTEST == True, "skipping this test as SKIPTEST variable is true")
     def test_delete_InvalidchapUser(self):
                 
-        self.printHeader('test_delete_chapUser')      
+        #self.printheader('test_delete_chapUser')      
         resp = self.createTestChapUser(username=CHAP_NAME_1,
                                                      password=CHAP_PASSWORD,
                                                      description="created by testcase"
@@ -126,14 +125,14 @@ class ChapUsersTestCase(nimosclientBase.NimosClientbaseTestCase):
                 print("Failed as expected. Invalid Id to delete")
             else:
                 print(ex)                             
-        self.printFooter('test_delete_chapUser')
+        #self.printfooter('test_delete_chapUser')
         
         
     
     @unittest.skipIf(SKIPTEST == True, "skipping this test as SKIPTEST variable is true")
     def test_update_chapUser(self):
                 
-        self.printHeader('test_update_chapUser')
+        #self.printheader('test_update_chapUser')
        
         resp = self.createTestChapUser(username=CHAP_NAME_1,
                                                      password=CHAP_PASSWORD,
@@ -150,7 +149,7 @@ class ChapUsersTestCase(nimosclientBase.NimosClientbaseTestCase):
         self.assertIsNotNone(updateresp) 
         self.assertEqual(updateresp.attrs.get("name"),"updatechapusertestcase")
         self.assertEqual(updateresp.attrs.get("description"),"modified by testcase")        
-        self.printFooter('test_update_folders')
+        #self.printfooter('test_update_folders')
         
 
           
@@ -161,13 +160,6 @@ def main(out = sys.stdout, verbosity = 2):
     suite = loader.loadTestsFromModule(sys.modules[__name__]) 
     unittest.TextTestRunner(out, verbosity = verbosity).run(suite)
       
-if __name__ == '__main__':
-        #print("from main ")             
-        if nimosclientBase.CONSOLELOG == False:
-            #means the test was run using python -m 
-            main(nimosclientBase.getUnittestlogfile())
-        else:
-            unittest.main()
-else:
-    #means the test was run using python -m 
-    main(nimosclientBase.getUnittestlogfile())
+    
+if __name__ == '__main__':       
+        unittest.main(module=sys.modules[__name__] , verbosity=2)
