@@ -10,26 +10,19 @@ import unittest
 nimosClientPackagePath = os.path.join(os.path.abspath(os.path.dirname(__file__)), "..\\")
 sys.path.append(nimosClientPackagePath)
 
-from testcase import NimbleClientbase as nimosclientBase
+import tests.NimbleClientbase as nimosclientBase
+from tests.NimbleClientbase import SKIPTEST
 from nimbleclient.v1 import exceptions
 # below code is needed for debugging.
 
 if __debug__ == True:
     from nimbleclient.v1 import client
 
-#global variables
 
-#the below variable "SKIPTEST" is to be used if a user wants to just run one particular function .
-#they should set the value of this to 1  on command prompt and then change the value of SKIPTEST to flase for the function they wish to debug.
-#if they want to skip the entire tests in this testcase, then easiest way is to change the value os.getenv('SKIPTEST', '0') TO os.getenv('SKIPTEST', '1')
-#"set SKIPTEST=1"
-SKIPTEST = int(os.getenv('SKIPTEST', '0'))
 
 VOLCOLL_NAME1 = nimosclientBase.getUniqueString("VolcollTC-VolColl1")
 volcoll_to_delete = []
 vol_to_delete = []
-
-
 class VolumeCollectionTestCase(nimosclientBase.NimosClientbaseTestCase):
     '''VolumeCollectionTestCase class test the volumeCollection object functionality '''
     
@@ -37,13 +30,17 @@ class VolumeCollectionTestCase(nimosclientBase.NimosClientbaseTestCase):
     print("**** Running Tests for VolumeCollectionTestCase *****")
   
     def __init__(self, x):
-            super().__init__(x)           
+            super().__init__(x)
+            
+    def setUp(self):
+            self.printHeader(self.id())           
 
     def tearDown(self):
         # very last, tear down base class
         super(VolumeCollectionTestCase, self).tearDown()        
         self.deleteVolume()
         self.deleteVolColl()
+        self.printFooter(self.id())
         
     
     def deleteVolume(self):
@@ -65,6 +62,7 @@ class VolumeCollectionTestCase(nimosclientBase.NimosClientbaseTestCase):
        
             
     def createTestVolColl(self,volCollName):
+        print(f"Creating volcoll with name '{volCollName}'")
         resp = nimosclientBase.getNimosClient().volume_collections.create(name=volCollName,description="created by testcase")
         volcoll_to_delete.append(resp.attrs.get("id"))
         self.assertIsNotNone(resp)
@@ -75,7 +73,7 @@ class VolumeCollectionTestCase(nimosclientBase.NimosClientbaseTestCase):
     @unittest.skipIf(SKIPTEST == True, "skipping this test as SKIPTEST variable is true")
     def test_create_VolColl(self):
                 
-        self.printHeader('test_1_create_VolColl')
+        #self.printheader('test_1_create_VolColl')
         resp = self.createTestVolColl(VOLCOLL_NAME1)
         self.assertIsNotNone(resp)
         self.assertEqual(VOLCOLL_NAME1,resp.attrs.get("name"))
@@ -86,13 +84,13 @@ class VolumeCollectionTestCase(nimosclientBase.NimosClientbaseTestCase):
         self.assertIsNotNone(resp)
         self.assertEqual("modified by testcase",resp.attrs.get("description"))
         
-        self.printFooter('test_1_create_VolColl')
+        #self.printfooter('test_1_create_VolColl')
         
         
     @unittest.skipIf(SKIPTEST == True, "skipping this test as SKIPTEST variable is true")
     def test_addVolumeToVolColl(self):
                 
-        self.printHeader('test_addVolumeToVolColl')
+        #self.printheader('test_addVolumeToVolColl')
         volcollresp = self.createTestVolColl(VOLCOLL_NAME1)
         volumeName= nimosclientBase.getUniqueString("VolumeCollectionTestCase-addtovolcoll")
         
@@ -111,13 +109,13 @@ class VolumeCollectionTestCase(nimosclientBase.NimosClientbaseTestCase):
         #get vol coll and confirm has no volumes
         volcollresp = nimosclientBase.getNimosClient().volume_collections.get(id=volcollresp.attrs.get("id"))
         self.assertEqual(volcollresp.attrs.get("volume_count"),0)
-        self.printFooter('test_addVolumeToVolColl')
+        #self.printfooter('test_addVolumeToVolColl')
         
         
     @unittest.skipIf(SKIPTEST == True, "skipping this test as SKIPTEST variable is true")
     def test_delete_VolCollBeforeDisassociatingVolume(self):
                 
-        self.printHeader('test_delete_VolCollBeforeDisassociatingVolume')
+        #self.printheader('test_delete_VolCollBeforeDisassociatingVolume')
         volcollresp = self.createTestVolColl(VOLCOLL_NAME1)
         volumeName= nimosclientBase.getUniqueString("VolumeCollectionTestCase-addtovolcoll")
         
@@ -136,16 +134,16 @@ class VolumeCollectionTestCase(nimosclientBase.NimosClientbaseTestCase):
             resp = nimosclientBase.getNimosClient().volume_collections.delete(id=volcollresp.attrs.get("id"))
         except exceptions.NimOSAPIError as ex:
             if"SM_ebusy" in str(ex):
-                print("Failed as expected")
+                print("Failed as expected. Disaasociate volume first")
             else:
                 raise ex
-        self.printFooter('test_delete_VolCollBeforeDisassociatingVolume')
+        #self.printfooter('test_delete_VolCollBeforeDisassociatingVolume')
         
         
     @unittest.skipIf(SKIPTEST == True, "skipping this test as SKIPTEST variable is true")
     def test_Promote_VolColl(self):
                 
-        self.printHeader('test_Promote_VolColl')
+        #self.printheader('test_Promote_VolColl')
         volcollresp = self.createTestVolColl(VOLCOLL_NAME1)
         volumeName= nimosclientBase.getUniqueString("VolumeCollectionTestCase-addtovolcoll")
         
@@ -167,14 +165,14 @@ class VolumeCollectionTestCase(nimosclientBase.NimosClientbaseTestCase):
                 print("Failed as expected. volcoll is already promoted")
             else:
                 print(ex)
-        self.printFooter('test_Promote_VolColl')
+        #self.printfooter('test_Promote_VolColl')
         
         
         
     @unittest.skipIf(SKIPTEST == True, "skipping this test as SKIPTEST variable is true")
     def test_Demote_VolColl(self):
                 
-        self.printHeader('test_Demote_VolColl')
+        #self.printheader('test_Demote_VolColl')
         volcollresp = self.createTestVolColl(VOLCOLL_NAME1)        
         self.assertIsNotNone(volcollresp)
         try:
@@ -184,14 +182,14 @@ class VolumeCollectionTestCase(nimosclientBase.NimosClientbaseTestCase):
                 print("Failed as expected. Invalid value provided for replication_partner_id")
             else:
                 print(ex)
-        self.printFooter('test_Demote_VolColl')
+        #self.printfooter('test_Demote_VolColl')
         
         
     
     @unittest.skipIf(SKIPTEST == True, "skipping this test as SKIPTEST variable is true")
     def test_Handover_VolColl(self):
                 
-        self.printHeader('test_Handover_VolColl')
+        #self.printheader('test_Handover_VolColl')
         volcollresp = self.createTestVolColl(VOLCOLL_NAME1)        
         self.assertIsNotNone(volcollresp)
         try:
@@ -201,14 +199,14 @@ class VolumeCollectionTestCase(nimosclientBase.NimosClientbaseTestCase):
                 print("Failed as expected. Invalid value provided for replication_partner_id")
             else:
                 print(ex)
-        self.printFooter('test_Handover_VolColl')
+        #self.printfooter('test_Handover_VolColl')
         
         
         
     @unittest.skipIf(SKIPTEST == True, "skipping this test as SKIPTEST variable is true")
     def test_delete_VolumeInVolCollBeforeDisassociating(self):
                 
-        self.printHeader('test_delete_VolumeInVolCollBeforeDisassociating')
+        #self.printheader('test_delete_VolumeInVolCollBeforeDisassociating')
         volcollresp = self.createTestVolColl(VOLCOLL_NAME1)
         volumeName= nimosclientBase.getUniqueString("VolumeCollectionTestCase-addtovolcoll")
         
@@ -228,30 +226,30 @@ class VolumeCollectionTestCase(nimosclientBase.NimosClientbaseTestCase):
             nimosclientBase.getNimosClient().volumes.delete(id=volresp.attrs.get("id"))
         except exceptions.NimOSAPIError as ex:
             if"SM_vol_assoc_volcoll" in str(ex):
-                print("Failed as expected")             
+                print("Failed as expected with exception SM_vol_assoc_volcoll")             
             else:
                 raise ex
-        self.printFooter('test_delete_VolumeInVolCollBeforeDisassociating')
+        #self.printfooter('test_delete_VolumeInVolCollBeforeDisassociating')
         
         
         
     @unittest.skipIf(SKIPTEST == True, "skipping this test as SKIPTEST variable is true")
     def test_createEditDeleteProtectionSchedule(self):
                 
-        self.printHeader('test_createEditDeleteProtectionSchedule')
+        #self.printheader('test_createEditDeleteProtectionSchedule')
         #check if this array has any previous volcoll
-        volcollresp=nimosclientBase.getNimosClient().volume_collections.list()
-        totalvolcoll = volcollresp.__len__()
+        allvolcollresp=nimosclientBase.getNimosClient().volume_collections.list()
+        totalvolcoll = allvolcollresp.__len__()
         
         PROTECTION_SCHED_NAME = "testcaseprotectionschedule"
         days = "monday,tuesday,wednesday,thursday,friday"
         description = "super cool schedule"
         
-        resp = self.createTestVolColl(VOLCOLL_NAME1)
-        self.assertIsNotNone(resp)
+        volcollresp = self.createTestVolColl(VOLCOLL_NAME1)
+        self.assertIsNotNone(volcollresp)
         #create a protection schedule
         protect_sched_resp = nimosclientBase.getNimosClient().protection_schedules.create(name=PROTECTION_SCHED_NAME,days=days,description=description,
-                                                                               volcoll_or_prottmpl_id=resp.attrs.get("id"),
+                                                                               volcoll_or_prottmpl_id=volcollresp.attrs.get("id"),
                                                                                volcoll_or_prottmpl_type='volume_collection',
                                                                                num_retain=2)
         self.assertIsNotNone(protect_sched_resp)
@@ -259,8 +257,8 @@ class VolumeCollectionTestCase(nimosclientBase.NimosClientbaseTestCase):
         self.assertEqual(protect_sched_resp.attrs.get("description"),description)
         self.assertEqual(protect_sched_resp.attrs.get("name"),PROTECTION_SCHED_NAME)
         #check if volcoll is present
-        volcollresp=nimosclientBase.getNimosClient().volume_collections.list()
-        self.assertEqual(volcollresp.__len__(),totalvolcoll+1)        
+        allvolcollresp=nimosclientBase.getNimosClient().volume_collections.list()
+        self.assertEqual(allvolcollresp.__len__(),totalvolcoll+1)        
         #update the schedule
         resp = nimosclientBase.getNimosClient().protection_schedules.update(id=protect_sched_resp.attrs.get("id"),period_unit="minutes")
         self.assertIsNotNone(resp)
@@ -268,9 +266,9 @@ class VolumeCollectionTestCase(nimosclientBase.NimosClientbaseTestCase):
         #delete the schedule
         resp = nimosclientBase.getNimosClient().protection_schedules.delete(id=protect_sched_resp.attrs.get("id"))
         #check if volcoll has schedule
-        volcollresp=nimosclientBase.getNimosClient().volume_collections.get()
+        volcollresp=nimosclientBase.getNimosClient().volume_collections.get(id=volcollresp.attrs.get("id"))
         self.assertIsNone(volcollresp.attrs.get("schedule_list"))        
-        self.printFooter('test_createEditDeleteProtectionSchedule')
+        #self.printfooter('test_createEditDeleteProtectionSchedule')
         
     
           
@@ -281,13 +279,6 @@ def main(out = sys.stdout, verbosity = 2):
     suite = loader.loadTestsFromModule(sys.modules[__name__]) 
     unittest.TextTestRunner(out, verbosity = verbosity).run(suite)
       
-if __name__ == '__main__':
-        #print("from main ")             
-        if nimosclientBase.CONSOLELOG == False:
-            #means the test was run using python -m 
-            main(nimosclientBase.getUnittestlogfile())
-        else:
-            unittest.main()
-else:
-    #means the test was run using python -m 
-    main(nimosclientBase.getUnittestlogfile())
+    
+if __name__ == '__main__':       
+        unittest.main(module=sys.modules[__name__] , verbosity=2)

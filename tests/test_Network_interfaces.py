@@ -18,11 +18,11 @@ if __debug__ == True:
     from nimbleclient.v1 import client
 
 
-class AppCategoryTestCase(nimosclientBase.NimosClientbaseTestCase):
-    '''AppCategoryTestCase class test the app category object functionality '''
+class NetworkInterfaceTestCase(nimosclientBase.NimosClientbaseTestCase):
+    '''NetworkInterfaceTestCase class test the subnet object functionality '''
     
     #client = nimosclientBase.NimosClientbaseTestCase.getNimosClientObj()
-    print("**** Running Tests for AppCategoryTestCase *****")
+    print("**** Running Tests for NetworkInterfaceTestCase *****")
     def __init__(self, x):
             super().__init__(x)
             
@@ -31,19 +31,18 @@ class AppCategoryTestCase(nimosclientBase.NimosClientbaseTestCase):
 
     def tearDown(self):
         # very last, tear down base class
-        super(AppCategoryTestCase, self).tearDown()
-        self.printFooter(self.id())  
+        super(NetworkInterfaceTestCase, self).tearDown() 
+        self.printFooter(self.id()) 
         
         
     @unittest.skipIf(SKIPTEST == True, "skipping this test as SKIPTEST variable is true")
-    def test_get_appcategoryDetails(self):
+    def test_get_networkinterfaceDetails(self):
                 
-        #self.printheader('test_get_appcategoryDetails')       
-        resp = nimosclientBase.getNimosClient().application_categories.list()
-        self.assertIsNotNone(resp)
-        #atleast 10 default app category are there
-        self.assertGreaterEqual(resp.__len__(),10)           
-        #self.printfooter('test_get_appcategoryDetails')
+        #self.printheader('test_get_networkinterfaceDetails')
+        #sdk bug. why is subnet object having functions like create,update delete??? the rest doc does not have these. only read is allowed
+        resp = nimosclientBase.getNimosClient().network_interfaces.get()
+        self.assertIsNotNone(resp)   
+        #self.printfooter('test_get_networkinterfaceDetails')
           
 
 def main(out = sys.stdout, verbosity = 2): 
@@ -55,4 +54,3 @@ def main(out = sys.stdout, verbosity = 2):
     
 if __name__ == '__main__':       
         unittest.main(module=sys.modules[__name__] , verbosity=2)
-    

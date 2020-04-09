@@ -9,7 +9,8 @@ import unittest
 nimosClientPackagePath =    os.path.join(os.path.abspath(os.path.dirname(__file__)),"..\\")
 sys.path.append(nimosClientPackagePath) #need this path to search modules when debugging from editor
 
-from testcase import NimbleClientbase as nimosclientBase
+import tests.NimbleClientbase as nimosclientBase
+from tests.NimbleClientbase import SKIPTEST
 from nimbleclient.v1 import exceptions
 
 # below code is needed for debugging.
@@ -24,12 +25,6 @@ INITIATOR_NAME1 = nimosclientBase.getUniqueString("IGrpTC-Initiator1")
 initiatorgrp_to_delete = []
 initiator_to_delete = []
 
-#the below variable "SKIPTEST" is to be used if a user wants to just run one particular function .
-#they should set the value of this to 1  on command prompt and then change the value of SKIPTEST to flase for the function they wish to debug.
-#if they want to skip the entire tests in this testcase, then easiest way is to change the value os.getenv('SKIPTEST', '0') TO os.getenv('SKIPTEST', '1')
-#"set SKIPTEST=1"
-SKIPTEST = int(os.getenv('SKIPTEST', '0'))
-
 
 
 class InitiatorGroupsTestCase(nimosclientBase.NimosClientbaseTestCase):
@@ -39,16 +34,20 @@ class InitiatorGroupsTestCase(nimosclientBase.NimosClientbaseTestCase):
     print("**** Running Tests for InitiatorGroupsTestCase *****")
     def __init__(self, x):
             super().__init__(x)
-
-                     
+            
+    def setUp(self):
+            self.printHeader(self.id())
+                                 
 
     def tearDown(self):
         # very last, tear down base class
         super(InitiatorGroupsTestCase, self).tearDown()
-        self.deleteInitiatorGroup()        
+        self.deleteInitiatorGroup()
+        self.printFooter(self.id())        
         
     
     def createTestInitiatorGroup(self,initiatorgrpName,**kwargs):
+        print(f"Creating IG with name '{initiatorgrpName}'")
         resp =nimosclientBase.getNimosClient().initiator_groups.create(name=initiatorgrpName,**kwargs)
         initiatorgrp_to_delete.append(resp.attrs.get("id"))
         self.assertIsNotNone(resp)
@@ -65,7 +64,7 @@ class InitiatorGroupsTestCase(nimosclientBase.NimosClientbaseTestCase):
     @unittest.skipIf(SKIPTEST == True, "skipping this test as SKIPTEST variable is true")
     def test_createAndDelete_InitiatorGroup(self):
                 
-        self.printHeader('test_createAndDelete_InitiatorGroup')        
+        #self.printheader('test_createAndDelete_InitiatorGroup')        
         igresp = self.createTestInitiatorGroup(INITIATOR_GRP_NAME1,
                                                 access_protocol="iscsi",
                                                 description="created by testcase"
@@ -77,14 +76,14 @@ class InitiatorGroupsTestCase(nimosclientBase.NimosClientbaseTestCase):
         self.assertEqual(igresp.attrs.get("access_protocol"),"iscsi")
         self.assertEqual(igresp.attrs.get("name"),INITIATOR_GRP_NAME1)
         
-        self.printFooter('test_createAndDelete_InitiatorGroup')
+        #self.printfooter('test_createAndDelete_InitiatorGroup')
         
         
         
     
     @unittest.skipIf(SKIPTEST == True, "skipping this test as SKIPTEST variable is true")
     def test_check_mandatoryparams_InitiatorGroup(self):               
-        self.printHeader('test_check_mandatoryparams_InitiatorGroup')
+        #self.printheader('test_check_mandatoryparams_InitiatorGroup')
         try:
                     
             igresp = self.createTestInitiatorGroup(INITIATOR_GRP_NAME1,                                              
@@ -99,13 +98,13 @@ class InitiatorGroupsTestCase(nimosclientBase.NimosClientbaseTestCase):
                 print("Failed as expected. Missing mandatory param")
             else:
                 print(ex)       
-        self.printFooter('test_check_mandatoryparams_InitiatorGroup')
+        #self.printfooter('test_check_mandatoryparams_InitiatorGroup')
         
         
         
     @unittest.skipIf(SKIPTEST == True, "skipping this test as SKIPTEST variable is true")
     def test_create_InitiatorGroup_With_IncorrectAccessProtocol(self):               
-        self.printHeader('test_create_InitiatorGroup_With_IncorrectAccessProtocol')
+        #self.printheader('test_create_InitiatorGroup_With_IncorrectAccessProtocol')
         try:
             access_protocol="not a valid param. should be FC or iscsi"       
             igresp = self.createTestInitiatorGroup(INITIATOR_GRP_NAME1,                                              
@@ -121,13 +120,13 @@ class InitiatorGroupsTestCase(nimosclientBase.NimosClientbaseTestCase):
                 print(f"Failed as expected. Invalid param value {access_protocol}")
             else:
                 print(ex)       
-        self.printFooter('test_create_InitiatorGroup_With_IncorrectAccessProtocol')
+        #self.printfooter('test_create_InitiatorGroup_With_IncorrectAccessProtocol')
         
         
     
     @unittest.skipIf(SKIPTEST == True, "skipping this test as SKIPTEST variable is true")
     def test_create_duplicate_Initiatorgroup(self):               
-        self.printHeader('test_create_duplicate_Initiatorgroup')
+        #self.printheader('test_create_duplicate_Initiatorgroup')
         try:
             access_protocol="iscsi"       
             igresp = self.createTestInitiatorGroup(INITIATOR_GRP_NAME1,                                              
@@ -146,13 +145,13 @@ class InitiatorGroupsTestCase(nimosclientBase.NimosClientbaseTestCase):
                 print(f"Failed as expected. IG group already present on array {INITIATOR_GRP_NAME1}")
             else:
                 print(ex)       
-        self.printFooter('test_create_duplicate_Initiatorgroup')
+        #self.printfooter('test_create_duplicate_Initiatorgroup')
                 
         
         
     @unittest.skipIf(SKIPTEST == True, "skipping this test as SKIPTEST variable is true")
     def test_create_InitiatorGroup_With_FCAccesssProtocol(self):               
-        self.printHeader('test_create_InitiatorGroup_With_IncorrectAccessProtocol')
+        #self.printheader('test_create_InitiatorGroup_With_IncorrectAccessProtocol')
         try:
             access_protocol="fc"       
             igresp = self.createTestInitiatorGroup(INITIATOR_GRP_NAME1,                                              
@@ -168,14 +167,14 @@ class InitiatorGroupsTestCase(nimosclientBase.NimosClientbaseTestCase):
                 print(f"Failed as expected. FC service not available")
             else:
                 print(ex)       
-        self.printFooter('test_create_InitiatorGroup_With_IncorrectAccessProtocol')
+        #self.printfooter('test_create_InitiatorGroup_With_IncorrectAccessProtocol')
         
         
     
     
     @unittest.skipIf(SKIPTEST == True, "skipping this test as SKIPTEST variable is true")
     def test_get_InitiatorGroups(self):               
-        self.printHeader('test_get_InitiatorGroups')
+        #self.printheader('test_get_InitiatorGroups')
         try:
             access_protocol="iscsi" 
             iscsi_initiators= [
@@ -215,13 +214,13 @@ class InitiatorGroupsTestCase(nimosclientBase.NimosClientbaseTestCase):
                        
         except exceptions.NimOSAPIError as ex:         
                 print(ex)       
-        self.printFooter('test_get_InitiatorGroups')
+        #self.printfooter('test_get_InitiatorGroups')
     
         
     
     @unittest.skipIf(SKIPTEST == True, "skipping this test as SKIPTEST variable is true")
     def test_update_InitiatorGroup(self):                       
-        self.printHeader('test_update_InitiatorGroup')        
+        #self.printheader('test_update_InitiatorGroup')        
   
         iscsi_initiators= [
          {
@@ -250,13 +249,13 @@ class InitiatorGroupsTestCase(nimosclientBase.NimosClientbaseTestCase):
                 print(f"Failed as expected. Invalid param value")
             else:
                 print(ex)       
-        self.printFooter('test_update_InitiatorGroup')
+        #self.printfooter('test_update_InitiatorGroup')
     
 
     
     @unittest.skipIf(SKIPTEST == True, "skipping this test as SKIPTEST variable is true")
     def test_InitiatorGroupNaming_Iscsi(self):                       
-        self.printHeader('test_InitiatorGroupNaming_Iscsi')        
+        #self.printheader('test_InitiatorGroupNaming_Iscsi')        
   
         iscsi_initiators1= [
          {
@@ -326,13 +325,13 @@ class InitiatorGroupsTestCase(nimosclientBase.NimosClientbaseTestCase):
                 print(f"Failed as expected. Invalid param value")
             else:
                 print(ex)       
-        self.printFooter('test_InitiatorGroupNaming_Iscsi')        
+        #self.printfooter('test_InitiatorGroupNaming_Iscsi')        
         
         
 
     @unittest.skipIf(SKIPTEST == True, "skipping this test as SKIPTEST variable is true")
     def test_get_suggested_lun(self):                       
-        self.printHeader('test_get_suggested_lun')        
+        #self.printheader('test_get_suggested_lun')        
   
         iscsi_initiators1= [
          {
@@ -358,14 +357,14 @@ class InitiatorGroupsTestCase(nimosclientBase.NimosClientbaseTestCase):
                 print(f"Failed as expected. Invalid param value")
             else:
                 print(ex)       
-        self.printFooter('test_get_suggested_lun')        
+        #self.printfooter('test_get_suggested_lun')        
         
         
 
 
     @unittest.skipIf(SKIPTEST == True, "skipping this test as SKIPTEST variable is true")
     def test_validate_lun(self):                       
-        self.printHeader('test_validate_lun')        
+        #self.printheader('test_validate_lun')        
   
         iscsi_initiators1= [
          {
@@ -391,7 +390,7 @@ class InitiatorGroupsTestCase(nimosclientBase.NimosClientbaseTestCase):
                 print(f"Failed as expected. Invalid param value")
             else:
                 print(ex)       
-        self.printFooter('test_validate_lun')
+        #self.printfooter('test_validate_lun')
                
         
           
@@ -402,13 +401,6 @@ def main(out = sys.stdout, verbosity = 2):
     suite = loader.loadTestsFromModule(sys.modules[__name__]) 
     unittest.TextTestRunner(out, verbosity = verbosity).run(suite)
       
-if __name__ == '__main__':
-        #print("from main ")             
-        if nimosclientBase.CONSOLELOG == False:
-            #means the test was run using python -m 
-            main(nimosclientBase.getUnittestlogfile())
-        else:
-            unittest.main()
-else:
-    #means the test was run using python -m 
-    main(nimosclientBase.getUnittestlogfile())
+    
+if __name__ == '__main__':       
+        unittest.main(module=sys.modules[__name__] , verbosity=2)

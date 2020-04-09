@@ -9,22 +9,13 @@ import unittest
 nimosClientPackagePath =    os.path.join(os.path.abspath(os.path.dirname(__file__)),"..\\")
 sys.path.append(nimosClientPackagePath) #need this path to search modules when debugging from editor
 
-from testcase import NimbleClientbase as nimosclientBase
+import tests.NimbleClientbase as nimosclientBase
+from tests.NimbleClientbase import SKIPTEST
 from nimbleclient.v1 import exceptions
 
 # below code is needed for debugging.
 if __debug__ == True:
     from nimbleclient.v1 import client
-
-#global variables
-
-#the below variable "SKIPTEST" is to be used if a user wants to just run one particular function .
-#they should set the value of this to 1  on command prompt and then change the value of SKIPTEST to flase for the function they wish to debug.
-#if they want to skip the entire tests in this testcase, then easiest way is to change the value os.getenv('SKIPTEST', '0') TO os.getenv('SKIPTEST', '1')
-#"set SKIPTEST=1"
-SKIPTEST = int(os.getenv('SKIPTEST', '0'))
-
-
 
 
 class GroupsTestCase(nimosclientBase.NimosClientbaseTestCase):
@@ -34,27 +25,31 @@ class GroupsTestCase(nimosclientBase.NimosClientbaseTestCase):
     print("**** Running Tests for GroupsTestCase *****")
     def __init__(self, x):
             super().__init__(x)
+            
+    def setUp(self):
+            self.printHeader(self.id())
 
     def tearDown(self):
         # very last, tear down base class
-        super(GroupsTestCase, self).tearDown()  
+        super(GroupsTestCase, self).tearDown()
+        self.printFooter(self.id())  
         
         
     @unittest.skipIf(SKIPTEST == True, "skipping this test as SKIPTEST variable is true")
     def test_get_groups(self):
                 
-        self.printHeader('test_get_groups')
+        #self.printheader('test_get_groups')
         #sdk bug. why is subnet object having functions like create,update delete??? the rest doc does not have these. only read is allowed
         resp = nimosclientBase.getNimosClient().groups.list(detail=True,pageSize=2)
         self.assertIsNotNone(resp)        
-        self.printFooter('test_get_groups')
+        #self.printfooter('test_get_groups')
         
         
         
     @unittest.skipIf(SKIPTEST == True, "skipping this test as SKIPTEST variable is true")
     def test_get_group_discovered_list(self):
                 
-        self.printHeader('test_get_group_discovered_list')
+        #self.printheader('test_get_group_discovered_list')
         try:
             resp = nimosclientBase.getNimosClient().groups.get()
             self.assertIsNotNone(resp)
@@ -65,13 +60,13 @@ class GroupsTestCase(nimosclientBase.NimosClientbaseTestCase):
                print("Failed as expected. Array id given is invalid")
            else:
                print(ex)
-        self.printFooter('test_get_group_discovered_list')
+        #self.printfooter('test_get_group_discovered_list')
         
         
     @unittest.skipIf(SKIPTEST == True, "skipping this test as SKIPTEST variable is true")
     def test_test_alert(self):
                 
-        self.printHeader('test_test_alert')
+        #self.printheader('test_test_alert')
         try:
             resp = nimosclientBase.getNimosClient().groups.get()
             self.assertIsNotNone(resp)
@@ -83,14 +78,14 @@ class GroupsTestCase(nimosclientBase.NimosClientbaseTestCase):
                print("Failed as expected. Array id given is invalid")
            else:
                print(ex)
-        self.printFooter('test_test_alert')
+        #self.printfooter('test_test_alert')
         
         
 
     @unittest.skipIf(SKIPTEST == True, "skipping this test as SKIPTEST variable is true")
     def test_update_group(self):
                 
-        self.printHeader('test_update_group')
+        #self.printheader('test_update_group')
         try:
             resp = nimosclientBase.getNimosClient().groups.get()
             self.assertIsNotNone(resp)
@@ -124,7 +119,7 @@ class GroupsTestCase(nimosclientBase.NimosClientbaseTestCase):
                print("Failed as expected. Array id given is invalid")
            else:
                print(ex)
-        self.printFooter('test_update_group')
+        #self.printfooter('test_update_group')
         
 
           
@@ -135,13 +130,6 @@ def main(out = sys.stdout, verbosity = 2):
     suite = loader.loadTestsFromModule(sys.modules[__name__]) 
     unittest.TextTestRunner(out, verbosity = verbosity).run(suite)
       
-if __name__ == '__main__':
-        #print("from main ")             
-        if nimosclientBase.CONSOLELOG == False:
-            #means the test was run using python -m 
-            main(nimosclientBase.getUnittestlogfile())
-        else:
-            unittest.main()
-else:
-    #means the test was run using python -m 
-    main(nimosclientBase.getUnittestlogfile())
+    
+if __name__ == '__main__':       
+        unittest.main(module=sys.modules[__name__] , verbosity=2)
