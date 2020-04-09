@@ -9,14 +9,13 @@ import unittest
 nimosClientPackagePath =    os.path.join(os.path.abspath(os.path.dirname(__file__)),"..\\")
 sys.path.append(nimosClientPackagePath) #need this path to search modules when debugging from editor
 
-from testcase import NimbleClientbase as nimosclientBase
+import tests.NimbleClientbase as nimosclientBase
+from tests.NimbleClientbase import SKIPTEST
 from nimbleclient.v1 import exceptions
 
 # below code is needed for debugging.
 if __debug__ == True:
     from nimbleclient.v1 import client
-
-
 class AlarmsTestCase(nimosclientBase.NimosClientbaseTestCase):
     '''Not Implemented '''
     
@@ -31,13 +30,6 @@ def main(out = sys.stdout, verbosity = 2):
     suite = loader.loadTestsFromModule(sys.modules[__name__]) 
     unittest.TextTestRunner(out, verbosity = verbosity).run(suite)
       
-if __name__ == '__main__':
-        #print("from main ")             
-        if nimosclientBase.CONSOLELOG == False:
-            #means the test was run using python -m 
-            main(nimosclientBase.getUnittestlogfile())
-        else:
-            unittest.main()
-else:
-    #means the test was run using python -m 
-    main(nimosclientBase.getUnittestlogfile())
+    
+if __name__ == '__main__':       
+        unittest.main(module=sys.modules[__name__] , verbosity=2)

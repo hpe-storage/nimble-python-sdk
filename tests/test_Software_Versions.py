@@ -8,7 +8,6 @@ import unittest
 
 nimosClientPackagePath =    os.path.join(os.path.abspath(os.path.dirname(__file__)),"..\\")
 sys.path.append(nimosClientPackagePath) #need this path to search modules when debugging from editor
-
 import tests.NimbleClientbase as nimosclientBase
 from tests.NimbleClientbase import SKIPTEST
 from nimbleclient.v1 import exceptions
@@ -18,33 +17,34 @@ if __debug__ == True:
     from nimbleclient.v1 import client
 
 
-class AppCategoryTestCase(nimosclientBase.NimosClientbaseTestCase):
-    '''AppCategoryTestCase class test the app category object functionality '''
+
+
+class SoftwareVersionsTestCase(nimosclientBase.NimosClientbaseTestCase):
+    '''SoftwareVersionsTestCase class test the software version object functionality '''
     
     #client = nimosclientBase.NimosClientbaseTestCase.getNimosClientObj()
-    print("**** Running Tests for AppCategoryTestCase *****")
+    print("**** Running Tests for SoftwareVersionsTestCase *****")
     def __init__(self, x):
             super().__init__(x)
-            
+                
     def setUp(self):
             self.printHeader(self.id())
 
     def tearDown(self):
         # very last, tear down base class
-        super(AppCategoryTestCase, self).tearDown()
-        self.printFooter(self.id())  
+        super(SoftwareVersionsTestCase, self).tearDown()  
+        self.printFooter(self.id())
         
         
     @unittest.skipIf(SKIPTEST == True, "skipping this test as SKIPTEST variable is true")
-    def test_get_appcategoryDetails(self):
+    def test_get_SoftwareVersionsDetails(self):
                 
-        #self.printheader('test_get_appcategoryDetails')       
-        resp = nimosclientBase.getNimosClient().application_categories.list()
+        #self.printheader('test_get_SoftwareVersionsDetails')
+        resp = nimosclientBase.getNimosClient().software_versions.get()
         self.assertIsNotNone(resp)
-        #atleast 10 default app category are there
-        self.assertGreaterEqual(resp.__len__(),10)           
-        #self.printfooter('test_get_appcategoryDetails')
-          
+        #self.printfooter('test_get_SoftwareVersionsDetails')
+        
+    
 
 def main(out = sys.stdout, verbosity = 2): 
     loader = unittest.TestLoader() 
@@ -55,4 +55,3 @@ def main(out = sys.stdout, verbosity = 2):
     
 if __name__ == '__main__':       
         unittest.main(module=sys.modules[__name__] , verbosity=2)
-    
