@@ -9,7 +9,8 @@ import unittest
 nimosClientPackagePath =    os.path.join(os.path.abspath(os.path.dirname(__file__)),"..\\")
 sys.path.append(nimosClientPackagePath) #need this path to search modules when debugging from editor
 
-from testcase import NimbleClientbase as nimosclientBase
+import tests.NimbleClientbase as nimosclientBase
+from tests.NimbleClientbase import SKIPTEST
 from nimbleclient.v1 import exceptions
 
 # below code is needed for debugging.
@@ -19,31 +20,27 @@ if __debug__ == True:
 #global variables
 VOL_NAME1 = nimosclientBase.getUniqueString("VolumeTC-Vol1")
 INITIATOR_GRP_NAME1 = nimosclientBase.getUniqueString("IGrpTC-IG1")
-
-#the below variable "SKIPTEST" is to be used if a user wants to just run one particular function .
-#they should set the value of this to 1  on command prompt and then change the value of SKIPTEST to flase for the function they wish to debug.
-#if they want to skip the entire tests in this testcase, then easiest way is to change the value os.getenv('SKIPTEST', '0') TO os.getenv('SKIPTEST', '1')
-#"set SKIPTEST=1"
-SKIPTEST = int(os.getenv('SKIPTEST', '0'))
-
-
-
 class ACLTestCase(nimosclientBase.NimosClientbaseTestCase):
     '''ACLTestCase class test the ACL object functionality '''
   
     print("**** Running Tests for ACLTestCase *****")
+
     def __init__(self, x):
-            super().__init__(x)
+                super().__init__(x)
+
+    def setUp(self):
+                self.printHeader(self.id())
 
     def tearDown(self):
         # very last, tear down base class
-        super(ACLTestCase, self).tearDown()  
+        super(ACLTestCase, self).tearDown()
+        self.printFooter(self.id())  
         
         
     @unittest.skipIf(SKIPTEST == True, "skipping this test as SKIPTEST variable is true")
     def test_createAndDeleteAcl(self):
                 
-        self.printHeader('test_createAndDeleteAcl') 
+        #self.printheader('test_createAndDeleteAcl') 
         try:            
             #first creat a volume.
             volresp= nimosclientBase.getNimosClient().volumes.create(name=VOL_NAME1,size=10)
@@ -73,23 +70,21 @@ class ACLTestCase(nimosclientBase.NimosClientbaseTestCase):
             
         except exceptions.NimOSAPIError as ex:
             print(ex)          
-        self.printFooter('test_createAndDeleteAcl')
+        #self.printfooter('test_createAndDeleteAcl')
+        
+     
           
 
 def main(out = sys.stdout, verbosity = 2): 
     loader = unittest.TestLoader() 
   
-    suite = loader.loadTestsFromModule(sys.modules[__name__]) 
+    suite = loader.loadTestsFromModule(sys.modules[__name__])
+    sys.stderr = out 
     unittest.TextTestRunner(out, verbosity = verbosity).run(suite)
       
-if __name__ == '__main__':
-        print("from main ")
-             
-        if nimosclientBase.CONSOLELOG == False:
-            #means the test was run using python -m 
-            main(nimosclientBase.getUnittestlogfile())
-        else:
-            unittest.main()
-else:   
-    #means the test was run using python -m
-    main(nimosclientBase.getUnittestlogfile())
+     
+if __name__ == '__main__':       
+        unittest.main(module=sys.modules[__name__] , verbosity=2)
+    
+  #  main(nimosclientBase.getUnittestlogfile())
+    #main(sl)
