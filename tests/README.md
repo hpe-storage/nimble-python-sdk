@@ -25,7 +25,7 @@ TO
 
 @unittest.skipIf(SKIPTEST == False, "skipping this test as SKIPTEST variable is true")
 
-3.Now attach the debugger to that testcase
+3.Attach the debugger to this testcase
 
 Q. How to run all the test case in one shot
 
@@ -35,7 +35,7 @@ OR
 
 please set env variable "CONSOLELOG=0" and then run the below command "python -m unittest discover <test_directory>".
 
-The Second Option will create a log file named "UnittestResult.log" and "TestcaseRun.log" under the testcase/logs folder. UnittestResult.log has the summary of the testcase run whereas the Testcaserun.log will have the log for each test.
+The Second Option will create a log file named "Unittest_Summary.log" and "TestcaseRun.log" under the testcase/logs folder. Unittest_Summary.log has the summary of the testcase run whereas the Testcaserun.log will have the log for each test.
 
 ### Example : Go to testcase folder on cmd prompt and run "python -m unittest discover -v ."
 
