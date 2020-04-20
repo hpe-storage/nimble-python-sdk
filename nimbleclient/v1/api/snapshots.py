@@ -60,7 +60,7 @@ class Snapshot(Resource):
         - vss_snap      : VSS app-synchronized snapshot; we don't support creation of non app-synchronized sanpshots through this interface; must be set to true.
         """
 
-        return self.collection.bulk_create(self.id, replicate, snap_vol_list, vss_snap)
+        return self.collection.bulk_create(self, replicate, snap_vol_list, vss_snap)
 
 class SnapshotList(Collection):
     resource = Snapshot
@@ -76,4 +76,4 @@ class SnapshotList(Collection):
         - vss_snap      : VSS app-synchronized snapshot; we don't support creation of non app-synchronized sanpshots through this interface; must be set to true.
         """
 
-        return self._client.perform_resource_action(self.resource_type, id, 'bulk_create', replicate=replicate, snap_vol_list=snap_vol_list, vss_snap=vss_snap)
+        return self._client.perform_bulk_resource_action(self.resource_type, 'bulk_create', replicate=replicate, snap_vol_list=snap_vol_list, vss_snap=vss_snap)
