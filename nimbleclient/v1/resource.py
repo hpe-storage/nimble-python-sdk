@@ -3,21 +3,32 @@
 #
 
 class Resource:
-    __slots__ = ['id', 'attrs', 'collection', '_client']
+    __slots__ = ['_id', '_attrs', '_collection', '_client']
 
     def __init__(self, id, attrs=None, client=None, collection=None):
-        self.id = id
-        self.attrs = {} if attrs is None else attrs
-        self.collection = collection
-
+        self._id = id
+        self._attrs = {} if attrs is None else attrs
+        self._collection = collection
         self._client = client
 
+    @property
+    def id(self):
+        return self._id
+
+    @property
+    def attrs(self):
+        return self._attrs
+
+    @property
+    def collection(self):
+        return self._collection
+
     def reload(self):
-        self.attrs = self.collection.get(self.id).attrs
+        self._attrs = self.collection.get(self.id).attrs
 
     def update(self, **kwargs):
         resp = self._client.update_resource(self.collection.resource_type, self.id, **kwargs)
-        self.attrs = resp
+        self._attrs = resp
 
     def delete(self, **kwargs):
         return self._client.delete_resource(self.collection.resource_type, self.id)
@@ -50,7 +61,7 @@ class Collection:
             if len(objs) == 0:
                 return None
             else:
-                return self.resource(objs[0]['id'] if 'id' in objs[0] else 0, objs[0], client=self._client, collection=self)
+                return self.resource(objs[0]['id'] if 'id' in objs[0] else None, objs[0], client=self._client, collection=self)
 
     def create(self, name, **kwargs):
         resp = self._client.create_resource(self.resource_type, name=name, **kwargs)
@@ -65,4 +76,4 @@ class Collection:
 
     def list(self, **kwargs):
         objs = self._client.list_resources(self.resource_type, **kwargs)
-        return [self.resource(obj['id'] if 'id' in obj else index, obj, client=self._client, collection=self) for index, obj in enumerate(objs)]
+        return [self.resource(obj['id'] if 'id' in obj else None, obj, client=self._client, collection=self) for index, obj in enumerate(objs)]

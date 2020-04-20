@@ -35,6 +35,7 @@ class ProtectionSchedule(Resource):
     - skip_db_consistency_check     : Skip consistency check for database files on snapshots created by this schedule. This option only applies to snapshot schedules of a protection template with application synchronization set to VSS, application ID set to MS Exchange 2010 or later w/DAG, this schedule's snap_verify option set to yes, and its disable_appsync option set to false. Skipping consistency checks is only recommended if each database in a DAG has multiple copies.
     - disable_appsync               : Disables application synchronized snapshots and creates crash consistent snapshots instead.
     - schedule_type                 : Normal schedules have internal timers which drive snapshot creation. An externally driven schedule has no internal timers. All snapshot activity is driven by an external trigger. In other words, these schedules are used only for externally driven manual snapshots.
+    - active                        : A schedule is active only if it is owned by the same owner as the volume collection. Only active schedules of a volume collection participate in the creation of snapshots and replication.
     - creation_time                 : Time when this protection schedule was created.
     - last_modified                 : Time when this protection schedule was last modified.
     - last_mod_sched_time           : Time when the timing of the protection schedule was last modified.

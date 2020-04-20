@@ -149,7 +149,7 @@ class Volume(Resource):
         - force_vvol   : Forcibly move a Virtual Volume. Moving Virtual Volume is disruptive to the vCenter, hence it should only be done by the VASA Provider (VP). This flag should only be set by the VP when it calls this API.
         """
 
-        return self.collection.bulk_move(self.id, dest_pool_id, vol_ids, force_vvol)
+        return self.collection.bulk_move(self, dest_pool_id, vol_ids, force_vvol)
 
     def abort_move(self):
         """
@@ -170,7 +170,7 @@ class Volume(Resource):
         - dedupe_enabled : Dedupe property to be applied to the list of volumes.
         """
 
-        return self.collection.bulk_set_dedupe(self.id, dedupe_enabled, vol_ids)
+        return self.collection.bulk_set_dedupe(self, dedupe_enabled, vol_ids)
 
     def bulk_set_online_and_offline(self, online, vol_ids):
         """
@@ -181,7 +181,7 @@ class Volume(Resource):
         - online  : Desired state of the volumes. "true" for online, "false" for offline.
         """
 
-        return self.collection.bulk_set_online_and_offline(self.id, online, vol_ids)
+        return self.collection.bulk_set_online_and_offline(self, online, vol_ids)
 
     def online(self):
         """Bring volume online."""
@@ -244,7 +244,7 @@ class VolumeList(Collection):
         - force_vvol   : Forcibly move a Virtual Volume. Moving Virtual Volume is disruptive to the vCenter, hence it should only be done by the VASA Provider (VP). This flag should only be set by the VP when it calls this API.
         """
 
-        return self._client.perform_resource_action(self.resource_type, id, 'bulk_move', dest_pool_id=dest_pool_id, vol_ids=vol_ids, force_vvol=force_vvol)
+        return self._client.perform_bulk_resource_action(self.resource_type, 'bulk_move', dest_pool_id=dest_pool_id, vol_ids=vol_ids, force_vvol=force_vvol)
 
     def abort_move(self, id):
         """
@@ -265,7 +265,7 @@ class VolumeList(Collection):
         - dedupe_enabled : Dedupe property to be applied to the list of volumes.
         """
 
-        return self._client.perform_resource_action(self.resource_type, id, 'bulk_set_dedupe', dedupe_enabled=dedupe_enabled, vol_ids=vol_ids)
+        return self._client.perform_bulk_resource_action(self.resource_type, 'bulk_set_dedupe', dedupe_enabled=dedupe_enabled, vol_ids=vol_ids)
 
     def bulk_set_online_and_offline(self, online, vol_ids):
         """
@@ -276,7 +276,7 @@ class VolumeList(Collection):
         - online  : Desired state of the volumes. "true" for online, "false" for offline.
         """
 
-        return self._client.perform_resource_action(self.resource_type, id, 'bulk_set_online_and_offline', online=online, vol_ids=vol_ids)
+        return self._client.perform_bulk_resource_action(self.resource_type, 'bulk_set_online_and_offline', online=online, vol_ids=vol_ids)
 
     def online(self, id):
         """Bring volume online.

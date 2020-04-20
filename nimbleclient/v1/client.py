@@ -51,7 +51,7 @@ from .api.groups import GroupList
 from .api.software_versions import SoftwareVersionList
 from .api.network_configs import NetworkConfigList
 
-class Client:
+class NimOSClient:
     def __init__(self, hostname, username, password, port=5392):
         self._client = NimOSAPIClient(hostname, username, password, port)
 
