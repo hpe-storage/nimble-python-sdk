@@ -1,6 +1,6 @@
 # (c) Copyright 2020 Hewlett Packard Enterprise Development LP
 
-# @author alokranjan
+# @author alok ranjan
 
 """Test base class for Nimos Client."""
 
@@ -12,21 +12,23 @@ import os
 import threading
 
 
-# the below variable "SKIPTEST" is to be used if a user wants to just run one
-# particular function.They should set the value of this to 1  on command
+# Below variable "SKIPTEST" is to be used if a user wants to just run one
+# particular function. They should set the value of this to 1 on command
 # prompt and then change the value of SKIPTEST to false for the function they
-# wish to debug.If they want to skip the entire tests in this testcase, then
+# wish to debug. If they want to skip the entire tests in this testcase, then
 # easiest way is to change the value os.getenv('SKIPTEST', '0') TO
 # os.getenv('SKIPTEST', '1') "set SKIPTEST=1"
 SKIPTEST = bool(int(os.getenv('SKIPTEST', "0")))
-log_folder = os.path.abspath(os.path.dirname(__file__)) + "\\" + "logs".strip()
+log_folder = os.path.abspath(os.path.dirname(__file__)) + "//" + "logs".strip()
 
 try:
+    print("hello")
     if os.path.exists(log_folder) is False:
         # create the log folder
         os.mkdir(log_folder)
     testcase_run_log_file = os.path.abspath(
-        log_folder) + "\\" + "TestcaseRun.log".strip()
+        log_folder) + "//" + "TestcaseRun.log".strip()
+    print(f"log path {testcase_run_log_file}")
     try:
         log_file = open(testcase_run_log_file, 'w')
         # create a thread lock to make sure only one thread writes to a file
@@ -63,7 +65,7 @@ def get_config_section_detail(section_name):
     config = configparser.ConfigParser()
     config.read(config_path)
     for section in config.sections():
-        # print(section)
+        # log(section)
         if(section_name == section):
             for option in config.options(section):
                 to_return[option] = config.get(section_name, option)
@@ -88,7 +90,7 @@ def get_nimos_client():
 
 def log_header(name):
     """Function to print header unit tests."""
-    # print("\n##Started testing '%s' at " %
+    # log("\n##Started testing '%s' at " %
     #       name, datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S"))
 
     temp = "##Started testing '{name}' at {time}".format(
@@ -99,7 +101,7 @@ def log_header(name):
 def log_footer(name):
     """Function to print header unit tests."""
     temp = "##Completed testing '{name}' \n".format(name=name)
-    # print("##Completed testing '%s' \n" % name)
+    # log("##Completed testing '%s' \n" % name)
     log_to_file(temp)
     log_file.flush()
 
