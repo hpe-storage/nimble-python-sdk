@@ -4,7 +4,7 @@
 import pytest
 import tests.nimbleclientbase as nimosclientbase
 from tests.nimbleclientbase import SKIPTEST, log_to_file as log
-from nimbleclient.v1 import exceptions
+from nimbleclient import exceptions
 
 
 '''DisksTestCase tests the disks object functionality '''
@@ -49,6 +49,7 @@ def test_update_disks_mandatory_params(setup_teardown_for_each_test):
         if "SM_missing_arg" in str(ex):
             log("Failed as expected. mandatory param 'disk_op' not provided")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
 
 
@@ -80,4 +81,5 @@ def test_query_invalid_params(setup_teardown_for_each_test):
             log("Failed as expected. "
                 f"Invalid query params provided to query: '{query_param }'")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex

@@ -5,7 +5,8 @@
 import pytest
 import tests.nimbleclientbase as nimosclientbase
 from tests.nimbleclientbase import SKIPTEST, log_to_file as log
-from nimbleclient.v1 import exceptions
+from nimbleclient import exceptions, query
+from nimbleclient.v1 import query_fields
 import time
 import threading
 
@@ -65,6 +66,7 @@ def cleanup_old_volumes():
                 else:
                     break  # from while loop
             except Exception as ex:
+                log(f"Failed with exception message : {str(ex)}")
                 raise ex
     volume_lock.release()
 
@@ -97,6 +99,7 @@ def create_volume(vol_name, size=50, read_only="false"):
         return resp
     except Exception as ex:
         volume_lock.release()
+        log(f"Failed with exception message : {str(ex)}")
         raise ex
 
 
@@ -119,8 +122,8 @@ def delete_volume():
                 log("Failed to delete volume. Will try next time")
             else:
                 volume_lock.release()
+                log(f"Failed with exception message : {str(ex)}")
                 raise ex
-            # raise ex
     vol_to_delete.clear()
     volume_lock.release()
 
@@ -151,7 +154,7 @@ def test_volume_already_exists(setup_teardown_for_each_test):
         log(exgeneral)
 
 
-@pytest.mark.skipif(SKIPTEST is True,
+@pytest.mark.skipif(SKIPTEST is False,
                     reason="skipped this test as SKIPTEST variable is true")
 def test_volume_bad_params(setup_teardown_for_each_test):
     # , or / is not supported by nimble for creating vol name
@@ -207,6 +210,7 @@ def test_invalid_volume_page_size(setup_teardown_for_each_test):
         if"SM_too_large_page_size" in str(ex):
             log("Failed as expected. Invaild pagesize given")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
 
 
@@ -323,6 +327,7 @@ def test_volume_startrow_beyond_endrow_volume(setup_teardown_for_each_test):
         if "SM_start_row_beyond_total_rows" in str(ex):
             pass
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
 
 
@@ -337,6 +342,7 @@ def test_volume_startrow_equals_endrow_volume(setup_teardown_for_each_test):
             startRow=1, endRow=1)
         assert resp is None
     except exceptions.NimOSAPIError as ex:
+        log(f"Failed with exception message : {str(ex)}")
         raise ex
 
 @pytest.mark.skipif(SKIPTEST is True,
@@ -355,42 +361,63 @@ def test_update_volume_size_attribute(setup_teardown_for_each_test):
 
 @pytest.mark.skipif(SKIPTEST is True,
                     reason="skipped this test as SKIPTEST variable is true")
-def test_update_volume_metadata_with_invalid_keypair(
+def test_query_volumes_based_on_metadata(
         setup_teardown_for_each_test):
     # first atleast create few volume
     resp_vol1 = create_volume(vol_name1)
-    create_volume(vol_name2)
+    resp_vol2 = create_volume(vol_name2)
+    create_volume(vol_name3)
     metadata = {
-        "key1": "abcde",
-        "key2": "xyz"
+        "key_-*1": "xyz"
     }
     try:
-        # update the size to 100
-        nimosclientbase.get_nimos_client().volumes.update(
+        client = nimosclientbase.get_nimos_client()
+        # update the size to 100 for vol1
+        update_resp = nimosclientbase.get_nimos_client().volumes.update(
             id=resp_vol1.attrs.get("id"), metadata=metadata)
+        assert update_resp is not None
+        # query the volume based on metadata
+        query_resp = client.volumes.list(detail=True, filter=query.and_(
+            query_fields.VolumeFields.name.contains(resp_vol1.attrs.get("name")),
+            query_fields.VolumeFields.metadata("key_-*1") == "xyz"))
+        assert query_resp is not None
+        # see if the query result has just one volume and match the name
+        assert query_resp.__len__() == 1
+        assert query_resp[0].attrs.get("name") == resp_vol1.attrs.get("name")
+        query_resp_metadata = query_resp[0].attrs.get("metadata")
+        assert query_resp_metadata[0]["value"] == metadata['key_-*1']
+
+        # query the volumes without metadata
+        query_resp = client.volumes.list(detail=True, filter=query.or_(
+            query_fields.VolumeFields.name.contains(resp_vol2.attrs.get("name")),
+            query_fields.VolumeFields.metadata("key_-*1") == "xyz"))
+        assert query_resp is not None
+        # see if the query result has two volume
+        assert query_resp.__len__() == 2
     except exceptions.NimOSAPIError as ex:
-        # covered SM_eexist and SM_http_conflict
-        if 'SM_invalid_keyvalue' in str(ex):
-            log("Failed as expected")
+        log(f"Failed with exception message : {str(ex)}")
+        raise ex
+    except Exception as ex:
+        log(f"Failed with exception message : {str(ex)}")
+        raise ex
 
 
-# TODO: as of now the below will always fail as no way to
-# provide correct metadata
 @pytest.mark.skipif(SKIPTEST is True,
                     reason="skipped this test as SKIPTEST variable is true")
 def test_update_volume_metadata(setup_teardown_for_each_test):
     resp_vol1 = create_volume(vol_name1)
     create_volume(vol_name2)
     metadata = {
-        'key1': 'abcde'
+        'key1': 'abcde',
+        'key_-*1': "xyz"
     }
     try:
         # update the size to 100
         nimosclientbase.get_nimos_client().volumes.update(
             id=resp_vol1.attrs.get("id"), metadata=metadata)
     except exceptions.NimOSAPIError as ex:
-        if 'SM_invalid_keyvalue' in str(ex):
-            log("Failed as expected")
+        log(f"Failed with exception message : {str(ex)}")
+        raise ex
 
 
 @pytest.mark.skipif(SKIPTEST is True,
@@ -428,6 +455,7 @@ def test_clone_volume(setup_teardown_for_each_test):
     resp_vol = create_volume(vol_name1)
     snap_resp = nimosclientbase.get_nimos_client().snapshots.create(
         name="test.volumeclone.snapshot", vol_id=resp_vol.attrs.get("id"))
+    # clone from snapshot
     clonevol_resp = nimosclientbase.get_nimos_client().volumes.create(
         name=clone_vol_name,
         base_snap_id=snap_resp.attrs.get("id"),
@@ -474,6 +502,7 @@ def test_delete_clone_volume(setup_teardown_for_each_test):
             nimosclientbase.get_nimos_client().volumes.delete(
                 clonevol_resp.attrs.get("id"))
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
 
 
@@ -513,6 +542,7 @@ def test_bulk_move_volume(setup_teardown_for_each_test):
         elif "SM_invalid_arg_value" in str(ex):
             log("Failed as expected. Invalid pool id provided")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
 
 
@@ -540,6 +570,7 @@ def test_move_volume(setup_teardown_for_each_test):
         elif "SM_invalid_arg_value" in str(ex):
             log("Failed as expected. Invalid pool id provided")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
 
 
@@ -557,4 +588,5 @@ def test_bulk_set_dedupe(setup_teardown_for_each_test):
             log("Failed as expected. pool is not"
                 "capable of hosting dedup volumes")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex

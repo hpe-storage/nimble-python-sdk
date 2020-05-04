@@ -2,7 +2,7 @@
 
 # @author alok ranjan
 
-from nimbleclient.v1 import exceptions
+from nimbleclient import exceptions
 from tests.nimbleclientbase import SKIPTEST, log_to_file as log
 import tests.nimbleclientbase as nimosclientbase
 import pytest
@@ -94,6 +94,7 @@ def test_check_mandatory_params_initiatorGroup(
         if "SM_missing_arg" in str(ex):
             log("Failed as expected. Missing mandatory param")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
 
 
@@ -114,6 +115,7 @@ def test_initiatorGroup_with_incorrect_access_protocol(
         if "SM_invalid_arg_value" in str(ex):
             log(f"Failed as expected. Invalid param value {access_protocol}")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
 
 
@@ -140,6 +142,7 @@ def test_duplicate_initiatorgroup(setup_teardown_for_each_test):
                 )
 
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
 
 
@@ -160,6 +163,7 @@ def test_initiatorgroup_with_fc_accesss_protocol(
         if "SM_fc_svc_not_available" in str(ex):
             log(f"Failed as expected. FC service not available")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
 
 
@@ -204,6 +208,7 @@ def test_get_initiatorgroups(setup_teardown_for_each_test):
                 assert igobj.attrs.get("access_protocol") == "iscsi"
                 assert igobj.attrs.get("iscsi_initiators") is not None
     except exceptions.NimOSAPIError as ex:
+        log(f"Failed with exception message : {str(ex)}")
         raise ex
 
 
@@ -237,6 +242,7 @@ def test_update_initiatorgroup(setup_teardown_for_each_test):
         if "SM_invalid_arg_value" in str(ex):
             log(f"Failed as expected. Invalid param value")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
 
 
@@ -311,6 +317,7 @@ def test_initiatorgroup_naming_iscsi(setup_teardown_for_each_test):
         if "SM_invalid_arg_value" in str(ex):
             log(f"Failed as expected. Invalid param value")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
 
 
@@ -340,6 +347,7 @@ def test_get_suggested_lun(setup_teardown_for_each_test):
         if "SM_invalid_arg_value" in str(ex):
             log(f"Failed as expected. Invalid param value")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
 
 
@@ -368,4 +376,5 @@ def test_validate_lun(setup_teardown_for_each_test):
         if "SM_invalid_arg_value" in str(ex):
             log(f"Failed as expected. Invalid param value")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex

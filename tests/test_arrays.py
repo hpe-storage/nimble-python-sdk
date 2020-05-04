@@ -4,7 +4,7 @@
 import pytest
 import tests.nimbleclientbase as nimosclientbase
 from tests.nimbleclientbase import SKIPTEST, log_to_file as log
-from nimbleclient.v1 import exceptions
+from nimbleclient import exceptions
 
 '''ArraysTestCase tests the Arrays object functionality '''
 
@@ -45,6 +45,7 @@ def test_iterate_arrays_endRow_beyond(setup_teardown_for_each_test):
         if "SM_end_row_beyond_total_rows" in str(ex):
             log("Failed as expected")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
 
 
@@ -63,6 +64,7 @@ def test_select_fields_for_arrays(setup_teardown_for_each_test):
         if "SM_end_row_beyond_total_rows" in str(ex):
             log("Failed as expected")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
 
 
@@ -112,6 +114,7 @@ def test_arrays(setup_teardown_for_each_test):
         if "SM_enoent" in str(ex):
             log("Failed as expected. no suc array object")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
 
 
@@ -138,5 +141,5 @@ def test_check_mandatory_params_arrays(setup_teardown_for_each_test):
         if "SM_missing_arg" in str(ex):
             log("Failed as expected. some mandatory arguments missing")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
-

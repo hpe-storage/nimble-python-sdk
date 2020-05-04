@@ -4,7 +4,7 @@
 import pytest
 import tests.nimbleclientbase as nimosclientbase
 from tests.nimbleclientbase import SKIPTEST, log_to_file as log
-from nimbleclient.v1 import exceptions
+from nimbleclient import exceptions
 
 
 '''Controller TestCase tests the controller object functionality '''
@@ -46,6 +46,7 @@ def test_controllers_endrow_beyond(setup_teardown_for_each_test):
         if "SM_end_row_beyond_total_rows" in str(ex):
             log("Failed as expected.no rows present")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
 
 
@@ -65,4 +66,5 @@ def test_select_fields_for_controllers(setup_teardown_for_each_test):
         if "SM_end_row_beyond_total_rows" in str(ex):
             log("Failed as expected")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex

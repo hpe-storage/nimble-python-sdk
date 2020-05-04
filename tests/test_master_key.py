@@ -4,7 +4,7 @@
 import pytest
 import tests.nimbleclientbase as nimosclientbase
 from tests.nimbleclientbase import SKIPTEST, log_to_file as log
-from nimbleclient.v1 import exceptions
+from nimbleclient import exceptions
 
 # global variables
 key_name_1 = "default"
@@ -69,6 +69,7 @@ def test_create_master_key(setup_teardown_for_each_test):
                                  passphrase=passphrase)
         assert resp is not None
     except exceptions.NimOSAPIError as ex:
+        log(f"Failed with exception message : {str(ex)}")
         raise ex
 
 
@@ -83,6 +84,7 @@ def test_check_mandatory_params_master_key(setup_teardown_for_each_test):
         if "SM_missing_arg" in str(ex):
             log("Failed as expected. missing mandatory arguments.")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
 
 
@@ -98,6 +100,7 @@ def test_master_key_endrow_beyond(setup_teardown_for_each_test):
         if "SM_end_row_beyond_total_rows" in str(ex):
             log("Failed as expected.no rows present")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
 
 @pytest.mark.skipif(SKIPTEST is True,
@@ -116,6 +119,7 @@ def test_select_fields_for_master_key(setup_teardown_for_each_test):
         if "SM_end_row_beyond_total_rows" in str(ex):
             log("Failed as expected")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
 
 
@@ -141,4 +145,5 @@ def test_update_master_key(setup_teardown_for_each_test):
         if "SM_end_row_beyond_total_rows" in str(ex):
             log("Failed as expected")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex

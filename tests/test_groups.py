@@ -4,7 +4,7 @@
 import pytest
 import tests.nimbleclientbase as nimosclientbase
 from tests.nimbleclientbase import SKIPTEST, log_to_file as log
-from nimbleclient.v1 import exceptions
+from nimbleclient import exceptions
 
 '''GroupsTestCase tests the subnet object functionality '''
 
@@ -48,6 +48,7 @@ def test_get_group_discovered_list(setup_teardown_for_each_test):
         if "SM_array_not_found" in str(ex):
             log("Failed as expected. Array id given is invalid")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
 
 
@@ -64,6 +65,7 @@ def test_test_alert(setup_teardown_for_each_test):
         if "SM_array_not_found" in str(ex):
             log("Failed as expected. Array id given is invalid")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
 
 
@@ -105,4 +107,5 @@ def test_update_group(setup_teardown_for_each_test):
         if "SM_array_not_found" in str(ex):
             log("Failed as expected. Array id given is invalid")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex

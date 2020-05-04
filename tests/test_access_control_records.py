@@ -4,7 +4,7 @@
 import pytest
 import tests.nimbleclientbase as nimosclientbase
 from tests.nimbleclientbase import SKIPTEST, log_to_file as log
-from nimbleclient.v1 import exceptions
+from nimbleclient import exceptions
 
 
 # global variables
@@ -71,4 +71,5 @@ def test_create_and_delete_acl(setup_teardown_for_each_test):
             id=vol_resp.get("id"))
         assert vol_resp is not None
     except exceptions.NimOSAPIError as ex:
+        log(f"Failed with exception message : {str(ex)}")
         raise ex

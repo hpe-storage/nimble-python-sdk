@@ -5,7 +5,7 @@
 import pytest
 import tests.nimbleclientbase as nimosclientbase
 from tests.nimbleclientbase import SKIPTEST, log_to_file as log
-from nimbleclient.v1 import exceptions
+from nimbleclient import exceptions
 
 '''audit_logTestCase tests the audit_log object functionality '''
 
@@ -67,4 +67,5 @@ def test_query_invalid_params(setup_teardown_for_each_test):
             log("Failed as expected. "
                 f"Invalid query params provided to query '{query_param}'")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex

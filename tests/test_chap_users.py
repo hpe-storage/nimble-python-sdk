@@ -4,7 +4,7 @@
 import pytest
 import tests.nimbleclientbase as nimosclientbase
 from tests.nimbleclientbase import SKIPTEST, log_to_file as log
-from nimbleclient.v1 import exceptions
+from nimbleclient import exceptions
 
 # global variables
 chap_name_1 = nimosclientbase.get_unique_string("chapusertc-1")
@@ -90,6 +90,7 @@ def test_chap_users_using_invalid_password(setup_teardown_for_each_test):
         if "SM_invalid_arg_value" in str(ex):
             log("Failed as expected. password length short")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
 
 
@@ -111,6 +112,7 @@ def test_delete_invalid_chap_users(setup_teardown_for_each_test):
         if"SM_invalid_path_variable" in str(ex):
             log("Failed as expected. Invalid Id to delete")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
 
 
@@ -133,4 +135,3 @@ def test_update_chap_users(setup_teardown_for_each_test):
     update_resp is not None
     assert update_resp.attrs.get("name") == "updatechapusertestcase"
     assert update_resp.attrs.get("description") == "modified by testcase"
-

@@ -5,7 +5,7 @@
 import pytest
 import tests.nimbleclientbase as nimosclientbase
 from tests.nimbleclientbase import SKIPTEST, log_to_file as log
-from nimbleclient.v1 import exceptions
+from nimbleclient import exceptions
 
 # global variables
 app_server_name_1 = nimosclientbase.get_unique_string("appservertc-1")
@@ -74,6 +74,7 @@ def test_create_app_server(setup_teardown_for_each_test):
             hostname="example.com")
         assert resp is not None
     except exceptions.NimOSAPIError as ex:
+        log(f"Failed with exception message : {str(ex)}")
         raise ex
 
 
@@ -88,6 +89,7 @@ def test_check_mandatory_params_app_server(setup_teardown_for_each_test):
         if "SM_missing_arg" in str(ex):
             log("Failed as expected. missing mandatory arguments.")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
 
 
@@ -102,6 +104,7 @@ def test_app_servers_endrow_beyond(setup_teardown_for_each_test):
         if "SM_end_row_beyond_total_rows" in str(ex):
             log("Failed as expected.no rows present")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
 
 
@@ -121,6 +124,7 @@ def test_select_fields_for_app_server(setup_teardown_for_each_test):
         if "SM_end_row_beyond_total_rows" in str(ex):
             log("Failed as expected")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
 
 
@@ -146,4 +150,5 @@ def test_update_app_server(setup_teardown_for_each_test):
         if "SM_end_row_beyond_total_rows" in str(ex):
             log("Failed as expected")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex

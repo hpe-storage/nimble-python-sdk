@@ -5,7 +5,7 @@
 import pytest
 import tests.nimbleclientbase as nimosclientbase
 from tests.nimbleclientbase import SKIPTEST, log_to_file as log
-from nimbleclient.v1 import exceptions
+from nimbleclient import exceptions
 import tests.test_volume as volume
 import threading
 
@@ -50,6 +50,7 @@ def delete_volcoll():
             log(f" Deleted volcoll with id '{volcoll_id}'")
         except exceptions.NimOSAPIError as ex:
             volcoll_lock.release()
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
     volcoll_to_delete.clear()
     volcoll_lock.release()
@@ -68,6 +69,7 @@ def create_volcoll(volcollname):
         return resp
     except Exception as ex:
         volcoll_lock.release()
+        log(f"Failed with exception message : {str(ex)}")
         raise ex
 
 
@@ -143,6 +145,7 @@ def test_delete_volcoll_before_disassociating_volume(
         if"SM_ebusy" in str(ex):
             log("Failed as expected. disaasociate volume first")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
 
 
@@ -174,6 +177,7 @@ def test_promote_volcoll(setup_teardown_for_each_test):
         if"SM_ealready" in str(ex):
             log("Failed as expected. volcoll is already promoted")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
 
 
@@ -191,6 +195,7 @@ def test_demote_volcoll(setup_teardown_for_each_test):
             log("Failed as expected. "
                 "Invalid value provided for replication_partner_id")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
 
 
@@ -208,6 +213,7 @@ def test_handover_volcoll(setup_teardown_for_each_test):
             log("Failed as expected. "
                 "Invalid value provided for replication_partner_id")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
 
 
@@ -243,6 +249,7 @@ def test_delete_volume_in_volcoll_before_disassociating(
         if"SM_vol_assoc_volcoll" in str(ex):
             log("Failed as expected with exception SM_vol_assoc_volcoll")
         else:
+            log(f"Failed with exception message : {str(ex)}")
             raise ex
 
 

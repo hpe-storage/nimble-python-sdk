@@ -78,7 +78,7 @@ def get_nimos_client():
         # Read the config which contains array credentials
         array_detail = get_config_section_detail(NIMBLE_ARRAY_CREDENTIALS)
         if(array_detail.__len__() == 3):
-            os_client = client.Client(
+            os_client = client.NimOSClient(
                 array_detail[ARRAY_HOSTNAME],
                 array_detail[ARRAY_USERNAME],
                 array_detail[ARRAY_PASSWORD]
