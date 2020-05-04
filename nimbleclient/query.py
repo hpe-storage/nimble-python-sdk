@@ -2,21 +2,22 @@
 #   © Copyright 2020 Hewlett Packard Enterprise Development LP
 #
 
+
 def and_(*args):
     ''' Build AND filters '''
-
-    return  {
+    return {
                 'operator': 'and',
                 'criteria': list(args)
             }
 
+
 def or_(*args):
     ''' Build OR filters '''
-
-    return  {
+    return {
                 'operator': 'or',
                 'criteria': list(args)
-            }
+        }
+
 
 class _Field:
     def __init__(self, name, value=None):
@@ -33,7 +34,7 @@ class _Field:
             value = str(value)
         return value
 
-    def  __eq__(self, value):
+    def __eq__(self, value):
         return {"fieldName": self.name, "operator": "equals", "value": self._get_value(value)}
 
     def __ne__(self, value):

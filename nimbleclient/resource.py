@@ -2,6 +2,7 @@
 #   © Copyright 2020 Hewlett Packard Enterprise Development LP
 #
 
+
 class Resource:
     __slots__ = ['_id', '_attrs', '_collection', '_client']
 
@@ -44,6 +45,7 @@ class Resource:
 
     def __hash__(self):
         return hash(f"{self.__class__.__name__}:{self.id}")
+
 
 class Collection:
     __slots__ = ['resource', 'resource_type', '_client']
