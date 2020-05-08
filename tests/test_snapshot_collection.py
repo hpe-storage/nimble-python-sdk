@@ -31,7 +31,6 @@ def setup_teardown_for_each_test(before_running_all_testcase, request):
     # setup operations before yield is called
     nimosclientbase.log_header(request.function.__name__)
     global vol_name1, snapcoll_name1, volcoll_name1
-
     volcoll_name1 = nimosclientbase.get_unique_string("snapcolltc-volcoll1")
     snapcoll_name1 = nimosclientbase.get_unique_string("snapcolltc-snapcoll1")
     vol_name1 = nimosclientbase.get_unique_string("snapcolltc-vol1")

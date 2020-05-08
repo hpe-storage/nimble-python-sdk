@@ -30,9 +30,9 @@ try:
         log_folder) + "//" + "TestcaseRun.log".strip()
     print(f"log path {testcase_run_log_file}")
     try:
-        log_file = open(testcase_run_log_file, 'w')
         # create a thread lock to make sure only one thread writes to a file
-        lock = threading.Lock()
+        lock = threading.RLock()
+        log_file = open(testcase_run_log_file, 'w')
     except Exception:
         pass
 except Exception:
@@ -51,10 +51,12 @@ os_client = None
 
 
 def get_unique_string(baseName):
-    time.sleep(0.1)
+    lock.acquire()
+    time.sleep(0.2)
     unique_string = baseName + datetime.datetime.now().strftime(
         "-%d-%m-%Y") + \
         str(time.time())
+    lock.release()
     return unique_string
 
 
@@ -92,18 +94,21 @@ def log_header(name):
     """Function to print header unit tests."""
     # log("\n##Started testing '%s' at " %
     #       name, datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S"))
-
+    lock.acquire()
     temp = "##Started testing '{name}' at {time}".format(
         name=name, time=datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S"))
     log_to_file(temp)
+    lock.release()
 
 
 def log_footer(name):
     """Function to print header unit tests."""
+    lock.acquire()
     temp = "##Completed testing '{name}' \n".format(name=name)
     # log("##Completed testing '%s' \n" % name)
     log_to_file(temp)
     log_file.flush()
+    lock.release()
 
 
 def log_to_file(tolog):

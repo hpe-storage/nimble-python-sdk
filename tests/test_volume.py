@@ -18,7 +18,7 @@ vol_name2 = nimosclientbase.get_unique_string("volumetc-vol2")
 vol_name3 = nimosclientbase.get_unique_string("volumetc-vol3")
 vol_to_delete = []
 delete_volume_counter = 5  # we will try to deletevolume at max 5 times
-volume_lock = threading.Lock()
+volume_lock = threading.RLock()
 
 
 @pytest.fixture(scope='module')
@@ -39,14 +39,16 @@ def cleanup_old_volumes():
     # every time this test is run, we will try to remove the old entries
     log("Cleaning up unwanted volumes if any")
     global delete_volume_counter
-    vol_resp = nimosclientbase.get_nimos_client().volumes.list()
+    vol_resp = nimosclientbase.get_nimos_client().volumes.list(detail=True)
     volume_lock.acquire()
     for vol_obj in vol_resp:
         while delete_volume_counter != 0:
             try:
                 if (str.startswith(vol_obj.attrs.get("name"), "volumetc-vol")
                     or str.startswith(vol_obj.attrs.get("name"),
-                                      "clone-volumetc")):
+                                      "clone-volumetc")
+                    or str.startswith(vol_obj.attrs.get("name"),
+                                      "snapcolltc-vol")):
 
                     vol_name = vol_obj.attrs.get("name")
                     nimosclientbase.get_nimos_client(
@@ -63,6 +65,20 @@ def cleanup_old_volumes():
                         f"volume '{vol_name}' again after 3 minutes")
                     time.sleep(180)
                     delete_volume_counter = delete_volume_counter - 1
+                elif "SM_vol_has_online_snap" in str(ex):
+                    log("Failed as expected with exception : 'SM_vol_has_online_snap'")
+                    # offilne the snapshot
+                    snapshotlist = vol_obj.attrs.get("online_snaps")
+                    for snapid in snapshotlist:
+                        nimosclientbase.get_nimos_client(
+                        ).snapshots.update(id=snapid["id"], online=False)
+                    nimosclientbase.get_nimos_client(
+                    ).volumes.delete(vol_obj.attrs.get("id"))
+                elif ("SM_vol_assoc_volcoll" in str(ex)):
+                    nimosclientbase.get_nimos_client().volumes.update(
+                        id=vol_obj.attrs.get("id"), volcoll_id="")  # disassociate
+                    nimosclientbase.get_nimos_client(
+                    ).volumes.delete(vol_obj.attrs.get("id"))
                 else:
                     break  # from while loop
             except Exception as ex:
@@ -76,13 +92,13 @@ def setup_teardown_for_each_test(before_running_all_testcase, request):
     global vol_name1, vol_name2, vol_name3
     # setup operations before yield is called
     nimosclientbase.log_header(request.function.__name__)
-    yield setup_teardown_for_each_test
-    # teardown operations below
-    delete_volume()
     # create new volume names for the next testcase
     vol_name1 = nimosclientbase.get_unique_string("volumetc-vol1")
     vol_name2 = nimosclientbase.get_unique_string("volumetc-vol2")
     vol_name3 = nimosclientbase.get_unique_string("volumetc-vol3")
+    yield setup_teardown_for_each_test
+    # teardown operations below
+    delete_volume()
     nimosclientbase.log_footer(request.function.__name__)
 
 
@@ -154,7 +170,7 @@ def test_volume_already_exists(setup_teardown_for_each_test):
         log(exgeneral)
 
 
-@pytest.mark.skipif(SKIPTEST is False,
+@pytest.mark.skipif(SKIPTEST is True,
                     reason="skipped this test as SKIPTEST variable is true")
 def test_volume_bad_params(setup_teardown_for_each_test):
     # , or / is not supported by nimble for creating vol name
@@ -193,6 +209,7 @@ def test_volume_page_size(setup_teardown_for_each_test):
     resp = nimosclientbase.get_nimos_client().volumes.list(
         detail=True, pageSize=2)
     assert resp is not None
+    log("Successfully got just 2 items per page")
     assert resp.__len__() == 2
 
 

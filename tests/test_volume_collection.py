@@ -12,7 +12,7 @@ import threading
 # global variables
 volcoll_name1 = nimosclientbase.get_unique_string("volcolltc-volcoll1")
 volcoll_to_delete = []
-volcoll_lock = threading.Lock()
+volcoll_lock = threading.RLock()
 
 '''VolumeCollectionTestCase tests the volumecollection object functionality '''
 
@@ -20,6 +20,7 @@ volcoll_lock = threading.Lock()
 @pytest.fixture(scope='module')
 def before_running_all_testcase(request):
     log("**** Starting Tests for VolumeCollectionTestCase *****\n")
+    cleanup_old_volume_collection()
 
     def after_running_all_testcase():
         log("**** Completed Tests for VolumeCollectionTestCase "
@@ -30,14 +31,30 @@ def before_running_all_testcase(request):
 @pytest.fixture(scope='function')
 def setup_teardown_for_each_test(before_running_all_testcase, request):
     global volcoll_name1
+    volcoll_name1 = nimosclientbase.get_unique_string("volcolltc-volcoll1")
     # setup operations before yield is called
     nimosclientbase.log_header(request.function.__name__)
     yield setup_teardown_for_each_test
     # teardown operations below
     volume.delete_volume()
     delete_volcoll()
-    volcoll_name1 = nimosclientbase.get_unique_string("volcolltc-volcoll1")
     nimosclientbase.log_footer(request.function.__name__)
+
+
+def cleanup_old_volume_collection():
+    log("Cleaning up any unwanted leftover volcoll from previous run")
+    volcoll_resp = nimosclientbase.get_nimos_client().volume_collections.list(detail=True)
+    for volcoll_obj in volcoll_resp:
+        try:
+            if (str.startswith(volcoll_obj.attrs.get("name"), "snapcolltc-vol")):
+                volcoll_name = volcoll_obj.attrs.get("name")
+                resp = nimosclientbase.get_nimos_client(
+                ).volume_collections.delete(id=volcoll_obj.attrs.get("id"))
+                assert resp is not None
+                log(f" Deleted volcoll with name '{volcoll_name}'")
+        except Exception as ex:
+            log(f"Failed with exception message : {str(ex)}")
+            raise ex
 
 
 def delete_volcoll():
@@ -257,9 +274,9 @@ def test_delete_volume_in_volcoll_before_disassociating(
                     reason="skipped this test as SKIPTEST variable is true")
 def test_create_edit_delete_protection_schedule(setup_teardown_for_each_test):
     # check if this array has any previous volcoll
-    allvolcoll_resp = nimosclientbase.get_nimos_client(
+    previous_volcoll_resp = nimosclientbase.get_nimos_client(
     ).volume_collections.list()
-    total_volcoll = allvolcoll_resp.__len__()
+    total_prev_volcoll = previous_volcoll_resp.__len__()
 
     protection_sched_name = "testcaseprotectionschedule"
     days = "monday,tuesday,wednesday,thursday,friday"
@@ -280,9 +297,9 @@ def test_create_edit_delete_protection_schedule(setup_teardown_for_each_test):
     assert protect_sched_resp.attrs.get("description") == description
     assert protect_sched_resp.attrs.get("name") == protection_sched_name
     # check if volcoll is present
-    allvolcoll_resp = nimosclientbase.get_nimos_client(
+    cur_volcoll_resp = nimosclientbase.get_nimos_client(
     ).volume_collections.list()
-    assert allvolcoll_resp.__len__() == total_volcoll + 1
+    assert cur_volcoll_resp.__len__() >= total_prev_volcoll
 
     # update the schedule
     resp = nimosclientbase.get_nimos_client().protection_schedules.update(

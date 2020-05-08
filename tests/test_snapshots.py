@@ -13,7 +13,7 @@ import threading
 snapshot_name1 = nimosclientbase.get_unique_string("snapshottc-snapshot1")
 vol_name1 = nimosclientbase.get_unique_string("snapshottc-vol1")
 snapshot_to_delete = []
-snapshot_lock = threading.Lock()
+snapshot_lock = threading.RLock()
 
 '''SnapshotsTestCase class tests the snapshots object functionality '''
 

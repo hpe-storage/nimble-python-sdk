@@ -4,7 +4,7 @@ The test case has been developed using Pytest Framework.
 
 ## PREREQUISITE.
 
-1.Please install python 3.6 and above
+1.Please install python 3.6 and above. ex : "pip install python3"
 
 2.Install Pytest package using pip. ex : "pip install pytest"
 
@@ -36,8 +36,7 @@ Ans: To run all the test cases in one shot,go to the folder where the testscase 
      This redirect the output to log file log.txt . Ex: pytest tests >> log.txt 2>&1
 OR
 
-Simply then run the command "pytest <test_directory>" . This command will search for all the test case which begins with "test_*.py" under the give directory 
-and run them.
+Simply then run the command "pytest <test_directory>" or "pytest .". This command will search for all the test case which begins with "test_*.py" under the give directory and run them.
 
 Logging:
 =========================
