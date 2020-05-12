@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+    
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Hewlett Packard Enterprise">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta property="og:title" content="HPE Storage Container Orchestrator Documentation"/>
+    <meta property="og:description" content="This is an umbrella documentation project for all Kubernetes and Docker integrations for HPE primary storage tailored for IT Ops, developers and partners. Including HPE 3PAR and Primera, HPE Cloud Volumes and HPE Nimble Storage."/>
+    <meta property="og:locale" content="en_US"/>
+    <meta property="og:url" content="https://scod.hpedev.io"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content="https://scod.hpedev.io/img/hpe-social-og-image01.jpg"/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
+    
+  <title>access_control_records - HPE Nimble Storage Software Development Kit (SDK) for Python</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../css/hpedev.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "access_control_records";
+    var mkdocs_page_input_path = "api/access_control_records.md";
+    var mkdocs_page_url = "/nimble-python-sdk/api/access_control_records.html";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-79554149-4', 'auto');
+      ga('send', 'pageview');
+  </script>
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> HPE Nimble Storage Software Development Kit (SDK) for Python</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">GET STARTED</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../get_started/install/index.html">Installation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../get_started/patterns/index.html">Patterns</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../get_started/examples/index.html">Example workflows</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">API REFERENCE</span>
+    <ul class="subnav">
+                <li class=" current">
+                    
+    <a class="current" href="access_control_records.html">access_control_records</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#nimbleclientv1apiaccess_control_records">nimbleclient.v1.api.access_control_records</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#accesscontrolrecord">AccessControlRecord</a></li>
+        
+            <li><a class="toctree-l4" href="#accesscontrolrecordlist">AccessControlRecordList</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="active_directory_memberships.html">active_directory_memberships</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="alarms.html">alarms</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="application_categories.html">application_categories</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="application_servers.html">application_servers</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="arrays.html">arrays</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="audit_log.html">audit_log</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="chap_users.html">chap_users</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="controllers.html">controllers</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="disks.html">disks</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="events.html">events</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="fibre_channel_configs.html">fibre_channel_configs</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="fibre_channel_initiator_aliases.html">fibre_channel_initiator_aliases</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="fibre_channel_interfaces.html">fibre_channel_interfaces</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="fibre_channel_ports.html">fibre_channel_ports</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="fibre_channel_sessions.html">fibre_channel_sessions</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="folders.html">folders</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="groups.html">groups</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="initiator_groups.html">initiator_groups</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="initiators.html">initiators</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="jobs.html">jobs</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="key_managers.html">key_managers</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="master_key.html">master_key</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="network_configs.html">network_configs</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="network_interfaces.html">network_interfaces</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="performance_policies.html">performance_policies</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="pools.html">pools</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="protection_schedules.html">protection_schedules</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="protection_templates.html">protection_templates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="protocol_endpoints.html">protocol_endpoints</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="replication_partners.html">replication_partners</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="shelves.html">shelves</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="snapshot_collections.html">snapshot_collections</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="snapshots.html">snapshots</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="software_versions.html">software_versions</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="space_domains.html">space_domains</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="subnets.html">subnets</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="support.html">support</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="tokens.html">tokens</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="user_groups.html">user_groups</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="user_policies.html">user_policies</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="users.html">users</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="versions.html">versions</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="volume_collections.html">volume_collections</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="volumes.html">volumes</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="witnesses.html">witnesses</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">COMMUNITY</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="https://developer.hpe.com">HPE Developer Community</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="https://slack.hpedev.io">Sign up to HPE DEV on Slack</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">EXTERNAL LINKS</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="https://github.com/hpe-storage/scod">Nimble SDK on GitHub</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="https://github.com/hpe-storage">HPE Storage on GitHub</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="https://hpe.com/storage/management-automation">Storage Automation on hpe.com</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">LEGAL</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../legal/contributing/index.html">Contributing</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../legal/support/index.html">Support</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../legal/license/index.html">License</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">HPE Nimble Storage Software Development Kit (SDK) for Python</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>API REFERENCE &raquo;</li>
+        
+      
+    
+    <li>access_control_records</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="nimbleclientv1apiaccess_control_records">nimbleclient.v1.api.access_control_records<a class="headerlink" href="#nimbleclientv1apiaccess_control_records" title="Permanent link">&para;</a></h1>
+<h2 id="accesscontrolrecord">AccessControlRecord<a class="headerlink" href="#accesscontrolrecord" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>AccessControlRecord(self, id, attrs=None, client=None, collection=None)
+</code></pre></p>
+<p>Manage access control records for volumes.</p>
+<p>Parameters:
+- id                   : Identifier for the access control record.
+- apply_to             : Type of object this access control record applies to.
+- chap_user_id         : Identifier for the CHAP user.
+- chap_user_name       : Name of the CHAP user.
+- initiator_group_id   : Identifier for the initiator group.
+- initiator_group_name : Name of the initiator group.
+- lun                  : If this access control record applies to a regular volume, this attribute is the volume's LUN (Logical Unit Number). If the access protocol is iSCSI,
+                         the LUN will be 0. However, if the access protocol is Fibre Channel, the LUN will be in the range from 0 to 2047. If this record applies to a Virtual
+                         Volume, this attribute is the volume's secondary LUN in the range from 0 to 399999, for both iSCSI and Fibre Channel. If the record applies to a
+                         OpenstackV2 volume, the LUN will be in the range from 0 to 2047, for both iSCSI and Fibre Channel. If this record applies to a protocol endpoint or
+                         only a snapshot, this attribute is not meaningful and is set to null.
+- vol_id               : Identifier for the volume this access control record applies to.
+- vol_name             : Name of the volume this access control record applies to.
+- vol_agent_type       : External management agent type.
+- pe_id                : Identifier for the protocol endpoint this access control record applies to.
+- pe_name              : Name of the protocol endpoint this access control record applies to.
+- pe_lun               : LUN (Logical Unit Number) to associate with this protocol endpoint. Valid LUNs are in the 0-2047 range.
+- snap_id              : Identifier for the snapshot this access control record applies to.
+- snap_name            : Name of the snapshot this access control record applies to.
+- pe_ids               : List of candidate protocol endpoints that may be used to access the Virtual Volume. One of them will be selected for the access control record. This
+                         field is required only when creating an access control record for a Virtual Volume.
+- snapluns             : Information about the snapshot LUNs associated with this access control record. This field is meaningful when the online snapshot can be accessed as a
+                         LUN in the group.
+- creation_time        : Time when this access control record was created.
+- last_modified        : Time when this access control record was last modified.
+- access_protocol      : Access protocol of the volume.</p>
+<h2 id="accesscontrolrecordlist">AccessControlRecordList<a class="headerlink" href="#accesscontrolrecordlist" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>AccessControlRecordList(self, client=None)
+</code></pre></p>
+              
+            </div>
+          </div>
+
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="active_directory_memberships.html" class="btn btn-neutral float-right" title="active_directory_memberships">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../get_started/examples/index.html" class="btn btn-neutral" title="Example workflows"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright 2020 Hewlett Packard Enterprise Development LP</p>
+    
+  </div>
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../get_started/examples/index.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="active_directory_memberships.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

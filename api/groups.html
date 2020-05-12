@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+    
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Hewlett Packard Enterprise">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta property="og:title" content="HPE Storage Container Orchestrator Documentation"/>
+    <meta property="og:description" content="This is an umbrella documentation project for all Kubernetes and Docker integrations for HPE primary storage tailored for IT Ops, developers and partners. Including HPE 3PAR and Primera, HPE Cloud Volumes and HPE Nimble Storage."/>
+    <meta property="og:locale" content="en_US"/>
+    <meta property="og:url" content="https://scod.hpedev.io"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content="https://scod.hpedev.io/img/hpe-social-og-image01.jpg"/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
+    
+  <title>groups - HPE Nimble Storage Software Development Kit (SDK) for Python</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../css/hpedev.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "groups";
+    var mkdocs_page_input_path = "api/groups.md";
+    var mkdocs_page_url = "/nimble-python-sdk/api/groups.html";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-79554149-4', 'auto');
+      ga('send', 'pageview');
+  </script>
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> HPE Nimble Storage Software Development Kit (SDK) for Python</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">GET STARTED</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../get_started/install/index.html">Installation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../get_started/patterns/index.html">Patterns</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../get_started/examples/index.html">Example workflows</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">API REFERENCE</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="access_control_records.html">access_control_records</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="active_directory_memberships.html">active_directory_memberships</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="alarms.html">alarms</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="application_categories.html">application_categories</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="application_servers.html">application_servers</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="arrays.html">arrays</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="audit_log.html">audit_log</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="chap_users.html">chap_users</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="controllers.html">controllers</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="disks.html">disks</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="events.html">events</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="fibre_channel_configs.html">fibre_channel_configs</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="fibre_channel_initiator_aliases.html">fibre_channel_initiator_aliases</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="fibre_channel_interfaces.html">fibre_channel_interfaces</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="fibre_channel_ports.html">fibre_channel_ports</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="fibre_channel_sessions.html">fibre_channel_sessions</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="folders.html">folders</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="groups.html">groups</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#nimbleclientv1apigroups">nimbleclient.v1.api.groups</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#group">Group</a></li>
+        
+            <li><a class="toctree-l4" href="#grouplist">GroupList</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="initiator_groups.html">initiator_groups</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="initiators.html">initiators</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="jobs.html">jobs</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="key_managers.html">key_managers</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="master_key.html">master_key</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="network_configs.html">network_configs</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="network_interfaces.html">network_interfaces</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="performance_policies.html">performance_policies</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="pools.html">pools</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="protection_schedules.html">protection_schedules</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="protection_templates.html">protection_templates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="protocol_endpoints.html">protocol_endpoints</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="replication_partners.html">replication_partners</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="shelves.html">shelves</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="snapshot_collections.html">snapshot_collections</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="snapshots.html">snapshots</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="software_versions.html">software_versions</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="space_domains.html">space_domains</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="subnets.html">subnets</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="support.html">support</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="tokens.html">tokens</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="user_groups.html">user_groups</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="user_policies.html">user_policies</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="users.html">users</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="versions.html">versions</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="volume_collections.html">volume_collections</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="volumes.html">volumes</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="witnesses.html">witnesses</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">COMMUNITY</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="https://developer.hpe.com">HPE Developer Community</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="https://slack.hpedev.io">Sign up to HPE DEV on Slack</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">EXTERNAL LINKS</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="https://github.com/hpe-storage/scod">Nimble SDK on GitHub</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="https://github.com/hpe-storage">HPE Storage on GitHub</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="https://hpe.com/storage/management-automation">Storage Automation on hpe.com</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">LEGAL</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../legal/contributing/index.html">Contributing</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../legal/support/index.html">Support</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../legal/license/index.html">License</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">HPE Nimble Storage Software Development Kit (SDK) for Python</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>API REFERENCE &raquo;</li>
+        
+      
+    
+    <li>groups</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="nimbleclientv1apigroups">nimbleclient.v1.api.groups<a class="headerlink" href="#nimbleclientv1apigroups" title="Permanent link">&para;</a></h1>
+<h2 id="group">Group<a class="headerlink" href="#group" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>Group(self, id, attrs=None, client=None, collection=None)
+</code></pre></p>
+<p>Group is a collection of arrays operating together organized into storage pools.</p>
+<p>Parameters:
+- id                                     : Identifier of the group.
+- name                                   : Name of the group.
+- smtp_server                            : Hostname or IP Address of SMTP Server.
+- smtp_port                              : Port number of SMTP Server.
+- smtp_auth_enabled                      : Whether SMTP Server requires authentication.
+- smtp_auth_username                     : Username to authenticate with SMTP Server.
+- smtp_auth_password                     : Password to authenticate with SMTP Server.
+- smtp_encrypt_type                      : Level of encryption for SMTP. Requires use of SMTP Authentication if encryption is enabled.
+- autosupport_enabled                    : Whether to send autosupport.
+- allow_analytics_gui                    : Specify whether to allow HPE Nimble Storage to use Google Analytics in the GUI.  HPE Nimble Storage uses Google Analytics to gather
+                                           data related to GUI usage.  The data gathered is used to evaluate and improve the product.
+- allow_support_tunnel                   : Whether to allow support tunnel.
+- proxy_server                           : Hostname or IP Address of HTTP Proxy Server. Setting this attribute to an empty string will unset all proxy settings.
+- proxy_port                             : Proxy Port of HTTP Proxy Server.
+- proxy_username                         : Username to authenticate with HTTP Proxy Server.
+- proxy_password                         : Password to authenticate with HTTP Proxy Server.
+- alert_to_email_addrs                   : Comma-separated list of email addresss to receive emails.
+- send_alert_to_support                  : Whether to send alert to Support.
+- alert_from_email_addr                  : From email address to use while sending emails.
+- alert_min_level                        : Minimum level of alert to be notified.
+- isns_enabled                           : Whether iSNS is enabled.
+- isns_server                            : Hostname or IP Address of iSNS Server.
+- isns_port                              : Port number for iSNS Server.
+- snmp_trap_enabled                      : Whether to enable SNMP traps.
+- snmp_trap_host                         : Hostname or IP Address to send SNMP traps.
+- snmp_trap_port                         : Port number of SNMP trap host.
+- snmp_get_enabled                       : Whether to accept SNMP get commands.
+- snmp_community                         : Community string to be used with SNMP.
+- snmp_get_port                          : Port number to which SNMP get requests should be sent.
+- snmp_sys_contact                       : Name of the SNMP administrator.
+- snmp_sys_location                      : Location of the group.
+- domain_name                            : Domain name for this group.
+- dns_servers                            : IP addresses for this group's dns servers.
+- ntp_server                             : Either IP address or hostname of the NTP server for this group.
+- timezone                               : Timezone in which this group is located.
+- user_inactivity_timeout                : The amount of time in seconds that the user session is inactive before timing out.
+- syslogd_enabled                        : Is syslogd enabled on this system.
+- syslogd_server                         : Hostname of the syslogd server.
+- syslogd_port                           : Port number for syslogd server.
+- vvol_enabled                           : Are vvols enabled on this group.
+- iscsi_enabled                          : Whether iSCSI is enabled on this group.
+- fc_enabled                             : Whether FC is enabled on this group.
+- unique_name_enabled                    : Are new volume and volume collection names transformed on this group.
+- access_protocol_list                   : Protocol used to access this group.
+- group_target_enabled                   : Is group_target enabled on this group.
+- default_iscsi_target_scope             : Newly created volumes are exported under iSCSI Group Target or iSCSI Volume Target.
+- tdz_enabled                            : Is Target Driven Zoning (TDZ) enabled on this group.
+- tdz_prefix                             : Target Driven Zoning (TDZ) prefix for peer zones created by TDZ.
+- group_target_name                      : Iscsi target name for this group.
+- default_volume_reserve                 : Amount of space to reserve for a volume as a percentage of volume size.
+- default_volume_warn_level              : Default threshold for volume space usage as a percentage of volume size above which an alert is raised.
+- default_volume_limit                   : Default limit for a volume space usage as a percentage of volume size. Volume will be taken offline/made non-writable on exceeding
+                                           its limit.
+- default_snap_reserve                   : Amount of space to reserve for snapshots of a volume as a percentage of volume size.
+- default_snap_warn_level                : Default threshold for snapshot space usage of a volume as a percentage of volume size above which an alert is raised.
+- default_snap_limit                     : This attribute is deprecated. The array does not limit a volume's snapshot space usage. The attribute is ignored on input and
+                                           returns max int64 value on output.
+- default_snap_limit_percent             : This attribute is deprecated. The array does not limit a volume's snapshot space usage. The attribute is ignored on input and
+                                           returns -1 on output.
+- alarms_enabled                         : Whether alarm feature is enabled.
+- vss_validation_timeout                 : The amount of time in seconds to validate Microsoft VSS application synchronization before timing out.
+- auto_switchover_enabled                : Whether automatic switchover of Group management services feature is enabled.
+- auto_switchover_messages               : List of validation messages for automatic switchover of Group Management. This will be empty when there are no conflicts found.
+- merge_state                            : State of group merge.
+- merge_group_name                       : Group that we're being merged with.
+- tlsv1_enabled                          : Enable or disable TLSv1.0 and TLSv1.1.
+- cc_mode_enabled                        : Enable or disable Common Criteria mode.
+- group_snapshot_ttl                     : Snapshot Time-to-live(TTL) configured at group level for automatic deletion of unmanaged snapshots. Value 0 indicates unlimited TTL.
+- autoclean_unmanaged_snapshots_ttl_unit : Unit for unmanaged snapshot time to live.
+- autoclean_unmanaged_snapshots_enabled  : Whether autoclean unmanaged snapshots feature is enabled.
+- leader_array_name                      : Name of the array where the group Management Service is running.
+- leader_array_serial                    : Serial number of the array where the group Management Service is running.
+- management_service_backup_array_name   : Name of the array where backup the group Management Service is running.
+- management_service_backup_status       : HA status of the group Management Service.
+- failover_mode                          : Failover mode of the group Management Service.
+- witness_status                         : Witness status from group Management Service array and group Management Service backup array.
+- member_list                            : Members of this group.
+- compressed_vol_usage_bytes             : Compressed usage of volumes in the group.
+- compressed_snap_usage_bytes            : Compressed usage of snapshots in the group.
+- uncompressed_vol_usage_bytes           : Uncompressed usage of volumes in the group.
+- uncompressed_snap_usage_bytes          : Uncompressed usage of snapshots in the group.
+- usable_capacity_bytes                  : Usable capacity bytes of the group.
+- usage                                  : Used space of the group in bytes.
+- raw_capacity                           : Total capacity of the group.
+- usable_cache_capacity                  : Usable cache capacity of the group.
+- raw_cache_capacity                     : Total cache capacity of the group.
+- snap_usage_populated                   : Total snapshot usage as if each snapshot is deep copy of the volume.
+- pending_deletes                        : Usage for blocks that are not yet deleted.
+- num_connections                        : Number of connections to the group.
+- vol_compression_ratio                  : Compression ratio of volumes in the group.
+- snap_compression_ratio                 : Compression ratio of snapshots in the group.
+- compression_ratio                      : Compression savings for the group expressed as ratio.
+- dedupe_ratio                           : Dedupe savings for the group expressed as ratio.
+- clone_ratio                            : Clone savings for the group expressed as ratio.
+- vol_thin_provisioning_ratio            : Thin provisioning savings for volumes in the group expressed as ratio.
+- savings_ratio                          : Overall savings in the group expressed as ratio.
+- data_reduction_ratio                   : Space savings in the group that does not include thin-provisioning savings expressed as ratio.
+- savings_dedupe                         : Space usage savings in the group due to deduplication.
+- savings_compression                    : Space usage savings in the group due to compression.
+- savings_clone                          : Space usage savings in the group due to cloning of volumes.
+- savings_vol_thin_provisioning          : Space usage savings in the group due to thin provisioning of volumes.
+- savings_data_reduction                 : Space usage savings in the group that does not include thin-provisioning savings.
+- savings                                : Overall space usage savings in the group.
+- free_space                             : Free space of the pool in bytes.
+- unused_reserve_bytes                   : Reserved space that is not utilized.
+- usage_valid                            : Indicates whether the usage of group is valid.
+- space_info_valid                       : Is space info for this group valid.
+- version_current                        : Version of software running on the group.
+- version_target                         : Desired software version for the group.
+- version_rollback                       : Rollback software version for the group.
+- update_state                           : Group update state.
+- update_start_time                      : Start time of last update.
+- update_end_time                        : End time of last update.
+- update_array_names                     : Arrays in the group undergoing update.
+- update_progress_msg                    : Group update detailed progress message.
+- update_error_code                      : If the software update has failed, this indicates the error code corresponding to the failure.
+- update_downloading                     : Is software update package currently downloading.
+- update_download_error_code             : If the software download has failed, this indicates the error code corresponding to the failure.
+- update_download_start_time             : Start time of last update.
+- update_download_end_time               : End time of last update.
+- iscsi_automatic_connection_method      : Is iscsi reconnection automatic.
+- iscsi_connection_rebalancing           : Does iscsi automatically rebalance connections.
+- repl_throttled_bandwidth               : Current bandwidth throttle for replication, expressed either as megabits per second or as -1 to indicate that there is no throttle.
+- repl_throttled_bandwidth_kbps          : Current bandwidth throttle for replication, expressed either as kilobits per second or as -1 to indicate that there is no throttle.
+- repl_throttle_list                     : All the replication bandwidth limits on the system.
+- volume_migration_status                : Status of data migration activity related to volumes being relocated to different pools.
+- array_unassign_migration_status        : Data migration status for arrays being removed from their pool.
+- data_rebalance_status                  : Status of data rebalancing operations for pools in the group.
+- scsi_vendor_id                         : SCSI vendor ID.
+- encryption_config                      : How encryption is configured for this group.
+- last_login                             : Time and user of last login to this group.
+- num_snaps                              : Number of snapshots in the group.
+- num_snapcolls                          : Number of snapshot collections in this group.
+- date                                   : Unix epoch time local to the group.
+- login_banner_message                   : The message for the login banner that is displayed during user login activity.
+- login_banner_after_auth                : Should the banner be displayed before the user credentials are prompted or after prompting the user credentials.
+- login_banner_reset                     : This will reset the banner to the version of the installed NOS. When login_banner_after_auth is specified, login_banner_reset can
+                                           not be set to true.
+- snap_retn_meter_high                   : Threshold for considering a volume as high retention.
+- snap_retn_meter_very_high              : Threshold for considering a volume as very high retention.</p>
+<h2 id="grouplist">GroupList<a class="headerlink" href="#grouplist" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>GroupList(self, client=None)
+</code></pre></p>
+              
+            </div>
+          </div>
+
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="initiator_groups.html" class="btn btn-neutral float-right" title="initiator_groups">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="folders.html" class="btn btn-neutral" title="folders"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright 2020 Hewlett Packard Enterprise Development LP</p>
+    
+  </div>
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="folders.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="initiator_groups.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

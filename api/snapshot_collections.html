@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+    
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Hewlett Packard Enterprise">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta property="og:title" content="HPE Storage Container Orchestrator Documentation"/>
+    <meta property="og:description" content="This is an umbrella documentation project for all Kubernetes and Docker integrations for HPE primary storage tailored for IT Ops, developers and partners. Including HPE 3PAR and Primera, HPE Cloud Volumes and HPE Nimble Storage."/>
+    <meta property="og:locale" content="en_US"/>
+    <meta property="og:url" content="https://scod.hpedev.io"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content="https://scod.hpedev.io/img/hpe-social-og-image01.jpg"/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
+    
+  <title>snapshot_collections - HPE Nimble Storage Software Development Kit (SDK) for Python</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../css/hpedev.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "snapshot_collections";
+    var mkdocs_page_input_path = "api/snapshot_collections.md";
+    var mkdocs_page_url = "/nimble-python-sdk/api/snapshot_collections.html";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-79554149-4', 'auto');
+      ga('send', 'pageview');
+  </script>
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> HPE Nimble Storage Software Development Kit (SDK) for Python</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">GET STARTED</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../get_started/install/index.html">Installation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../get_started/patterns/index.html">Patterns</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../get_started/examples/index.html">Example workflows</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">API REFERENCE</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="access_control_records.html">access_control_records</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="active_directory_memberships.html">active_directory_memberships</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="alarms.html">alarms</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="application_categories.html">application_categories</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="application_servers.html">application_servers</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="arrays.html">arrays</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="audit_log.html">audit_log</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="chap_users.html">chap_users</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="controllers.html">controllers</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="disks.html">disks</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="events.html">events</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="fibre_channel_configs.html">fibre_channel_configs</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="fibre_channel_initiator_aliases.html">fibre_channel_initiator_aliases</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="fibre_channel_interfaces.html">fibre_channel_interfaces</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="fibre_channel_ports.html">fibre_channel_ports</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="fibre_channel_sessions.html">fibre_channel_sessions</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="folders.html">folders</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="groups.html">groups</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="initiator_groups.html">initiator_groups</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="initiators.html">initiators</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="jobs.html">jobs</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="key_managers.html">key_managers</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="master_key.html">master_key</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="network_configs.html">network_configs</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="network_interfaces.html">network_interfaces</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="performance_policies.html">performance_policies</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="pools.html">pools</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="protection_schedules.html">protection_schedules</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="protection_templates.html">protection_templates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="protocol_endpoints.html">protocol_endpoints</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="replication_partners.html">replication_partners</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="shelves.html">shelves</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="snapshot_collections.html">snapshot_collections</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#nimbleclientv1apisnapshot_collections">nimbleclient.v1.api.snapshot_collections</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#snapshotcollection">SnapshotCollection</a></li>
+        
+            <li><a class="toctree-l4" href="#snapshotcollectionlist">SnapshotCollectionList</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="snapshots.html">snapshots</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="software_versions.html">software_versions</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="space_domains.html">space_domains</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="subnets.html">subnets</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="support.html">support</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="tokens.html">tokens</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="user_groups.html">user_groups</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="user_policies.html">user_policies</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="users.html">users</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="versions.html">versions</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="volume_collections.html">volume_collections</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="volumes.html">volumes</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="witnesses.html">witnesses</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">COMMUNITY</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="https://developer.hpe.com">HPE Developer Community</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="https://slack.hpedev.io">Sign up to HPE DEV on Slack</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">EXTERNAL LINKS</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="https://github.com/hpe-storage/scod">Nimble SDK on GitHub</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="https://github.com/hpe-storage">HPE Storage on GitHub</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="https://hpe.com/storage/management-automation">Storage Automation on hpe.com</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">LEGAL</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../legal/contributing/index.html">Contributing</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../legal/support/index.html">Support</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../legal/license/index.html">License</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">HPE Nimble Storage Software Development Kit (SDK) for Python</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>API REFERENCE &raquo;</li>
+        
+      
+    
+    <li>snapshot_collections</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="nimbleclientv1apisnapshot_collections">nimbleclient.v1.api.snapshot_collections<a class="headerlink" href="#nimbleclientv1apisnapshot_collections" title="Permanent link">&para;</a></h1>
+<h2 id="snapshotcollection">SnapshotCollection<a class="headerlink" href="#snapshotcollection" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>SnapshotCollection(self, id, attrs=None, client=None, collection=None)
+</code></pre></p>
+<p>Snapshot collections are collections of scheduled snapshots that are taken from volumes sharing a volume collection. Snapshot collections are replicated in the order that the
+collections were taken.</p>
+<p>Parameters:
+- id                         : Identifier for snapshot collection.
+- name                       : Name of snapshot collection.
+- description                : Text description of snapshot collection.
+- volcoll_name               : Volume collection name.
+- volcoll_id                 : Parent volume collection ID.
+- origin_name                : Origination group name/ID.
+- is_replica                 : Indicates if snapshot collection was created as a replica.
+- srep_owner_name            : Name of the partner where the snapshots in this snapshot collection reside.
+- srep_owner_id              : ID of the partner where snapshots for this snapshot collection reside which were created by synchronous replication. Field will be null if no
+                               peer snapshot_collection was created by synchronous replication.
+- peer_snapcoll_id           : ID of the peer snapshot collection created by synchronous replication. Field will be null if no peer snapshot_collection was created by
+                               synchronous replication.
+- is_complete                : Is complete.
+- is_manual                  : Is manual.
+- is_external_trigger        : Is externally triggered.
+- is_unmanaged               : Indicates whether a snapshot collection is unmanaged. This is based on the state of individual snapshots.
+- is_manually_managed        : Indicates whether a snapshot collection is managed.
+- repl_status                : Replication status.
+- repl_start_time            : Replication start time.
+- repl_complete_time         : Replication complete time.
+- repl_bytes_transferred     : Number of bytes transferred after replication completes.
+- creation_time              : Time when this snapshot collection was created.
+- last_modified              : Time when this snapshot collection was last modified.
+- online_status              : Online status of snapcoll. This is based on the online status of the individual snapshots.
+- vol_snap_attr_list         : List of snapshot attributes for snapshots being created as part of snapshot collection creation.
+- snapshots_list             : List of snapshots in the snapshot collection.
+- replicate                  : True if this snapshot collection has been marked for replication. This attribute cannot be updated for synchronous replication.
+- replicate_to               : Specifies the partner name that the snapshots in this snapshot collection are replicated to.
+- start_online               : Start with snapshot set online.
+- allow_writes               : Allow applications to write to created snapshot(s). Mandatory and must be set to 'true' for VSS application synchronized snapshots.
+- disable_appsync            : Do not perform application synchronization for this snapshot, create a crash-consistent snapshot instead.
+- snap_verify                : Run verification tool on this snapshot. This option can only be used with a volume collection that has application synchronization.
+- skip_db_consistency_check  : Skip consistency check for database files on this snapshot. This option only applies to volume collections with application synchronization set
+                               to VSS, application ID set to MS Exchange 2010 or later with Database Availability Group (DAG), snap_verify option set to true, and
+                               disable_appsync option set to false.
+- sched_id                   : ID of protection schedule of snapshot collection.
+- sched_name                 : Name of protection schedule of snapshot collection.
+- invoke_on_upstream_partner : Invoke snapshot request on upstream partner. This operation is not supported for synchronous replication volume vollections.
+- agent_type                 : External management agent type for snapshots being created as part of snapshot collection.
+- expiry_after               : Number of seconds after which this snapcoll is considered expired by the snapshot TTL. A value of 0 indicates that the snapshot never expires, 1
+                               indicates that the snapshot uses a group-level configured TTL value and any other value indicates the number of seconds.
+- metadata                   : Key-value pairs that augment a snapshot collection's attributes.
+- force                      : Forcibly delete the specified snapshot collection even if it is the last replicated snapshot. Doing so could lead to full re-seeding at the next
+                               replication.</p>
+<h2 id="snapshotcollectionlist">SnapshotCollectionList<a class="headerlink" href="#snapshotcollectionlist" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>SnapshotCollectionList(self, client=None)
+</code></pre></p>
+              
+            </div>
+          </div>
+
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="snapshots.html" class="btn btn-neutral float-right" title="snapshots">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="shelves.html" class="btn btn-neutral" title="shelves"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright 2020 Hewlett Packard Enterprise Development LP</p>
+    
+  </div>
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="shelves.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="snapshots.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

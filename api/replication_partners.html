@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+    
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Hewlett Packard Enterprise">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta property="og:title" content="HPE Storage Container Orchestrator Documentation"/>
+    <meta property="og:description" content="This is an umbrella documentation project for all Kubernetes and Docker integrations for HPE primary storage tailored for IT Ops, developers and partners. Including HPE 3PAR and Primera, HPE Cloud Volumes and HPE Nimble Storage."/>
+    <meta property="og:locale" content="en_US"/>
+    <meta property="og:url" content="https://scod.hpedev.io"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content="https://scod.hpedev.io/img/hpe-social-og-image01.jpg"/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
+    
+  <title>replication_partners - HPE Nimble Storage Software Development Kit (SDK) for Python</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../css/hpedev.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "replication_partners";
+    var mkdocs_page_input_path = "api/replication_partners.md";
+    var mkdocs_page_url = "/nimble-python-sdk/api/replication_partners.html";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-79554149-4', 'auto');
+      ga('send', 'pageview');
+  </script>
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> HPE Nimble Storage Software Development Kit (SDK) for Python</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">GET STARTED</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../get_started/install/index.html">Installation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../get_started/patterns/index.html">Patterns</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../get_started/examples/index.html">Example workflows</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">API REFERENCE</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="access_control_records.html">access_control_records</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="active_directory_memberships.html">active_directory_memberships</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="alarms.html">alarms</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="application_categories.html">application_categories</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="application_servers.html">application_servers</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="arrays.html">arrays</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="audit_log.html">audit_log</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="chap_users.html">chap_users</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="controllers.html">controllers</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="disks.html">disks</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="events.html">events</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="fibre_channel_configs.html">fibre_channel_configs</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="fibre_channel_initiator_aliases.html">fibre_channel_initiator_aliases</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="fibre_channel_interfaces.html">fibre_channel_interfaces</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="fibre_channel_ports.html">fibre_channel_ports</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="fibre_channel_sessions.html">fibre_channel_sessions</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="folders.html">folders</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="groups.html">groups</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="initiator_groups.html">initiator_groups</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="initiators.html">initiators</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="jobs.html">jobs</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="key_managers.html">key_managers</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="master_key.html">master_key</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="network_configs.html">network_configs</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="network_interfaces.html">network_interfaces</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="performance_policies.html">performance_policies</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="pools.html">pools</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="protection_schedules.html">protection_schedules</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="protection_templates.html">protection_templates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="protocol_endpoints.html">protocol_endpoints</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="replication_partners.html">replication_partners</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#nimbleclientv1apireplication_partners">nimbleclient.v1.api.replication_partners</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#replicationpartner">ReplicationPartner</a></li>
+        
+            <li><a class="toctree-l4" href="#replicationpartnerlist">ReplicationPartnerList</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="shelves.html">shelves</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="snapshot_collections.html">snapshot_collections</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="snapshots.html">snapshots</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="software_versions.html">software_versions</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="space_domains.html">space_domains</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="subnets.html">subnets</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="support.html">support</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="tokens.html">tokens</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="user_groups.html">user_groups</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="user_policies.html">user_policies</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="users.html">users</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="versions.html">versions</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="volume_collections.html">volume_collections</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="volumes.html">volumes</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="witnesses.html">witnesses</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">COMMUNITY</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="https://developer.hpe.com">HPE Developer Community</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="https://slack.hpedev.io">Sign up to HPE DEV on Slack</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">EXTERNAL LINKS</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="https://github.com/hpe-storage/scod">Nimble SDK on GitHub</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="https://github.com/hpe-storage">HPE Storage on GitHub</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="https://hpe.com/storage/management-automation">Storage Automation on hpe.com</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">LEGAL</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../legal/contributing/index.html">Contributing</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../legal/support/index.html">Support</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../legal/license/index.html">License</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">HPE Nimble Storage Software Development Kit (SDK) for Python</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>API REFERENCE &raquo;</li>
+        
+      
+    
+    <li>replication_partners</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="nimbleclientv1apireplication_partners">nimbleclient.v1.api.replication_partners<a class="headerlink" href="#nimbleclientv1apireplication_partners" title="Permanent link">&para;</a></h1>
+<h2 id="replicationpartner">ReplicationPartner<a class="headerlink" href="#replicationpartner" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>ReplicationPartner(self, id, attrs=None, client=None, collection=None)
+</code></pre></p>
+<p>Manage replication partner. Replication partners let one storage array talk to another for replication purposes. The two arrays must be able to communicate over a network, and
+use ports 4213 and 4214. Replication partners have the same name as the remote group. Replication partners can be reciprocal, upstream (the source of replicas), or downstream
+(the receiver of replicas) partners.</p>
+<p>Parameters:
+- id                               : Identifier for a replication partner.
+- name                             : Name of replication partner.
+- full_name                        : Fully qualified name of replication partner.
+- search_name                      : Name of replication partner used for object search.
+- description                      : Description of replication partner.
+- partner_type                     : Replication partner type. Possible values are group or pool.
+- alias                            : Name this group uses to identify itself to this partner.
+- secret                           : Replication partner shared secret, used for mutual authentication of the partners.
+- creation_time                    : Time when this replication partner was created.
+- last_modified                    : Time when this replication partner was last modified.
+- control_port                     : Port number of partner control interface.
+- hostname                         : IP address or hostname of partner interface.  This must be the partner's Group Management IP address.
+- port_range_start                 : For tunnel_endpoint partner types, first port available on the ssh proxy available for reverse forwarding. It must be guaranteed that the
+                                     proxy has the next N ports reserved for this partner, where N is the count of DSDs in this group. This attribute is only valid for
+                                     tunnel_endpoint partner type.
+- proxy_hostname                   : IP address of tunnel endpoint. Only valid for tunnel_endpoint partner types.
+- proxy_user                       : User to authenticate with tunnel endpoint. Only valid for tunnel_endpoint partner types.
+- repl_hostname                    : IP address or hostname of partner data interface.
+- data_port                        : Port number of partner data interface.
+- is_alive                         : Whether the partner is available, and responding to pings.
+- partner_group_uid                : Replication partner group uid.
+- last_keepalive_error             : Most recent error while attempting to ping the partner.
+- cfg_sync_status                  : Indicates whether all volumes and volume collections have been synced to the partner.
+- last_sync_error                  : Most recent error seen while attempting to sync objects to the partner.
+- array_serial                     : Serial number of group leader array of the partner.
+- version                          : Replication version of the partner.
+- pool_id                          : The pool ID where volumes replicated from this partner will be created. Replica volumes created as clones ignore this parameter and are
+                                     always created in the same pool as their parent volume.
+- pool_name                        : The pool name where volumes replicated from this partner will be created.
+- folder_id                        : The Folder ID within the pool where volumes replicated from this partner will be created. This is not supported for pool partners.
+- folder_name                      : The Folder name within the pool where volumes replicated from this partner will be created.
+- match_folder                     : Indicates whether to match the upstream volume's folder on the downstream.
+- paused                           : Indicates whether replication traffic from/to this partner has been halted.
+- unique_name                      : Indicates whether this partner actively mangles object names to avoid name conflicts during replication.
+- subnet_label                     : Label of the subnet used to replicate to this partner.
+- subnet_type                      : Type of the subnet used to replicate to this partner.
+- throttles                        : Throttles used while replicating from/to this partner.
+- throttled_bandwidth              : Current bandwidth throttle for this partner, expressed either as megabits per second or as the largest possible 64-bit signed integer
+                                     (9223372036854775807) to indicate that there is no throttle. This attribute is superseded by throttled_bandwidth_current.
+- throttled_bandwidth_current      : Current bandwidth throttle for this partner, expressed either as megabits per second or as -1 to indicate that there is no throttle.
+- throttled_bandwidth_kbps         : Current bandwidth throttle for this partner, expressed either as kilobits per second or as the largest possible 64-bit signed integer
+                                     (9223372036854775807) to indicate that there is no throttle. This attribute is superseded by throttled_bandwidth_current_kbps.
+- throttled_bandwidth_current_kbps : Current bandwidth throttle for this partner, expressed either as kilobits per second or as -1 to indicate that there is no throttle.
+- subnet_network                   : Subnet used to replicate to this partner.
+- subnet_netmask                   : Subnet mask used to replicate to this partner.
+- volume_collection_list           : List of volume collections that are replicating from/to this partner.
+- volume_collection_list_count     : Count of volume collections that are replicating from/to this partner.
+- volume_list                      : List of volumes that are replicating from/to this partner.
+- volume_list_count                : Count of volumes that are replicating from/to this partner.
+- replication_direction            : Direction of replication configured with this partner.</p>
+<h2 id="replicationpartnerlist">ReplicationPartnerList<a class="headerlink" href="#replicationpartnerlist" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>ReplicationPartnerList(self, client=None)
+</code></pre></p>
+              
+            </div>
+          </div>
+
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="shelves.html" class="btn btn-neutral float-right" title="shelves">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="protocol_endpoints.html" class="btn btn-neutral" title="protocol_endpoints"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright 2020 Hewlett Packard Enterprise Development LP</p>
+    
+  </div>
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="protocol_endpoints.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="shelves.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>
