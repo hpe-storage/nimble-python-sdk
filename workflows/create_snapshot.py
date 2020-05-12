@@ -1,39 +1,55 @@
+# (c) Copyright 2020 Hewlett Packard Enterprise Development LP
+# @author bsorge
+
 import os
 import sys
 import traceback
-from workflow_common import screen, get_config_vol_name, handle_params, login, cleanup
+from workflow_common import screen, handle_params, login, read_config, KEY_VOL, KEY_SNAP,\
+    cleanup_snapshots, cleanup_snapshot, cleanup_vol
 from nimbleclient.v1 import NimOSAPIError
-from create_volume import create_volume
 
 
-def create_snapshot(client, vol_name, noisy):
-    snap_id = None
+def do_cleanup(client, snap_id, vol_name, noisy):
+    screen('\nDoing Cleanup:', noisy)
+    cleanup_snapshot(client, snap_id, noisy)
+    cleanup_vol(client, vol_name, noisy)
+
+
+def force_cleanup(client, vol_name, noisy):
+    screen('\tCleaning up existing workflow objects...', noisy)
+    cleanup_snapshots(client, vol_name, noisy=False)
+    cleanup_vol(client, vol_name, noisy=False)
+
+
+def do_setup(client, config, noisy):
+    screen('\nDoing Setup:', noisy)
+    vol_name = config[KEY_VOL]
+    # Cleanup any existing workflow objects (i.e. if cleanup was skipped on a previous execution)
+    if client.volumes.get(name=vol_name) is not None:
+        force_cleanup(client, vol_name, noisy)
+    vol = client.volumes.create(name=vol_name, size=50, limit_iops=12000)
+    screen('\tCreated volume: {}, Id: {}'.format(vol.attrs['name'], vol.id), noisy)
+    return vol.id, vol.attrs['name']
+
+
+def create_snapshot(client, noisy, cleanup):
+    config = read_config()
     try:
+        vol_id, vol_name = do_setup(client, config, noisy)
         screen('\nWORKFLOW: Create Snapshot for Volume - {}'.format(vol_name), noisy)
-        res = client.volumes.list()
-        vol = None
-        for item in res:
-            if item.attrs['name'] == vol_name:
-                vol = item
-                break
-        if vol is None:
-            screen('ERROR: Volume {} does not exist.'.format(vol_name), noisy)
-            return None
+        vol = client.volumes.get(name=vol_name)
         # Create a snapshot
-        snap = client.snapshots.create(name=vol_name + 'snap', vol_id=vol.attrs['id'])
+        snap = client.snapshots.create(name=config[KEY_SNAP], vol_id=vol.attrs['id'])
         screen('\tCreated a snapshot: {}, Id: {}'.format(snap.attrs['name'], snap.id), noisy)
-        snap_id = snap.attrs['id']
+        if cleanup:
+            do_cleanup(client, snap.id, vol_name, noisy)
     except NimOSAPIError:
-        traceback.print_stack()
         traceback.print_exc()
-    return snap_id
 
 
 if __name__ == '__main__':
     noisy = True
     filename = os.path.basename(__file__)
-    client = login(handle_params(filename, sys.argv), noisy)
-    vol_id = create_volume(client, get_config_vol_name(), noisy=False)
-    screen('\nCreated volume {} to snapshot.'.format(vol_id), noisy)
-    snap_id = create_snapshot(client, get_config_vol_name(), noisy)
-    cleanup(client, {'snap_id_list': [snap_id], 'vol_id_list': [vol_id]}, noisy)
+    query_login, cleanup = handle_params(filename, sys.argv)
+    client = login(query_login, noisy)
+    create_snapshot(client, noisy, cleanup)

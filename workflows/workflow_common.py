@@ -1,9 +1,21 @@
+# (c) Copyright 2020 Hewlett Packard Enterprise Development LP
+# @author bsorge
+
 import sys
 import json
 import getpass
 from nimbleclient.v1 import Client, NimOSAuthenticationError
 
 config_file = 'workflow_config.json'
+KEY_VOL = 'vol_name'
+KEY_ENCRYPT_VOL = 'encrypted_vol_name'
+KEY_IG = 'ig_name'
+KEY_MK = 'mk_name'
+KEY_MK_PHRASE = 'mk_phrase'
+KEY_CLONE = 'clone_name'
+KEY_SNAP = 'snap_name'
+KEY_PS = 'protection_sched'
+KEY_VOLCOLL = 'volcoll_name'
 
 
 def screen(msg, noisy, end='\n'):
@@ -13,7 +25,7 @@ def screen(msg, noisy, end='\n'):
 
 def usage(file, noisy=True):
     screen('Usage:', noisy)
-    screen('\t{} [--query_login]'.format(file), noisy)
+    screen('\t{} [--query_login] [--skip_cleanup]'.format(file), noisy)
     sys.exit(1)
 
 
@@ -24,26 +36,30 @@ def read_config():
         data = myfile.read()
     if data is not None:
         config_dict = json.loads(data)
+        config_dict[KEY_ENCRYPT_VOL] = config_dict[KEY_VOL] + 'encrypted'
+        config_dict[KEY_CLONE] = config_dict[KEY_VOL] + 'clone'
+        config_dict[KEY_SNAP] = config_dict[KEY_VOL] + 'snap'
+        config_dict[KEY_VOLCOLL] = config_dict[KEY_VOL] + 'volcoll'
+    if config_dict is None:
+        screen('ERROR: Failed to read config file', noisy=True)
+        sys.exit(1)
     return config_dict
-
-
-def get_config_vol_name():
-    config_dict = read_config()
-    return config_dict['vol_name']
-
-
-def get_config_ig_name():
-    config_dict = read_config()
-    return config_dict['ig_name']
 
 
 def handle_params(file, param_list):
     query_login = False
-    if len(param_list) == 2 and param_list[1] == '--query_login':
+    cleanup = True
+    valid_params = ['--query_login', '--skip_cleanup']
+    if len(param_list) > 3:
+        usage()
+    for param in param_list[1:]:
+        if param not in valid_params:
+            usage()
+    if '--query_login' in param_list:
         query_login = True
-    elif (len(param_list) == 2 and param_list[1] != '--query_login') or (len(param_list) > 2):
-        usage(file)
-    return query_login
+    if '--skip_cleanup' in param_list:
+        cleanup = False
+    return query_login, cleanup
 
 
 def login(query_login, noisy):
@@ -70,22 +86,72 @@ def login(query_login, noisy):
     return client
 
 
-def cleanup(client, target_dict, noisy):
-    screen('\nDoing Cleanup:', noisy)
-    if 'acr_id_list' in target_dict.keys():
-        for item in target_dict['acr_id_list']:
-            acr = client.access_control_records.get(item)
-            if acr is not None:
-                client.access_control_records.delete(id=acr.attrs['id'])
-                screen('\tDeleted ACR: {}'.format(acr.attrs['id']), noisy)
-                client.initiator_groups.delete(id=acr.attrs['initiator_group_id'])
-                screen('\tDeleted initiator group: {}'.format(acr.attrs['initiator_group_name']), noisy)
-    if 'snap_id_list' in target_dict.keys():
-        for item in target_dict['snap_id_list']:
-            client.snapshots.delete(id=item)
-            screen('\tDeleted snapshot: {}'.format(item), noisy)
-    if 'vol_id_list' in target_dict.keys():
-        for item in target_dict['vol_id_list']:
-            client.volumes.offline(id=item)
-            client.volumes.delete(id=item)
-            screen('\tDeleted volume: {}'.format(item), noisy)
+def cleanup_vol(client, volume_name, noisy):
+    vol = client.volumes.get(name=volume_name)
+    if vol is not None:
+        client.volumes.offline(id=vol.id)
+        client.volumes.delete(id=vol.id)
+        screen('\tDeleted volume: {}, Id: {}'.format(vol.attrs['name'], vol.attrs['id']), noisy)
+
+
+def cleanup_master_key(client, mk_name, noisy):
+    mk = client.master_key.get(name=mk_name)
+    if mk is not None:
+        client.master_key.delete(mk.attrs['id'])
+        screen('\tDeleted master key: {}, Id: {}'.format(mk.attrs['name'], mk.attrs['id']), noisy)
+
+
+def cleanup_access_control_record(client, acr_id, noisy):
+    acr = client.access_control_records.get(id=acr_id)
+    if acr is not None:
+        client.access_control_records.delete(id=acr.attrs['id'])
+        screen('\tDeleted ACR: {}'.format(acr.attrs['id']), noisy)
+
+
+def cleanup_initiator_group(client, ig_name, noisy):
+    ig = client.initiator_groups.get(name=ig_name)
+    if ig is not None:
+        client.initiator_groups.delete(id=ig.attrs['id'])
+        screen('\tDeleted initiator group: {}, Id: {}'.format(ig.attrs['name'], ig.attrs['id']), noisy)
+
+
+def cleanup_snapshots(client, vol_name, noisy):
+    # Deletes ALL the snapshots on the specified volume
+    # screen('\tCleaning up snapshots for volume: {}'.format(vol_name), noisy)
+    vol = client.volumes.get(name=vol_name)
+    if vol is not None:
+        snap_list = client.snapshots.list(vol_name=vol.attrs['name'])
+        for snap in snap_list:
+            client.snapshots.delete(id=snap.attrs['id'])
+            screen('\tDeleted snapshot: {}, Id: {}'.format(snap.attrs['name'], snap.attrs['id']), noisy)
+
+
+def cleanup_snapshot(client, snap_id, noisy):
+    snap = client.snapshots.get(id=snap_id)
+    if snap is not None:
+        client.snapshots.delete(id=snap_id)
+        screen('\tDeleted snapshot: {}, Id: {}'.format(snap.attrs['name'], snap_id), noisy)
+
+
+def cleanup_protection_schedule(client, ps_name, noisy):
+    ps = client.protection_schedules.get(name=ps_name)
+    if ps is not None:
+        client.protection_schedules.delete(id=ps.attrs['id'])
+        screen('\tDeleted protection schedule: {}, Id: {}'.format(ps.attrs['name'], ps.attrs['id']), noisy)
+        # print(ps.attrs)
+
+
+def cleanup_volume_collection(client, vc_name, noisy):
+    vols = client.volumes.list()
+    vc = None
+    for vol_short in vols:
+        vol = client.volumes.get(id=vol_short.attrs['id'])
+        if vol.attrs['volcoll_name'] == vc_name:
+            vc = client.volume_collections.get(id=vol.attrs['volcoll_id'])
+    if vc is not None and vc.attrs['volume_list'] is not None:
+        for vol in vc.attrs['volume_list']:
+            client.volumes.dissociate(id=vol['id'])
+            screen('\tDisassociated vol {} from volume collection {}'.format(vol['name'], vc.attrs['name']), noisy)
+    if vc is not None:
+        client.volume_collections.delete(id=vc.id)
+        screen('\tDeleted volume collection {}'.format(vc.attrs['name']), noisy)

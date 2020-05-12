@@ -1,15 +1,17 @@
+# (c) Copyright 2020 Hewlett Packard Enterprise Development LP
+# @author bsorge
+
 import os
 import sys
-from workflow_common import screen, get_config_vol_name, get_config_ig_name, login, config_file
+from workflow_common import screen, login, config_file
 from initiator_group_lifecycle import initiator_group_lifecycle
-from volume_clone_lifecycle import volume_clone_lifecycle
-from access_control_record_lifecycle import access_control_record_lifecycle
+from create_clone import create_clone
+from create_access_control_record import create_access_control_record
 from create_volume import create_volume
 from publish_volume import publish_volume
 from detach_volume import detach_volume
 from create_snapshot import create_snapshot
-from delete_snapshot import delete_snapshot
-from clone_volume import clone_volume
+from clone_and_publish_volume import clone_and_publish_volume
 from protect_volume import protect_volume
 from configure_encryption import configure_encryption
 
@@ -21,22 +23,29 @@ def usage(noisy):
 
 
 def run_internal(query_login, noisy):
-    print(sys.argv)
+    cleanup = True
     screen('\nRunning All Workflows Internally:', noisy)
-    vol_name = get_config_vol_name()
-    ig_name = get_config_ig_name()
     client = login(query_login, noisy)
-    initiator_group_lifecycle(client, ig_name, noisy)
-    volume_clone_lifecycle(client, vol_name, noisy)
-    access_control_record_lifecycle(client, vol_name, ig_name, noisy)
-    vol_id = create_volume(client, vol_name, noisy)
-    acr_id = publish_volume(client, vol_id, noisy)
-    snap_id = create_snapshot(client, vol_name, noisy)
-    delete_snapshot(client, snap_id, noisy)
-    clone_volume(client, vol_name, noisy)
-    protect_volume(client, vol_id, noisy)
-    configure_encryption(client, noisy)
-    detach_volume(client, acr_id, noisy)
+    screen('\n\n===================================================================== initiator_group_lifecycle', noisy)
+    initiator_group_lifecycle(client, noisy, cleanup)
+    screen('\n\n================================================================================== create_clone', noisy)
+    create_clone(client, noisy, cleanup)
+    screen('\n\n================================================================== create_access_control_record', noisy)
+    create_access_control_record(client, noisy, cleanup)
+    screen('\n\n================================================================================= create_volume', noisy)
+    create_volume(client, noisy, cleanup)
+    screen('\n\n================================================================================ publish_volume', noisy)
+    publish_volume(client, noisy, cleanup)
+    screen('\n\n=============================================================================== create_snapshot', noisy)
+    create_snapshot(client, noisy, cleanup)
+    screen('\n\n====================================================================== clone_and_publish_volume', noisy)
+    clone_and_publish_volume(client, noisy, cleanup)
+    screen('\n\n================================================================================ protect_volume', noisy)
+    protect_volume(client, noisy, cleanup)
+    screen('\n\n========================================================================== configure_encryption', noisy)
+    configure_encryption(client, noisy, cleanup)
+    screen('\n\n================================================================================= detach_volume', noisy)
+    detach_volume(client, noisy, cleanup)
 
 
 def run_external(query_login, noisy):
@@ -45,27 +54,25 @@ def run_external(query_login, noisy):
                format(config_file), noisy)
         usage(noisy)
     screen('\nRunning All Workflows Externally:', noisy)
-    screen('\n===================================================================== initiator_group_lifecycle\n', noisy)
+    screen('\n\n===================================================================== initiator_group_lifecycle', noisy)
     os.system('python3 initiator_group_lifecycle.py')
-    screen('\n======================================================================== volume_clone_lifecycle\n', noisy)
-    os.system('python3 volume_clone_lifecycle.py')
-    screen('\n=============================================================== access_control_record_lifecycle\n', noisy)
-    os.system('python3 access_control_record_lifecycle.py')
-    screen('\n================================================================================= create_volume\n', noisy)
+    screen('\n\n================================================================================== create_clone', noisy)
+    os.system('python3 create_clone.py')
+    screen('\n\n================================================================== create_access_control_record', noisy)
+    os.system('python3 create_access_control_record.py')
+    screen('\n\n================================================================================= create_volume', noisy)
     os.system('python3 create_volume.py')
-    screen('\n================================================================================ publish_volume\n', noisy)
+    screen('\n\n================================================================================ publish_volume', noisy)
     os.system('python3 publish_volume.py')
-    screen('\n=============================================================================== create_snapshot\n', noisy)
+    screen('\n\n=============================================================================== create_snapshot', noisy)
     os.system('python3 create_snapshot.py')
-    screen('\n=============================================================================== delete_snapshot\n', noisy)
-    os.system('python3 delete_snapshot.py')
-    screen('\n================================================================================== clone_volume\n', noisy)
-    os.system('python3 clone_volume.py')
-    screen('\n================================================================================ protect_volume\n', noisy)
+    screen('\n\n====================================================================== clone_and_publish_volume', noisy)
+    os.system('python3 clone_and_publish_volume.py')
+    screen('\n\n================================================================================ protect_volume', noisy)
     os.system('python3 protect_volume.py')
-    screen('\n========================================================================== configure_encryption\n', noisy)
+    screen('\n\n========================================================================== configure_encryption', noisy)
     os.system('python3 configure_encryption.py')
-    screen('\n================================================================================= detach_volume\n', noisy)
+    screen('\n\n================================================================================= detach_volume', noisy)
     os.system('python3 detach_volume.py')
 
 

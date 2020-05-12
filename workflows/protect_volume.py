@@ -1,26 +1,54 @@
+# (c) Copyright 2020 Hewlett Packard Enterprise Development LP
+# @author bsorge
+
 import os
 import sys
 import traceback
-from workflow_common import screen, get_config_vol_name, handle_params, login, cleanup
+from workflow_common import screen, read_config, handle_params, login, KEY_VOL, KEY_PS, KEY_VOLCOLL,\
+    cleanup_protection_schedule, cleanup_volume_collection, cleanup_vol
 from nimbleclient.v1 import NimOSAPIError
-from create_volume import create_volume
 
 
-def protect_volume(client, vol_id, noisy):
+def do_cleanup(client, ps_name, vc_name, vol_name, noisy):
+    screen('\nDoing Cleanup:', noisy)
+    cleanup_protection_schedule(client, ps_name, noisy)
+    cleanup_volume_collection(client, vc_name, noisy)
+    cleanup_vol(client, vol_name, noisy)
+
+
+def force_cleanup(client, ps_name, vc_name, vol_name, noisy):
+    screen('\tCleaning up existing workflow objects...', noisy)
+    do_cleanup(client, ps_name, vc_name, vol_name, noisy=False)
+
+
+def do_setup(client, config, noisy):
+    screen('\nDoing Setup:', noisy)
+    vol_name = config[KEY_VOL]
+    # Cleanup any existing workflow objects (i.e. if cleanup was skipped on a previous execution)
+    vol = client.volumes.get(name=vol_name)
+    if vol is not None:
+        force_cleanup(client, config[KEY_PS], config[KEY_VOLCOLL], vol_name, noisy)
+    vol = client.volumes.create(name=vol_name, size=50, limit_iops=12000)
+    screen('\tCreated volume: {}, Id: {}'.format(vol.attrs['name'], vol.id), noisy)
+    return vol.id, vol.attrs['name']
+
+
+def protect_volume(client, noisy, cleanup):
+    config = read_config()
     try:
+        vol_id, vol_name = do_setup(client, config, noisy)
         screen('\nWORKFLOW: Protect Volume - {}'.format(vol_id), noisy)
         # Get the volume
         vol = client.volumes.get(vol_id)
         # Create a volume collection
-        volcoll_name = vol.attrs['name'] + 'coll'
-        volcoll1 = client.volume_collections.create(name=volcoll_name, description="created by workflow")
+        volcoll1 = client.volume_collections.create(name=config[KEY_VOLCOLL], description="created by workflow")
         screen('\tCreated volume collection: {}, Id: {}'.format(volcoll1.attrs['name'], volcoll1.id), noisy)
         # Associate a volume with the volume collection
         asoc = client.volumes.associate(id=vol.attrs['id'], volcoll=volcoll1)
         screen('\tAssociated volume: {}, with volume vollection: {}'.format(
                asoc['id'], asoc['volcoll_name']), noisy)
         # Create a protection schedule
-        ps_name = "ps1"
+        ps_name = config[KEY_PS]
         ps_days = "monday,tuesday,wednesday,thursday,friday"
         ps_info = "just a schedule"
         ps = client.protection_schedules.create(name=ps_name, period=60, period_unit="minutes",
@@ -29,24 +57,15 @@ def protect_volume(client, vol_id, noisy):
                                                 volcoll_or_prottmpl_type='volume_collection',
                                                 num_retain=2)
         screen('\tCreated protection schedule: {}, Id: {}'.format(ps.attrs['name'], ps.id), noisy)
-        client.protection_schedules.delete(id=ps.attrs['id'])
-        screen('\tDeleted protection schedule: {}'.format(ps.attrs['name']), noisy)
-        # Disassociate a volume with the volume collection and delete the volume collection
-        client.volumes.dissociate(id=vol.attrs['id'])
-        screen('\tDisassociated volume: {}, with volume vollection: {}'.
-               format(vol.attrs['name'], volcoll1.attrs['name']), noisy)
-        client.volume_collections.delete(id=volcoll1.id)
-        screen('\tDeleted volume collection: {}'.format(volcoll1.attrs['name']), noisy)
+        if cleanup:
+            do_cleanup(client, ps_name, config[KEY_VOLCOLL], vol_name, noisy)
     except NimOSAPIError:
-        traceback.print_stack()
         traceback.print_exc()
 
 
 if __name__ == '__main__':
     noisy = True
     filename = os.path.basename(__file__)
-    client = login(handle_params(filename, sys.argv), noisy)
-    vol_id = create_volume(client, get_config_vol_name(), noisy=False)
-    screen('\nCreated volume {} to protect.'.format(vol_id), noisy)
-    protect_volume(client, vol_id, noisy)
-    cleanup(client, {'vol_id_list': [vol_id]}, noisy)
+    query_login, cleanup = handle_params(filename, sys.argv)
+    client = login(query_login, noisy)
+    protect_volume(client, noisy, cleanup)
