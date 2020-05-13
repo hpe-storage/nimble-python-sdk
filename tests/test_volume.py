@@ -9,6 +9,7 @@ from nimbleclient import exceptions, query
 from nimbleclient.v1 import query_fields
 import time
 import threading
+import tests.test_snapshots as snapshot
 
 '''VolumeTestCase tests the volume object functionality '''
 
@@ -607,3 +608,54 @@ def test_bulk_set_dedupe(setup_teardown_for_each_test):
         else:
             log(f"Failed with exception message : {str(ex)}")
             raise ex
+
+
+@pytest.mark.skipif(SKIPTEST is True,
+                    reason="skipped this test as SKIPTEST variable is true")
+def test_restore_online_volume(setup_teardown_for_each_test):
+    try:
+        snapshot_resp = None
+        # first create volume
+        vol_resp = create_volume(vol_name1, size=5)
+        snapshot_name1 = nimosclientbase.get_unique_string("volumetc-snapshot1")
+        snapshot_resp = snapshot.create_snapshot(snapshot_name1,
+                                                 vol_id=vol_to_delete[0],
+                                                 description="created by testcase",
+                                                 online=False,
+                                                 writable=False)
+        assert snapshot_resp is not None
+        # restore the volume
+        vol_restore_resp = nimosclientbase.get_nimos_client().volumes.restore(
+            base_snap_id=snapshot_resp.attrs.get("id"),
+            id=vol_resp.attrs.get("id"))
+        assert vol_restore_resp is not None
+    except exceptions.NimOSAPIError as ex:
+        if "SM_vol_not_offline_on_restore" in str(ex):
+            log("Failed as expected. volume to restore is not offline")
+        else:
+            log(f"Failed with exception message : {str(ex)}")
+            raise ex
+
+
+@pytest.mark.skipif(SKIPTEST is True,
+                    reason="skipped this test as SKIPTEST variable is true")
+def test_restore_offline_volume(setup_teardown_for_each_test):
+    try:
+        # first create volume
+        vol_resp = create_volume(vol_name1, size=5)
+        snapshot_name1 = nimosclientbase.get_unique_string("volumetc-snapshot1")
+        snapshot_resp = snapshot.create_snapshot(snapshot_name1,
+                                                 vol_id=vol_to_delete[0],
+                                                 description="created by testcase",
+                                                 online=False,
+                                                 writable=False)
+        assert snapshot_resp is not None
+        # offline and restore
+        nimosclientbase.get_nimos_client().volumes.offline(id=vol_resp.attrs.get("id"))
+        vol_restore_resp = nimosclientbase.get_nimos_client().volumes.restore(
+            base_snap_id=snapshot_resp.attrs.get("id"),
+            id=vol_resp.attrs.get("id"))
+        assert vol_restore_resp is not None
+    except exceptions.NimOSAPIError as ex:
+        log(f"Failed with exception message : {str(ex)}")
+        raise ex
