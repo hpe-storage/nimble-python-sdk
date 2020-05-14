@@ -199,13 +199,6 @@ def test_get_initiatorgroups(setup_teardown_for_each_test):
         igrps = nimosclientbase.get_nimos_client(
         ).initiator_groups.list(detail=True, pageSize=2)
 
-        # igrps_get = nimosclientbase.get_nimos_client().initiator_groups.get(id=None,
-        #                                                                     name=initiator_grp_name1)
-
-        # initiators_list = igrps_get.attrs.get("iscsi_initiators")
-        # for initiator_obj in initiators_list:
-        #     if "iqn.1992-01.com.example:storage.tape1.sys1.xyz" == initiator_obj["iqn"]:
-        #         break
         for igobj in igrps:
             if (igobj.attrs.get("name") == initiator_grp_name1
                     or igobj.attrs.get("name") == initiator_grp_name2):
