@@ -9,7 +9,6 @@ from nimbleclient import exceptions, query
 from nimbleclient.v1 import query_fields
 import time
 import threading
-import tests.test_snapshots as snapshot
 
 '''VolumeTestCase tests the volume object functionality '''
 
@@ -618,11 +617,11 @@ def test_restore_online_volume(setup_teardown_for_each_test):
         # first create volume
         vol_resp = create_volume(vol_name1, size=5)
         snapshot_name1 = nimosclientbase.get_unique_string("volumetc-snapshot1")
-        snapshot_resp = snapshot.create_snapshot(snapshot_name1,
-                                                 vol_id=vol_to_delete[0],
-                                                 description="created by testcase",
-                                                 online=False,
-                                                 writable=False)
+        snapshot_resp = nimosclientbase.get_nimos_client().snapshots.create(name=snapshot_name1,
+                                                                            vol_id=vol_to_delete[0],
+                                                                            description="created by testcase",
+                                                                            online=False,
+                                                                            writable=False)
         assert snapshot_resp is not None
         # restore the volume
         vol_restore_resp = nimosclientbase.get_nimos_client().volumes.restore(
@@ -644,11 +643,11 @@ def test_restore_offline_volume(setup_teardown_for_each_test):
         # first create volume
         vol_resp = create_volume(vol_name1, size=5)
         snapshot_name1 = nimosclientbase.get_unique_string("volumetc-snapshot1")
-        snapshot_resp = snapshot.create_snapshot(snapshot_name1,
-                                                 vol_id=vol_to_delete[0],
-                                                 description="created by testcase",
-                                                 online=False,
-                                                 writable=False)
+        snapshot_resp = nimosclientbase.get_nimos_client().snapshots.create(name=snapshot_name1,
+                                                                            vol_id=vol_to_delete[0],
+                                                                            description="created by testcase",
+                                                                            online=False,
+                                                                            writable=False)
         assert snapshot_resp is not None
         # offline and restore
         nimosclientbase.get_nimos_client().volumes.offline(id=vol_resp.attrs.get("id"))
