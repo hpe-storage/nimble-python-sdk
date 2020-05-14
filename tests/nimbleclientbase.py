@@ -22,7 +22,6 @@ SKIPTEST = bool(int(os.getenv('SKIPTEST', "0")))
 log_folder = os.path.abspath(os.path.dirname(__file__)) + "//" + "logs".strip()
 
 try:
-    print("hello")
     if os.path.exists(log_folder) is False:
         # create the log folder
         os.mkdir(log_folder)
