@@ -4,39 +4,43 @@
 import os
 import sys
 import traceback
-from workflow_common import screen, read_config, handle_params, login, KEY_VOL, cleanup_vol
+from workflow_common import screen, read_config, handle_params, login, KEY_VOL, create_vol, cleanup_vol
 from nimbleclient.v1 import NimOSAPIError
 
 
-def do_cleanup(client, vol_name, noisy):
-    screen('\nDoing Cleanup:', noisy)
-    cleanup_vol(client, vol_name, noisy)
+class create_volume:
+    def __init__(self, client, noisy, cleanup):
+        self.title = 'Create Volume'
+        self.client = client
+        self.noisy = noisy
+        self.cleanup = cleanup
+        self.config = read_config()
 
+    def _do_cleanup(self, vol_name, noisy):
+        screen('\nDoing Cleanup:', noisy)
+        cleanup_vol(self.client, vol_name, noisy)
 
-def force_cleanup(vol_name, noisy):
-    screen('\tCleaning up existing workflow objects...', noisy)
-    do_cleanup(client, vol_name, noisy=False)
+    def do_cleanup(self, vol_name, noisy_cleanup=False):
+        self._do_cleanup(vol_name, noisy_cleanup)
 
-
-def create_volume(client, noisy, cleanup):
-    config = read_config()
-    try:
-        vol_name = config[KEY_VOL]
-        screen('\nWORKFLOW: Create Volume - {}'.format(vol_name), noisy)
-        # Cleanup any existing workflow objects (i.e. if cleanup was skipped on a previous execution)
-        if client.volumes.get(name=vol_name) is not None:
-            force_cleanup(vol_name, noisy)
-        vol = client.volumes.create(name=config[KEY_VOL], size=50, limit_iops=12000)
-        screen('\tCreated volume: {}, Id: {}'.format(vol.attrs['name'], vol.id), noisy)
-        if cleanup:
-            do_cleanup(client, vol_name, noisy)
-    except NimOSAPIError:
-        traceback.print_exc()
+    def run(self):
+        screen('WORKFLOW: {}'.format(self.title), self.noisy)
+        screen('\nRunning:', self.noisy)
+        try:
+            create_vol(self.client, self.config[KEY_VOL], self.noisy)
+            if self.cleanup:
+                self._do_cleanup(self.config[KEY_VOL], self.noisy)
+        except NimOSAPIError:
+            traceback.print_exc()
+            return False
+        return True
 
 
 if __name__ == '__main__':
-    noisy = True
+    cur_noisy = True
     filename = os.path.basename(__file__)
     query_login, cleanup = handle_params(filename, sys.argv)
-    client = login(query_login, noisy)
-    create_volume(client, noisy, cleanup)
+    client = login(query_login, cur_noisy)
+    screen(' ', cur_noisy)
+    wf = create_volume(client, cur_noisy, cleanup)
+    wf.run()

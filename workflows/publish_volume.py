@@ -4,65 +4,61 @@
 import os
 import sys
 import traceback
-from workflow_common import screen, read_config, handle_params, login, KEY_VOL, cleanup_vol,\
-    cleanup_access_control_record, cleanup_initiator_group
+from workflow_common import screen, read_config, handle_params, login, KEY_VOL, KEY_IG, cleanup_vol,\
+    cleanup_access_control_rec, cleanup_initiator_group, create_vol, create_initiator_group, create_access_control_rec
 from nimbleclient.v1 import NimOSAPIError
 
 
-def do_cleanup(client, acr_id, noisy):
-    screen('\nDoing Cleanup:', noisy)
-    acr = client.access_control_records.get(acr_id)
-    cleanup_access_control_record(client, acr.attrs['id'], noisy)
-    cleanup_initiator_group(client, acr.attrs['initiator_group_name'], noisy)
-    cleanup_vol(client, acr.attrs['vol_name'], noisy)   # Cleanup clone vol
+class publish_volume:
+    def __init__(self, client, noisy, cleanup):
+        self.title = 'Publish Volume'
+        self.client = client
+        self.noisy = noisy
+        self.cleanup = cleanup
+        self.config = read_config()
+        self.acr_id = None
 
+    def _do_cleanup(self, acr_id, noisy):
+        screen('\nDoing Cleanup:', noisy)
+        acr = self.client.access_control_records.get(acr_id)
+        cleanup_access_control_rec(self.client, acr.attrs['id'], noisy)
+        self.acr_id = None
+        cleanup_initiator_group(self.client, acr.attrs['initiator_group_name'], noisy)
+        cleanup_vol(self.client, acr.attrs['vol_name'], noisy)   # Cleanup clone vol
 
-def force_cleanup(client, config, noisy):
-    screen('\tCleaning up existing workflow objects...', noisy)
-    res = client.access_control_records.list()
-    for item in res:
-        acr = client.access_control_records.get(id=item.attrs['id'])
-        if acr.attrs['vol_name'] == config[KEY_VOL]:
-            do_cleanup(client, acr.attrs['id'], noisy=False)
-            break
+    def do_cleanup(self, noisy_cleanup=False):
+        res = self.client.access_control_records.list()
+        for item in res:
+            acr = self.client.access_control_records.get(id=item.attrs['id'])
+            if acr.attrs['vol_name'] == self.config[KEY_VOL]:
+                self._do_cleanup(acr.attrs['id'], noisy_cleanup)
+                break
 
-
-def do_setup(client, config, noisy, show_header=True):
-    if show_header:
-        screen('\nDoing Setup:', noisy)
-    # Cleanup any existing workflow objects (i.e. if cleanup was skipped on a previous execution)
-    if client.volumes.get(name=config[KEY_VOL]) is not None:
-        force_cleanup(client, config, noisy)
-    vol = client.volumes.create(name=config[KEY_VOL], size=50, limit_iops=12000)
-    screen('\tCreated volume: {}, Id: {}'.format(vol.attrs['name'], vol.id), noisy)
-    return vol.id
-
-
-def publish_volume(client, noisy, cleanup, show_header=True):
-    config = read_config()
-    try:
-        vol_id = do_setup(client, config, noisy, show_header)
+    def run(self, show_header=True):
         if show_header:
-            screen('\nWORKFLOW: Publish Volume - {}'.format(vol_id), noisy)
-        vol = client.volumes.get(id=vol_id)
-        vol_name = vol.attrs['name']
-        # Create an initiator group
-        ig_name = vol_name + 'ig'
-        ig = client.initiator_groups.create(name=ig_name, description='workflow example', access_protocol='iscsi')
-        screen('\tCreated initiator group: {}, Id: {}'.format(ig.attrs['name'], ig.id), noisy)
-        # Create the ACR
-        acr = client.access_control_records.create(apply_to='both', initiator_group_id=ig.attrs['id'],
-                                                   vol_id=vol.attrs['id'])
-        screen('\tCreated ACR: {}'.format(acr.attrs['id']), noisy)
-        if cleanup:
-            do_cleanup(client, acr.attrs['id'], noisy)
-    except NimOSAPIError:
-        traceback.print_exc()
+            screen('WORKFLOW: {}'.format(self.title), self.noisy)
+            screen('\nRunning:', self.noisy)
+        try:
+            vol = create_vol(self.client, self.config[KEY_VOL], self.noisy)
+            ig = create_initiator_group(self.client, self.config[KEY_IG], self.noisy)
+            acr = create_access_control_rec(self.client, ig.attrs['id'], vol.attrs['id'], self.noisy)
+            self.acr_id = acr.attrs['id']
+            if self.cleanup:
+                self._do_cleanup(acr.attrs['id'], self.noisy)
+        except NimOSAPIError:
+            traceback.print_exc()
+            return False
+        return True
+
+    def get_acr_id(self):
+        return self.acr_id
 
 
 if __name__ == '__main__':
-    noisy = True
+    cur_noisy = True
     filename = os.path.basename(__file__)
     query_login, cleanup = handle_params(filename, sys.argv)
-    client = login(query_login, noisy)
-    publish_volume(client, noisy, cleanup)
+    client = login(query_login, cur_noisy)
+    screen(' ', cur_noisy)
+    wf = publish_volume(client, cur_noisy, cleanup)
+    wf.run()
