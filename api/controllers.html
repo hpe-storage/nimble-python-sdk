@@ -9,8 +9,8 @@
   
   <meta name="author" content="Hewlett Packard Enterprise">
   <link rel="shortcut icon" href="../img/favicon.ico">
-    <meta property="og:title" content="HPE Storage Container Orchestrator Documentation"/>
-    <meta property="og:description" content="This is an umbrella documentation project for all Kubernetes and Docker integrations for HPE primary storage tailored for IT Ops, developers and partners. Including HPE 3PAR and Primera, HPE Cloud Volumes and HPE Nimble Storage."/>
+    <meta property="og:title" content="HPE Nimble Storage SDK for Python"/>
+    <meta property="og:description" content="The HPE Nimble Storage SDK for Python provides a Pythonic client library to interact with the HPE Nimble Storage REST API."/>
     <meta property="og:locale" content="en_US"/>
     <meta property="og:url" content="https://scod.hpedev.io"/>
     <meta property="og:type" content="website"/>
@@ -79,7 +79,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../get_started/patterns/index.html">Patterns</a>
+    <a class="" href="../get_started/using/index.html">Using</a>
                 </li>
                 <li class="">
                     
@@ -387,29 +387,31 @@
 <p> <pre><code class=python>Controller(self, id, attrs=None, client=None, collection=None)
 </code></pre></p>
 <p>Controller is a redundant collection of hardware capable of running the array software.</p>
-<p>Parameters:
-- id                  : Identifier of the controller.
-- name                : Name of the controller.
-- array_name          : Name of the array containing this controller.
-- array_id            : Rest ID of the array containing this controller.
-- partial_response_ok : Indicate that it is ok to provide partially available response.
-- serial              : Serial number for this controller.
-- hostname            : Host name for the controller.
-- support_address     : IP address used for support.
-- support_netmask     : IP netmask used for support.
-- support_nic         : Network card used for support.
-- power_status        : Overall power supply status for the controller.
-- fan_status          : Overall fan status for the controller.
-- temperature_status  : Overall temperature status for the controller.
-- power_supplies      : Status for each power supply in the controller.
-- fans                : Status for each fan in the controller.
-- temperature_sensors : Status for temperature sensor in the controller.
-- partition_status    : Status of the system's raid partitions.
-- ctrlr_side          : Identifies which controller this is on its array.
-- state               : Indicates whether this controller is active or not.
-- nvme_cards_enabled  : Indicates if the NVMe accelerator card is enabled.
-- nvme_cards          : List of NVMe accelerator cards.
-- asup_time           : Time of the last autosupport by the controller.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id                  </strong>: Identifier of the controller.</li>
+<li><strong>name                </strong>: Name of the controller.</li>
+<li><strong>array_name          </strong>: Name of the array containing this controller.</li>
+<li><strong>array_id            </strong>: Rest ID of the array containing this controller.</li>
+<li><strong>partial_response_ok </strong>: Indicate that it is ok to provide partially available response.</li>
+<li><strong>serial              </strong>: Serial number for this controller.</li>
+<li><strong>hostname            </strong>: Host name for the controller.</li>
+<li><strong>support_address     </strong>: IP address used for support.</li>
+<li><strong>support_netmask     </strong>: IP netmask used for support.</li>
+<li><strong>support_nic         </strong>: Network card used for support.</li>
+<li><strong>power_status        </strong>: Overall power supply status for the controller.</li>
+<li><strong>fan_status          </strong>: Overall fan status for the controller.</li>
+<li><strong>temperature_status  </strong>: Overall temperature status for the controller.</li>
+<li><strong>power_supplies      </strong>: Status for each power supply in the controller.</li>
+<li><strong>fans                </strong>: Status for each fan in the controller.</li>
+<li><strong>temperature_sensors </strong>: Status for temperature sensor in the controller.</li>
+<li><strong>partition_status    </strong>: Status of the system's raid partitions.</li>
+<li><strong>ctrlr_side          </strong>: Identifies which controller this is on its array.</li>
+<li><strong>state               </strong>: Indicates whether this controller is active or not.</li>
+<li><strong>nvme_cards_enabled  </strong>: Indicates if the NVMe accelerator card is enabled.</li>
+<li><strong>nvme_cards          </strong>: List of NVMe accelerator cards.</li>
+<li><strong>asup_time           </strong>: Time of the last autosupport by the controller.</li>
+</ul>
 <h2 id="controllerlist">ControllerList<a class="headerlink" href="#controllerlist" title="Permanent link">&para;</a></h2>
 <p> <pre><code class=python>ControllerList(self, client=None)
 </code></pre></p>

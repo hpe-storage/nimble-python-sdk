@@ -9,8 +9,8 @@
   
   <meta name="author" content="Hewlett Packard Enterprise">
   <link rel="shortcut icon" href="../img/favicon.ico">
-    <meta property="og:title" content="HPE Storage Container Orchestrator Documentation"/>
-    <meta property="og:description" content="This is an umbrella documentation project for all Kubernetes and Docker integrations for HPE primary storage tailored for IT Ops, developers and partners. Including HPE 3PAR and Primera, HPE Cloud Volumes and HPE Nimble Storage."/>
+    <meta property="og:title" content="HPE Nimble Storage SDK for Python"/>
+    <meta property="og:description" content="The HPE Nimble Storage SDK for Python provides a Pythonic client library to interact with the HPE Nimble Storage REST API."/>
     <meta property="og:locale" content="en_US"/>
     <meta property="og:url" content="https://scod.hpedev.io"/>
     <meta property="og:type" content="website"/>
@@ -79,7 +79,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../get_started/patterns/index.html">Patterns</a>
+    <a class="" href="../get_started/using/index.html">Using</a>
                 </li>
                 <li class="">
                     
@@ -387,17 +387,19 @@
 <p> <pre><code class=python>UserPolicy(self, id, attrs=None, client=None, collection=None)
 </code></pre></p>
 <p>Manages the password policies configured for the group.</p>
-<p>Parameters:
-- id               : Identifier for the security policy.
-- allowed_attempts : Number of authentication attempts allowed before the user account is locked. Allowed range is [1, 10] inclusive. '0' indicates no limit.
-- min_length       : Minimum length for user passwords. Allowed range is [8, 255] inclusive.
-- upper            : Number of uppercase characters required in user passwords. Allowed range is [0, 255] inclusive.
-- lower            : Number of lowercase characters required in user passwords. Allowed range is [0, 255] inclusive.
-- digit            : Number of numerical characters required in user passwords. Allowed range is [0, 255] inclusive.
-- special          : Number of special characters required in user passwords. Allowed range is [0, 255] inclusive.
-- previous_diff    : Number of characters that must be different from the previous password. Allowed range is [1, 255] inclusive.
-- no_reuse         : Number of times that a password must change before you can reuse a previous password. Allowed range is [1,20] inclusive.
-- max_sessions     : Maximum number of sessions allowed for a group. Allowed range is [10, 1000] inclusive. '0' indicates no limit.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id               </strong>: Identifier for the security policy.</li>
+<li><strong>allowed_attempts </strong>: Number of authentication attempts allowed before the user account is locked. Allowed range is [1, 10] inclusive. '0' indicates no limit.</li>
+<li><strong>min_length       </strong>: Minimum length for user passwords. Allowed range is [8, 255] inclusive.</li>
+<li><strong>upper            </strong>: Number of uppercase characters required in user passwords. Allowed range is [0, 255] inclusive.</li>
+<li><strong>lower            </strong>: Number of lowercase characters required in user passwords. Allowed range is [0, 255] inclusive.</li>
+<li><strong>digit            </strong>: Number of numerical characters required in user passwords. Allowed range is [0, 255] inclusive.</li>
+<li><strong>special          </strong>: Number of special characters required in user passwords. Allowed range is [0, 255] inclusive.</li>
+<li><strong>previous_diff    </strong>: Number of characters that must be different from the previous password. Allowed range is [1, 255] inclusive.</li>
+<li><strong>no_reuse         </strong>: Number of times that a password must change before you can reuse a previous password. Allowed range is [1,20] inclusive.</li>
+<li><strong>max_sessions     </strong>: Maximum number of sessions allowed for a group. Allowed range is [10, 1000] inclusive. '0' indicates no limit.</li>
+</ul>
 <h2 id="userpolicylist">UserPolicyList<a class="headerlink" href="#userpolicylist" title="Permanent link">&para;</a></h2>
 <p> <pre><code class=python>UserPolicyList(self, client=None)
 </code></pre></p>

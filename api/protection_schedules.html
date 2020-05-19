@@ -9,8 +9,8 @@
   
   <meta name="author" content="Hewlett Packard Enterprise">
   <link rel="shortcut icon" href="../img/favicon.ico">
-    <meta property="og:title" content="HPE Storage Container Orchestrator Documentation"/>
-    <meta property="og:description" content="This is an umbrella documentation project for all Kubernetes and Docker integrations for HPE primary storage tailored for IT Ops, developers and partners. Including HPE 3PAR and Primera, HPE Cloud Volumes and HPE Nimble Storage."/>
+    <meta property="og:title" content="HPE Nimble Storage SDK for Python"/>
+    <meta property="og:description" content="The HPE Nimble Storage SDK for Python provides a Pythonic client library to interact with the HPE Nimble Storage REST API."/>
     <meta property="og:locale" content="en_US"/>
     <meta property="og:url" content="https://scod.hpedev.io"/>
     <meta property="og:type" content="website"/>
@@ -79,7 +79,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../get_started/patterns/index.html">Patterns</a>
+    <a class="" href="../get_started/using/index.html">Using</a>
                 </li>
                 <li class="">
                     
@@ -387,71 +387,72 @@
 <p> <pre><code class=python>ProtectionSchedule(self, id, attrs=None, client=None, collection=None)
 </code></pre></p>
 <p>Manage protection schedules used in protection templates.</p>
-<p>Parameters:
-- id                            : Identifier for protection schedule.
-- name                          : Name of snapshot schedule to create.
-- description                   : Description of the schedule.
-- volcoll_or_prottmpl_type      : Type of the protection policy this schedule is attached to. Valid values are protection_template and volume_collection.
-- volcoll_or_prottmpl_id        : Identifier of the protection policy (protection_template or volume_collection) in which this protection schedule is attached to.
-- period                        : Repeat interval for snapshots with respect to the period_unit.  For example, a value of 2 with the 'period_unit' of 'hours' results in one
-                                  snapshot every 2 hours.
-- period_unit                   : Time unit over which to take the number of snapshots specified in 'period'. For example, a value of 'days' with a 'period' of '1' results in
-                                  one snapshot every day.
-- at_time                       : Time of day when snapshot should be taken. In case repeat frequency specifies more than one snapshot in a day then the until_time option
-                                  specifies until what time of day to take snapshots.
-- until_time                    : Time of day to stop taking snapshots. Applicable only when repeat frequency specifies more than one snapshot in a day.
-- days                          : Specifies which days snapshots should be taken.
-- num_retain                    : Number of snapshots to retain. If replication is enabled on this schedule the array will always retain the latest replicated snapshot, which
-                                  may exceed the specified retention value. This is necessary to ensure efficient replication performance.
-- downstream_partner            : Specifies the partner name if snapshots created by this schedule should be replicated.
-- downstream_partner_name       : Specifies the partner name if snapshots created by this schedule should be replicated.
-- downstream_partner_id         : Specifies the partner ID if snapshots created by this schedule should be replicated. In an update operation, if snapshots should be
-                                  replicated, set this attribute to the ID of the replication partner. If snapshots should not be replicated, set this attribute to the empty
-                                  string.
-- upstream_partner_name         : Specifies the partner name from which snapshots created by this schedule are replicated.
-- upstream_partner_id           : Specifies the partner ID from which snapshots created by this schedule are replicated.
-- replicate_every               : Specifies which snapshots should be replicated. If snapshots are replicated and this option is not specified, every snapshot is replicated.
-- num_retain_replica            : Number of snapshots to retain on the replica.
-- repl_alert_thres              : Replication alert threshold in seconds. If the replication of a snapshot takes more than this amount of time to complete an alert will be
-                                  generated. Enter 0 to disable this alert.
-- snap_verify                   : Run verification tool on snapshot created by this schedule. This option can only be used with snapshot schedules of a protection template
-                                  that has application synchronization. The tool used to verify snapshot depends on the type of application. For example, if application
-                                  synchronization is VSS and the application ID is Exchange, eseutil tool is run on the snapshots. If verification fails, the logs are not
-                                  truncated.
-- skip_db_consistency_check     : Skip consistency check for database files on snapshots created by this schedule. This option only applies to snapshot schedules of a
-                                  protection template with application synchronization set to VSS, application ID set to MS Exchange 2010 or later w/DAG, this schedule's
-                                  snap_verify option set to yes, and its disable_appsync option set to false. Skipping consistency checks is only recommended if each database
-                                  in a DAG has multiple copies.
-- disable_appsync               : Disables application synchronized snapshots and creates crash consistent snapshots instead.
-- schedule_type                 : Normal schedules have internal timers which drive snapshot creation. An externally driven schedule has no internal timers. All snapshot
-                                  activity is driven by an external trigger. In other words, these schedules are used only for externally driven manual snapshots.
-- active                        : A schedule is active only if it is owned by the same owner as the volume collection. Only active schedules of a volume collection participate
-                                  in the creation of snapshots and replication.
-- creation_time                 : Time when this protection schedule was created.
-- last_modified                 : Time when this protection schedule was last modified.
-- last_mod_sched_time           : Time when the timing of the protection schedule was last modified.
-- last_replicated_snapcoll_name : Specifies the name of last replicated snapshot collection.
-- last_replicated_snapcoll_id   : Specifies the snapshot collection ID of last replicated snapshot collection.
-- last_replicated_at_time       : Time when last snapshot collection was replicated.
-- last_snap_time                : Time when last snapshot was taken.
-- next_snap_time                : Time when next snapshot will be taken.
-- next_repl_snap_time           : Time when next snapshot will be replicated.
-- snap_counter                  : This is only used by custom read handler for internal calculations.
-- sched_owner_id                : Identifier of the group that owns this schedule.
-- sched_owner_name              : Name of the group that owns this schedule.
-- last_config_change_time       : The last timing configutation changed.
-- vol_status_list               : The list of the replication status of volumes undergoing replication.
-- sync_repl_vol_status_list     : A list of the replication status of volumes undergoing synchronous replication.
-- use_downstream_for_DR         : Break synchronous replication for the specified volume collection and present downstream volumes to host(s). Downstream volumes in the volume
-                                  collection will be set to online and presented to the host(s) using new serial and LUN numbers. No changes will be made to the upstream
-                                  volumes, their serial and LUN numbers, and their online state. The existing ACLs on the upstream volumes will be copied to the downstream
-                                  volumes. Use this in conjunction with an empty downstream_partner_id. This unconfigures synchronous replication when the partner is removed
-                                  from the last replicating schedule in the specified volume collection and presents the downstream volumes to host(s). Host(s) will need to be
-                                  configured to access the new volumes with the newly assigned serial and LUN numbers. Use this option to expose downstream volumes in a
-                                  synchronously replicated volume collection to host(s) only when the upstream partner is confirmed to be down and there is no communication
-                                  between partners. Do not execute this operation if a previous Group Management Service takeover has been performed on a different array. Do
-                                  not perform a subsequent Group Management Service takeover on a different array as it will lead to irreconcilable conflicts. This limitation
-                                  is cleared once the Group management service backup array has successfully synchronized after reconnection.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id                            </strong>: Identifier for protection schedule.</li>
+<li><strong>name                          </strong>: Name of snapshot schedule to create.</li>
+<li><strong>description                   </strong>: Description of the schedule.</li>
+<li><strong>volcoll_or_prottmpl_type      </strong>: Type of the protection policy this schedule is attached to. Valid values are protection_template and volume_collection.</li>
+<li><strong>volcoll_or_prottmpl_id        </strong>: Identifier of the protection policy (protection_template or volume_collection) in which this protection schedule is attached to.</li>
+<li><strong>period                        </strong>: Repeat interval for snapshots with respect to the period_unit.  For example, a value of 2 with the 'period_unit' of 'hours' results in one
+                                snapshot every 2 hours.</li>
+<li><strong>period_unit                   </strong>: Time unit over which to take the number of snapshots specified in 'period'. For example, a value of 'days' with a 'period' of '1' results in
+                                one snapshot every day.</li>
+<li><strong>at_time                       </strong>: Time of day when snapshot should be taken. In case repeat frequency specifies more than one snapshot in a day then the until_time option
+                                specifies until what time of day to take snapshots.</li>
+<li><strong>until_time                    </strong>: Time of day to stop taking snapshots. Applicable only when repeat frequency specifies more than one snapshot in a day.</li>
+<li><strong>days                          </strong>: Specifies which days snapshots should be taken.</li>
+<li><strong>num_retain                    </strong>: Number of snapshots to retain. If replication is enabled on this schedule the array will always retain the latest replicated snapshot, which
+                                may exceed the specified retention value. This is necessary to ensure efficient replication performance.</li>
+<li><strong>downstream_partner            </strong>: Specifies the partner name if snapshots created by this schedule should be replicated.</li>
+<li><strong>downstream_partner_name       </strong>: Specifies the partner name if snapshots created by this schedule should be replicated.</li>
+<li><strong>downstream_partner_id         </strong>: Specifies the partner ID if snapshots created by this schedule should be replicated. In an update operation, if snapshots should be replicated,
+                                set this attribute to the ID of the replication partner. If snapshots should not be replicated, set this attribute to the empty string.</li>
+<li><strong>upstream_partner_name         </strong>: Specifies the partner name from which snapshots created by this schedule are replicated.</li>
+<li><strong>upstream_partner_id           </strong>: Specifies the partner ID from which snapshots created by this schedule are replicated.</li>
+<li><strong>replicate_every               </strong>: Specifies which snapshots should be replicated. If snapshots are replicated and this option is not specified, every snapshot is replicated.</li>
+<li><strong>num_retain_replica            </strong>: Number of snapshots to retain on the replica.</li>
+<li><strong>repl_alert_thres              </strong>: Replication alert threshold in seconds. If the replication of a snapshot takes more than this amount of time to complete an alert will be
+                                generated. Enter 0 to disable this alert.</li>
+<li><strong>snap_verify                   </strong>: Run verification tool on snapshot created by this schedule. This option can only be used with snapshot schedules of a protection template that
+                                has application synchronization. The tool used to verify snapshot depends on the type of application. For example, if application
+                                synchronization is VSS and the application ID is Exchange, eseutil tool is run on the snapshots. If verification fails, the logs are not
+                                truncated.</li>
+<li><strong>skip_db_consistency_check     </strong>: Skip consistency check for database files on snapshots created by this schedule. This option only applies to snapshot schedules of a protection
+                                template with application synchronization set to VSS, application ID set to MS Exchange 2010 or later w/DAG, this schedule's snap_verify option
+                                set to yes, and its disable_appsync option set to false. Skipping consistency checks is only recommended if each database in a DAG has multiple
+                                copies.</li>
+<li><strong>disable_appsync               </strong>: Disables application synchronized snapshots and creates crash consistent snapshots instead.</li>
+<li><strong>schedule_type                 </strong>: Normal schedules have internal timers which drive snapshot creation. An externally driven schedule has no internal timers. All snapshot
+                                activity is driven by an external trigger. In other words, these schedules are used only for externally driven manual snapshots.</li>
+<li><strong>active                        </strong>: A schedule is active only if it is owned by the same owner as the volume collection. Only active schedules of a volume collection participate
+                                in the creation of snapshots and replication.</li>
+<li><strong>creation_time                 </strong>: Time when this protection schedule was created.</li>
+<li><strong>last_modified                 </strong>: Time when this protection schedule was last modified.</li>
+<li><strong>last_mod_sched_time           </strong>: Time when the timing of the protection schedule was last modified.</li>
+<li><strong>last_replicated_snapcoll_name </strong>: Specifies the name of last replicated snapshot collection.</li>
+<li><strong>last_replicated_snapcoll_id   </strong>: Specifies the snapshot collection ID of last replicated snapshot collection.</li>
+<li><strong>last_replicated_at_time       </strong>: Time when last snapshot collection was replicated.</li>
+<li><strong>last_snap_time                </strong>: Time when last snapshot was taken.</li>
+<li><strong>next_snap_time                </strong>: Time when next snapshot will be taken.</li>
+<li><strong>next_repl_snap_time           </strong>: Time when next snapshot will be replicated.</li>
+<li><strong>snap_counter                  </strong>: This is only used by custom read handler for internal calculations.</li>
+<li><strong>sched_owner_id                </strong>: Identifier of the group that owns this schedule.</li>
+<li><strong>sched_owner_name              </strong>: Name of the group that owns this schedule.</li>
+<li><strong>last_config_change_time       </strong>: The last timing configutation changed.</li>
+<li><strong>vol_status_list               </strong>: The list of the replication status of volumes undergoing replication.</li>
+<li><strong>sync_repl_vol_status_list     </strong>: A list of the replication status of volumes undergoing synchronous replication.</li>
+<li><strong>use_downstream_for_DR         </strong>: Break synchronous replication for the specified volume collection and present downstream volumes to host(s). Downstream volumes in the volume
+                                collection will be set to online and presented to the host(s) using new serial and LUN numbers. No changes will be made to the upstream
+                                volumes, their serial and LUN numbers, and their online state. The existing ACLs on the upstream volumes will be copied to the downstream
+                                volumes. Use this in conjunction with an empty downstream_partner_id. This unconfigures synchronous replication when the partner is removed
+                                from the last replicating schedule in the specified volume collection and presents the downstream volumes to host(s). Host(s) will need to be
+                                configured to access the new volumes with the newly assigned serial and LUN numbers. Use this option to expose downstream volumes in a
+                                synchronously replicated volume collection to host(s) only when the upstream partner is confirmed to be down and there is no communication
+                                between partners. Do not execute this operation if a previous Group Management Service takeover has been performed on a different array. Do not
+                                perform a subsequent Group Management Service takeover on a different array as it will lead to irreconcilable conflicts. This limitation is
+                                cleared once the Group management service backup array has successfully synchronized after reconnection.</li>
+</ul>
 <h2 id="protectionschedulelist">ProtectionScheduleList<a class="headerlink" href="#protectionschedulelist" title="Permanent link">&para;</a></h2>
 <p> <pre><code class=python>ProtectionScheduleList(self, client=None)
 </code></pre></p>

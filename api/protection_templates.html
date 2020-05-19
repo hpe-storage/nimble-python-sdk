@@ -9,8 +9,8 @@
   
   <meta name="author" content="Hewlett Packard Enterprise">
   <link rel="shortcut icon" href="../img/favicon.ico">
-    <meta property="og:title" content="HPE Storage Container Orchestrator Documentation"/>
-    <meta property="og:description" content="This is an umbrella documentation project for all Kubernetes and Docker integrations for HPE primary storage tailored for IT Ops, developers and partners. Including HPE 3PAR and Primera, HPE Cloud Volumes and HPE Nimble Storage."/>
+    <meta property="og:title" content="HPE Nimble Storage SDK for Python"/>
+    <meta property="og:description" content="The HPE Nimble Storage SDK for Python provides a Pythonic client library to interact with the HPE Nimble Storage REST API."/>
     <meta property="og:locale" content="en_US"/>
     <meta property="og:url" content="https://scod.hpedev.io"/>
     <meta property="og:type" content="website"/>
@@ -79,7 +79,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../get_started/patterns/index.html">Patterns</a>
+    <a class="" href="../get_started/using/index.html">Using</a>
                 </li>
                 <li class="">
                     
@@ -390,27 +390,29 @@
 information when creating new volume collections. A volume collection, once created, is not affected by edits to the protection template that was used to create it. All the
 volumes assigned to a volume collection use the same settings. You cannot edit or delete the predefined protection templates provided by storage array, but you can create
 custom protection templates as needed.</p>
-<p>Parameters:
-- id               : Identifier for protection template.
-- name             : User provided identifier.
-- full_name        : Fully qualified name of protection template.
-- search_name      : Name of protection template used for object search.
-- description      : Text description of protection template.
-- repl_priority    : Replication priority for the protection template with the following choices: {normal | high}.
-- app_sync         : Application synchronization ({none|vss|vmware|generic}).
-- app_server       : Application server hostname.
-- app_id           : Application ID running on the server. Application ID can only be specified if application synchronization is VSS.
-- app_cluster_name : If the application is running within a Windows cluster environment then this is the cluster name.
-- app_service_name : If the application is running within a Windows cluster environment then this is the instance name of the service running within the cluster environment.
-- vcenter_hostname : VMware vCenter hostname. Custom port number can be specified with vCenter hostname using :.
-- vcenter_username : VMware vCenter username.
-- vcenter_password : VMware vCenter password.
-- agent_hostname   : Generic Backup agent hostname. Custom port number can be specified with agent hostname using \":\".
-- agent_username   : Generic Backup agent username.
-- agent_password   : Generic Backup agent password.
-- creation_time    : Time when this protection template was created.
-- last_modified    : Time when this protection template was last modified.
-- schedule_list    : List of schedules for this protection policy.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id               </strong>: Identifier for protection template.</li>
+<li><strong>name             </strong>: User provided identifier.</li>
+<li><strong>full_name        </strong>: Fully qualified name of protection template.</li>
+<li><strong>search_name      </strong>: Name of protection template used for object search.</li>
+<li><strong>description      </strong>: Text description of protection template.</li>
+<li><strong>repl_priority    </strong>: Replication priority for the protection template with the following choices: {normal | high}.</li>
+<li><strong>app_sync         </strong>: Application synchronization ({none|vss|vmware|generic}).</li>
+<li><strong>app_server       </strong>: Application server hostname.</li>
+<li><strong>app_id           </strong>: Application ID running on the server. Application ID can only be specified if application synchronization is VSS.</li>
+<li><strong>app_cluster_name </strong>: If the application is running within a Windows cluster environment then this is the cluster name.</li>
+<li><strong>app_service_name </strong>: If the application is running within a Windows cluster environment then this is the instance name of the service running within the cluster environment.</li>
+<li><strong>vcenter_hostname </strong>: VMware vCenter hostname. Custom port number can be specified with vCenter hostname using :.</li>
+<li><strong>vcenter_username </strong>: VMware vCenter username.</li>
+<li><strong>vcenter_password </strong>: VMware vCenter password.</li>
+<li><strong>agent_hostname   </strong>: Generic Backup agent hostname. Custom port number can be specified with agent hostname using \":\".</li>
+<li><strong>agent_username   </strong>: Generic Backup agent username.</li>
+<li><strong>agent_password   </strong>: Generic Backup agent password.</li>
+<li><strong>creation_time    </strong>: Time when this protection template was created.</li>
+<li><strong>last_modified    </strong>: Time when this protection template was last modified.</li>
+<li><strong>schedule_list    </strong>: List of schedules for this protection policy.</li>
+</ul>
 <h2 id="protectiontemplatelist">ProtectionTemplateList<a class="headerlink" href="#protectiontemplatelist" title="Permanent link">&para;</a></h2>
 <p> <pre><code class=python>ProtectionTemplateList(self, client=None)
 </code></pre></p>

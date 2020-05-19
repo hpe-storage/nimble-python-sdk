@@ -9,8 +9,8 @@
   
   <meta name="author" content="Hewlett Packard Enterprise">
   <link rel="shortcut icon" href="../img/favicon.ico">
-    <meta property="og:title" content="HPE Storage Container Orchestrator Documentation"/>
-    <meta property="og:description" content="This is an umbrella documentation project for all Kubernetes and Docker integrations for HPE primary storage tailored for IT Ops, developers and partners. Including HPE 3PAR and Primera, HPE Cloud Volumes and HPE Nimble Storage."/>
+    <meta property="og:title" content="HPE Nimble Storage SDK for Python"/>
+    <meta property="og:description" content="The HPE Nimble Storage SDK for Python provides a Pythonic client library to interact with the HPE Nimble Storage REST API."/>
     <meta property="og:locale" content="en_US"/>
     <meta property="og:url" content="https://scod.hpedev.io"/>
     <meta property="og:type" content="website"/>
@@ -79,7 +79,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../get_started/patterns/index.html">Patterns</a>
+    <a class="" href="../get_started/using/index.html">Using</a>
                 </li>
                 <li class="">
                     
@@ -387,18 +387,20 @@
 <p> <pre><code class=python>SoftwareVersion(self, id, attrs=None, client=None, collection=None)
 </code></pre></p>
 <p>Show the software version.</p>
-<p>Parameters:
-- version                : Software version, used as identifier in URL.
-- signature              : Keyed hash of download package.
-- name                   : Name of version.
-- status                 : Status of version.
-- total_bytes            : Size of version.
-- downloaded_bytes       : Number of bytes downloaded for the version.
-- blacklist_reason       : Reason for blacklisting the version. Empty if version is not blacklisted.
-- release_date           : Date when software version was released.
-- is_manually_downloaded : Whether or not the version was downloaded manually.
-- release_status         : Release status of software version.
-- no_partial_response    : Indicate that it is not ok to provide partially available response.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>version                </strong>: Software version, used as identifier in URL.</li>
+<li><strong>signature              </strong>: Keyed hash of download package.</li>
+<li><strong>name                   </strong>: Name of version.</li>
+<li><strong>status                 </strong>: Status of version.</li>
+<li><strong>total_bytes            </strong>: Size of version.</li>
+<li><strong>downloaded_bytes       </strong>: Number of bytes downloaded for the version.</li>
+<li><strong>blacklist_reason       </strong>: Reason for blacklisting the version. Empty if version is not blacklisted.</li>
+<li><strong>release_date           </strong>: Date when software version was released.</li>
+<li><strong>is_manually_downloaded </strong>: Whether or not the version was downloaded manually.</li>
+<li><strong>release_status         </strong>: Release status of software version.</li>
+<li><strong>no_partial_response    </strong>: Indicate that it is not ok to provide partially available response.</li>
+</ul>
 <h2 id="softwareversionlist">SoftwareVersionList<a class="headerlink" href="#softwareversionlist" title="Permanent link">&para;</a></h2>
 <p> <pre><code class=python>SoftwareVersionList(self, client=None)
 </code></pre></p>

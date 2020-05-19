@@ -9,8 +9,8 @@
   
   <meta name="author" content="Hewlett Packard Enterprise">
   <link rel="shortcut icon" href="../img/favicon.ico">
-    <meta property="og:title" content="HPE Storage Container Orchestrator Documentation"/>
-    <meta property="og:description" content="This is an umbrella documentation project for all Kubernetes and Docker integrations for HPE primary storage tailored for IT Ops, developers and partners. Including HPE 3PAR and Primera, HPE Cloud Volumes and HPE Nimble Storage."/>
+    <meta property="og:title" content="HPE Nimble Storage SDK for Python"/>
+    <meta property="og:description" content="The HPE Nimble Storage SDK for Python provides a Pythonic client library to interact with the HPE Nimble Storage REST API."/>
     <meta property="og:locale" content="en_US"/>
     <meta property="og:url" content="https://scod.hpedev.io"/>
     <meta property="og:type" content="website"/>
@@ -79,7 +79,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../get_started/patterns/index.html">Patterns</a>
+    <a class="" href="../get_started/using/index.html">Using</a>
                 </li>
                 <li class="">
                     
@@ -387,56 +387,58 @@
 <p> <pre><code class=python>Pool(self, id, attrs=None, client=None, collection=None)
 </code></pre></p>
 <p>Manage pools. Pools are an aggregation of arrays.</p>
-<p>Parameters:
-- id                            : Identifier for the pool.
-- name                          : Name of pool.
-- full_name                     : Fully qualified name of pool.
-- search_name                   : Name of pool used for object search.
-- description                   : Text description of pool.
-- creation_time                 : Time when this pool was created.
-- last_modified                 : Time when this pool was last modified.
-- capacity                      : Total storage space of the pool in bytes.
-- usage                         : Used space of the pool in bytes.
-- savings                       : Overall space usage savings in the pool.
-- savings_data_reduction        : Space usage savings in the pool that does not include thin-provisioning savings.
-- savings_compression           : Space usage savings in the pool due to compression.
-- savings_dedupe                : Space usage savings in the pool due to deduplication.
-- savings_clone                 : Space usage savings in the pool due to cloning of volumes.
-- savings_vol_thin_provisioning : Space usage savings in the pool due to thin provisioning of volumes.
-- reserve                       : Reserved space of the pool in bytes. Sum of volume reserve in the pool.
-- unused_reserve                : Unused reserve space of the pool in bytes.
-- free_space                    : Free space of the pool in bytes.
-- cache_capacity                : Total usable cache capacity of the pool in bytes.
-- pinnable_cache_capacity       : Total pinnable cache capacity of the pool in bytes.
-- pinned_cache_capacity         : Total pinned cache capacity of the pool in bytes.
-- dedupe_capacity_bytes         : The dedupe capacity of a hybrid pool. Does not apply to all-flash pools.
-- dedupe_usage_bytes            : The dedupe usage of a hybrid pool. Does not apply to all-flash pools.
-- savings_ratio                 : Overall space usage savings in the pool expressed as ratio.
-- data_reduction_ratio          : Space usage savings in the pool expressed as ratio that does not include thin-provisioning savings.
-- compression_ratio             : Compression savings for the pool expressed as ratio.
-- dedupe_ratio                  : Dedupe savings for the pool expressed as ratio.
-- clone_ratio                   : Clone savings for the pool expressed as ratio.
-- vol_thin_provisioning_ratio   : Thin provisioning savings for volumes in the pool expressed as ratio.
-- snapcoll_count                : Snapshot collection count.
-- snap_count                    : Snapshot count.
-- array_count                   : Number of arrays in the pool.
-- vol_count                     : Number of volumes assigned to the pool.
-- array_list                    : List of arrays in the pool with detailed information. When create/update array list, only arrays' ID is required.
-- unassigned_array_list         : List of arrays being unassigned from the pool.
-- vol_list                      : The list of volumes in the pool.
-- pinned_vol_list               : The list of pinned volumes in the pool.
-- folder_list                   : The list of fully qualified names of folders in the pool.
-- force                         : Forcibly delete the specified pool even if it contains deleted volumes whose space is being reclaimed. Forcibly remove an array from
-                                  array_list via an update operation even if the array is not reachable. There should no volumes currently in the pool for the forced update
-                                  operation to succeed.
-- usage_valid                   : Indicates whether the usage of pool is valid.
-- uncompressed_vol_usage_bytes  : Uncompressed usage of volumes in the pool.
-- uncompressed_snap_usage_bytes : Uncompressed usage of snapshots in the pool.
-- all_flash                     : Indicate whether the pool is an all_flash pool.
-- dedupe_capable                : Indicates whether the pool is capable of hosting deduped volumes.
-- dedupe_all_volumes_capable    : Indicates whether the pool can enable dedupe by default.
-- dedupe_all_volumes            : Indicates if dedupe is enabled by default for new volumes on this pool.
-- is_default                    : Indicates if this is the default pool.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id                            </strong>: Identifier for the pool.</li>
+<li><strong>name                          </strong>: Name of pool.</li>
+<li><strong>full_name                     </strong>: Fully qualified name of pool.</li>
+<li><strong>search_name                   </strong>: Name of pool used for object search.</li>
+<li><strong>description                   </strong>: Text description of pool.</li>
+<li><strong>creation_time                 </strong>: Time when this pool was created.</li>
+<li><strong>last_modified                 </strong>: Time when this pool was last modified.</li>
+<li><strong>capacity                      </strong>: Total storage space of the pool in bytes.</li>
+<li><strong>usage                         </strong>: Used space of the pool in bytes.</li>
+<li><strong>savings                       </strong>: Overall space usage savings in the pool.</li>
+<li><strong>savings_data_reduction        </strong>: Space usage savings in the pool that does not include thin-provisioning savings.</li>
+<li><strong>savings_compression           </strong>: Space usage savings in the pool due to compression.</li>
+<li><strong>savings_dedupe                </strong>: Space usage savings in the pool due to deduplication.</li>
+<li><strong>savings_clone                 </strong>: Space usage savings in the pool due to cloning of volumes.</li>
+<li><strong>savings_vol_thin_provisioning </strong>: Space usage savings in the pool due to thin provisioning of volumes.</li>
+<li><strong>reserve                       </strong>: Reserved space of the pool in bytes. Sum of volume reserve in the pool.</li>
+<li><strong>unused_reserve                </strong>: Unused reserve space of the pool in bytes.</li>
+<li><strong>free_space                    </strong>: Free space of the pool in bytes.</li>
+<li><strong>cache_capacity                </strong>: Total usable cache capacity of the pool in bytes.</li>
+<li><strong>pinnable_cache_capacity       </strong>: Total pinnable cache capacity of the pool in bytes.</li>
+<li><strong>pinned_cache_capacity         </strong>: Total pinned cache capacity of the pool in bytes.</li>
+<li><strong>dedupe_capacity_bytes         </strong>: The dedupe capacity of a hybrid pool. Does not apply to all-flash pools.</li>
+<li><strong>dedupe_usage_bytes            </strong>: The dedupe usage of a hybrid pool. Does not apply to all-flash pools.</li>
+<li><strong>savings_ratio                 </strong>: Overall space usage savings in the pool expressed as ratio.</li>
+<li><strong>data_reduction_ratio          </strong>: Space usage savings in the pool expressed as ratio that does not include thin-provisioning savings.</li>
+<li><strong>compression_ratio             </strong>: Compression savings for the pool expressed as ratio.</li>
+<li><strong>dedupe_ratio                  </strong>: Dedupe savings for the pool expressed as ratio.</li>
+<li><strong>clone_ratio                   </strong>: Clone savings for the pool expressed as ratio.</li>
+<li><strong>vol_thin_provisioning_ratio   </strong>: Thin provisioning savings for volumes in the pool expressed as ratio.</li>
+<li><strong>snapcoll_count                </strong>: Snapshot collection count.</li>
+<li><strong>snap_count                    </strong>: Snapshot count.</li>
+<li><strong>array_count                   </strong>: Number of arrays in the pool.</li>
+<li><strong>vol_count                     </strong>: Number of volumes assigned to the pool.</li>
+<li><strong>array_list                    </strong>: List of arrays in the pool with detailed information. When create/update array list, only arrays' ID is required.</li>
+<li><strong>unassigned_array_list         </strong>: List of arrays being unassigned from the pool.</li>
+<li><strong>vol_list                      </strong>: The list of volumes in the pool.</li>
+<li><strong>pinned_vol_list               </strong>: The list of pinned volumes in the pool.</li>
+<li><strong>folder_list                   </strong>: The list of fully qualified names of folders in the pool.</li>
+<li><strong>force                         </strong>: Forcibly delete the specified pool even if it contains deleted volumes whose space is being reclaimed. Forcibly remove an array from array_list
+                                via an update operation even if the array is not reachable. There should no volumes currently in the pool for the forced update operation to
+                                succeed.</li>
+<li><strong>usage_valid                   </strong>: Indicates whether the usage of pool is valid.</li>
+<li><strong>uncompressed_vol_usage_bytes  </strong>: Uncompressed usage of volumes in the pool.</li>
+<li><strong>uncompressed_snap_usage_bytes </strong>: Uncompressed usage of snapshots in the pool.</li>
+<li><strong>all_flash                     </strong>: Indicate whether the pool is an all_flash pool.</li>
+<li><strong>dedupe_capable                </strong>: Indicates whether the pool is capable of hosting deduped volumes.</li>
+<li><strong>dedupe_all_volumes_capable    </strong>: Indicates whether the pool can enable dedupe by default.</li>
+<li><strong>dedupe_all_volumes            </strong>: Indicates if dedupe is enabled by default for new volumes on this pool.</li>
+<li><strong>is_default                    </strong>: Indicates if this is the default pool.</li>
+</ul>
 <h2 id="poollist">PoolList<a class="headerlink" href="#poollist" title="Permanent link">&para;</a></h2>
 <p> <pre><code class=python>PoolList(self, client=None)
 </code></pre></p>

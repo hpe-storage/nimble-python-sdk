@@ -9,8 +9,8 @@
   
   <meta name="author" content="Hewlett Packard Enterprise">
   <link rel="shortcut icon" href="../img/favicon.ico">
-    <meta property="og:title" content="HPE Storage Container Orchestrator Documentation"/>
-    <meta property="og:description" content="This is an umbrella documentation project for all Kubernetes and Docker integrations for HPE primary storage tailored for IT Ops, developers and partners. Including HPE 3PAR and Primera, HPE Cloud Volumes and HPE Nimble Storage."/>
+    <meta property="og:title" content="HPE Nimble Storage SDK for Python"/>
+    <meta property="og:description" content="The HPE Nimble Storage SDK for Python provides a Pythonic client library to interact with the HPE Nimble Storage REST API."/>
     <meta property="og:locale" content="en_US"/>
     <meta property="og:url" content="https://scod.hpedev.io"/>
     <meta property="og:type" content="website"/>
@@ -79,7 +79,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../get_started/patterns/index.html">Patterns</a>
+    <a class="" href="../get_started/using/index.html">Using</a>
                 </li>
                 <li class="">
                     
@@ -387,18 +387,20 @@
 <p> <pre><code class=python>Token(self, id, attrs=None, client=None, collection=None)
 </code></pre></p>
 <p>Manage user's session information.</p>
-<p>Parameters:
-- id            : Object identifier for the session token.
-- session_token : Token used for authentication.
-- username      : User name for the session.
-- password      : Password for the user. A password is required for creating a token.
-- app_name      : Application name.
-- sdk_name      : SDK name.
-- source_ip     : IP address from which the session originates.
-- creation_time : Time when this token was created.
-- last_modified : Time when this token was last modified.
-- expiry_time   : Time when this token will expire.
-- server_uuid   : Non mandatory 36 character uuid returned by the server. Currently only the witness REST server returns one.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id            </strong>: Object identifier for the session token.</li>
+<li><strong>session_token </strong>: Token used for authentication.</li>
+<li><strong>username      </strong>: User name for the session.</li>
+<li><strong>password      </strong>: Password for the user. A password is required for creating a token.</li>
+<li><strong>app_name      </strong>: Application name.</li>
+<li><strong>sdk_name      </strong>: SDK name.</li>
+<li><strong>source_ip     </strong>: IP address from which the session originates.</li>
+<li><strong>creation_time </strong>: Time when this token was created.</li>
+<li><strong>last_modified </strong>: Time when this token was last modified.</li>
+<li><strong>expiry_time   </strong>: Time when this token will expire.</li>
+<li><strong>server_uuid   </strong>: Non mandatory 36 character uuid returned by the server. Currently only the witness REST server returns one.</li>
+</ul>
 <h2 id="tokenlist">TokenList<a class="headerlink" href="#tokenlist" title="Permanent link">&para;</a></h2>
 <p> <pre><code class=python>TokenList(self, client=None)
 </code></pre></p>

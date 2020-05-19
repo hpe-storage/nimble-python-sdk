@@ -9,8 +9,8 @@
   
   <meta name="author" content="Hewlett Packard Enterprise">
   <link rel="shortcut icon" href="../img/favicon.ico">
-    <meta property="og:title" content="HPE Storage Container Orchestrator Documentation"/>
-    <meta property="og:description" content="This is an umbrella documentation project for all Kubernetes and Docker integrations for HPE primary storage tailored for IT Ops, developers and partners. Including HPE 3PAR and Primera, HPE Cloud Volumes and HPE Nimble Storage."/>
+    <meta property="og:title" content="HPE Nimble Storage SDK for Python"/>
+    <meta property="og:description" content="The HPE Nimble Storage SDK for Python provides a Pythonic client library to interact with the HPE Nimble Storage REST API."/>
     <meta property="og:locale" content="en_US"/>
     <meta property="og:url" content="https://scod.hpedev.io"/>
     <meta property="og:type" content="website"/>
@@ -79,7 +79,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../get_started/patterns/index.html">Patterns</a>
+    <a class="" href="../get_started/using/index.html">Using</a>
                 </li>
                 <li class="">
                     
@@ -391,11 +391,13 @@
                            collection=None)
 </code></pre></p>
 <p>This API provides the alias information for Fibre Channel initiators.</p>
-<p>Parameters:
-- id     : Unique identifier for the Fibre Channel initiator alias.
-- alias  : Alias of the Fibre Channel initiator.
-- wwpn   : WWPN (World Wide Port Name) of the Fibre Channel initiator.
-- source : Source of the Fibre Channel initiator alias.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id     </strong>: Unique identifier for the Fibre Channel initiator alias.</li>
+<li><strong>alias  </strong>: Alias of the Fibre Channel initiator.</li>
+<li><strong>wwpn   </strong>: WWPN (World Wide Port Name) of the Fibre Channel initiator.</li>
+<li><strong>source </strong>: Source of the Fibre Channel initiator alias.</li>
+</ul>
 <h2 id="fibrechannelinitiatoraliaslist">FibreChannelInitiatorAliasList<a class="headerlink" href="#fibrechannelinitiatoraliaslist" title="Permanent link">&para;</a></h2>
 <p> <pre><code class=python>FibreChannelInitiatorAliasList(self, client=None)
 </code></pre></p>

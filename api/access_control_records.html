@@ -9,8 +9,8 @@
   
   <meta name="author" content="Hewlett Packard Enterprise">
   <link rel="shortcut icon" href="../img/favicon.ico">
-    <meta property="og:title" content="HPE Storage Container Orchestrator Documentation"/>
-    <meta property="og:description" content="This is an umbrella documentation project for all Kubernetes and Docker integrations for HPE primary storage tailored for IT Ops, developers and partners. Including HPE 3PAR and Primera, HPE Cloud Volumes and HPE Nimble Storage."/>
+    <meta property="og:title" content="HPE Nimble Storage SDK for Python"/>
+    <meta property="og:description" content="The HPE Nimble Storage SDK for Python provides a Pythonic client library to interact with the HPE Nimble Storage REST API."/>
     <meta property="og:locale" content="en_US"/>
     <meta property="og:url" content="https://scod.hpedev.io"/>
     <meta property="og:type" content="website"/>
@@ -79,7 +79,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../get_started/patterns/index.html">Patterns</a>
+    <a class="" href="../get_started/using/index.html">Using</a>
                 </li>
                 <li class="">
                     
@@ -387,33 +387,35 @@
 <p> <pre><code class=python>AccessControlRecord(self, id, attrs=None, client=None, collection=None)
 </code></pre></p>
 <p>Manage access control records for volumes.</p>
-<p>Parameters:
-- id                   : Identifier for the access control record.
-- apply_to             : Type of object this access control record applies to.
-- chap_user_id         : Identifier for the CHAP user.
-- chap_user_name       : Name of the CHAP user.
-- initiator_group_id   : Identifier for the initiator group.
-- initiator_group_name : Name of the initiator group.
-- lun                  : If this access control record applies to a regular volume, this attribute is the volume's LUN (Logical Unit Number). If the access protocol is iSCSI,
-                         the LUN will be 0. However, if the access protocol is Fibre Channel, the LUN will be in the range from 0 to 2047. If this record applies to a Virtual
-                         Volume, this attribute is the volume's secondary LUN in the range from 0 to 399999, for both iSCSI and Fibre Channel. If the record applies to a
-                         OpenstackV2 volume, the LUN will be in the range from 0 to 2047, for both iSCSI and Fibre Channel. If this record applies to a protocol endpoint or
-                         only a snapshot, this attribute is not meaningful and is set to null.
-- vol_id               : Identifier for the volume this access control record applies to.
-- vol_name             : Name of the volume this access control record applies to.
-- vol_agent_type       : External management agent type.
-- pe_id                : Identifier for the protocol endpoint this access control record applies to.
-- pe_name              : Name of the protocol endpoint this access control record applies to.
-- pe_lun               : LUN (Logical Unit Number) to associate with this protocol endpoint. Valid LUNs are in the 0-2047 range.
-- snap_id              : Identifier for the snapshot this access control record applies to.
-- snap_name            : Name of the snapshot this access control record applies to.
-- pe_ids               : List of candidate protocol endpoints that may be used to access the Virtual Volume. One of them will be selected for the access control record. This
-                         field is required only when creating an access control record for a Virtual Volume.
-- snapluns             : Information about the snapshot LUNs associated with this access control record. This field is meaningful when the online snapshot can be accessed as a
-                         LUN in the group.
-- creation_time        : Time when this access control record was created.
-- last_modified        : Time when this access control record was last modified.
-- access_protocol      : Access protocol of the volume.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id                   </strong>: Identifier for the access control record.</li>
+<li><strong>apply_to             </strong>: Type of object this access control record applies to.</li>
+<li><strong>chap_user_id         </strong>: Identifier for the CHAP user.</li>
+<li><strong>chap_user_name       </strong>: Name of the CHAP user.</li>
+<li><strong>initiator_group_id   </strong>: Identifier for the initiator group.</li>
+<li><strong>initiator_group_name </strong>: Name of the initiator group.</li>
+<li><strong>lun                  </strong>: If this access control record applies to a regular volume, this attribute is the volume's LUN (Logical Unit Number). If the access protocol is iSCSI,
+                       the LUN will be 0. However, if the access protocol is Fibre Channel, the LUN will be in the range from 0 to 2047. If this record applies to a Virtual
+                       Volume, this attribute is the volume's secondary LUN in the range from 0 to 399999, for both iSCSI and Fibre Channel. If the record applies to a
+                       OpenstackV2 volume, the LUN will be in the range from 0 to 2047, for both iSCSI and Fibre Channel. If this record applies to a protocol endpoint or only
+                       a snapshot, this attribute is not meaningful and is set to null.</li>
+<li><strong>vol_id               </strong>: Identifier for the volume this access control record applies to.</li>
+<li><strong>vol_name             </strong>: Name of the volume this access control record applies to.</li>
+<li><strong>vol_agent_type       </strong>: External management agent type.</li>
+<li><strong>pe_id                </strong>: Identifier for the protocol endpoint this access control record applies to.</li>
+<li><strong>pe_name              </strong>: Name of the protocol endpoint this access control record applies to.</li>
+<li><strong>pe_lun               </strong>: LUN (Logical Unit Number) to associate with this protocol endpoint. Valid LUNs are in the 0-2047 range.</li>
+<li><strong>snap_id              </strong>: Identifier for the snapshot this access control record applies to.</li>
+<li><strong>snap_name            </strong>: Name of the snapshot this access control record applies to.</li>
+<li><strong>pe_ids               </strong>: List of candidate protocol endpoints that may be used to access the Virtual Volume. One of them will be selected for the access control record. This
+                       field is required only when creating an access control record for a Virtual Volume.</li>
+<li><strong>snapluns             </strong>: Information about the snapshot LUNs associated with this access control record. This field is meaningful when the online snapshot can be accessed as a
+                       LUN in the group.</li>
+<li><strong>creation_time        </strong>: Time when this access control record was created.</li>
+<li><strong>last_modified        </strong>: Time when this access control record was last modified.</li>
+<li><strong>access_protocol      </strong>: Access protocol of the volume.</li>
+</ul>
 <h2 id="accesscontrolrecordlist">AccessControlRecordList<a class="headerlink" href="#accesscontrolrecordlist" title="Permanent link">&para;</a></h2>
 <p> <pre><code class=python>AccessControlRecordList(self, client=None)
 </code></pre></p>

@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+    
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Hewlett Packard Enterprise">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+    <meta property="og:title" content="HPE Nimble Storage SDK for Python"/>
+    <meta property="og:description" content="The HPE Nimble Storage SDK for Python provides a Pythonic client library to interact with the HPE Nimble Storage REST API."/>
+    <meta property="og:locale" content="en_US"/>
+    <meta property="og:url" content="https://scod.hpedev.io"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content="https://scod.hpedev.io/img/hpe-social-og-image01.jpg"/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
+    
+  <title>Using - HPE Nimble Storage Software Development Kit (SDK) for Python</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../../css/hpedev.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Using";
+    var mkdocs_page_input_path = "get_started/using/index.md";
+    var mkdocs_page_url = "/nimble-python-sdk/get_started/using/index.html";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-79554149-4', 'auto');
+      ga('send', 'pageview');
+  </script>
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> HPE Nimble Storage Software Development Kit (SDK) for Python</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">GET STARTED</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../install/index.html">Installation</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="index.html">Using</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#using_the_sdk">Using the SDK</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#using_python_interactively">Using python interactively</a></li>
+        
+            <li><a class="toctree-l4" href="#manipulating_resources">Manipulating resources</a></li>
+        
+            <li><a class="toctree-l4" href="#assign_a_volume_to_an_object">Assign a volume to an object</a></li>
+        
+            <li><a class="toctree-l4" href="#access_object_attributes">Access object attributes</a></li>
+        
+            <li><a class="toctree-l4" href="#update_volume_attributes">Update volume attributes</a></li>
+        
+            <li><a class="toctree-l4" href="#access_object_methods">Access object methods</a></li>
+        
+            <li><a class="toctree-l4" href="#field_filters">Field filters</a></li>
+        
+            <li><a class="toctree-l4" href="#using_fields">Using Fields</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../examples/index.html">Example workflows</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">API REFERENCE</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../api/access_control_records.html">access_control_records</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/active_directory_memberships.html">active_directory_memberships</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/alarms.html">alarms</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/application_categories.html">application_categories</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/application_servers.html">application_servers</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/arrays.html">arrays</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/audit_log.html">audit_log</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/chap_users.html">chap_users</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/controllers.html">controllers</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/disks.html">disks</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/events.html">events</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/fibre_channel_configs.html">fibre_channel_configs</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/fibre_channel_initiator_aliases.html">fibre_channel_initiator_aliases</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/fibre_channel_interfaces.html">fibre_channel_interfaces</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/fibre_channel_ports.html">fibre_channel_ports</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/fibre_channel_sessions.html">fibre_channel_sessions</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/folders.html">folders</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/groups.html">groups</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/initiator_groups.html">initiator_groups</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/initiators.html">initiators</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/jobs.html">jobs</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/key_managers.html">key_managers</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/master_key.html">master_key</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/network_configs.html">network_configs</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/network_interfaces.html">network_interfaces</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/performance_policies.html">performance_policies</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/pools.html">pools</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/protection_schedules.html">protection_schedules</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/protection_templates.html">protection_templates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/protocol_endpoints.html">protocol_endpoints</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/replication_partners.html">replication_partners</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/shelves.html">shelves</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/snapshot_collections.html">snapshot_collections</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/snapshots.html">snapshots</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/software_versions.html">software_versions</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/space_domains.html">space_domains</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/subnets.html">subnets</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/support.html">support</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/tokens.html">tokens</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/user_groups.html">user_groups</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/user_policies.html">user_policies</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/users.html">users</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/versions.html">versions</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/volume_collections.html">volume_collections</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/volumes.html">volumes</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../api/witnesses.html">witnesses</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">COMMUNITY</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="https://developer.hpe.com">HPE Developer Community</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="https://slack.hpedev.io">Sign up to HPE DEV on Slack</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">EXTERNAL LINKS</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="https://github.com/hpe-storage/scod">Nimble SDK on GitHub</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="https://github.com/hpe-storage">HPE Storage on GitHub</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="https://hpe.com/storage/management-automation">Storage Automation on hpe.com</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">LEGAL</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../legal/contributing/index.html">Contributing</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../legal/support/index.html">Support</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../legal/license/index.html">License</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">HPE Nimble Storage Software Development Kit (SDK) for Python</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>GET STARTED &raquo;</li>
+        
+      
+    
+    <li>Using</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="using_the_sdk">Using the SDK<a class="headerlink" href="#using_the_sdk" title="Permanent link">&para;</a></h1>
+<p>Refer to the API reference for indivual resource manipulations. This introduction illustrate how to use the SDK and the more advanced features. HPE Nimble Storage specific workflows can be found in the <a href="../examples/index.html">example workflows</a> section.</p>
+<div class="toc">
+<ul>
+<li><a href="#using_the_sdk">Using the SDK</a><ul>
+<li><a href="#using_python_interactively">Using python interactively</a></li>
+<li><a href="#manipulating_resources">Manipulating resources</a><ul>
+<li><a href="#create_a_volume">Create a volume</a></li>
+<li><a href="#create_a_volume_with_custom_metadata">Create a volume with custom metadata</a></li>
+<li><a href="#list_volumes">List volumes</a></li>
+<li><a href="#fetch_volume_attributes">Fetch volume attributes</a></li>
+</ul>
+</li>
+<li><a href="#assign_a_volume_to_an_object">Assign a volume to an object</a></li>
+<li><a href="#access_object_attributes">Access object attributes</a></li>
+<li><a href="#update_volume_attributes">Update volume attributes</a></li>
+<li><a href="#access_object_methods">Access object methods</a></li>
+<li><a href="#field_filters">Field filters</a><ul>
+<li><a href="#list_only_resources_with_a_certain_name">List only resources with a certain name</a></li>
+<li><a href="#expand_object_with_limited_resource_attributes">Expand object with limited resource attributes</a></li>
+</ul>
+</li>
+<li><a href="#using_fields">Using Fields</a><ul>
+<li><a href="#search_for_a_volume_wildcard">Search for a volume wildcard</a></li>
+<li><a href="#combining_multiple_fields">Combining multiple Fields</a></li>
+<li><a href="#complex_fields_with_and_and_or_operators">Complex Fields with AND and OR operators</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="using_python_interactively">Using python interactively<a class="headerlink" href="#using_python_interactively" title="Permanent link">&para;</a></h2>
+<p>Python 3.6 or later is required and for illustrative purposes, the examples uses <code>python</code> interactively.</p>
+<p>From scratch on a <code>python</code> prompt.</p>
+<p> <pre><code class=python>$ python3
+Python 3.7.7 (default, Mar 10 2020, 15:43:03)
+[Clang 11.0.0 (clang-1100.0.33.17)] on darwin
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; from nimbleclient import NimOSClient
+&gt;&gt;&gt; import pprint
+&gt;&gt;&gt; api = NimOSClient('192.168.1.128', 'admin', 'admin')
+&gt;&gt;&gt;
+</code></pre></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All the examples below uses <code>pprint</code> for formatting purposes only.</p>
+</div>
+<h2 id="manipulating_resources">Manipulating resources<a class="headerlink" href="#manipulating_resources" title="Permanent link">&para;</a></h2>
+<p>Simple interactions with the <code>volumes</code> endpoint. Refer to the <a href="../../api/volumes.html">volumes</a> API reference for more details.</p>
+<h3 id="create_a_volume">Create a volume<a class="headerlink" href="#create_a_volume" title="Permanent link">&para;</a></h3>
+<p> <pre><code class=python>&gt;&gt;&gt; api.volumes.create('myvol1', size=1024, description='My first volume')
+&lt;Volume(id=0649686580b78e0b16000000000000000000000004, name=myvol1)&gt;
+</code></pre></p>
+<h3 id="create_a_volume_with_custom_metadata">Create a volume with custom metadata<a class="headerlink" href="#create_a_volume_with_custom_metadata" title="Permanent link">&para;</a></h3>
+<p> <pre><code class=python>&gt;&gt;&gt; meta_data = {'mykey1': 'myval1', 'mykey2': 'myval2'}
+&gt;&gt;&gt; api.volumes.create('myvol2', size=2048, description='My second volume', metadata=meta_data)
+&lt;Volume(id=0649686580b78e0b16000000000000000000000005, name=myvol2)&gt;
+</code></pre></p>
+<h3 id="list_volumes">List volumes<a class="headerlink" href="#list_volumes" title="Permanent link">&para;</a></h3>
+<p> <pre><code class=python>&gt;&gt;&gt; pprint.pprint(api.volumes.list())
+[&lt;Volume(id=0649686580b78e0b16000000000000000000000004, name=myvol1)&gt;,
+ &lt;Volume(id=0649686580b78e0b16000000000000000000000005, name=myvol2)&gt;]
+</code></pre></p>
+<h3 id="fetch_volume_attributes">Fetch volume attributes<a class="headerlink" href="#fetch_volume_attributes" title="Permanent link">&para;</a></h3>
+<p> <pre><code class=python>&gt;&gt;&gt; pprint.pprint(api.volumes.get('0649686580b78e0b16000000000000000000000005').attrs)
+{'access_control_records': None,
+ 'agent_type': 'none',
+ 'app_category': 'Other',
+ 'app_uuid': '',
+ 'avg_stats_last_5mins': {'combined_iops': 0,
+                          'combined_latency': 0,
+                          'combined_throughput': 0,
+                          'read_iops': 0,
+                          'read_latency': 0,
+                          'read_throughput': 0,
+                          'write_iops': 0,
+                          'write_latency': 0,
+                          'write_throughput': 0},
+ 'base_snap_id': '',
+ 'base_snap_name': '',
+ 'block_size': 4096,
+ 'cache_needed_for_pin': 2147483648,
+ 'cache_pinned': False,
+ 'cache_policy': 'normal',
+ 'caching_enabled': True,
+ 'cksum_last_verified': 0,
+ 'clone': False,
+ 'content_repl_errors_found': False,
+ 'creation_time': 1573161873,
+ 'dedupe_enabled': False,
+ 'description': 'My second volume',
+ 'dest_pool_id': '',
+ 'dest_pool_name': '',
+ 'encryption_cipher': 'none',
+ 'fc_sessions': None,
+ 'folder_id': '',
+ 'folder_name': '',
+ 'full_name': 'default:/myvol2',
+ 'id': '0649686580b78e0b16000000000000000000000005',
+ 'iscsi_sessions': None,
+ 'iscsi_target_scope': 'group',
+ 'last_content_snap_br_cg_uid': 0,
+ 'last_content_snap_br_gid': 0,
+ 'last_content_snap_id': 0,
+ 'last_modified': 1573161873,
+ 'last_replicated_snap': None,
+ 'last_snap': None,
+ 'limit': 100,
+ 'limit_iops': -1,
+ 'limit_mbps': -1,
+ 'metadata': [{'key': 'mykey2', 'value': 'myval2'},
+              {'key': 'mykey1', 'value': 'myval1'}],
+ 'move_aborting': False,
+ 'move_bytes_migrated': 0,
+ 'move_bytes_remaining': 0,
+ 'move_est_compl_time': 0,
+ 'move_start_time': 0,
+ 'multi_initiator': False,
+ 'name': 'myvol2',
+ 'needs_content_repl': False,
+ 'num_connections': 0,
+ 'num_fc_connections': 0,
+ 'num_iscsi_connections': 0,
+ 'num_snaps': 0,
+ 'offline_reason': None,
+ 'online': True,
+ 'online_snaps': None,
+ 'owned_by_group': 'nva-test-grp',
+ 'owned_by_group_id': '0049686580b78e0b16000000000000000000000001',
+ 'parent_vol_id': '',
+ 'parent_vol_name': '',
+ 'perfpolicy_id': '0349686580b78e0b16000000000000000000000001',
+ 'perfpolicy_name': 'default',
+ 'pinned_cache_size': 0,
+ 'pool_id': '0a49686580b78e0b16000000000000000000000001',
+ 'pool_name': 'default',
+ 'previously_deduped': False,
+ 'projected_num_snaps': 0,
+ 'protection_type': 'unprotected',
+ 'read_only': False,
+ 'replication_role': 'no_replication',
+ 'reserve': 0,
+ 'search_name': 'myvol2',
+ 'serial_number': '2ee4231f34e21d4b6c9ce900966ee6fe',
+ 'size': 2048,
+ 'snap_limit': 9223372036854775807,
+ 'snap_limit_percent': -1,
+ 'snap_reserve': 0,
+ 'snap_usage_compressed_bytes': 0,
+ 'snap_usage_populated_bytes': 0,
+ 'snap_usage_uncompressed_bytes': 0,
+ 'snap_warn_level': 0,
+ 'space_usage_level': 'normal',
+ 'srep_last_sync': 0,
+ 'srep_resync_percent': 0,
+ 'target_name': 'iqn.2007-11.com.nimblestorage:nva-test-grp-g49686580b78e0b16',
+ 'thinly_provisioned': True,
+ 'total_usage_bytes': 0,
+ 'upstream_cache_pinned': False,
+ 'usage_valid': True,
+ 'vol_state': 'online',
+ 'vol_usage_compressed_bytes': 0,
+ 'vol_usage_mapped_bytes': 0,
+ 'vol_usage_uncompressed_bytes': 0,
+ 'volcoll_id': '',
+ 'volcoll_name': '',
+ 'vpd_ieee0': '2ee4231f34e21d4b',
+ 'vpd_ieee1': '6c9ce900966ee6fe',
+ 'vpd_t10': 'Nimble  2ee4231f34e21d4b6c9ce900966ee6fe',
+ 'warn_level': 0}
+</code></pre></p>
+<h2 id="assign_a_volume_to_an_object">Assign a volume to an object<a class="headerlink" href="#assign_a_volume_to_an_object" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>&gt;&gt;&gt; vol = api.volumes.get(name='myvol1')
+&lt;Volume(id=0601a32bf8f45646a500000000000000000000070d, name=vol-3)&gt;
+</code></pre></p>
+<h2 id="access_object_attributes">Access object attributes<a class="headerlink" href="#access_object_attributes" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>&gt;&gt;&gt; vol = api.volumes.get(name='myvol2')
+&gt;&gt;&gt; pprint.pprint(vol.attrs['metadata'])
+[{'key': 'mykey2', 'value': 'myval2'}, {'key': 'mykey1', 'value': 'myval1'}]
+</code></pre></p>
+<h2 id="update_volume_attributes">Update volume attributes<a class="headerlink" href="#update_volume_attributes" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>&gt;&gt;&gt; vol.update(id=vol.attrs['id'], description='My new cool description')
+&gt;&gt;&gt; vol.reload()
+&gt;&gt;&gt; pprint.pprint(vol.attrs['description'])
+'My new cool description'
+</code></pre></p>
+<h2 id="access_object_methods">Access object methods<a class="headerlink" href="#access_object_methods" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>&gt;&gt;&gt; vol.offline()
+{ 'offline_reason': 'user', 'online': False } # Full object representation omitted 
+&gt;&gt;&gt; vol.delete()
+{}
+</code></pre></p>
+<h2 id="field_filters">Field filters<a class="headerlink" href="#field_filters" title="Permanent link">&para;</a></h2>
+<p>Most of the time a developer have a vague idea of what he's looking for and what attributes are of interest. Using field filters one way to satisfy the need and optimize the payload.</p>
+<h3 id="list_only_resources_with_a_certain_name">List only resources with a certain name<a class="headerlink" href="#list_only_resources_with_a_certain_name" title="Permanent link">&para;</a></h3>
+<p> <pre><code class=python>&gt;&gt;&gt; pprint.pprint(api.volumes.list(name='myvol1'))
+[&lt;Volume(id=0649686580b78e0b16000000000000000000000004, name=myvol1)&gt;]
+</code></pre></p>
+<h3 id="expand_object_with_limited_resource_attributes">Expand object with limited resource attributes<a class="headerlink" href="#expand_object_with_limited_resource_attributes" title="Permanent link">&para;</a></h3>
+<p> <pre><code class=python>&gt;&gt;&gt; pprint.pprint(api.volumes.list(name='myvol1', detail=True, fields='name,id,size,online,clone')[0].attrs)
+{'clone': False,
+ 'id': '0649686580b78e0b16000000000000000000000004',
+ 'name': 'myvol1',
+ 'online': True,
+ 'size': 1024}
+</code></pre></p>
+<h2 id="using_fields">Using Fields<a class="headerlink" href="#using_fields" title="Permanent link">&para;</a></h2>
+<p>Each API resource comes with "Fields" class which allow complex querying of the resource. The class naming convention is the resource name in singular without underscores in camelcase. Example:</p>
+<ul>
+<li><code>volumes</code> -&gt; <code>VolumeFields</code></li>
+<li><code>volume_collections</code> - <code>VolumeCollectionFields</code></li>
+<li><code>protection_templates</code> - <code>ProtectionTemplateFields</code></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The volume named "myvol2" in previous steps that was deleted has to be recreated for the next set of examples to make sense.</p>
+</div>
+<h3 id="search_for_a_volume_wildcard">Search for a volume wildcard<a class="headerlink" href="#search_for_a_volume_wildcard" title="Permanent link">&para;</a></h3>
+<p> <pre><code class=python>&gt;&gt;&gt; from nimbleclient import *
+&gt;&gt;&gt; from nimbleclient.v1 import VolumeFields
+&gt;&gt;&gt; pprint.pprint(api.volumes.list(filter=and_(VolumeFields.name.contains('vol'))))
+[&lt;Volume(id=0649686580b78e0b16000000000000000000000004, name=myvol1)&gt;,
+ &lt;Volume(id=0649686580b78e0b16000000000000000000000006, name=myvol2)&gt;]
+</code></pre></p>
+<h3 id="combining_multiple_fields">Combining multiple Fields<a class="headerlink" href="#combining_multiple_fields" title="Permanent link">&para;</a></h3>
+<p> <pre><code class=python>&gt;&gt;&gt; myfilter = and_(
+... VolumeFields.name.contains('vol'),
+... VolumeFields.metadata('mykey1') == 'myval1'
+... )
+&gt;&gt;&gt; pprint.pprint(api.volumes.list(detail=True, filter=myfilter, fields='id,name,size,metadata'))
+[&lt;Volume(id=0649686580b78e0b16000000000000000000000006, name=myvol2)&gt;]
+&gt;&gt;&gt; pprint.pprint(api.volumes.list(detail=True, filter=myfilter, fields='name,size,metadata'
+... )[0].attrs)
+{'metadata': [{'key': 'mykey2', 'value': 'myval2'},
+              {'key': 'mykey1', 'value': 'myval1'}],
+ 'name': 'myvol2',
+ 'size': 2048}
+</code></pre></p>
+<h3 id="complex_fields_with_and_and_or_operators">Complex Fields with AND and OR operators<a class="headerlink" href="#complex_fields_with_and_and_or_operators" title="Permanent link">&para;</a></h3>
+<p> <pre><code class=python>&gt;&gt;&gt; myfilter = and_(
+...     VolumeFields.name.contains('vol'),
+...     VolumeFields.online == 'true',
+...     or_(
+...         VolumeFields.protection_type == 'unprotected',
+...         and_(
+...             VolumeFields.size &lt;= '4096',
+...             VolumeFields.encryption_cipher == None,
+...         )
+...     )
+... )
+&gt;&gt;&gt; pprint.pprint(api.volumes.list(detail=True, filter=myfilter, fields='id,name,size,metadata'))
+[&lt;Volume(id=0649686580b78e0b16000000000000000000000004, name=myvol1)&gt;,
+ &lt;Volume(id=0649686580b78e0b16000000000000000000000006, name=myvol2)&gt;]
+</code></pre></p>
+              
+            </div>
+          </div>
+
+<footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../examples/index.html" class="btn btn-neutral float-right" title="Example workflows">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../install/index.html" class="btn btn-neutral" title="Installation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright 2020 Hewlett Packard Enterprise Development LP</p>
+    
+  </div>
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../install/index.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../examples/index.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
+</html>

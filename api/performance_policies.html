@@ -9,8 +9,8 @@
   
   <meta name="author" content="Hewlett Packard Enterprise">
   <link rel="shortcut icon" href="../img/favicon.ico">
-    <meta property="og:title" content="HPE Storage Container Orchestrator Documentation"/>
-    <meta property="og:description" content="This is an umbrella documentation project for all Kubernetes and Docker integrations for HPE primary storage tailored for IT Ops, developers and partners. Including HPE 3PAR and Primera, HPE Cloud Volumes and HPE Nimble Storage."/>
+    <meta property="og:title" content="HPE Nimble Storage SDK for Python"/>
+    <meta property="og:description" content="The HPE Nimble Storage SDK for Python provides a Pythonic client library to interact with the HPE Nimble Storage REST API."/>
     <meta property="og:locale" content="en_US"/>
     <meta property="og:url" content="https://scod.hpedev.io"/>
     <meta property="og:type" content="website"/>
@@ -79,7 +79,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../get_started/patterns/index.html">Patterns</a>
+    <a class="" href="../get_started/using/index.html">Using</a>
                 </li>
                 <li class="">
                     
@@ -389,30 +389,32 @@
 <p>Manage performance policies. A performance policy is a set of optimizations including block size, compression, and caching, to ensure that the volume's performance is the best
 configuration for its intended use like databases or log files. By default, a volume uses the \"default\" performance policy, which is set to use 4096 byte blocks with full
 compression and caching enabled. For replicated volumes, the same performance policy must exist on each replication partner.</p>
-<p>Parameters:
-- id                    : Unique Identifier for the Performance Policy.
-- name                  : Name of the Performance Policy.
-- full_name             : Fully qualified name of the Performance Policy.
-- search_name           : Name of the Performance Policy used for object search.
-- description           : Description of a performance policy.
-- block_size            : Block Size in bytes to be used by the volumes created with this specific performance policy. Supported block sizes are 4096 bytes (4 KB), 8192 bytes
-                          (8 KB), 16384 bytes(16 KB), and 32768 bytes (32 KB). Block size of a performance policy cannot be changed once the performance policy is created.
-- compress              : Flag denoting if data in the associated volume should be compressed.
-- cache                 : Flag denoting if data in the associated volume should be cached.
-- cache_policy          : Specifies how data of associated volume should be cached. Supports two policies, 'normal' and 'aggressive'. 'normal' policy caches data but skips in
-                          certain conditions such as sequential I/O. 'aggressive' policy will accelerate caching of all data belonging to this volume, regardless of
-                          sequentiality.
-- space_policy          : Specifies the state of the volume upon space constraint violation such as volume limit violation or volumes above their volume reserve, if the pool
-                          free space is exhausted. Supports two policies, 'offline' and 'non_writable'.
-- app_category          : Specifies the application category of the associated volume.
-- dedupe_enabled        : Specifies if dedupe is enabled for volumes created with this performance policy.
-- deprecated            : Specifies if this performance policy is deprecated.
-- predefined            : Specifies if this performance policy is predefined (read-only).
-- creation_time         : Time when the performance policy was created.
-- last_modified         : Time when the performance policy's configurations were last modified.
-- sample_rate           : Sample rate value.
-- volume_count          : Number of volumes using this performance policy.
-- dedupe_override_pools : List of pools that override performance policy's dedupe setting.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id                    </strong>: Unique Identifier for the Performance Policy.</li>
+<li><strong>name                  </strong>: Name of the Performance Policy.</li>
+<li><strong>full_name             </strong>: Fully qualified name of the Performance Policy.</li>
+<li><strong>search_name           </strong>: Name of the Performance Policy used for object search.</li>
+<li><strong>description           </strong>: Description of a performance policy.</li>
+<li><strong>block_size            </strong>: Block Size in bytes to be used by the volumes created with this specific performance policy. Supported block sizes are 4096 bytes (4 KB), 8192 bytes (8
+                        KB), 16384 bytes(16 KB), and 32768 bytes (32 KB). Block size of a performance policy cannot be changed once the performance policy is created.</li>
+<li><strong>compress              </strong>: Flag denoting if data in the associated volume should be compressed.</li>
+<li><strong>cache                 </strong>: Flag denoting if data in the associated volume should be cached.</li>
+<li><strong>cache_policy          </strong>: Specifies how data of associated volume should be cached. Supports two policies, 'normal' and 'aggressive'. 'normal' policy caches data but skips in
+                        certain conditions such as sequential I/O. 'aggressive' policy will accelerate caching of all data belonging to this volume, regardless of
+                        sequentiality.</li>
+<li><strong>space_policy          </strong>: Specifies the state of the volume upon space constraint violation such as volume limit violation or volumes above their volume reserve, if the pool
+                        free space is exhausted. Supports two policies, 'offline' and 'non_writable'.</li>
+<li><strong>app_category          </strong>: Specifies the application category of the associated volume.</li>
+<li><strong>dedupe_enabled        </strong>: Specifies if dedupe is enabled for volumes created with this performance policy.</li>
+<li><strong>deprecated            </strong>: Specifies if this performance policy is deprecated.</li>
+<li><strong>predefined            </strong>: Specifies if this performance policy is predefined (read-only).</li>
+<li><strong>creation_time         </strong>: Time when the performance policy was created.</li>
+<li><strong>last_modified         </strong>: Time when the performance policy's configurations were last modified.</li>
+<li><strong>sample_rate           </strong>: Sample rate value.</li>
+<li><strong>volume_count          </strong>: Number of volumes using this performance policy.</li>
+<li><strong>dedupe_override_pools </strong>: List of pools that override performance policy's dedupe setting.</li>
+</ul>
 <h2 id="performancepolicylist">PerformancePolicyList<a class="headerlink" href="#performancepolicylist" title="Permanent link">&para;</a></h2>
 <p> <pre><code class=python>PerformancePolicyList(self, client=None)
 </code></pre></p>

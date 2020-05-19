@@ -9,8 +9,8 @@
   
   <meta name="author" content="Hewlett Packard Enterprise">
   <link rel="shortcut icon" href="../img/favicon.ico">
-    <meta property="og:title" content="HPE Storage Container Orchestrator Documentation"/>
-    <meta property="og:description" content="This is an umbrella documentation project for all Kubernetes and Docker integrations for HPE primary storage tailored for IT Ops, developers and partners. Including HPE 3PAR and Primera, HPE Cloud Volumes and HPE Nimble Storage."/>
+    <meta property="og:title" content="HPE Nimble Storage SDK for Python"/>
+    <meta property="og:description" content="The HPE Nimble Storage SDK for Python provides a Pythonic client library to interact with the HPE Nimble Storage REST API."/>
     <meta property="og:locale" content="en_US"/>
     <meta property="og:url" content="https://scod.hpedev.io"/>
     <meta property="og:type" content="website"/>
@@ -79,7 +79,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../get_started/patterns/index.html">Patterns</a>
+    <a class="" href="../get_started/using/index.html">Using</a>
                 </li>
                 <li class="">
                     
@@ -387,60 +387,62 @@
 <p> <pre><code class=python>Array(self, id, attrs=None, client=None, collection=None)
 </code></pre></p>
 <p>Retrieve information of specified arrays. The array is the management and configuration for the underlying physical hardware array box.</p>
-<p>Parameters:
-- id                            : Identifier for array.
-- name                          : The user provided name of the array. It is also the array's hostname.
-- force                         : Forcibly delete the specified array.
-- full_name                     : The array's fully qualified name.
-- search_name                   : The array name used for object search.
-- status                        : Reachability status of the array in the group.
-- role                          : Role of the array in the group.
-- group_state                   : State of the array in the group.
-- pool_name                     : Name of pool to which this is a member.
-- pool_id                       : ID of pool to which this is a member.
-- model                         : Array model.
-- serial                        : Serial number of the array.
-- version                       : Software version of the array.
-- is_sfa                        : True if this array supports SFA; false otherwise.
-- creation_time                 : Time when this array object was created.
-- last_modified                 : Time when this array object was last modified.
-- usage_valid                   : Indicates whether the usage of array is valid.
-- usable_capacity_bytes         : The usable capacity of the array in bytes.
-- usable_cache_capacity_bytes   : The usable cache capacity of the array in bytes.
-- raw_capacity_bytes            : The raw capacity of the array in bytes.
-- vol_usage_bytes               : The compressed usage of volumes in array.
-- vol_usage_uncompressed_bytes  : The uncompressed usage of volumes in array. This is the pre-reduced usage.
-- vol_compression               : The compression rate of volumes in array expressed as ratio.
-- vol_saved_bytes               : The saved space of volumes in array.
-- snap_usage_bytes              : The compressed usage of snapshots in array.
-- snap_usage_uncompressed_bytes : The uncompressed usage of snapshots in array. This is the pre-reduced usage.
-- snap_compression              : The compression rate of snapshots in array expressed as ratio.
-- snap_space_reduction          : The space reduction rate of snapshots in array expressed as ratio.
-- snap_saved_bytes              : The saved space of snapshots in array.
-- pending_delete_bytes          : The pending delete bytes in array.
-- available_bytes               : The available space of array.
-- usage                         : Used space of the array in bytes.
-- all_flash                     : Whether it is an all-flash array.
-- dedupe_capacity_bytes         : The dedupe capacity of a hybrid array. Does not apply to all-flash arrays.
-- dedupe_usage_bytes            : The dedupe usage of a hybrid array. Does not apply to all-flash arrays.
-- is_fully_dedupe_capable       : Is array fully capable to dedupe its usable capacity.
-- extended_model                : Extended model of the array.
-- is_supported_hw_config        : Whether it is a supported hardware config.
-- gig_nic_port_count            : Count of 1G NIC Ports installed on the array.
-- ten_gig_sfp_nic_port_count    : Count of 10G SFP NIC Ports installed on the array.
-- ten_gig_t_nic_port_count      : Count of 10G BaseT NIC Ports installed on the array.
-- fc_port_count                 : Count of Fibre Channel Ports installed on the array.
-- public_key                    : Public key of the array.
-- upgrade                       : The array upgrade data.
-- create_pool                   : Whether to create associated pool during array create.
-- pool_description              : Text description of the pool to be created during array creation.
-- allow_lower_limits            : A True setting will allow you to add an array with lower limits to a pool with higher limits.
-- ctrlr_a_support_ip            : Controller A Support IP Address.
-- ctrlr_b_support_ip            : Controller B Support IP Address.
-- nic_list                      : List NICs information. Used when creating an array.
-- model_sub_type                : Array model sub type.
-- zconf_ipaddrs                 : List of link-local zero-configuration addresses of the array.
-- secondary_mgmt_ip             : Secondary management IP address for the Group.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id                            </strong>: Identifier for array.</li>
+<li><strong>name                          </strong>: The user provided name of the array. It is also the array's hostname.</li>
+<li><strong>force                         </strong>: Forcibly delete the specified array.</li>
+<li><strong>full_name                     </strong>: The array's fully qualified name.</li>
+<li><strong>search_name                   </strong>: The array name used for object search.</li>
+<li><strong>status                        </strong>: Reachability status of the array in the group.</li>
+<li><strong>role                          </strong>: Role of the array in the group.</li>
+<li><strong>group_state                   </strong>: State of the array in the group.</li>
+<li><strong>pool_name                     </strong>: Name of pool to which this is a member.</li>
+<li><strong>pool_id                       </strong>: ID of pool to which this is a member.</li>
+<li><strong>model                         </strong>: Array model.</li>
+<li><strong>serial                        </strong>: Serial number of the array.</li>
+<li><strong>version                       </strong>: Software version of the array.</li>
+<li><strong>is_sfa                        </strong>: True if this array supports SFA; false otherwise.</li>
+<li><strong>creation_time                 </strong>: Time when this array object was created.</li>
+<li><strong>last_modified                 </strong>: Time when this array object was last modified.</li>
+<li><strong>usage_valid                   </strong>: Indicates whether the usage of array is valid.</li>
+<li><strong>usable_capacity_bytes         </strong>: The usable capacity of the array in bytes.</li>
+<li><strong>usable_cache_capacity_bytes   </strong>: The usable cache capacity of the array in bytes.</li>
+<li><strong>raw_capacity_bytes            </strong>: The raw capacity of the array in bytes.</li>
+<li><strong>vol_usage_bytes               </strong>: The compressed usage of volumes in array.</li>
+<li><strong>vol_usage_uncompressed_bytes  </strong>: The uncompressed usage of volumes in array. This is the pre-reduced usage.</li>
+<li><strong>vol_compression               </strong>: The compression rate of volumes in array expressed as ratio.</li>
+<li><strong>vol_saved_bytes               </strong>: The saved space of volumes in array.</li>
+<li><strong>snap_usage_bytes              </strong>: The compressed usage of snapshots in array.</li>
+<li><strong>snap_usage_uncompressed_bytes </strong>: The uncompressed usage of snapshots in array. This is the pre-reduced usage.</li>
+<li><strong>snap_compression              </strong>: The compression rate of snapshots in array expressed as ratio.</li>
+<li><strong>snap_space_reduction          </strong>: The space reduction rate of snapshots in array expressed as ratio.</li>
+<li><strong>snap_saved_bytes              </strong>: The saved space of snapshots in array.</li>
+<li><strong>pending_delete_bytes          </strong>: The pending delete bytes in array.</li>
+<li><strong>available_bytes               </strong>: The available space of array.</li>
+<li><strong>usage                         </strong>: Used space of the array in bytes.</li>
+<li><strong>all_flash                     </strong>: Whether it is an all-flash array.</li>
+<li><strong>dedupe_capacity_bytes         </strong>: The dedupe capacity of a hybrid array. Does not apply to all-flash arrays.</li>
+<li><strong>dedupe_usage_bytes            </strong>: The dedupe usage of a hybrid array. Does not apply to all-flash arrays.</li>
+<li><strong>is_fully_dedupe_capable       </strong>: Is array fully capable to dedupe its usable capacity.</li>
+<li><strong>extended_model                </strong>: Extended model of the array.</li>
+<li><strong>is_supported_hw_config        </strong>: Whether it is a supported hardware config.</li>
+<li><strong>gig_nic_port_count            </strong>: Count of 1G NIC Ports installed on the array.</li>
+<li><strong>ten_gig_sfp_nic_port_count    </strong>: Count of 10G SFP NIC Ports installed on the array.</li>
+<li><strong>ten_gig_t_nic_port_count      </strong>: Count of 10G BaseT NIC Ports installed on the array.</li>
+<li><strong>fc_port_count                 </strong>: Count of Fibre Channel Ports installed on the array.</li>
+<li><strong>public_key                    </strong>: Public key of the array.</li>
+<li><strong>upgrade                       </strong>: The array upgrade data.</li>
+<li><strong>create_pool                   </strong>: Whether to create associated pool during array create.</li>
+<li><strong>pool_description              </strong>: Text description of the pool to be created during array creation.</li>
+<li><strong>allow_lower_limits            </strong>: A True setting will allow you to add an array with lower limits to a pool with higher limits.</li>
+<li><strong>ctrlr_a_support_ip            </strong>: Controller A Support IP Address.</li>
+<li><strong>ctrlr_b_support_ip            </strong>: Controller B Support IP Address.</li>
+<li><strong>nic_list                      </strong>: List NICs information. Used when creating an array.</li>
+<li><strong>model_sub_type                </strong>: Array model sub type.</li>
+<li><strong>zconf_ipaddrs                 </strong>: List of link-local zero-configuration addresses of the array.</li>
+<li><strong>secondary_mgmt_ip             </strong>: Secondary management IP address for the Group.</li>
+</ul>
 <h2 id="arraylist">ArrayList<a class="headerlink" href="#arraylist" title="Permanent link">&para;</a></h2>
 <p> <pre><code class=python>ArrayList(self, client=None)
 </code></pre></p>

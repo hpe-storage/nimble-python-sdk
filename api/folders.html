@@ -9,8 +9,8 @@
   
   <meta name="author" content="Hewlett Packard Enterprise">
   <link rel="shortcut icon" href="../img/favicon.ico">
-    <meta property="og:title" content="HPE Storage Container Orchestrator Documentation"/>
-    <meta property="og:description" content="This is an umbrella documentation project for all Kubernetes and Docker integrations for HPE primary storage tailored for IT Ops, developers and partners. Including HPE 3PAR and Primera, HPE Cloud Volumes and HPE Nimble Storage."/>
+    <meta property="og:title" content="HPE Nimble Storage SDK for Python"/>
+    <meta property="og:description" content="The HPE Nimble Storage SDK for Python provides a Pythonic client library to interact with the HPE Nimble Storage REST API."/>
     <meta property="og:locale" content="en_US"/>
     <meta property="og:url" content="https://scod.hpedev.io"/>
     <meta property="og:type" content="website"/>
@@ -79,7 +79,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../get_started/patterns/index.html">Patterns</a>
+    <a class="" href="../get_started/using/index.html">Using</a>
                 </li>
                 <li class="">
                     
@@ -387,72 +387,73 @@
 <p> <pre><code class=python>Folder(self, id, attrs=None, client=None, collection=None)
 </code></pre></p>
 <p>Folders are a way to group volumes, as well as a way to apply space constraints to them.</p>
-<p>Parameters:
-- id                            : Identifier for the folder.
-- name                          : Name of folder.
-- fqn                           : Fully qualified name of folder in the pool.
-- full_name                     : Fully qualified name of folder in the group.
-- search_name                   : Name of folder used for object search.
-- description                   : Text description of folder.
-- pool_name                     : Name of the pool where the folder resides.
-- pool_id                       : ID of the pool where the folder resides.
-- limit_bytes_specified         : Indicates whether the folder has a limit.
-- limit_bytes                   : Folder limit size in bytes. By default, a folder (except SMIS and VVol types) does not have a limit. If limit_bytes is not specified when a
-                                  folder is created, or if limit_bytes is set to the largest possible 64-bit signed integer (9223372036854775807), then the folder has no
-                                  limit. Otherwise, a limit smaller than the capacity of the pool can be set. On output, if the folder has a limit, the limit_bytes_specified
-                                  attribute will be true and limit_bytes will be the limit. If the folder does not have a limit, the limit_bytes_specified attribute will be
-                                  false and limit_bytes will be interpreted based on the value of the usage_valid attribute. If the usage_valid attribute is true, limits_byte
-                                  will be the capacity of the pool. Otherwise, limits_bytes is not meaningful and can be null. SMIS and VVol folders require a size limit. This
-                                  attribute is superseded by limit_size_bytes.
-- limit_size_bytes              : Folder size limit in bytes. If limit_size_bytes is not specified when a folder is created, or if limit_size_bytes is set to -1, then the
-                                  folder has no limit. Otherwise, a limit smaller than the capacity of the pool can be set. Folders with an agent_type of 'smis' or 'vvol' must
-                                  have a size limit.
-- provisioned_limit_size_bytes  : Limit on the provisioned size of volumes in a folder. If provisioned_limit_size_bytes is not specified when a folder is created, or if
-                                  provisioned_limit_size_bytes is set to -1, then the folder has no provisioned size limit.
-- overdraft_limit_pct           : Amount of space to consider as overdraft range for this folder as a percentage of folder used limit. Valid values are from 0% - 200%. This is
-                                  the limit above the folder usage limit beyond which enforcement action(volume offline/non-writable) is issued.
-- capacity_bytes                : Capacity of the folder in bytes. If the folder's size has a usage limit, capacity_bytes will be the folder's usage limit. If the folder's
-                                  size does not have a usage limit, capacity_bytes will be the pool's capacity. This field is meaningful only when the usage_valid attribute is
-                                  true.
-- free_space_bytes              : Free space in the folder in bytes. If the folder has a usage limit, free_space_bytes will be the folder's free space (the folder's usage
-                                  limit minus the folder's space usage). If the folder does not have a usage limit, free_space_bytes will be the pool's free space. This field
-                                  is meaningful only when the usage_valid attribute is true.
-- provisioned_bytes             : Sum of provisioned size of volumes in the folder.
-- usage_bytes                   : Sum of mapped usage and snapshot uncompressed usage of volumes in the folder.
-- volume_mapped_bytes           : Sum of mapped usage of volumes in the folder.
-- usage_valid                   : Indicate whether the space usage attributes of folder are valid.
-- agent_type                    : External management agent type.
-- inherited_vol_perfpol_id      : Identifier of the default performance policy for a newly created volume.
-- inherited_vol_perfpol_name    : Name of the default performance policy for a newly created volume.
-- unused_reserve_bytes          : Unused reserve of volumes in the folder in bytes. This field is meaningful only when the usage_valid attribute is true.
-- unused_snap_reserve_bytes     : Unused reserve of snapshots of volumes in the folder in bytes. This field is meaningful only when the usage_valid attribute is true.
-- compressed_vol_usage_bytes    : Compressed usage of volumes in the folder. This field is meaningful only when the usage_valid attribute is true.
-- compressed_snap_usage_bytes   : Compressed usage of snapshots in the folder. This field is meaningful only when the usage_valid attribute is true.
-- uncompressed_vol_usage_bytes  : Uncompressed usage of volumes in the folder. This field is meaningful only when the usage_valid attribute is true.
-- uncompressed_snap_usage_bytes : Uncompressed usage of snapshots in the folder. This field is meaningful only when the usage_valid attribute is true.
-- vol_compression_ratio         : Compression ratio of volumes in the folder. This field is meaningful only when the usage_valid attribute is true.
-- snap_compression_ratio        : Compression ratio of snapshots in the folder. This field is meaningful only when the usage_valid attribute is true.
-- compression_ratio             : Compression savings for the folder expressed as ratio. This field is meaningful only when the usage_valid attribute is true.
-- creation_time                 : Time when this folder was created.
-- last_modified                 : Time when this folder was last modified.
-- num_snaps                     : Number of snapshots inside the folder. This attribute is deprecated and has no meaningful value.
-- num_snapcolls                 : Number of snapshot collections inside the folder. This attribute is deprecated and has no meaningful value.
-- app_uuid                      : Application identifier of the folder.
-- volume_list                   : List of volumes contained by the folder.
-- appserver_id                  : Identifier of the application server associated with the folder.
-- appserver_name                : Name of the application server associated with the folder.
-- folset_id                     : Identifier of the folder set associated with the folder. Only VVol folder can be associated with the folder set. The folder and the
-                                  containing folder set must be associated with the same application server.
-- folset_name                   : Name of the folder set associated with the folder. Only VVol folder can be associated with the folder set. The folder and the containing
-                                  folder set must be associated with the same application server.
-- limit_iops                    : IOPS limit for this folder. If limit_iops is not specified when a folder is created, or if limit_iops is set to -1, then the folder has no
-                                  IOPS limit. IOPS limit should be in range [256, 4294967294] or -1 for unlimited.
-- limit_mbps                    : Throughput limit for this folder in MB/s. If limit_mbps is not specified when a folder is created, or if limit_mbps is set to -1, then the
-                                  folder has no throughput limit. MBPS limit should be in range [1, 4294967294] or -1 for unlimited.
-- access_protocol               : Access protocol of the folder. This attribute is used by the VASA Provider to determine the access protocol of the bind request. If not
-                                  specified in the creation request, it will be the access protocol supported by the group. If the group supports multiple protocols, the
-                                  default will be Fibre Channel. This field is meaningful only to VVol folder.
-- tenant_id                     : Tenant ID of the folder. This is used to determine what tenant context the folder belongs to.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id                            </strong>: Identifier for the folder.</li>
+<li><strong>name                          </strong>: Name of folder.</li>
+<li><strong>fqn                           </strong>: Fully qualified name of folder in the pool.</li>
+<li><strong>full_name                     </strong>: Fully qualified name of folder in the group.</li>
+<li><strong>search_name                   </strong>: Name of folder used for object search.</li>
+<li><strong>description                   </strong>: Text description of folder.</li>
+<li><strong>pool_name                     </strong>: Name of the pool where the folder resides.</li>
+<li><strong>pool_id                       </strong>: ID of the pool where the folder resides.</li>
+<li><strong>limit_bytes_specified         </strong>: Indicates whether the folder has a limit.</li>
+<li><strong>limit_bytes                   </strong>: Folder limit size in bytes. By default, a folder (except SMIS and VVol types) does not have a limit. If limit_bytes is not specified when a
+                                folder is created, or if limit_bytes is set to the largest possible 64-bit signed integer (9223372036854775807), then the folder has no limit.
+                                Otherwise, a limit smaller than the capacity of the pool can be set. On output, if the folder has a limit, the limit_bytes_specified attribute
+                                will be true and limit_bytes will be the limit. If the folder does not have a limit, the limit_bytes_specified attribute will be false and
+                                limit_bytes will be interpreted based on the value of the usage_valid attribute. If the usage_valid attribute is true, limits_byte will be the
+                                capacity of the pool. Otherwise, limits_bytes is not meaningful and can be null. SMIS and VVol folders require a size limit. This attribute is
+                                superseded by limit_size_bytes.</li>
+<li><strong>limit_size_bytes              </strong>: Folder size limit in bytes. If limit_size_bytes is not specified when a folder is created, or if limit_size_bytes is set to -1, then the folder
+                                has no limit. Otherwise, a limit smaller than the capacity of the pool can be set. Folders with an agent_type of 'smis' or 'vvol' must have a
+                                size limit.</li>
+<li><strong>provisioned_limit_size_bytes  </strong>: Limit on the provisioned size of volumes in a folder. If provisioned_limit_size_bytes is not specified when a folder is created, or if
+                                provisioned_limit_size_bytes is set to -1, then the folder has no provisioned size limit.</li>
+<li><strong>overdraft_limit_pct           </strong>: Amount of space to consider as overdraft range for this folder as a percentage of folder used limit. Valid values are from 0% - 200%. This is
+                                the limit above the folder usage limit beyond which enforcement action(volume offline/non-writable) is issued.</li>
+<li><strong>capacity_bytes                </strong>: Capacity of the folder in bytes. If the folder's size has a usage limit, capacity_bytes will be the folder's usage limit. If the folder's size
+                                does not have a usage limit, capacity_bytes will be the pool's capacity. This field is meaningful only when the usage_valid attribute is true.</li>
+<li><strong>free_space_bytes              </strong>: Free space in the folder in bytes. If the folder has a usage limit, free_space_bytes will be the folder's free space (the folder's usage limit
+                                minus the folder's space usage). If the folder does not have a usage limit, free_space_bytes will be the pool's free space. This field is
+                                meaningful only when the usage_valid attribute is true.</li>
+<li><strong>provisioned_bytes             </strong>: Sum of provisioned size of volumes in the folder.</li>
+<li><strong>usage_bytes                   </strong>: Sum of mapped usage and snapshot uncompressed usage of volumes in the folder.</li>
+<li><strong>volume_mapped_bytes           </strong>: Sum of mapped usage of volumes in the folder.</li>
+<li><strong>usage_valid                   </strong>: Indicate whether the space usage attributes of folder are valid.</li>
+<li><strong>agent_type                    </strong>: External management agent type.</li>
+<li><strong>inherited_vol_perfpol_id      </strong>: Identifier of the default performance policy for a newly created volume.</li>
+<li><strong>inherited_vol_perfpol_name    </strong>: Name of the default performance policy for a newly created volume.</li>
+<li><strong>unused_reserve_bytes          </strong>: Unused reserve of volumes in the folder in bytes. This field is meaningful only when the usage_valid attribute is true.</li>
+<li><strong>unused_snap_reserve_bytes     </strong>: Unused reserve of snapshots of volumes in the folder in bytes. This field is meaningful only when the usage_valid attribute is true.</li>
+<li><strong>compressed_vol_usage_bytes    </strong>: Compressed usage of volumes in the folder. This field is meaningful only when the usage_valid attribute is true.</li>
+<li><strong>compressed_snap_usage_bytes   </strong>: Compressed usage of snapshots in the folder. This field is meaningful only when the usage_valid attribute is true.</li>
+<li><strong>uncompressed_vol_usage_bytes  </strong>: Uncompressed usage of volumes in the folder. This field is meaningful only when the usage_valid attribute is true.</li>
+<li><strong>uncompressed_snap_usage_bytes </strong>: Uncompressed usage of snapshots in the folder. This field is meaningful only when the usage_valid attribute is true.</li>
+<li><strong>vol_compression_ratio         </strong>: Compression ratio of volumes in the folder. This field is meaningful only when the usage_valid attribute is true.</li>
+<li><strong>snap_compression_ratio        </strong>: Compression ratio of snapshots in the folder. This field is meaningful only when the usage_valid attribute is true.</li>
+<li><strong>compression_ratio             </strong>: Compression savings for the folder expressed as ratio. This field is meaningful only when the usage_valid attribute is true.</li>
+<li><strong>creation_time                 </strong>: Time when this folder was created.</li>
+<li><strong>last_modified                 </strong>: Time when this folder was last modified.</li>
+<li><strong>num_snaps                     </strong>: Number of snapshots inside the folder. This attribute is deprecated and has no meaningful value.</li>
+<li><strong>num_snapcolls                 </strong>: Number of snapshot collections inside the folder. This attribute is deprecated and has no meaningful value.</li>
+<li><strong>app_uuid                      </strong>: Application identifier of the folder.</li>
+<li><strong>volume_list                   </strong>: List of volumes contained by the folder.</li>
+<li><strong>appserver_id                  </strong>: Identifier of the application server associated with the folder.</li>
+<li><strong>appserver_name                </strong>: Name of the application server associated with the folder.</li>
+<li><strong>folset_id                     </strong>: Identifier of the folder set associated with the folder. Only VVol folder can be associated with the folder set. The folder and the containing
+                                folder set must be associated with the same application server.</li>
+<li><strong>folset_name                   </strong>: Name of the folder set associated with the folder. Only VVol folder can be associated with the folder set. The folder and the containing folder
+                                set must be associated with the same application server.</li>
+<li><strong>limit_iops                    </strong>: IOPS limit for this folder. If limit_iops is not specified when a folder is created, or if limit_iops is set to -1, then the folder has no IOPS
+                                limit. IOPS limit should be in range [256, 4294967294] or -1 for unlimited.</li>
+<li><strong>limit_mbps                    </strong>: Throughput limit for this folder in MB/s. If limit_mbps is not specified when a folder is created, or if limit_mbps is set to -1, then the
+                                folder has no throughput limit. MBPS limit should be in range [1, 4294967294] or -1 for unlimited.</li>
+<li><strong>access_protocol               </strong>: Access protocol of the folder. This attribute is used by the VASA Provider to determine the access protocol of the bind request. If not
+                                specified in the creation request, it will be the access protocol supported by the group. If the group supports multiple protocols, the default
+                                will be Fibre Channel. This field is meaningful only to VVol folder.</li>
+<li><strong>tenant_id                     </strong>: Tenant ID of the folder. This is used to determine what tenant context the folder belongs to.</li>
+</ul>
 <h2 id="folderlist">FolderList<a class="headerlink" href="#folderlist" title="Permanent link">&para;</a></h2>
 <p> <pre><code class=python>FolderList(self, client=None)
 </code></pre></p>

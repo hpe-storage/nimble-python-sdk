@@ -9,8 +9,8 @@
   
   <meta name="author" content="Hewlett Packard Enterprise">
   <link rel="shortcut icon" href="../img/favicon.ico">
-    <meta property="og:title" content="HPE Storage Container Orchestrator Documentation"/>
-    <meta property="og:description" content="This is an umbrella documentation project for all Kubernetes and Docker integrations for HPE primary storage tailored for IT Ops, developers and partners. Including HPE 3PAR and Primera, HPE Cloud Volumes and HPE Nimble Storage."/>
+    <meta property="og:title" content="HPE Nimble Storage SDK for Python"/>
+    <meta property="og:description" content="The HPE Nimble Storage SDK for Python provides a Pythonic client library to interact with the HPE Nimble Storage REST API."/>
     <meta property="og:locale" content="en_US"/>
     <meta property="og:url" content="https://scod.hpedev.io"/>
     <meta property="og:type" content="website"/>
@@ -79,7 +79,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../get_started/patterns/index.html">Patterns</a>
+    <a class="" href="../get_started/using/index.html">Using</a>
                 </li>
                 <li class="">
                     
@@ -387,22 +387,24 @@
 <p> <pre><code class=python>Event(self, id, attrs=None, client=None, collection=None)
 </code></pre></p>
 <p>View events.</p>
-<p>Parameters:
-- id          : Identifier for the event record.
-- type        : Type of the event record.
-- name        : Name of alert macro to generate.
-- scope       : The array name for array level event.
-- target      : Name of object upon which the event occurred.
-- target_type : Target type of the event record.
-- timestamp   : Time when this event happened.
-- category    : Category of the event record.
-- severity    : Severity level of the event.
-- summary     : Summary of the event.
-- activity    : Description of the event.
-- alarm_id    : The alarm ID if the event is related to an alarm.
-- params      : Arguments provided for event creation in key-value structure. Until KV implementation for events, will ignore keys (though keys must be non-empty) and take
-                values positionally.
-- tenant_id   : Tenant ID of the event. This is used to determine what tenant context the event belongs to.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id          </strong>: Identifier for the event record.</li>
+<li><strong>type        </strong>: Type of the event record.</li>
+<li><strong>name        </strong>: Name of alert macro to generate.</li>
+<li><strong>scope       </strong>: The array name for array level event.</li>
+<li><strong>target      </strong>: Name of object upon which the event occurred.</li>
+<li><strong>target_type </strong>: Target type of the event record.</li>
+<li><strong>timestamp   </strong>: Time when this event happened.</li>
+<li><strong>category    </strong>: Category of the event record.</li>
+<li><strong>severity    </strong>: Severity level of the event.</li>
+<li><strong>summary     </strong>: Summary of the event.</li>
+<li><strong>activity    </strong>: Description of the event.</li>
+<li><strong>alarm_id    </strong>: The alarm ID if the event is related to an alarm.</li>
+<li><strong>params      </strong>: Arguments provided for event creation in key-value structure. Until KV implementation for events, will ignore keys (though keys must be non-empty) and take
+              values positionally.</li>
+<li><strong>tenant_id   </strong>: Tenant ID of the event. This is used to determine what tenant context the event belongs to.</li>
+</ul>
 <h2 id="eventlist">EventList<a class="headerlink" href="#eventlist" title="Permanent link">&para;</a></h2>
 <p> <pre><code class=python>EventList(self, client=None)
 </code></pre></p>

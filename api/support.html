@@ -9,8 +9,8 @@
   
   <meta name="author" content="Hewlett Packard Enterprise">
   <link rel="shortcut icon" href="../img/favicon.ico">
-    <meta property="og:title" content="HPE Storage Container Orchestrator Documentation"/>
-    <meta property="og:description" content="This is an umbrella documentation project for all Kubernetes and Docker integrations for HPE primary storage tailored for IT Ops, developers and partners. Including HPE 3PAR and Primera, HPE Cloud Volumes and HPE Nimble Storage."/>
+    <meta property="og:title" content="HPE Nimble Storage SDK for Python"/>
+    <meta property="og:description" content="The HPE Nimble Storage SDK for Python provides a Pythonic client library to interact with the HPE Nimble Storage REST API."/>
     <meta property="og:locale" content="en_US"/>
     <meta property="og:url" content="https://scod.hpedev.io"/>
     <meta property="og:type" content="website"/>
@@ -79,7 +79,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../get_started/patterns/index.html">Patterns</a>
+    <a class="" href="../get_started/using/index.html">Using</a>
                 </li>
                 <li class="">
                     
@@ -387,11 +387,13 @@
 <p> <pre><code class=python>Support(self, id, attrs=None, client=None, collection=None)
 </code></pre></p>
 <p>View and alter support-based parameters.</p>
-<p>Parameters:
-- id            : Object identifier for the group.
-- password_mode : Mode for support password.
-- array_count   : Count of arrays for support password.
-- array_list    : Details of support passwords for arrays.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id            </strong>: Object identifier for the group.</li>
+<li><strong>password_mode </strong>: Mode for support password.</li>
+<li><strong>array_count   </strong>: Count of arrays for support password.</li>
+<li><strong>array_list    </strong>: Details of support passwords for arrays.</li>
+</ul>
 <h2 id="supportlist">SupportList<a class="headerlink" href="#supportlist" title="Permanent link">&para;</a></h2>
 <p> <pre><code class=python>SupportList(self, client=None)
 </code></pre></p>

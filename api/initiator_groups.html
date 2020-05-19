@@ -9,8 +9,8 @@
   
   <meta name="author" content="Hewlett Packard Enterprise">
   <link rel="shortcut icon" href="../img/favicon.ico">
-    <meta property="og:title" content="HPE Storage Container Orchestrator Documentation"/>
-    <meta property="og:description" content="This is an umbrella documentation project for all Kubernetes and Docker integrations for HPE primary storage tailored for IT Ops, developers and partners. Including HPE 3PAR and Primera, HPE Cloud Volumes and HPE Nimble Storage."/>
+    <meta property="og:title" content="HPE Nimble Storage SDK for Python"/>
+    <meta property="og:description" content="The HPE Nimble Storage SDK for Python provides a Pythonic client library to interact with the HPE Nimble Storage REST API."/>
     <meta property="og:locale" content="en_US"/>
     <meta property="og:url" content="https://scod.hpedev.io"/>
     <meta property="og:type" content="website"/>
@@ -79,7 +79,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../get_started/patterns/index.html">Patterns</a>
+    <a class="" href="../get_started/using/index.html">Using</a>
                 </li>
                 <li class="">
                     
@@ -388,27 +388,29 @@
 </code></pre></p>
 <p>Manage initiator groups for initiator authentication. An initiator group is a set of initiators that can be configured as part of your ACL to access a specific volume through
 group membership.</p>
-<p>Parameters:
-- id               : Identifier for initiator group.
-- name             : Name of initiator group.
-- full_name        : Initiator group's full name.
-- search_name      : Initiator group name used for search.
-- description      : Text description of initiator group.
-- access_protocol  : Initiator group access protocol.
-- host_type        : Initiator group host type. Available options are auto and hpux. The default option is auto. This attribute will be applied to all the initiators in the
-                     initiator group. Initiators with different host OSes should not be kept in the same initiator group having a non-default host type attribute.
-- fc_tdz_ports     : List of target Fibre Channel ports with Target Driven Zoning configured on this initiator group.
-- target_subnets   : List of target subnet labels. If specified, discovery and access to volumes will be restricted to the specified subnets.
-- iscsi_initiators : List of iSCSI initiators. When create/update iscsi_initiators, either iqn or ip_address is always required with label.
-- fc_initiators    : List of FC initiators. When create/update fc_initiators, wwpn is required.
-- creation_time    : Time when this initiator group was created.
-- last_modified    : Time when this initiator group was last modified.
-- vp_override      : Flag to allow modifying VP created initiator groups. When set to true, user can add this initiator to a VP created initiator group.
-- app_uuid         : Application identifier of initiator group.
-- volume_count     : Number of volumes that are accessible by the initiator group.
-- volume_list      : List of volumes that are accessible by the initiator group.
-- num_connections  : Total number of connections from initiators in the initiator group.
-- metadata         : Key-value pairs that augment an initiator group's attributes.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id               </strong>: Identifier for initiator group.</li>
+<li><strong>name             </strong>: Name of initiator group.</li>
+<li><strong>full_name        </strong>: Initiator group's full name.</li>
+<li><strong>search_name      </strong>: Initiator group name used for search.</li>
+<li><strong>description      </strong>: Text description of initiator group.</li>
+<li><strong>access_protocol  </strong>: Initiator group access protocol.</li>
+<li><strong>host_type        </strong>: Initiator group host type. Available options are auto and hpux. The default option is auto. This attribute will be applied to all the initiators in the
+                   initiator group. Initiators with different host OSes should not be kept in the same initiator group having a non-default host type attribute.</li>
+<li><strong>fc_tdz_ports     </strong>: List of target Fibre Channel ports with Target Driven Zoning configured on this initiator group.</li>
+<li><strong>target_subnets   </strong>: List of target subnet labels. If specified, discovery and access to volumes will be restricted to the specified subnets.</li>
+<li><strong>iscsi_initiators </strong>: List of iSCSI initiators. When create/update iscsi_initiators, either iqn or ip_address is always required with label.</li>
+<li><strong>fc_initiators    </strong>: List of FC initiators. When create/update fc_initiators, wwpn is required.</li>
+<li><strong>creation_time    </strong>: Time when this initiator group was created.</li>
+<li><strong>last_modified    </strong>: Time when this initiator group was last modified.</li>
+<li><strong>vp_override      </strong>: Flag to allow modifying VP created initiator groups. When set to true, user can add this initiator to a VP created initiator group.</li>
+<li><strong>app_uuid         </strong>: Application identifier of initiator group.</li>
+<li><strong>volume_count     </strong>: Number of volumes that are accessible by the initiator group.</li>
+<li><strong>volume_list      </strong>: List of volumes that are accessible by the initiator group.</li>
+<li><strong>num_connections  </strong>: Total number of connections from initiators in the initiator group.</li>
+<li><strong>metadata         </strong>: Key-value pairs that augment an initiator group's attributes.</li>
+</ul>
 <h2 id="initiatorgrouplist">InitiatorGroupList<a class="headerlink" href="#initiatorgrouplist" title="Permanent link">&para;</a></h2>
 <p> <pre><code class=python>InitiatorGroupList(self, client=None)
 </code></pre></p>

@@ -9,8 +9,8 @@
   
   <meta name="author" content="Hewlett Packard Enterprise">
   <link rel="shortcut icon" href="../../img/favicon.ico">
-    <meta property="og:title" content="HPE Storage Container Orchestrator Documentation"/>
-    <meta property="og:description" content="This is an umbrella documentation project for all Kubernetes and Docker integrations for HPE primary storage tailored for IT Ops, developers and partners. Including HPE 3PAR and Primera, HPE Cloud Volumes and HPE Nimble Storage."/>
+    <meta property="og:title" content="HPE Nimble Storage SDK for Python"/>
+    <meta property="og:description" content="The HPE Nimble Storage SDK for Python provides a Pythonic client library to interact with the HPE Nimble Storage REST API."/>
     <meta property="og:locale" content="en_US"/>
     <meta property="og:url" content="https://scod.hpedev.io"/>
     <meta property="og:type" content="website"/>
@@ -78,11 +78,20 @@
     <a class="current" href="index.html">Installation</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#install_using_pip">Install using pip</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#install_from_source">Install from source</a></li>
+        
+        </ul>
+    
+
     </ul>
                 </li>
                 <li class="">
                     
-    <a class="" href="../patterns/index.html">Patterns</a>
+    <a class="" href="../using/index.html">Using</a>
                 </li>
                 <li class="">
                     
@@ -371,7 +380,16 @@
           <div role="main">
             <div class="section">
               
-                
+                <h1 id="install_using_pip">Install using pip<a class="headerlink" href="#install_using_pip" title="Permanent link">&para;</a></h1>
+<p>The HPE Nimble Storage SDK for Python may be installed the <a href="https://pip.pypa.io">Python Package Installer</a>, pip for short. Pip is usually installed with Python. It varies from host operating system and distribution on how to get <code>pip</code> installed. Please refer to your platform documentation on how to install <code>pip</code>.</p>
+<p>To install the latest version of the SDK:</p>
+<p> <pre><code class=markdown>pip install nimble-sdk
+</code></pre></p>
+<h2 id="install_from_source">Install from source<a class="headerlink" href="#install_from_source" title="Permanent link">&para;</a></h2>
+<p>Alternatively, you can grab the latest source code from <a href="https://github.com/hpe-storage/nimble-python-sdk">GitHub</a>:</p>
+<p> <pre><code class=markdown>git clone https://github.com/hpe-storage/nimble-python-sdk.git
+python setup.py install
+</code></pre></p>
               
             </div>
           </div>
@@ -380,7 +398,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../patterns/index.html" class="btn btn-neutral float-right" title="Patterns">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../using/index.html" class="btn btn-neutral float-right" title="Using">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
     </div>
@@ -408,7 +426,7 @@
       
       
       
-        <span style="margin-left: 15px"><a href="../patterns/index.html" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../using/index.html" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

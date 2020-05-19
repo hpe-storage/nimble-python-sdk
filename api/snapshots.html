@@ -9,8 +9,8 @@
   
   <meta name="author" content="Hewlett Packard Enterprise">
   <link rel="shortcut icon" href="../img/favicon.ico">
-    <meta property="og:title" content="HPE Storage Container Orchestrator Documentation"/>
-    <meta property="og:description" content="This is an umbrella documentation project for all Kubernetes and Docker integrations for HPE primary storage tailored for IT Ops, developers and partners. Including HPE 3PAR and Primera, HPE Cloud Volumes and HPE Nimble Storage."/>
+    <meta property="og:title" content="HPE Nimble Storage SDK for Python"/>
+    <meta property="og:description" content="The HPE Nimble Storage SDK for Python provides a Pythonic client library to interact with the HPE Nimble Storage REST API."/>
     <meta property="og:locale" content="en_US"/>
     <meta property="og:url" content="https://scod.hpedev.io"/>
     <meta property="og:type" content="website"/>
@@ -79,7 +79,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../get_started/patterns/index.html">Patterns</a>
+    <a class="" href="../get_started/using/index.html">Using</a>
                 </li>
                 <li class="">
                     
@@ -389,47 +389,49 @@
 <p>Snapshots are point-in-time copies of a volume. Snapshots are managed the same way you manage volumes. In reality, snapshots are volumes: they can be accessed by initiators,
 are subject to the same controls, can be modified, and have the same restrictions as volumes. Snapshots can be cloned and replicated. The initial snapshot uses no space: it
 shares the original data with the source volume. Each successive snapshot captures the changes that have occurred on the volume. The changed blocks are compressed.</p>
-<p>Parameters:
-- id                          : Identifier for the snapshot.
-- name                        : Name of snapshot.
-- description                 : Text description of snapshot.
-- size                        : Size of volume at time of snapshot (in bytes).
-- vol_name                    : Name of the parent volume in which the snapshot belongs to.
-- pool_name                   : Name of the pool in which the parent volume belongs to.
-- vol_id                      : Parent volume ID.
-- snap_collection_name        : Name of snapshot collection.
-- snap_collection_id          : Identifier of snapshot collection.
-- online                      : Online state for a snapshot means it could be mounted for data restore.
-- writable                    : Allow snapshot to be writable. Mandatory and must be set to 'true' for VSS application synchronized snapshots.
-- offline_reason              : Snapshot offline reason - possible entries: one of 'user', 'recovery', 'replica', 'over_volume_limit', 'over_snapshot_limit',
-                                'over_volume_reserve', 'nvram_loss_recovery', 'pool_free_space_exhausted' .
-- expiry_time                 : Unix timestamp indicating that the snapshot is considered expired by Snapshot Time-to-live(TTL). A value of 0 indicates that snapshot never
-                                expires.
-- expiry_after                : Number of seconds after which this snapshot is considered expired by snapshot TTL. A value of 0 indicates that snapshot never expires, 1
-                                indicates that snapshot uses group-level configured TTL value and any other value indicates number of seconds.
-- origin_name                 : Origination group name.
-- is_replica                  : Snapshot is a replica from upstream replication partner.
-- is_unmanaged                : Indicates whether the snapshot is unmanaged. The snapshot will not be deleted automatically unless the unmanaged cleanup feature is enabled.
-- is_manually_managed         : Is snapshot manually managed, i.e., snapshot is manually or third party created or created by system at the time of volume restore or resize.
-- replication_status          : Replication status.
-- access_control_records      : List of access control records that apply to this snapshot.
-- serial_number               : Identifier for the SCSI protocol.
-- target_name                 : The iSCSI Qualified Name (IQN) or the Fibre Channel World Wide Node Name (WWNN) of the target snapshot.
-- creation_time               : Time when this snapshot was created.
-- last_modified               : Time when this snapshort was last modified.
-- schedule_name               : Name of protection schedule.
-- schedule_id                 : Identifier of protection schedule.
-- app_uuid                    : Application identifier of snapshots.
-- metadata                    : Key-value pairs that augment a snapshot's attributes.
-- new_data_valid              : Indicate the usage infomation is valid.
-- new_data_compressed_bytes   : The bytes of compressed new data.
-- new_data_uncompressed_bytes : The bytes of uncompressed new data.
-- agent_type                  : External management agent type.
-- vpd_t10                     : The snapshot's T10 Vendor ID-based identifier.
-- vpd_ieee0                   : The first 64 bits of the snapshots's EUI-64 identifier, encoded as a hexadecimal string.
-- vpd_ieee1                   : The last 64 bits of the snapshots's EUI-64 identifier, encoded as a hexadecimal string.
-- force                       : Forcibly delete the specified snapshot even if it is the last replicated collection. Doing so could lead to full re-seeding at the next
-                                replication.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id                          </strong>: Identifier for the snapshot.</li>
+<li><strong>name                        </strong>: Name of snapshot.</li>
+<li><strong>description                 </strong>: Text description of snapshot.</li>
+<li><strong>size                        </strong>: Size of volume at time of snapshot (in bytes).</li>
+<li><strong>vol_name                    </strong>: Name of the parent volume in which the snapshot belongs to.</li>
+<li><strong>pool_name                   </strong>: Name of the pool in which the parent volume belongs to.</li>
+<li><strong>vol_id                      </strong>: Parent volume ID.</li>
+<li><strong>snap_collection_name        </strong>: Name of snapshot collection.</li>
+<li><strong>snap_collection_id          </strong>: Identifier of snapshot collection.</li>
+<li><strong>online                      </strong>: Online state for a snapshot means it could be mounted for data restore.</li>
+<li><strong>writable                    </strong>: Allow snapshot to be writable. Mandatory and must be set to 'true' for VSS application synchronized snapshots.</li>
+<li><strong>offline_reason              </strong>: Snapshot offline reason - possible entries: one of 'user', 'recovery', 'replica', 'over_volume_limit', 'over_snapshot_limit',
+                              'over_volume_reserve', 'nvram_loss_recovery', 'pool_free_space_exhausted' .</li>
+<li><strong>expiry_time                 </strong>: Unix timestamp indicating that the snapshot is considered expired by Snapshot Time-to-live(TTL). A value of 0 indicates that snapshot never
+                              expires.</li>
+<li><strong>expiry_after                </strong>: Number of seconds after which this snapshot is considered expired by snapshot TTL. A value of 0 indicates that snapshot never expires, 1
+                              indicates that snapshot uses group-level configured TTL value and any other value indicates number of seconds.</li>
+<li><strong>origin_name                 </strong>: Origination group name.</li>
+<li><strong>is_replica                  </strong>: Snapshot is a replica from upstream replication partner.</li>
+<li><strong>is_unmanaged                </strong>: Indicates whether the snapshot is unmanaged. The snapshot will not be deleted automatically unless the unmanaged cleanup feature is enabled.</li>
+<li><strong>is_manually_managed         </strong>: Is snapshot manually managed, i.e., snapshot is manually or third party created or created by system at the time of volume restore or resize.</li>
+<li><strong>replication_status          </strong>: Replication status.</li>
+<li><strong>access_control_records      </strong>: List of access control records that apply to this snapshot.</li>
+<li><strong>serial_number               </strong>: Identifier for the SCSI protocol.</li>
+<li><strong>target_name                 </strong>: The iSCSI Qualified Name (IQN) or the Fibre Channel World Wide Node Name (WWNN) of the target snapshot.</li>
+<li><strong>creation_time               </strong>: Time when this snapshot was created.</li>
+<li><strong>last_modified               </strong>: Time when this snapshort was last modified.</li>
+<li><strong>schedule_name               </strong>: Name of protection schedule.</li>
+<li><strong>schedule_id                 </strong>: Identifier of protection schedule.</li>
+<li><strong>app_uuid                    </strong>: Application identifier of snapshots.</li>
+<li><strong>metadata                    </strong>: Key-value pairs that augment a snapshot's attributes.</li>
+<li><strong>new_data_valid              </strong>: Indicate the usage infomation is valid.</li>
+<li><strong>new_data_compressed_bytes   </strong>: The bytes of compressed new data.</li>
+<li><strong>new_data_uncompressed_bytes </strong>: The bytes of uncompressed new data.</li>
+<li><strong>agent_type                  </strong>: External management agent type.</li>
+<li><strong>vpd_t10                     </strong>: The snapshot's T10 Vendor ID-based identifier.</li>
+<li><strong>vpd_ieee0                   </strong>: The first 64 bits of the snapshots's EUI-64 identifier, encoded as a hexadecimal string.</li>
+<li><strong>vpd_ieee1                   </strong>: The last 64 bits of the snapshots's EUI-64 identifier, encoded as a hexadecimal string.</li>
+<li><strong>force                       </strong>: Forcibly delete the specified snapshot even if it is the last replicated collection. Doing so could lead to full re-seeding at the next
+                              replication.</li>
+</ul>
 <h2 id="snapshotlist">SnapshotList<a class="headerlink" href="#snapshotlist" title="Permanent link">&para;</a></h2>
 <p> <pre><code class=python>SnapshotList(self, client=None)
 </code></pre></p>
