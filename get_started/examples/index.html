@@ -86,6 +86,19 @@
     <a class="current" href="index.html">Example workflows</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#overview">Overview</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#setup">Setup</a></li>
+        
+            <li><a class="toctree-l4" href="#interactive_explorer">Interactive explorer</a></li>
+        
+            <li><a class="toctree-l4" href="#individual_workflows">Individual workflows</a></li>
+        
+        </ul>
+    
+
     </ul>
                 </li>
     </ul>
@@ -371,7 +384,278 @@
           <div role="main">
             <div class="section">
               
-                
+                <h1 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h1>
+<p>These example workflows constitutes an introduction to the HPE Nimble Storage SDK for Python. It may be used to get familiar both HPE Nimble Storage and NimbleOS as a product as well as getting familiar with the SDK.</p>
+<p>The examples are available to <a href="https://github.com/hpe-storage/nimble-python-sdk/tree/master/workflows">browse on GitHub</a>.</p>
+<div class="toc">
+<ul>
+<li><a href="#overview">Overview</a><ul>
+<li><a href="#setup">Setup</a></li>
+<li><a href="#interactive_explorer">Interactive explorer</a></li>
+<li><a href="#individual_workflows">Individual workflows</a><ul>
+<li><a href="#create_a_volume">Create a volume</a></li>
+<li><a href="#list_objects">List objects</a></li>
+<li><a href="#create_a_snapshot">Create a snapshot</a></li>
+<li><a href="#create_initiator_group">Create initiator group</a></li>
+<li><a href="#publish_volume">Publish volume</a></li>
+<li><a href="#detach_volume">Detach volume</a></li>
+<li><a href="#create_a_clone">Create a clone</a></li>
+<li><a href="#create_access_control_record">Create access control record</a></li>
+<li><a href="#create_a_clone_and_publish">Create a clone and publish</a></li>
+<li><a href="#protect_volume">Protect volume</a></li>
+<li><a href="#configures_encryption">Configures encryption</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h2>
+<p>Ensure Python 3.6+, <code>pip</code> and <code>git</code> is installed on your workstation. </p>
+<p> <pre><code class=markdown>pip install nimble-sdk
+git clone https://github.com/hpe-storage/nimble-python-sdk
+cd nimble-python-sdk/workflows
+</code></pre></p>
+<p>It's possible to run the example scripts interactively, but it's more convenient to configure the accompanied <code>workflow_config.json</code>:</p>
+<p> <pre><code class=json>{
+  &quot;hostname&quot;:&quot;192.168.1.100&quot;,  # Set these to point to the array being used
+  &quot;username&quot;:&quot;admin&quot;,
+  &quot;password&quot;:&quot;admin&quot;,
+  &quot;vol_name&quot;:&quot;wfvol&quot;,
+  &quot;ig_name&quot;:&quot;wfig&quot;,
+  &quot;mk_name&quot;:&quot;default&quot;,
+  &quot;mk_phrase&quot;:&quot;test-phrase11&quot;,
+  &quot;protection_sched&quot;:&quot;ps1&quot;
+}
+</code></pre></p>
+<p>Scripts can be run with the <code>--query_login</code> paramater to interactively login to the Nimble array (credentials are not stored anywhere).</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>All examples below assumes current working directory <code>nimble-python-sdk/workflows</code></p>
+</div>
+<h2 id="interactive_explorer">Interactive explorer<a class="headerlink" href="#interactive_explorer" title="Permanent link">&para;</a></h2>
+<p>As a starting point, running the interactive explorer allows a user to interact with a Nimble array using the SDK.</p>
+<p> <pre><code class=markdown>python nimble_sdk_helper.py
+</code></pre></p>
+<p>Source code: <a href="https://github.com/hpe-storage/nimble-python-sdk/blob/master/workflows/nimble_sdk_helper.py">nimble_sdk_helper.py</a></p>
+<h2 id="individual_workflows">Individual workflows<a class="headerlink" href="#individual_workflows" title="Permanent link">&para;</a></h2>
+<p>Each workflow creates objects to manipulate. If it's not desirable to have objects lingering around on the array, run the scripts with the <code>--cleanup</code> parameter.</p>
+<div class="admonition note">
+<p class="admonition-title">Good to know</p>
+<p>The example outputs below is run in sequence running from the top on a clean array.</p>
+</div>
+<h3 id="create_a_volume">Create a volume<a class="headerlink" href="#create_a_volume" title="Permanent link">&para;</a></h3>
+<p>Creates a volume on the array.</p>
+<p> <pre><code class=markdown>python create_volume.py
+
+Attempting to establish connection to array:
+    Hostname: 192.168.59.128
+    Username: admin
+    Connection successful!
+
+WORKFLOW: Create Volume
+
+Running:
+    Create Volume &quot;wfvol&quot;: Created Id: 0649686580b78e0b16000000000000000000000017
+</code></pre></p>
+<p>Source code: <a href="https://github.com/hpe-storage/nimble-python-sdk/blob/master/workflows/create_volume.py">create_volume.py</a></p>
+<h3 id="list_objects">List objects<a class="headerlink" href="#list_objects" title="Permanent link">&para;</a></h3>
+<p>List objects on the array.</p>
+<p> <pre><code class=markdown>python list_objects.py
+
+Attempting to establish connection to array:
+    Hostname: 192.168.59.128
+    Username: admin
+    Connection successful!
+
+WORKFLOW: List Objects
+
+Generating Objects...
+    Create Volume &quot;wfvol0&quot;: Created Id: 0649686580b78e0b16000000000000000000000018
+    Create Snapshot &quot;wfvolsnap0.0&quot;: Created Id: 0449686580b78e0b1600000000000000210000004f
+    Create Snapshot &quot;wfvolsnap0.1&quot;: Created Id: 0449686580b78e0b16000000000000002100000050
+    Create Snapshot &quot;wfvolsnap0.2&quot;: Created Id: 0449686580b78e0b16000000000000002100000051
+    Create Volume &quot;wfvol1&quot;: Created Id: 0649686580b78e0b16000000000000000000000019
+    Create Snapshot &quot;wfvolsnap1.0&quot;: Created Id: 0449686580b78e0b16000000000000002200000052
+    Create Snapshot &quot;wfvolsnap1.1&quot;: Created Id: 0449686580b78e0b16000000000000002200000053
+    Create Snapshot &quot;wfvolsnap1.2&quot;: Created Id: 0449686580b78e0b16000000000000002200000054
+
+Running:
+
+    Objects on Array:
+        VOLUME: wfvol0, Id: 0649686580b78e0b16000000000000000000000018
+            SNAPSHOT: wfvolsnap0.0, Id: 0449686580b78e0b1600000000000000210000004f
+            SNAPSHOT: wfvolsnap0.1, Id: 0449686580b78e0b16000000000000002100000050
+            SNAPSHOT: wfvolsnap0.2, Id: 0449686580b78e0b16000000000000002100000051
+        VOLUME: wfvol, Id: 0649686580b78e0b16000000000000000000000017
+        VOLUME: wfvol1, Id: 0649686580b78e0b16000000000000000000000019
+            SNAPSHOT: wfvolsnap1.0, Id: 0449686580b78e0b16000000000000002200000052
+            SNAPSHOT: wfvolsnap1.1, Id: 0449686580b78e0b16000000000000002200000053
+            SNAPSHOT: wfvolsnap1.2, Id: 0449686580b78e0b16000000000000002200000054
+</code></pre></p>
+<p>Source code: <a href="https://github.com/hpe-storage/nimble-python-sdk/blob/master/workflows/list_objects.py">list_objects.py</a></p>
+<h3 id="create_a_snapshot">Create a snapshot<a class="headerlink" href="#create_a_snapshot" title="Permanent link">&para;</a></h3>
+<p>Creates a snapshot on an example volume.</p>
+<p> <pre><code class=markdown>python create_snapshot.py
+
+Attempting to establish connection to array:
+    Hostname: 192.168.59.128
+    Username: admin
+    Connection successful!
+
+WORKFLOW: Create Snapshot
+
+Running:
+    Create Volume &quot;wfvol&quot;: Already exists. Continuing.
+    Create Snapshot &quot;wfvolsnap&quot;: Created Id: 0449686580b78e0b16000000000000002000000055
+</code></pre></p>
+<p>Source code: <a href="https://github.com/hpe-storage/nimble-python-sdk/blob/master/workflows/create_snapshot.py">create_snapshot.py</a></p>
+<h3 id="create_initiator_group">Create initiator group<a class="headerlink" href="#create_initiator_group" title="Permanent link">&para;</a></h3>
+<p>Create an initiator group.</p>
+<p> <pre><code class=markdown>python create_and_update_initiator_group.py
+
+Attempting to establish connection to array:
+    Hostname: 192.168.59.128
+    Username: admin
+    Connection successful!
+
+WORKFLOW: Create And Update Initiator Group
+
+Running:
+    Create Initiator Group &quot;wfig&quot;: Created Id: 0249686580b78e0b16000000000000000000000005
+    Current initiator count: 0
+    Added initiator &quot;wftest-itor1&quot;: {'label': 'wftest-itor1', 'ip_address': '1.1.1.1', 'iqn': 'iqn.1992-01.com.example:storage.tape1.sys1.xyz'}
+    Current initiator count: 1
+</code></pre></p>
+<p>Source code: <a href="https://github.com/hpe-storage/nimble-python-sdk/blob/master/workflows/create_and_update_initiator_group.py">create_and_update_initiator_group.py</a></p>
+<h3 id="publish_volume">Publish volume<a class="headerlink" href="#publish_volume" title="Permanent link">&para;</a></h3>
+<p>Publishes a volume to a host.</p>
+<p> <pre><code class=markdown>python publish_volume.py
+
+Attempting to establish connection to array:
+    Hostname: 192.168.59.128
+    Username: admin
+    Connection successful!
+
+WORKFLOW: Publish Volume
+
+Running:
+    Create Volume &quot;wfvol&quot;: Already exists. Continuing.
+    Create Initiator Group &quot;wfig&quot;: Already exists. Continuing.
+    Create Access Control Record: Created Id: 0d49686580b78e0b16000000000000000000000004
+</code></pre></p>
+<p>Source code: <a href="https://github.com/hpe-storage/nimble-python-sdk/blob/master/workflows/publish_volume.py">publish_volume.py</a></p>
+<h3 id="detach_volume">Detach volume<a class="headerlink" href="#detach_volume" title="Permanent link">&para;</a></h3>
+<p>Detach volume from a host.</p>
+<p> <pre><code class=markdown>python detach_volume.py 
+
+Attempting to establish connection to array:
+    Hostname: 192.168.59.128
+    Username: admin
+    Connection successful!
+
+WORKFLOW: Detach Volume
+
+Running:
+    Create Volume &quot;wfvol&quot;: Already exists. Continuing.
+    Create Initiator Group &quot;wfig&quot;: Already exists. Continuing.
+    Create Access Control Record: Already exists. Continuing.
+    Cleanup Acccess Control Record: Deleted Id: 0d49686580b78e0b16000000000000000000000004
+    Cleanup Initiator Group &quot;wfig&quot;: Deleted Id: 0249686580b78e0b16000000000000000000000005
+    Cleanup Vol &quot;wfvol&quot;: Offlined and deleted Id: 0649686580b78e0b16000000000000000000000017
+</code></pre></p>
+<p>Source code: <a href="https://github.com/hpe-storage/nimble-python-sdk/blob/master/workflows/detach_volume.py">detach_volume.py</a></p>
+<h3 id="create_a_clone">Create a clone<a class="headerlink" href="#create_a_clone" title="Permanent link">&para;</a></h3>
+<p>Create a clone from a snapshot.</p>
+<p> <pre><code class=markdown>python create_clone.py 
+
+Attempting to establish connection to array:
+    Hostname: 192.168.59.128
+    Username: admin
+    Connection successful!
+
+WORKFLOW: Create Clone
+
+Running:
+    Create Volume &quot;wfvol&quot;: Created Id: 0649686580b78e0b1600000000000000000000001a
+    Create Snapshot &quot;wfvolsnap&quot;: Created Id: 0449686580b78e0b16000000000000002300000056
+    Create Clone &quot;wfvolclone&quot;: Created Id: 0649686580b78e0b1600000000000000000000001b
+</code></pre></p>
+<p>Source code: <a href="https://github.com/hpe-storage/nimble-python-sdk/blob/master/workflows/create_clone.py">create_clone.py</a></p>
+<h3 id="create_access_control_record">Create access control record<a class="headerlink" href="#create_access_control_record" title="Permanent link">&para;</a></h3>
+<p>Create an access control record (ACR) for a volume.</p>
+<p> <pre><code class=markdown>python create_access_control_record.py
+
+Attempting to establish connection to array:
+    Hostname: 192.168.59.128
+    Username: admin
+    Connection successful!
+
+WORKFLOW: Create Access control Record
+
+Running:
+    Create Volume &quot;wfvol&quot;: Already exists. Continuing.
+    Create Initiator Group &quot;wfig&quot;: Created Id: 0249686580b78e0b16000000000000000000000006
+    Create Access Control Record: Created Id: 0d49686580b78e0b16000000000000000000000005
+</code></pre></p>
+<p>Source code: <a href="https://github.com/hpe-storage/nimble-python-sdk/blob/master/workflows/create_access_control_record.py">create_access_control_record.py</a></p>
+<h3 id="create_a_clone_and_publish">Create a clone and publish<a class="headerlink" href="#create_a_clone_and_publish" title="Permanent link">&para;</a></h3>
+<p>Create a clone from a snapshot and publish to a host.</p>
+<p> <pre><code class=markdown>python clone_and_publish_volume.py
+
+Attempting to establish connection to array:
+    Hostname: 192.168.59.128
+    Username: admin
+    Connection successful!
+
+WORKFLOW: Clone And Publish Volume
+
+Running:
+    Create Volume &quot;wfvol&quot;: Already exists. Continuing.
+    Create Snapshot &quot;wfvolsnap&quot;: Already exists. Continuing.
+    Create Clone &quot;wfvolclone&quot;: Already exists. Continuing.
+    Create Initiator Group &quot;wfvolcloneig&quot;: Created Id: 0249686580b78e0b16000000000000000000000007
+    Create Access Control Record: Created Id: 0d49686580b78e0b16000000000000000000000006
+</code></pre></p>
+<p>Source code: <a href="https://github.com/hpe-storage/nimble-python-sdk/blob/master/workflows/clone_and_publish_volume.py">clone_and_publish_volume.py</a></p>
+<h3 id="protect_volume">Protect volume<a class="headerlink" href="#protect_volume" title="Permanent link">&para;</a></h3>
+<p>Protect a volume with a volume collection and protection schedule.</p>
+<p> <pre><code class=markdown>python protect_volume.py
+
+Attempting to establish connection to array:
+    Hostname: 192.168.59.128
+    Username: admin
+    Connection successful!
+
+WORKFLOW: Protect Volume
+
+Running:
+    Create Volume &quot;wfvol&quot;: Already exists. Continuing.
+    Create Volume Collection &quot;wfvolvolcoll&quot;: Created Id: 0749686580b78e0b16000000000000000000000006
+    Associate Volume: Volume &quot;wfvol&quot; associated with volume vollection &quot;wfvolvolcoll&quot;
+    Create Protection Schedule &quot;ps1&quot;: Created Id: 0c49686580b78e0b1600000000000000000000000a
+</code></pre></p>
+<p>Source code: <a href="https://github.com/hpe-storage/nimble-python-sdk/blob/master/workflows/protect_volume.py">protect_volume.py</a></p>
+<h3 id="configures_encryption">Configures encryption<a class="headerlink" href="#configures_encryption" title="Permanent link">&para;</a></h3>
+<p>Setup encryption on the Nimble array.</p>
+<p> <pre><code class=markdown>python configure_encryption.py
+
+Attempting to establish connection to array:
+    Hostname: 192.168.59.128
+    Username: admin
+    Connection successful!
+
+WORKFLOW: Configure Encryption
+
+Running:
+    Got group: &quot;nva-test-grp&quot;, Id: 0049686580b78e0b16000000000000000000000001
+    Current encryption:  {'master_key_set': False, 'mode': 'none', 'scope': 'none', 'cipher': 'none', 'encryption_active': False}
+    Create Master Key &quot;default&quot;: Created Id: 2449686580b78e0b16000000000000000000000001
+    Create Encrypted Volume &quot;wfvolencrypted&quot;: Created Id: 0649686580b78e0b16000000000000000000000013
+    Updated encryption:  {'master_key_set': True, 'mode': 'available', 'scope': 'group', 'cipher': 'aes_256_xts', 'encryption_active': True}
+    Modified encryption: {'master_key_set': True, 'mode': 'secure', 'scope': 'group', 'cipher': 'aes_256_xts', 'encryption_active': True}
+</code></pre></p>
+<p>Source code: <a href="https://github.com/hpe-storage/nimble-python-sdk/blob/master/workflows/configure_encryption.py">configure_encryption.py</a></p>
               
             </div>
           </div>
