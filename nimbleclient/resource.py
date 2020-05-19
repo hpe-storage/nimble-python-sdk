@@ -4,47 +4,43 @@
 
 
 class Resource:
-    __slots__ = ['_id', '_attrs', '_collection', '_client']
+    __slots__ = ['__id', '__attrs', '_collection', '_client']
 
     def __init__(self, id, attrs=None, client=None, collection=None):
-        self._id = id
-        self._attrs = {} if attrs is None else attrs
+        self.__id = id
+        self.__attrs = {} if attrs is None else attrs
         self._collection = collection
         self._client = client
 
     @property
     def id(self):
-        return self._id
+        return self.__id
 
     @property
     def attrs(self):
-        return self._attrs
-
-    @property
-    def collection(self):
-        return self._collection
+        return self.__attrs
 
     def reload(self):
-        self._attrs = self.collection.get(self.id).attrs
+        self.__attrs = self._collection.get(self.__id).__attrs
 
     def update(self, **kwargs):
-        resp = self._client.update_resource(self.collection.resource_type, self.id, **kwargs)
+        resp = self._client.update_resource(self._collection.resource_type, self.__id, **kwargs)
         self._attrs = resp
 
     def delete(self, **kwargs):
-        return self._client.delete_resource(self.collection.resource_type, self.id)
+        return self._client.delete_resource(self._collection.resource_type, self.__id)
 
     def __repr__(self):
         if 'name' in self.attrs:
-            return f"<{self.__class__.__name__}(id={self.id}, name={self.attrs['name']})>"
+            return f"<{self.__class__.__name__}(id={self.__id}, name={self.attrs['name']})>"
         else:
-            return f"<{self.__class__.__name__}(id={self.id})>"
+            return f"<{self.__class__.__name__}(id={self.__id})>"
 
     def __eq__(self, other):
-        return isinstance(other, self.__class__) and self.id == other.id
+        return isinstance(other, self.__class__) and self.__id == other.__id
 
     def __hash__(self):
-        return hash(f"{self.__class__.__name__}:{self.id}")
+        return hash(f"{self.__class__.__name__}:{self.__id}")
 
 
 class Collection:

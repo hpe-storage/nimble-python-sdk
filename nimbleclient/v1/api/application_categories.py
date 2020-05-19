@@ -10,16 +10,15 @@ from ...exceptions import NimOSAPIOperationUnsupported
 
 
 class ApplicationCategory(Resource):
-    '''
-    Provides the list of application categories that are available, to classify volumes depending on the applications that use them.
+    """Provides the list of application categories that are available, to classify volumes depending on the applications that use them.
 
-    Parameters:
-    - id             : Identifier for the application category.
-    - name           : Name of application category.
-    - dedupe_enabled : Specifies if dedupe is enabled for performance policies associated with this application category.
-    - creation_time  : Time when this application category was created.
-    - last_modified  : Time when this application category was last modified.
-    '''
+    # Parameters
+    id             : Identifier for the application category.
+    name           : Name of application category.
+    dedupe_enabled : Specifies if dedupe is enabled for performance policies associated with this application category.
+    creation_time  : Time when this application category was created.
+    last_modified  : Time when this application category was last modified.
+    """
 
     def create(self, **kwargs):
         raise NimOSAPIOperationUnsupported("create operation not supported")

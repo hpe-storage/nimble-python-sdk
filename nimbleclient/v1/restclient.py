@@ -73,7 +73,7 @@ class NimOSAPIClient:
     }
 
     def __init__(self, hostname, username, password, port=5392):
-        """Initialize a session to the NimOS REST API"""
+        """Initialize a session to the NimOS REST API."""
 
         connection_hash = str(uuid.uuid3(uuid.NAMESPACE_OID, f'{hostname}{port}{username}{password}'))
 
@@ -84,7 +84,7 @@ class NimOSAPIClient:
             'data': {
                 'username': username,
                 'password': password,
-                'app_name': 'NimOS REST Client'
+                'app_name': 'NimOS Python REST Client'
             }
         }
 
@@ -102,7 +102,7 @@ class NimOSAPIClient:
             self.connected = self._connect()
 
     def _connect(self):
-        """Perform NimOS authentication and session token retrieval"""
+        """Perform NimOS authentication and session token retrieval."""
 
         try:
             response = requests.post(
@@ -136,7 +136,7 @@ class NimOSAPIClient:
             raise ConnectionError(f"Error connecting to {self.hostname}")
 
     def _refresh_connection(self):
-        """Checks status of NimOS session and reconnects if necessary"""
+        """Checks status of NimOS session and reconnects if necessary."""
 
         try:
             response = requests.get(
@@ -168,30 +168,34 @@ class NimOSAPIClient:
             logging.exception(error)
             raise ConnectionError("Error closing connection")
 
-    def get(self, endpoint, **params):
-        """Wrapper for GET requests"""
+    def build_advanced_criteria(self, operator, criteria):
+        """Constructs advanced criteria and returns JSON object."""
 
-        try:
-            return self.get_data(endpoint, **params)
+        return {
+            'data': {
+                '_constructor': 'AdvancedCriteria',
+                'operator': operator,
+                'criteria': criteria,
+            },
+            'operationType': 'fetch'
+        }
 
-        except requests.exceptions.RequestException as error:
-            logging.exception(error)
-            raise ConnectionError(f"Error retrieving data from {self.hostname}")
-
-    def get_data(self, endpoint, filter=None, **params):
+    def get(self, endpoint, filter=None, **params):
         """Wrapper for GET requests with filters and advanced criteria"""
 
         url = f'https://{self.hostname}:{self.port}/{endpoint}'
 
-        logging.debug("Params: %s", json.dumps(params, indent=4))
+        logging.debug("Query Params: %s", json.dumps(params, indent=4))
+
         try:
+            # Init response data and query for more paginated data records if available
+            response_data = []
             while 1:
                 if filter is not None:
-                    logging.debug("Advanced Criteria Filter: %s", json.dumps(self.build_advanced_criteria(filter), indent=4))
                     response = requests.post(
                         url,
                         params=params,
-                        json=self.build_advanced_criteria(filter),
+                        json=filter,
                         headers=self._headers,
                         verify=False
                     )
@@ -208,68 +212,45 @@ class NimOSAPIClient:
                         self._refresh_connection()
                     else:
                         raise NimOSAPIError(response.json())
-                else:
+
+                response = response.json()
+                logging.debug("API RESPONSE: %s", json.dumps(response, indent=4))
+
+                # Check for errors if any in the response (Treat partial response as an error)
+                if 'messages' in response:
+                    raise NimOSAPIError(response['messages'])
+
+                # Get response
+                if 'totalRows' not in response:
+                    logging.debug("Returning Data: %s", json.dumps(response, indent=4))
+                    return response
+
+                # Append to the resultant data
+                response_data.extend(response["data"])
+
+                # When pageSize is requested, then return only those no. of records
+                if 'pageSize' in params:
                     break
 
-            # Check for errors if any in the response (Treat partial response as an error)
-            if 'messages' in response.json():
-                raise NimOSAPIError(response.json()['messages'])
+                # When end_row is requested, then return only upto 'end_row' records
+                if 'endRow' in params and params['endRow'] == response['endRow']:
+                    break
 
-            # Retrieves as per 'rest_api_row_limit' configuration on array
-            if 'pageSize' in params:
-                return response.json()
+                # Break when all available records are read or No more records to read
+                if len(response_data) == response['totalRows'] or len(response["data"]) == 0:
+                    break
 
-            if 'totalRows' not in response.json():
-                return response.json()
-
-            # If startRow and/or endRow is specified, then retrieve records accordingly.
-            # If unspecified, then retrieves all the available records.
-            paginated_data = list()
-            paginated_data.extend(response.json()["data"])
-            total_rows = response.json()['totalRows']
-            retrieved_rows = len(paginated_data)
-            # current_end_row = response.json()['endRow']
-
-            if 'startRow' in params and 'endRow' in params:
-                requested_rows = params['endRow'] - params['startRow']
-            elif 'startRow' not in params and 'endRow' not in params:
-                requested_rows = total_rows  # Get all available records
-            else:
+                # Set next start row index to continue reading more records
                 if 'startRow' in params:
-                    requested_rows = total_rows - params['startRow']
+                    params['startRow'] += len(response["data"])
                 else:
-                    requested_rows = params['endRow']
+                    params['startRow'] = 0
 
-            logging.debug("Total records requested: %d, Retrieved records: %d", requested_rows, retrieved_rows)
+                logging.debug("[read_records_count: %s], [total_rows: %s], [next_start_row: %s]", len(response_data), response['totalRows'], params['startRow'])
 
-            pending_rows = requested_rows-retrieved_rows
-            params.clear()
-            while pending_rows > 0:
-                params['startRow'] = response.json()['endRow']
-                logging.debug("Retrieved: %d, Pending: %d, Next startRow: %d", retrieved_rows, pending_rows, params['startRow'])
-                if filter is not None:
-                    response = requests.post(
-                        url,
-                        params=params,
-                        json=self.build_advanced_criteria(filter),
-                        headers=self._headers,
-                        verify=False
-                    )
-                else:
-                    response = requests.get(
-                        url,
-                        params=params,
-                        headers=self._headers,
-                        verify=False,
-                    )
-                records = response.json()["data"][:pending_rows]
-                records_count = len(records)
-                paginated_data.extend(records)
-                pending_rows -= records_count
-                retrieved_rows += records_count
-                # TODO: Handle change in the total no. of rows during this large operation
-
-            return paginated_data
+            logging.debug("Returning Data: %s", json.dumps(response_data, indent=4))
+            logging.debug("Retrieved %d record(s) successfully", len(response_data))
+            return response_data
 
         except requests.exceptions.RequestException as error:
             logging.exception(error)
@@ -301,7 +282,7 @@ class NimOSAPIClient:
             raise ConnectionError(f"Error communicating with {self.hostname}")
 
     def put(self, endpoint, **payload):
-        """Wrapper for PUT requests"""
+        """Wrapper for PUT requests."""
 
         # Translate metadata dict to REST key-value pairs.
         # Ex: {'k1': 'k1', 'k2': 'v2'} ==> [{'key': 'k1', 'value': 'v1'}, {'key': 'k2', 'value': 'v2'}]
@@ -342,7 +323,7 @@ class NimOSAPIClient:
 
         try:
             while 1:
-                logging.debug("Params: %s", json.dumps(params, indent=4))
+                logging.debug("Query Params: %s", json.dumps(params, indent=4))
                 response = requests.post(
                     f'https://{self.hostname}:{self.port}/{endpoint}',
                     headers=self._headers,
@@ -358,7 +339,9 @@ class NimOSAPIClient:
                 else:
                     break
 
-            return response.json()
+            response = response.json()
+            logging.debug("API RESPONSE: %s", json.dumps(response, indent=4))
+            return response
 
         except requests.exceptions.RequestException as error:
             logging.exception(error)
@@ -371,14 +354,23 @@ class NimOSAPIClient:
         resp = self.get(f"{self._ENDPOINTS[resource]}/{ident}", **params)
         return resp['data'] if 'data' in resp else resp
 
-    def list_resources(self, resource, detail=False, filter=None, **params):
+    def list_resources(self, resource, detail=False, filter=None, start_row=None, end_row=None, **params):
         if resource not in self._ENDPOINTS:
             raise ValueError(f"Unknown resource {resource}")
 
+        # Build advanced criteria filter if requested
         if filter is not None:
-            resp = self.get_data(f"{self._ENDPOINTS[resource]}{'/detail' if detail else ''}", filter, **params)
-        else:
-            resp = self.get(f"{self._ENDPOINTS[resource]}{'/detail' if detail else ''}", **params)
+            filter = self.build_advanced_criteria(filter['operator'], filter['criteria'])
+            logging.debug("Advanced Criteria: %s", json.dumps(filter, indent=4))
+
+        # Initialize start/end row query parameters if requested
+        if start_row is not None:
+            params['startRow'] = start_row
+
+        if end_row is not None:
+            params['endRow'] = end_row
+
+        resp = self.get(f"{self._ENDPOINTS[resource]}{'/detail' if detail else ''}", filter, **params)
         return resp['data'] if 'data' in resp else resp
 
     def create_resource(self, resource, **params):
@@ -415,16 +407,3 @@ class NimOSAPIClient:
 
         resp = self.post(f"{self._ENDPOINTS[resource]}/actions/{action}", **params)
         return resp['data'] if 'data' in resp else resp
-
-    def build_advanced_criteria(self, filter):
-        """Construct Advanced Criteria JSON object"""
-
-        data = {}
-        data["_constructor"] = "AdvancedCriteria"
-        data["operator"] = filter['operator']
-        data["criteria"] = filter['criteria']
-        advancedCriteria = {
-                                "data": data,
-                                "operationType": "fetch"
-                            }
-        return advancedCriteria

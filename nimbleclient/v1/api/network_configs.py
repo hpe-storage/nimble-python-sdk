@@ -9,87 +9,88 @@ from ...resource import Resource, Collection
 
 
 class NetworkConfig(Resource):
-    '''
-    Manage group wide network configuration. The three possible network configurations include active, backup and an optional draft configuration.
+    """Manage group wide network configuration. The three possible network configurations include active, backup and an optional draft configuration.
 
-    Parameters:
-    - id                                : Identifier for network configuration.
-    - name                              : Name of the network configuration. Use the name 'draft' when creating a draft configuration.
-    - mgmt_ip                           : Management IP address for the Group.
-    - secondary_mgmt_ip                 : Secondary management IP address for the Group.
-    - role                              : Role of network configuration.
-    - iscsi_automatic_connection_method : Whether automatic connection method is enabled. Enabling this means means redirecting connections from the specified iSCSI discovery IP
-                                          address to the best data IP address based on connection counts.
-    - iscsi_connection_rebalancing      : Whether rebalancing is enabled. Enabling this means rebalancing iSCSI connections by periodically breaking existing connections that are
-                                          out-of-balance, allowing the host to reconnect to a more appropriate data IP address.
-    - route_list                        : List of static routes.
-    - subnet_list                       : List of subnet configs.
-    - array_list                        : List of array network configs.
-    - group_leader_array                : Name of the group leader array.
-    - creation_time                     : Time when this net configuration was created.
-    - last_modified                     : Time when this network configuration was last modified.
-    - active_since                      : Start time of activity.
-    - last_active                       : Time of last activity.
-    - ignore_validation_mask            : Indicates whether to ignore the validation.
-    '''
+    # Parameters
+    id                                : Identifier for network configuration.
+    name                              : Name of the network configuration. Use the name 'draft' when creating a draft configuration.
+    mgmt_ip                           : Management IP address for the Group.
+    secondary_mgmt_ip                 : Secondary management IP address for the Group.
+    role                              : Role of network configuration.
+    iscsi_automatic_connection_method : Whether automatic connection method is enabled. Enabling this means means redirecting connections from the specified iSCSI discovery IP
+                                        address to the best data IP address based on connection counts.
+    iscsi_connection_rebalancing      : Whether rebalancing is enabled. Enabling this means rebalancing iSCSI connections by periodically breaking existing connections that are
+                                        out-of-balance, allowing the host to reconnect to a more appropriate data IP address.
+    route_list                        : List of static routes.
+    subnet_list                       : List of subnet configs.
+    array_list                        : List of array network configs.
+    group_leader_array                : Name of the group leader array.
+    creation_time                     : Time when this net configuration was created.
+    last_modified                     : Time when this network configuration was last modified.
+    active_since                      : Start time of activity.
+    last_active                       : Time of last activity.
+    ignore_validation_mask            : Indicates whether to ignore the validation.
+    """
 
     def activate_netconfig(self, ignore_validation_mask):
-        '''
-        Activate a network configuration.
+        """Activate a network configuration.
 
-        Parameters:
-        - id                     : ID of the netconfig to activate.
-        - ignore_validation_mask : Whether to ignore validation or not.
-        '''
+        # Parameters
+        id                     : ID of the netconfig to activate.
+        ignore_validation_mask : Whether to ignore validation or not.
+        """
 
-        return self.collection.activate_netconfig(self.id, ignore_validation_mask)
+        return self._collection.activate_netconfig(
+            self.id,
+            ignore_validation_mask
+        )
 
     def validate_netconfig(self, ignore_validation_mask):
-        '''
-        Validate a network configuration.
+        """Validate a network configuration.
 
-        Parameters:
-        - id                     : ID of the netconfig to validate.
-        - ignore_validation_mask : Whether to ignore validation or not.
-        '''
+        # Parameters
+        id                     : ID of the netconfig to validate.
+        ignore_validation_mask : Whether to ignore validation or not.
+        """
 
-        return self.collection.validate_netconfig(self.id, ignore_validation_mask)
+        return self._collection.validate_netconfig(
+            self.id,
+            ignore_validation_mask
+        )
 
 
 class NetworkConfigList(Collection):
     resource = NetworkConfig
     resource_type = "network_configs"
 
-    def activate_netconfig(self,
-                           id,
-                           ignore_validation_mask
-                           ):
-        '''
-        Activate a network configuration.
+    def activate_netconfig(self, id, ignore_validation_mask):
+        """Activate a network configuration.
 
-        Parameters:
-        - id                     : ID of the netconfig to activate.
-        - ignore_validation_mask : Whether to ignore validation or not.
-        '''
+        # Parameters
+        id                     : ID of the netconfig to activate.
+        ignore_validation_mask : Whether to ignore validation or not.
+        """
 
-        return self._client.perform_resource_action(self.resource_type, id, 'activate_netconfig',
-                                                    id=id,
-                                                    ignore_validation_mask=ignore_validation_mask
-                                                    )
+        return self._client.perform_resource_action(
+            self.resource_type,
+            id,
+            'activate_netconfig',
+            id=id,
+            ignore_validation_mask=ignore_validation_mask
+        )
 
-    def validate_netconfig(self,
-                           id,
-                           ignore_validation_mask
-                           ):
-        '''
-        Validate a network configuration.
+    def validate_netconfig(self, id, ignore_validation_mask):
+        """Validate a network configuration.
 
-        Parameters:
-        - id                     : ID of the netconfig to validate.
-        - ignore_validation_mask : Whether to ignore validation or not.
-        '''
+        # Parameters
+        id                     : ID of the netconfig to validate.
+        ignore_validation_mask : Whether to ignore validation or not.
+        """
 
-        return self._client.perform_resource_action(self.resource_type, id, 'validate_netconfig',
-                                                    id=id,
-                                                    ignore_validation_mask=ignore_validation_mask
-                                                    )
+        return self._client.perform_resource_action(
+            self.resource_type,
+            id,
+            'validate_netconfig',
+            id=id,
+            ignore_validation_mask=ignore_validation_mask
+        )

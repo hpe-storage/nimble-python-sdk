@@ -9,36 +9,35 @@ from ...resource import Resource, Collection
 
 
 class PerformancePolicy(Resource):
-    '''
-    Manage performance policies. A performance policy is a set of optimizations including block size, compression, and caching, to ensure that the volume's performance is the best
+    """Manage performance policies. A performance policy is a set of optimizations including block size, compression, and caching, to ensure that the volume's performance is the best
     configuration for its intended use like databases or log files. By default, a volume uses the \\"default\\" performance policy, which is set to use 4096 byte blocks with full
     compression and caching enabled. For replicated volumes, the same performance policy must exist on each replication partner.
 
-    Parameters:
-    - id                    : Unique Identifier for the Performance Policy.
-    - name                  : Name of the Performance Policy.
-    - full_name             : Fully qualified name of the Performance Policy.
-    - search_name           : Name of the Performance Policy used for object search.
-    - description           : Description of a performance policy.
-    - block_size            : Block Size in bytes to be used by the volumes created with this specific performance policy. Supported block sizes are 4096 bytes (4 KB), 8192 bytes
-                              (8 KB), 16384 bytes(16 KB), and 32768 bytes (32 KB). Block size of a performance policy cannot be changed once the performance policy is created.
-    - compress              : Flag denoting if data in the associated volume should be compressed.
-    - cache                 : Flag denoting if data in the associated volume should be cached.
-    - cache_policy          : Specifies how data of associated volume should be cached. Supports two policies, 'normal' and 'aggressive'. 'normal' policy caches data but skips in
-                              certain conditions such as sequential I/O. 'aggressive' policy will accelerate caching of all data belonging to this volume, regardless of
-                              sequentiality.
-    - space_policy          : Specifies the state of the volume upon space constraint violation such as volume limit violation or volumes above their volume reserve, if the pool
-                              free space is exhausted. Supports two policies, 'offline' and 'non_writable'.
-    - app_category          : Specifies the application category of the associated volume.
-    - dedupe_enabled        : Specifies if dedupe is enabled for volumes created with this performance policy.
-    - deprecated            : Specifies if this performance policy is deprecated.
-    - predefined            : Specifies if this performance policy is predefined (read-only).
-    - creation_time         : Time when the performance policy was created.
-    - last_modified         : Time when the performance policy's configurations were last modified.
-    - sample_rate           : Sample rate value.
-    - volume_count          : Number of volumes using this performance policy.
-    - dedupe_override_pools : List of pools that override performance policy's dedupe setting.
-    '''
+    # Parameters
+    id                    : Unique Identifier for the Performance Policy.
+    name                  : Name of the Performance Policy.
+    full_name             : Fully qualified name of the Performance Policy.
+    search_name           : Name of the Performance Policy used for object search.
+    description           : Description of a performance policy.
+    block_size            : Block Size in bytes to be used by the volumes created with this specific performance policy. Supported block sizes are 4096 bytes (4 KB), 8192 bytes (8
+                            KB), 16384 bytes(16 KB), and 32768 bytes (32 KB). Block size of a performance policy cannot be changed once the performance policy is created.
+    compress              : Flag denoting if data in the associated volume should be compressed.
+    cache                 : Flag denoting if data in the associated volume should be cached.
+    cache_policy          : Specifies how data of associated volume should be cached. Supports two policies, 'normal' and 'aggressive'. 'normal' policy caches data but skips in
+                            certain conditions such as sequential I/O. 'aggressive' policy will accelerate caching of all data belonging to this volume, regardless of
+                            sequentiality.
+    space_policy          : Specifies the state of the volume upon space constraint violation such as volume limit violation or volumes above their volume reserve, if the pool
+                            free space is exhausted. Supports two policies, 'offline' and 'non_writable'.
+    app_category          : Specifies the application category of the associated volume.
+    dedupe_enabled        : Specifies if dedupe is enabled for volumes created with this performance policy.
+    deprecated            : Specifies if this performance policy is deprecated.
+    predefined            : Specifies if this performance policy is predefined (read-only).
+    creation_time         : Time when the performance policy was created.
+    last_modified         : Time when the performance policy's configurations were last modified.
+    sample_rate           : Sample rate value.
+    volume_count          : Number of volumes using this performance policy.
+    dedupe_override_pools : List of pools that override performance policy's dedupe setting.
+    """
 
 
 class PerformancePolicyList(Collection):

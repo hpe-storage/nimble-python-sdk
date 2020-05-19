@@ -10,27 +10,26 @@ from ...exceptions import NimOSAPIOperationUnsupported
 
 
 class NetworkInterface(Resource):
-    '''
-    Manage per array network interface configuration.
+    """Manage per array network interface configuration.
 
-    Parameters:
-    - id                   : Identifier for the interface.
-    - array_name_or_serial : Name or serial of the array where the interface is hosted.
-    - partial_response_ok  : Indicate that it is ok to provide partially available response.
-    - array_id             : Identifier for the array.
-    - controller_name      : Name (A or B) of the controller where the interface is hosted.
-    - controller_id        : Identifier of the controller where the interface is hosted.
-    - name                 : Name of the interface.
-    - mac                  : MAC address of the interface.
-    - is_present           : Whether this interface is present on this controller.
-    - link_speed           : Speed of the link.
-    - link_status          : Status of the link.
-    - mtu                  : MTU on the link.
-    - port                 : Port number for this interface.
-    - slot                 : Slot number for this interface.
-    - max_link_speed       : Maximum speed of the link.
-    - nic_type             : Interface type.
-    '''
+    # Parameters
+    id                   : Identifier for the interface.
+    array_name_or_serial : Name or serial of the array where the interface is hosted.
+    partial_response_ok  : Indicate that it is ok to provide partially available response.
+    array_id             : Identifier for the array.
+    controller_name      : Name (A or B) of the controller where the interface is hosted.
+    controller_id        : Identifier of the controller where the interface is hosted.
+    name                 : Name of the interface.
+    mac                  : MAC address of the interface.
+    is_present           : Whether this interface is present on this controller.
+    link_speed           : Speed of the link.
+    link_status          : Status of the link.
+    mtu                  : MTU on the link.
+    port                 : Port number for this interface.
+    slot                 : Slot number for this interface.
+    max_link_speed       : Maximum speed of the link.
+    nic_type             : Interface type.
+    """
 
     def create(self, **kwargs):
         raise NimOSAPIOperationUnsupported("create operation not supported")

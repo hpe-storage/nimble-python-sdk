@@ -10,32 +10,31 @@ from ...exceptions import NimOSAPIOperationUnsupported
 
 
 class Initiator(Resource):
-    '''
-    Manage initiators in initiator groups. An initiator group has a set of initiators that can be configured as part of your ACL to access a specific volume through group
+    """Manage initiators in initiator groups. An initiator group has a set of initiators that can be configured as part of your ACL to access a specific volume through group
     membership.
 
-    Parameters:
-    - id                      : Identifier for initiator.
-    - access_protocol         : Access protocol used by the initiator. Valid values are 'iscsi' and 'fc'.
-    - initiator_group_id      : Identifier of the initiator group that this initiator is assigned to.
-    - initiator_group_name    : Name of the initiator group that this initiator is assigned to.
-    - label                   : Unique Identifier of the iSCSI initiator. Label is required when creating iSCSI initiator.
-    - iqn                     : IQN name of the iSCSI initiator. Each initiator IQN name must have an associated IP address specified using the 'ip_address' attribute. You can
-                                choose not to enter the IP address for an initiator if you prefer not to authenticate using both name and IP address, in this case the IP address
-                                will be returned as '*'.
-    - ip_address              : IP address of the iSCSI initiator. Each initiator IP address must have an associated name specified using 'name' attribute. You can choose not to
-                                enter the name for an initiator if you prefer not to authenticate using both name and IP address, in this case the IQN name will be returned as '*'.
-    - alias                   : Alias of the Fibre Channel initiator. Maximum alias length is 32 characters. Each initiator alias must have an associated WWPN specified using the
-                                'wwpn' attribute. You can choose not to enter the WWPN for an initiator when using previously saved initiator alias.
-    - chapuser_id             : Identifier for the CHAP user.
-    - wwpn                    : WWPN (World Wide Port Name) of the Fibre Channel initiator. WWPN is required when creating a Fibre Channel initiator. Each initiator WWPN can have
-                                an associated alias specified using the 'alias' attribute. You can choose not to enter the alias for an initiator if you prefer not to assign an
-                                initiator alias.
-    - vp_override             : Flag to allow modifying VP created initiator groups. When set to true, user can add this initiator to a VP created initiator group.
-    - creation_time           : Time when this initiator group was created.
-    - last_modified           : Time when this initiator group was last modified.
-    - override_existing_alias : Forcibly add Fibre Channel initiator to initiator group by updating or removing conflicting Fibre Channel initiator aliases.
-    '''
+    # Parameters
+    id                      : Identifier for initiator.
+    access_protocol         : Access protocol used by the initiator. Valid values are 'iscsi' and 'fc'.
+    initiator_group_id      : Identifier of the initiator group that this initiator is assigned to.
+    initiator_group_name    : Name of the initiator group that this initiator is assigned to.
+    label                   : Unique Identifier of the iSCSI initiator. Label is required when creating iSCSI initiator.
+    iqn                     : IQN name of the iSCSI initiator. Each initiator IQN name must have an associated IP address specified using the 'ip_address' attribute. You can
+                              choose not to enter the IP address for an initiator if you prefer not to authenticate using both name and IP address, in this case the IP address
+                              will be returned as '*'.
+    ip_address              : IP address of the iSCSI initiator. Each initiator IP address must have an associated name specified using 'name' attribute. You can choose not to
+                              enter the name for an initiator if you prefer not to authenticate using both name and IP address, in this case the IQN name will be returned as '*'.
+    alias                   : Alias of the Fibre Channel initiator. Maximum alias length is 32 characters. Each initiator alias must have an associated WWPN specified using the
+                              'wwpn' attribute. You can choose not to enter the WWPN for an initiator when using previously saved initiator alias.
+    chapuser_id             : Identifier for the CHAP user.
+    wwpn                    : WWPN (World Wide Port Name) of the Fibre Channel initiator. WWPN is required when creating a Fibre Channel initiator. Each initiator WWPN can have an
+                              associated alias specified using the 'alias' attribute. You can choose not to enter the alias for an initiator if you prefer not to assign an
+                              initiator alias.
+    vp_override             : Flag to allow modifying VP created initiator groups. When set to true, user can add this initiator to a VP created initiator group.
+    creation_time           : Time when this initiator group was created.
+    last_modified           : Time when this initiator group was last modified.
+    override_existing_alias : Forcibly add Fibre Channel initiator to initiator group by updating or removing conflicting Fibre Channel initiator aliases.
+    """
 
     def update(self, **kwargs):
         raise NimOSAPIOperationUnsupported("update operation not supported")

@@ -4,22 +4,26 @@
 
 
 def and_(*args):
-    ''' Build AND filters '''
+    """Build AND filters."""
+
     return {
                 'operator': 'and',
                 'criteria': list(args)
-            }
+           }
 
 
 def or_(*args):
-    ''' Build OR filters '''
+    """Build OR filters."""
+
     return {
                 'operator': 'or',
                 'criteria': list(args)
-        }
+           }
 
 
 class _Field:
+    """Builds a simple filter criteria."""
+
     def __init__(self, name, value=None):
         self.name = name
 

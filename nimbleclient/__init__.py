@@ -11,14 +11,15 @@ from .query import (
     or_
 )
 
-
-def NimOSClient(hostname, username, password, port=5392, version=1):
-    return getattr(nimbleclient, 'v1').NimOSClient(hostname, username, password, port)
-
-
 __all__ = [
     "v1",
     "and_",
     "or_",
     "NimOSClient",
 ]
+
+
+def NimOSClient(hostname, username, password, port=5392, version=1):
+    """Instantiates Nimble client instance to interact with the NimOS REST API Server."""
+
+    return getattr(nimbleclient, 'v1').NimOSClient(hostname, username, password, port)

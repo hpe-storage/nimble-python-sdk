@@ -10,22 +10,21 @@ from ...exceptions import NimOSAPIOperationUnsupported
 
 
 class SoftwareVersion(Resource):
-    '''
-    Show the software version.
+    """Show the software version.
 
-    Parameters:
-    - version                : Software version, used as identifier in URL.
-    - signature              : Keyed hash of download package.
-    - name                   : Name of version.
-    - status                 : Status of version.
-    - total_bytes            : Size of version.
-    - downloaded_bytes       : Number of bytes downloaded for the version.
-    - blacklist_reason       : Reason for blacklisting the version. Empty if version is not blacklisted.
-    - release_date           : Date when software version was released.
-    - is_manually_downloaded : Whether or not the version was downloaded manually.
-    - release_status         : Release status of software version.
-    - no_partial_response    : Indicate that it is not ok to provide partially available response.
-    '''
+    # Parameters
+    version                : Software version, used as identifier in URL.
+    signature              : Keyed hash of download package.
+    name                   : Name of version.
+    status                 : Status of version.
+    total_bytes            : Size of version.
+    downloaded_bytes       : Number of bytes downloaded for the version.
+    blacklist_reason       : Reason for blacklisting the version. Empty if version is not blacklisted.
+    release_date           : Date when software version was released.
+    is_manually_downloaded : Whether or not the version was downloaded manually.
+    release_status         : Release status of software version.
+    no_partial_response    : Indicate that it is not ok to provide partially available response.
+    """
 
     def create(self, **kwargs):
         raise NimOSAPIOperationUnsupported("create operation not supported")

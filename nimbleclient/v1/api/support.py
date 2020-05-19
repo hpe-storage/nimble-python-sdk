@@ -10,25 +10,25 @@ from ...exceptions import NimOSAPIOperationUnsupported
 
 
 class Support(Resource):
-    '''
-    View and alter support-based parameters.
+    """View and alter support-based parameters.
 
-    Parameters:
-    - id            : Object identifier for the group.
-    - password_mode : Mode for support password.
-    - array_count   : Count of arrays for support password.
-    - array_list    : Details of support passwords for arrays.
-    '''
+    # Parameters
+    id            : Object identifier for the group.
+    password_mode : Mode for support password.
+    array_count   : Count of arrays for support password.
+    array_list    : Details of support passwords for arrays.
+    """
 
     def cycle(self):
-        '''
-        Cycles the passwords for the group.
+        """Cycles the passwords for the group.
 
-        Parameters:
-        - id : ID for the group.
-        '''
+        # Parameters
+        id : ID for the group.
+        """
 
-        return self.collection.cycle(self.id)
+        return self._collection.cycle(
+            self.id
+        )
 
     def create(self, **kwargs):
         raise NimOSAPIOperationUnsupported("create operation not supported")
@@ -44,19 +44,19 @@ class SupportList(Collection):
     resource = Support
     resource_type = "support"
 
-    def cycle(self,
-              id
-              ):
-        '''
-        Cycles the passwords for the group.
+    def cycle(self, id):
+        """Cycles the passwords for the group.
 
-        Parameters:
-        - id : ID for the group.
-        '''
+        # Parameters
+        id : ID for the group.
+        """
 
-        return self._client.perform_resource_action(self.resource_type, id, 'cycle',
-                                                    id=id
-                                                    )
+        return self._client.perform_resource_action(
+            self.resource_type,
+            id,
+            'cycle',
+            id=id
+        )
 
     def create(self, **kwargs):
         raise NimOSAPIOperationUnsupported("create operation not supported")

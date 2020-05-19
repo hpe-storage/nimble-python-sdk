@@ -10,15 +10,14 @@ from ...exceptions import NimOSAPIOperationUnsupported
 
 
 class FibreChannelInitiatorAlias(Resource):
-    '''
-    This API provides the alias information for Fibre Channel initiators.
+    """This API provides the alias information for Fibre Channel initiators.
 
-    Parameters:
-    - id     : Unique identifier for the Fibre Channel initiator alias.
-    - alias  : Alias of the Fibre Channel initiator.
-    - wwpn   : WWPN (World Wide Port Name) of the Fibre Channel initiator.
-    - source : Source of the Fibre Channel initiator alias.
-    '''
+    # Parameters
+    id     : Unique identifier for the Fibre Channel initiator alias.
+    alias  : Alias of the Fibre Channel initiator.
+    wwpn   : WWPN (World Wide Port Name) of the Fibre Channel initiator.
+    source : Source of the Fibre Channel initiator alias.
+    """
 
     def create(self, **kwargs):
         raise NimOSAPIOperationUnsupported("create operation not supported")

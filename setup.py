@@ -6,25 +6,30 @@ import setuptools
 
 __version__ = '1.0.0'
 
-with open("README.md", "r") as fh:
+with open("README.rst", "r") as fh:
     long_description = fh.read()
 
 with open("requirements.txt") as requirements:
-        install_requires = requirements.readlines()
+    install_requires = requirements.readlines()
 
 setuptools.setup(
-    name="nimble-python-sdk",
+    name="nimble-sdk",
     version=__version__,
     author="Suneethkumar Byadarahalli",
     author_email="suneethkumar.byadarahalli@hpe.com",
-    maintainer="Suneethkumar Byadarahalli, George Costea",
+    maintainer="Suneethkumar Byadarahalli, Alok Ranjan, George Costea",
     keywords=["hpe", "nimble", "python", "sdk", "rest", "storage"],
     requires=['requests'],
-    description="A Python SDK or Client library for Nimble OS",
-    long_description="A Python SDK to interact with the Nimble OS for storage provisioning and data protection.",
-    long_description_content_type="text/markdown",
+    description="The Nimble Python SDK (client library) is a utility that can be leveraged to manage HPE Nimble Storage arrays.",
+    long_description=long_description,
+    long_description_content_type="text/x-rst",
     license="Apache License, Version 2.0",
     url="https://github.com/hpe-storage/nimble-python-sdk",
+    project_urls={
+        "Documentation": "https://scod.hpedev.io/storage_automation/nimble_python_sdk/index.html",
+        "Code": "https://github.com/hpe-storage/nimble-python-sdk",
+        "Issue tracker": "https://github.com/hpe-storage/nimble-python-sdk/issues",
+    },
     packages=setuptools.find_packages(),
     install_requires=install_requires,
     classifiers=[

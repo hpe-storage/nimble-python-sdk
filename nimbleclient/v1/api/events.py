@@ -10,26 +10,25 @@ from ...exceptions import NimOSAPIOperationUnsupported
 
 
 class Event(Resource):
-    '''
-    View events.
+    """View events.
 
-    Parameters:
-    - id          : Identifier for the event record.
-    - type        : Type of the event record.
-    - name        : Name of alert macro to generate.
-    - scope       : The array name for array level event.
-    - target      : Name of object upon which the event occurred.
-    - target_type : Target type of the event record.
-    - timestamp   : Time when this event happened.
-    - category    : Category of the event record.
-    - severity    : Severity level of the event.
-    - summary     : Summary of the event.
-    - activity    : Description of the event.
-    - alarm_id    : The alarm ID if the event is related to an alarm.
-    - params      : Arguments provided for event creation in key-value structure. Until KV implementation for events, will ignore keys (though keys must be non-empty) and take
-                    values positionally.
-    - tenant_id   : Tenant ID of the event. This is used to determine what tenant context the event belongs to.
-    '''
+    # Parameters
+    id          : Identifier for the event record.
+    type        : Type of the event record.
+    name        : Name of alert macro to generate.
+    scope       : The array name for array level event.
+    target      : Name of object upon which the event occurred.
+    target_type : Target type of the event record.
+    timestamp   : Time when this event happened.
+    category    : Category of the event record.
+    severity    : Severity level of the event.
+    summary     : Summary of the event.
+    activity    : Description of the event.
+    alarm_id    : The alarm ID if the event is related to an alarm.
+    params      : Arguments provided for event creation in key-value structure. Until KV implementation for events, will ignore keys (though keys must be non-empty) and take
+                  values positionally.
+    tenant_id   : Tenant ID of the event. This is used to determine what tenant context the event belongs to.
+    """
 
     def create(self, **kwargs):
         raise NimOSAPIOperationUnsupported("create operation not supported")

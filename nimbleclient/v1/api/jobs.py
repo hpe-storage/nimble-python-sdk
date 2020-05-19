@@ -10,29 +10,28 @@ from ...exceptions import NimOSAPIOperationUnsupported
 
 
 class Job(Resource):
-    '''
-    Jobs are operations in progress in the system.
+    """Jobs are operations in progress in the system.
 
-    Parameters:
-    - completion_time           : Completion time of the job.
-    - creation_time             : Time when this job was created.
-    - current_phase             : Phase number of the job in progress.
-    - current_phase_description : Description of the current phase of the job.
-    - description               : Description of the job.
-    - id                        : Identifier for job.
-    - name                      : Name of the job.
-    - last_modified             : Time of the last update from the job.
-    - object_id                 : Identifier for object being acted upon.
-    - op_type                   : Type of operation.
-    - type                      : Job type.
-    - parent_job_id             : Identifier of parent job.
-    - percent_complete          : Progress of the job as a percentage.
-    - request                   : Original request that the job is responsible for.
-    - response                  : Response from the operation as the job executes.
-    - state                     : Status of the job.
-    - result                    : Result of the job.
-    - total_phases              : Total number of phases of the job.
-    '''
+    # Parameters
+    completion_time           : Completion time of the job.
+    creation_time             : Time when this job was created.
+    current_phase             : Phase number of the job in progress.
+    current_phase_description : Description of the current phase of the job.
+    description               : Description of the job.
+    id                        : Identifier for job.
+    name                      : Name of the job.
+    last_modified             : Time of the last update from the job.
+    object_id                 : Identifier for object being acted upon.
+    op_type                   : Type of operation.
+    type                      : Job type.
+    parent_job_id             : Identifier of parent job.
+    percent_complete          : Progress of the job as a percentage.
+    request                   : Original request that the job is responsible for.
+    response                  : Response from the operation as the job executes.
+    state                     : Status of the job.
+    result                    : Result of the job.
+    total_phases              : Total number of phases of the job.
+    """
 
     def create(self, **kwargs):
         raise NimOSAPIOperationUnsupported("create operation not supported")

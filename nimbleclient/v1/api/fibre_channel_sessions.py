@@ -10,14 +10,13 @@ from ...exceptions import NimOSAPIOperationUnsupported
 
 
 class FibreChannelSession(Resource):
-    '''
-    Fibre Channel session is created when Fibre Channel initiator connects to this group.
+    """Fibre Channel session is created when Fibre Channel initiator connects to this group.
 
-    Parameters:
-    - id             : Unique identifier of the Fibre Channel session.
-    - initiator_info : Information about the Fibre Channel initiator.
-    - target_info    : Information about the Fibre Channel target.
-    '''
+    # Parameters
+    id             : Unique identifier of the Fibre Channel session.
+    initiator_info : Information about the Fibre Channel initiator.
+    target_info    : Information about the Fibre Channel target.
+    """
 
     def create(self, **kwargs):
         raise NimOSAPIOperationUnsupported("create operation not supported")

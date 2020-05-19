@@ -10,13 +10,12 @@ from ...exceptions import NimOSAPIOperationUnsupported
 
 
 class Version(Resource):
-    '''
-    Show the API version.
+    """Show the API version.
 
-    Parameters:
-    - name             : API version number.
-    - software_version : Software version of the group.
-    '''
+    # Parameters
+    name             : API version number.
+    software_version : Software version of the group.
+    """
 
     def create(self, **kwargs):
         raise NimOSAPIOperationUnsupported("create operation not supported")
