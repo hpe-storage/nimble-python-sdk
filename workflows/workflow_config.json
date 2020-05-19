@@ -1,0 +1,10 @@
+{
+  "hostname":"brian-va.vlab.nimblestorage.com",
+  "username":"admin",
+  "password":"admin",
+  "vol_name":"wfvol",
+  "ig_name":"wfig",
+  "mk_name":"default",
+  "mk_phrase":"test-phrase11",
+  "protection_sched":"ps1"
+}
