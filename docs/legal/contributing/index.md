@@ -4,7 +4,7 @@ We welcome and encourage community contributions to csi-driver.
 
 ## Contributing
 
-The best way to directly collaborate with the project contributors is through GitHub: <https://github.com/hpe-storage/nimble-python-sdk>
+The best way to directly collaborate with the project contributors is through the [hpe-storage/nimble-python-sdk](https://github.com/hpe-storage/nimble-python-sdk) repo on GitHub.
 
 * If you want to contribute to our code by either fixing a problem or creating a new feature, please open a GitHub pull request.
 * If you want to raise an issue such as a defect, an enhancement request or a general issue, please open a GitHub issue.
@@ -33,21 +33,21 @@ All contributions must include acceptance of the DCO:
 >
 > By making a contribution to this project, I certify that:
 >
-> \(a) The contribution was created in whole or in part by me and I have
+> (a) The contribution was created in whole or in part by me and I have
 > the right to submit it under the open source license indicated in the
 > file; or
 >
-> \(b) The contribution is based upon previous work that, to the best of my
+> (b) The contribution is based upon previous work that, to the best of my
 > knowledge, is covered under an appropriate open source license and I
 > have the right under that license to submit that work with
 > modifications, whether created in whole or in part by me, under the same
 > open source license (unless I am permitted to submit under a different
 > license), as indicated in the file; or
 >
-> \(c) The contribution was provided directly to me by some other person
+> (c) The contribution was provided directly to me by some other person
 > who certified (a), (b) or (c) and I have not modified it.
 >
-> \(d) I understand and agree that this project and the contribution are
+> (d) I understand and agree that this project and the contribution are
 > public and that a record of the contribution (including all personal
 > information I submit with it, including my sign-off) is maintained
 > indefinitely and may be redistributed consistent with this project or
@@ -58,7 +58,9 @@ All contributions must include acceptance of the DCO:
 To accept the DCO, simply add this line to each commit message with your
 name and email address (git commit -s will do this for you):
 
-    Signed-off-by: Jane Example <jane@example.com>
+```markdown
+Signed-off-by: Jane Example <jane@example.com>
+```
 
 For legal reasons, no anonymous or pseudonymous contributions are
 accepted.
