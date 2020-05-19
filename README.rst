@@ -12,7 +12,7 @@ Requirements
 Installing
 ----------
 
-The Nimble Python SDK can be installed with `pip <https://pip.pypa.io>`__. To install the latest version from `pypi <http://pypi.org>`:
+The Nimble Python SDK can be installed with `pip <https://pip.pypa.io>`__. To install the latest version from `pypi <http://pypi.org>`__:
 
     $ pip install nimble-sdk
 
