@@ -6,7 +6,7 @@ import sys
 import traceback
 from workflow_common import screen, handle_params, login, read_config, cleanup_vol,\
      cleanup_access_control_rec, cleanup_initiator_group, cleanup_vol_prep
-from nimbleclient.v1 import NimOSAPIError
+from nimbleclient.exceptions import NimOSAPIError
 from publish_volume import publish_volume
 
 

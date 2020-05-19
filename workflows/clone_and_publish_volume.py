@@ -7,7 +7,7 @@ import traceback
 from workflow_common import screen, read_config, handle_params, login, cleanup_access_control_rec,\
     KEY_VOL, KEY_SNAP, KEY_CLONE, cleanup_initiator_group, create_vol, cleanup_vol, clone_vol,\
     cleanup_snapshots, create_snap, create_initiator_group, create_access_control_rec
-from nimbleclient.v1 import NimOSAPIError
+from nimbleclient.exceptions import NimOSAPIError
 
 
 class clone_and_publish_volume:

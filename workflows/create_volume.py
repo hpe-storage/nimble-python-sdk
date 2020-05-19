@@ -5,7 +5,7 @@ import os
 import sys
 import traceback
 from workflow_common import screen, read_config, handle_params, login, KEY_VOL, create_vol, cleanup_vol
-from nimbleclient.v1 import NimOSAPIError
+from nimbleclient.exceptions import NimOSAPIError
 
 
 class create_volume:

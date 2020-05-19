@@ -7,7 +7,7 @@ import traceback
 from workflow_common import screen, handle_params, login, read_config, KEY_VOL, KEY_IG,\
     cleanup_access_control_rec, cleanup_initiator_group, cleanup_vol,\
     create_vol, create_initiator_group, create_access_control_rec
-from nimbleclient.v1 import NimOSAPIError
+from nimbleclient.exceptions import NimOSAPIError
 
 
 class create_access_control_record:

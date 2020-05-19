@@ -6,7 +6,7 @@ import sys
 import traceback
 from workflow_common import screen, read_config, handle_params, login, cleanup_vol, cleanup_master_key,\
     KEY_ENCRYPT_VOL, KEY_MK, KEY_MK_PHRASE, create_master_key, create_encrypted_vol
-from nimbleclient.v1 import NimOSAPIError
+from nimbleclient.exceptions import NimOSAPIError
 
 
 class configure_encryption:

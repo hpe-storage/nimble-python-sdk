@@ -1,5 +1,6 @@
 import sys
-from nimbleclient.v1 import Client, NimOSAuthenticationError, NimOSAPIError
+from nimbleclient.v1 import NimOSClient
+from nimbleclient.exceptions import NimOSAuthenticationError, NimOSAPIError
 from workflow_common import read_config, KEY_HNAME, KEY_UNAME, KEY_PWD, create_vol, create_initiator_group,\
      create_access_control_rec, cleanup_vol, create_master_key, cleanup_initiator_group,\
      cleanup_master_key, create_snap, cleanup_snapshot, cleanup_access_control_rec
@@ -156,7 +157,7 @@ def cleanup(client):
 if __name__ == '__main__':
     config = read_config()
     try:
-        client = Client(config[KEY_HNAME], config[KEY_UNAME], config[KEY_PWD])
+        client = NimOSClient(config[KEY_HNAME], config[KEY_UNAME], config[KEY_PWD])
     except NimOSAuthenticationError:
         print('ERROR: Invalid credentials.')
         sys.exit(1)

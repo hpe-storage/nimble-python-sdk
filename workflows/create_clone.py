@@ -6,7 +6,7 @@ import sys
 import traceback
 from workflow_common import screen, read_config, handle_params, login, KEY_VOL, KEY_SNAP, KEY_CLONE,\
     cleanup_vol, cleanup_snapshots, create_vol, create_snap, clone_vol
-from nimbleclient.v1 import NimOSAPIError
+from nimbleclient.exceptions import NimOSAPIError
 
 
 class create_clone:

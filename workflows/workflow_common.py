@@ -4,7 +4,8 @@
 import sys
 import json
 import getpass
-from nimbleclient.v1 import Client, NimOSAuthenticationError
+from nimbleclient.v1 import NimOSClient
+from nimbleclient.exceptions import NimOSAuthenticationError
 
 config_file = 'workflow_config.json'
 KEY_HNAME = 'hostname'
@@ -54,10 +55,10 @@ def handle_params(file, param_list):
     cleanup = False
     valid_params = ['--query_login', '--cleanup']
     if len(param_list) > 3:
-        usage()
+        usage(file)
     for param in param_list[1:]:
         if param not in valid_params:
-            usage()
+            usage(file)
     if '--query_login' in param_list:
         query_login = True
     if '--cleanup' in param_list:
@@ -81,7 +82,7 @@ def login(query_login, noisy):
     screen('\tUsername: {}'.format(username), noisy)
     # Instantiate nimble client object
     try:
-        client = Client(hostname, username, password)
+        client = NimOSClient(hostname, username, password)
         screen('\tConnection successful!', noisy)
     except NimOSAuthenticationError:
         screen('ERROR: Invalid credentials.', noisy)

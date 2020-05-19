@@ -7,7 +7,7 @@ import traceback
 from workflow_common import screen, read_config, handle_params, login, KEY_VOL, KEY_PS, KEY_VOLCOLL,\
     cleanup_protection_schedule, cleanup_volume_collection, cleanup_vol, create_vol, create_volume_collection,\
     associate_vol, create_protection_schedule
-from nimbleclient.v1 import NimOSAPIError
+from nimbleclient.exceptions import NimOSAPIError
 
 
 class protect_volume:

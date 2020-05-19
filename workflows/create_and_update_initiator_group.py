@@ -6,7 +6,7 @@ import sys
 import traceback
 from workflow_common import screen, read_config, handle_params, login, cleanup_initiator_group, KEY_IG,\
      create_initiator_group
-from nimbleclient.v1 import NimOSAPIError
+from nimbleclient.exceptions import NimOSAPIError
 
 
 class create_and_update_initiator_group:
