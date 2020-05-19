@@ -12,13 +12,14 @@ Requirements
 Installing
 ----------
 
-The Nimble Python SDK can be installed with `pip <https://pip.pypa.io>`. To install the latest version from `pypi <http://pypi.org>`:
+The Nimble Python SDK can be installed with `pip <https://pip.pypa.io>`__. To install the latest version from `pypi <http://pypi.org>`:
 
     $ pip install nimble-sdk
 
-Alternatively, you can grab the latest source code from `GitHub <https://github.com/hpe-storage/nimble-python-sdk>`:
+Alternatively, you can grab the latest source code from `GitHub <https://github.com/hpe-storage/nimble-python-sdk>`__:
 
     $ git clone https://github.com/hpe-storage/nimble-python-sdk.git
+
     $ python setup.py install
 
 
@@ -31,7 +32,7 @@ The Nimble Python SDK is available on PyPI `https://pypi.org/project/hpe-nimble-
 Documentation
 -------------
 
-The Nimble Python SDK has usage and reference documentation at `nimble-sdk.readthedocs.io <https://scod.hpedev.io/storage_automation/nimble_python_sdk/index.html>`.
+The Nimble Python SDK has usage and reference documentation at `nimble-sdk.readthedocs.io <https://scod.hpedev.io/storage_automation/nimble_python_sdk/index.html>`__.
 
 
 Getting Started
@@ -191,7 +192,7 @@ Contributing
 ------------
 
 The Nimble Python SDK happily accepts contributions. Please see our
-`contributing documentation <https://github.com/hpe-storage/nimble-python-sdk/blob/master/CONTRIBUTING.md>`
+`contributing documentation <https://github.com/hpe-storage/nimble-python-sdk/blob/master/CONTRIBUTING.md>`__
 for some tips on getting started.
 
 
