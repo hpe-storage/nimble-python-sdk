@@ -1,9 +1,8 @@
 import sys
-from nimbleclient.v1 import NimOSClient
-from nimbleclient.exceptions import NimOSAuthenticationError, NimOSAPIError
-from workflow_common import read_config, KEY_HNAME, KEY_UNAME, KEY_PWD, create_vol, create_initiator_group,\
-     create_access_control_rec, cleanup_vol, create_master_key, cleanup_initiator_group,\
-     cleanup_master_key, create_snap, cleanup_snapshot, cleanup_access_control_rec, cleanup_volume_collection
+from nimbleclient.exceptions import NimOSAPIError
+from workflow_common import create_vol, create_initiator_group, create_access_control_rec, cleanup_vol,\
+     create_master_key, cleanup_initiator_group, login, cleanup_master_key, create_snap, cleanup_snapshot,\
+     cleanup_access_control_rec, cleanup_volume_collection
 
 
 ADD = 'add'
@@ -32,7 +31,7 @@ def print_attrs(myobj, prefix=''):
         print('{}\t {} : {}'.format(prefix, key, val))
 
 
-def track_created_objs(action, obj_dict, obj_type, obj_name=None, obj_id=None):
+def track_created_objs(client, action, obj_dict, obj_type, obj_name=None, obj_id=None):
     # obj_list = {VOL_COLLS: [], VOLUMES: [], SNAPSHOTS: [], INIT_GRPS: [], ACRS: [], MASTER_KEY: []}
     if obj_id is None and obj_name is not None:
         obj = None
@@ -70,11 +69,11 @@ def access_control_record_create(client, acr_name, prefix):
     vol_name = acr_name + 'testvol'
     ig_name = acr_name + 'testig'
     vol = create_vol(client, vol_name, noisy=True)
-    track_created_objs(ADD, objs, VOLUMES, obj_name=None, obj_id=vol.id)
+    track_created_objs(client, ADD, objs, VOLUMES, obj_name=None, obj_id=vol.id)
     ig = create_initiator_group(client, ig_name, noisy=True)
-    track_created_objs(ADD, objs, INIT_GRPS, obj_name=None, obj_id=ig.id)
+    track_created_objs(client, ADD, objs, INIT_GRPS, obj_name=None, obj_id=ig.id)
     acr = create_access_control_rec(client, ig.attrs['id'], vol.attrs['id'], noisy=True)
-    track_created_objs(ADD, objs, ACRS, obj_name=None, obj_id=acr.id)
+    track_created_objs(client, ADD, objs, ACRS, obj_name=None, obj_id=acr.id)
     if acr is None:
         print('ERROR: Failed to create ACR. Id: {}'.format(acr.attrs['id']))
         return None
@@ -90,16 +89,16 @@ def access_control_record_delete(client, acr_id, query, prefix):
         print('{}ERROR: ACR {} does not exist.'.format(prefix, acr_id))
         return False
     cleanup_access_control_rec(client, acr_id, noisy=True)
-    track_created_objs(REM, objs, ACRS, obj_name=None, obj_id=acr_id)
+    track_created_objs(client, REM, objs, ACRS, obj_name=None, obj_id=acr_id)
     if query:
         answer = input('\tDelete Associated Initiator Group "{}" and Volume "{}": '.
                        format(acr.attrs['initiator_group_name'], acr.attrs['vol_name']))
     else:
         answer = 'y'
     if answer.lower() == 'y' or answer.lower() == 'yes':
-        track_created_objs(REM, objs, INIT_GRPS, obj_name=acr.attrs['initiator_group_name'], obj_id=None)
+        track_created_objs(client, REM, objs, INIT_GRPS, obj_name=acr.attrs['initiator_group_name'], obj_id=None)
         cleanup_initiator_group(client, acr.attrs['initiator_group_name'], noisy=True)
-        track_created_objs(REM, objs, VOLUMES, obj_name=acr.attrs['vol_name'], obj_id=None)
+        track_created_objs(client, REM, objs, VOLUMES, obj_name=acr.attrs['vol_name'], obj_id=None)
         cleanup_vol(client, acr.attrs['vol_name'], noisy=True)
 
 
@@ -259,15 +258,11 @@ def unsafe_cleanup(client):
 
 
 if __name__ == '__main__':
-    config = read_config()
-    try:
-        client = NimOSClient(config[KEY_HNAME], config[KEY_UNAME], config[KEY_PWD])
-    except NimOSAuthenticationError:
-        print('ERROR: Invalid credentials.')
+    client = login(query_login=False, noisy=True)
+    if client is None:
         sys.exit(1)
 
     objs = {VOL_COLLS: [], VOLUMES: [], SNAPSHOTS: [], INIT_GRPS: [], ACRS: [], MASTER_KEY: []}
-
     choice = -1
     while choice != 0:
         print('\n\n\n_____________________')
@@ -325,13 +320,13 @@ if __name__ == '__main__':
         elif choice == 3:   # Create all objects
             acr_id = access_control_record_create(client, 'wftestacr', '\t')
             ig = create_initiator_group(client, 'wftestig', noisy=True)
-            track_created_objs(ADD, objs, INIT_GRPS, obj_name=None, obj_id=ig.id)
+            track_created_objs(client, ADD, objs, INIT_GRPS, obj_name=None, obj_id=ig.id)
             mk = create_master_key(client, 'default', 'blahblah', noisy=True)
-            track_created_objs(ADD, objs, MASTER_KEY, obj_name=None, obj_id=mk.id)
+            track_created_objs(client, ADD, objs, MASTER_KEY, obj_name=None, obj_id=mk.id)
             vol = create_vol(client, 'wftestvol', noisy=True)
-            track_created_objs(ADD, objs, VOLUMES, obj_name=None, obj_id=vol.id)
+            track_created_objs(client, ADD, objs, VOLUMES, obj_name=None, obj_id=vol.id)
             snap = create_snap(client, 'wftestsnap', vol.attrs['id'], noisy=True)
-            track_created_objs(ADD, objs, SNAPSHOTS, obj_name=None, obj_id=snap.id)
+            track_created_objs(client, ADD, objs, SNAPSHOTS, obj_name=None, obj_id=snap.id)
         elif choice == 4:
             show_all_objects(client)
         elif choice == 5:
@@ -378,21 +373,21 @@ if __name__ == '__main__':
             analyze(client.initiator_groups, 'client.initiator_groups:')
         elif choice == 31:  # initiator Groups: Show instance attributes
             ig = create_initiator_group(client, 'igz', noisy=True)
-            track_created_objs(ADD, objs, INIT_GRPS, obj_name=None, obj_id=ig.id)
+            track_created_objs(client, ADD, objs, INIT_GRPS, obj_name=None, obj_id=ig.id)
             print('')
             analyze(ig, 'initiator_group instance')
             print('')
             print_attrs(ig, prefix='\t\t')
             print('')
             cleanup_initiator_group(client, 'igz', noisy=True)
-            track_created_objs(REM, objs, INIT_GRPS, obj_name=None, obj_id=ig.id)
+            track_created_objs(client, REM, objs, INIT_GRPS, obj_name=None, obj_id=ig.id)
         elif choice == 32:  # initiator Groups: Do Create
             ig_name = input('\tCreate Initiator Group Name: ')
             ig = create_initiator_group(client, ig_name, noisy=True)
-            track_created_objs(ADD, objs, INIT_GRPS, obj_name=None, obj_id=ig.id)
+            track_created_objs(client, ADD, objs, INIT_GRPS, obj_name=None, obj_id=ig.id)
         elif choice == 33:  # initiator Groups: Do Delete'
             ig_name = input('\tDelete Initiator Group Name: ')
-            track_created_objs(REM, objs, INIT_GRPS, obj_name=ig_name, obj_id=None)
+            track_created_objs(client, REM, objs, INIT_GRPS, obj_name=ig_name, obj_id=None)
             cleanup_initiator_group(client, ig_name, noisy=True)
         elif choice == 34:
             print('\tAll Initiator Groups:')
@@ -405,14 +400,14 @@ if __name__ == '__main__':
         elif choice == 41:  # Master Key: Show instance attributes
             mk_name = 'default'
             mk = create_master_key(client, mk_name, 'onetwothreefourfive', noisy=True)
-            track_created_objs(ADD, objs, MASTER_KEY, obj_name=None, obj_id=mk.id)
+            track_created_objs(client, ADD, objs, MASTER_KEY, obj_name=None, obj_id=mk.id)
             print('')
             analyze(mk, 'master_key instance')
             print('')
             print_attrs(mk, prefix='\t\t')
             print('')
             cleanup_master_key(client, mk_name, noisy=True)
-            track_created_objs(REM, objs, MASTER_KEY, obj_name=None, obj_id=mk.id)
+            track_created_objs(client, REM, objs, MASTER_KEY, obj_name=None, obj_id=mk.id)
         elif choice == 42:  # Master Key: Show All
             print('\tMaster Keys:')
             key_list = client.master_key.list()
@@ -423,30 +418,30 @@ if __name__ == '__main__':
             mk_phrase = 'onetwothreefour'
             try:
                 mk = create_master_key(client, mk_name, mk_phrase, noisy=True)
-                track_created_objs(ADD, objs, MASTER_KEY, obj_name=None, obj_id=mk.id)
+                track_created_objs(client, ADD, objs, MASTER_KEY, obj_name=None, obj_id=mk.id)
             except NimOSAPIError:
                 print('\tMaster Key creation failed. Try a Master Key named "default".')
         elif choice == 44:  # Master Key: Do Delete
             mk_name = input('\tDelete Master Key Name: ')
-            track_created_objs(REM, objs, MASTER_KEY, obj_name=mk_name, obj_id=None)
+            track_created_objs(client, REM, objs, MASTER_KEY, obj_name=mk_name, obj_id=None)
             cleanup_master_key(client, mk_name, noisy=True)
         elif choice == 50:  # Snapshots: Show client attributes
             analyze(client.snapshots, 'client.snapshots:')
         elif choice == 51:  # Snapshots: Show instance attributes
             vol_name = 'wfhelpervol'
             vol = create_vol(client, vol_name, noisy=True)
-            track_created_objs(ADD, objs, VOLUMES, obj_name=None, obj_id=vol.id)
+            track_created_objs(client, ADD, objs, VOLUMES, obj_name=None, obj_id=vol.id)
             snap = create_snap(client, vol_name + 'snap', vol.attrs['id'], noisy=True)
-            track_created_objs(ADD, objs, SNAPSHOTS, obj_name=None, obj_id=snap.id)
+            track_created_objs(client, ADD, objs, SNAPSHOTS, obj_name=None, obj_id=snap.id)
             print('')
             analyze(snap, 'client.snapshots:')
             print('')
             print_attrs(snap, prefix='\t\t')
             print('')
             cleanup_snapshot(client, snap.attrs['id'], noisy=True)
-            track_created_objs(REM, objs, SNAPSHOTS, obj_name=None, obj_id=snap.id)
+            track_created_objs(client, REM, objs, SNAPSHOTS, obj_name=None, obj_id=snap.id)
             cleanup_vol(client, vol_name, noisy=True)
-            track_created_objs(REM, objs, VOLUMES, obj_name=None, obj_id=vol.id)
+            track_created_objs(client, REM, objs, VOLUMES, obj_name=None, obj_id=vol.id)
         elif choice == 52:
             vol_name = input('\tGet Snapshots for Vol: ')
             snap_list = client.snapshots.list(vol_name=vol_name)
@@ -456,19 +451,19 @@ if __name__ == '__main__':
             snap_name = input('\tCreate Snapshot Name: ')
             vol_name = 'wfhelpervol'
             vol = create_vol(client, vol_name, noisy=True)
-            track_created_objs(ADD, objs, VOLUMES, obj_name=None, obj_id=vol.id)
+            track_created_objs(client, ADD, objs, VOLUMES, obj_name=None, obj_id=vol.id)
             snap = create_snap(client, snap_name, vol.attrs['id'], noisy=True)
-            track_created_objs(ADD, objs, SNAPSHOTS, obj_name=None, obj_id=snap.id)
+            track_created_objs(client, ADD, objs, SNAPSHOTS, obj_name=None, obj_id=snap.id)
         elif choice == 54:
             snap_id = input('\tDelete Snapshot Id: ')
             try:
                 snap = client.snapshots.get(id=snap_id)
                 if snap is not None:
                     cleanup_snapshot(client, snap.attrs['id'], noisy=True)
-                    track_created_objs(REM, objs, SNAPSHOTS, obj_name=None, obj_id=snap.id)
+                    track_created_objs(client, REM, objs, SNAPSHOTS, obj_name=None, obj_id=snap.id)
                     answer = input('\tDelete Associated Snapshot Volume "{}": '.format(snap.attrs['vol_name']))
                     if answer.lower() == 'y' or answer.lower() == 'yes':
-                        track_created_objs(REM, objs, VOLUMES, obj_name=snap.attrs['vol_name'], obj_id=None)
+                        track_created_objs(client, REM, objs, VOLUMES, obj_name=snap.attrs['vol_name'], obj_id=None)
                         cleanup_vol(client, snap.attrs['vol_name'], noisy=True)
             except NimOSAPIError:
                 print('\tERROR: Failed to delete snapshot.')
@@ -480,22 +475,22 @@ if __name__ == '__main__':
         elif choice == 71:  # Volume: Show instance attributes
             vol_name = 'wftempvol'
             vol = create_vol(client, vol_name, noisy=True)
-            track_created_objs(ADD, objs, VOLUMES, obj_name=None, obj_id=vol.id)
+            track_created_objs(client, ADD, objs, VOLUMES, obj_name=None, obj_id=vol.id)
             print('')
             analyze(vol, 'volumes instance attributes:')
             print('')
             print_attrs(vol, '\t\t')
             print('')
             cleanup_vol(client, vol_name, noisy=True)
-            track_created_objs(REM, objs, VOLUMES, obj_name=None, obj_id=vol.id)
+            track_created_objs(client, REM, objs, VOLUMES, obj_name=None, obj_id=vol.id)
         elif choice == 72:  # Volume: Do Create
             vol_name = input('\tCreate Volume Name: ')
             # vol_id = volume_create(client, vol_name)
             vol = create_vol(client, vol_name, noisy=True)
-            track_created_objs(ADD, objs, VOLUMES, obj_name=None, obj_id=vol.id)
+            track_created_objs(client, ADD, objs, VOLUMES, obj_name=None, obj_id=vol.id)
         elif choice == 73:
             vol_name = input('\tDelete Volume Name: ')
-            track_created_objs(ADD, objs, VOLUMES, obj_name=vol_name, obj_id=None)
+            track_created_objs(client, ADD, objs, VOLUMES, obj_name=vol_name, obj_id=None)
             cleanup_vol(client, vol_name, noisy=True)
         elif choice == 74:  # Volume: Do Get All
             print('\tAll Volumes:')
