@@ -84,7 +84,7 @@ nav:
     - 'HPE Developer Community': 'https://developer.hpe.com'
     - 'Sign up to HPE DEV on Slack': 'https://slack.hpedev.io'
   - EXTERNAL LINKS:
-    - 'Nimble SDK on GitHub': 'https://github.com/hpe-storage/scod'
+    - 'Nimble SDK on GitHub': 'https://github.com/hpe-storage/nimble-python-sdk'
     - 'HPE Storage on GitHub': 'https://github.com/hpe-storage'
     - 'Storage Automation on hpe.com': 'https://hpe.com/storage/management-automation'
   - LEGAL:
