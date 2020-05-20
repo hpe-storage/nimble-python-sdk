@@ -1,6 +1,6 @@
 site_name: 'HPE Nimble Storage Software Development Kit (SDK) for Python'
 site_description: 'Reference documentation for the HPE Nimble Storage SDK for Python'
-site_url: 'https://drajen.github.io/nimble-python-sdk'
+site_url: 'https://hpe-storage.github.io/nimble-python-sdk'
 site_author: 'Hewlett Packard Enterprise'
 theme: 
   name: readthedocs
