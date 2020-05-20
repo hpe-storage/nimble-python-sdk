@@ -144,9 +144,11 @@ class VolumeFields():
     app_uuid = _Field('app_uuid')
     folder_id = _Field('folder_id')
     folder_name = _Field('folder_name')
+
     @classmethod
     def metadata(cls, key):
         return _Field('metadata.' + key)
+
     iscsi_sessions = _Field('iscsi_sessions')
     fc_sessions = _Field('fc_sessions')
     caching_enabled = _Field('caching_enabled')
@@ -508,9 +510,11 @@ class SnapshotCollectionFields():
     invoke_on_upstream_partner = _Field('invoke_on_upstream_partner')
     agent_type = _Field('agent_type')
     expiry_after = _Field('expiry_after')
+
     @classmethod
     def metadata(cls, key):
         return _Field('metadata.' + key)
+
     force = _Field('force')
 
 
@@ -607,9 +611,11 @@ class SnapshotFields():
     schedule_name = _Field('schedule_name')
     schedule_id = _Field('schedule_id')
     app_uuid = _Field('app_uuid')
+
     @classmethod
     def metadata(cls, key):
         return _Field('metadata.' + key)
+
     new_data_valid = _Field('new_data_valid')
     new_data_compressed_bytes = _Field('new_data_compressed_bytes')
     new_data_uncompressed_bytes = _Field('new_data_uncompressed_bytes')
@@ -629,9 +635,11 @@ class ApplicationServerFields():
     description = _Field('description')
     password = _Field('password')
     server_type = _Field('server_type')
+
     @classmethod
     def metadata(cls, key):
         return _Field('metadata.' + key)
+
     creation_time = _Field('creation_time')
     last_modified = _Field('last_modified')
 
@@ -796,6 +804,7 @@ class InitiatorGroupFields():
     volume_count = _Field('volume_count')
     volume_list = _Field('volume_list')
     num_connections = _Field('num_connections')
+
     @classmethod
     def metadata(cls, key):
         return _Field('metadata.' + key)
@@ -1020,9 +1029,11 @@ class VolumeCollectionFields():
     repl_bytes_transferred = _Field('repl_bytes_transferred')
     is_handing_over = _Field('is_handing_over')
     handover_replication_partner = _Field('handover_replication_partner')
+
     @classmethod
     def metadata(cls, key):
         return _Field('metadata.' + key)
+
     srep_last_sync = _Field('srep_last_sync')
     srep_resync_percent = _Field('srep_resync_percent')
 

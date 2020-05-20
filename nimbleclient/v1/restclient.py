@@ -168,6 +168,7 @@ class NimOSAPIClient:
             logging.exception(error)
             raise ConnectionError("Error closing connection")
 
+    @classmethod
     def build_advanced_criteria(self, operator, criteria):
         """Constructs advanced criteria and returns JSON object."""
 
