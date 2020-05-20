@@ -84,7 +84,7 @@ class NimOSAPIClient:
             'data': {
                 'username': username,
                 'password': password,
-                'app_name': 'NimOS Python REST Client'
+                'app_name': 'NimOS Python SDK v1.0.0'
             }
         }
 

@@ -16,7 +16,7 @@ setuptools.setup(
     name="nimble-sdk",
     version=__version__,
     author="Suneethkumar Byadarahalli",
-    author_email="suneethkumar.byadarahalli@hpe.com",
+    author_email="nimble-dcs-storage-automation-eng@hpe.com",
     maintainer="Suneethkumar Byadarahalli, Alok Ranjan, George Costea",
     keywords=["hpe", "nimble", "python", "sdk", "rest", "storage"],
     requires=['requests'],

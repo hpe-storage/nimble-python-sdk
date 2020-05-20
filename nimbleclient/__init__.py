@@ -22,4 +22,4 @@ __all__ = [
 def NimOSClient(hostname, username, password, port=5392, version=1):
     """Instantiates Nimble client instance to interact with the NimOS REST API Server."""
 
-    return getattr(nimbleclient, 'v1').NimOSClient(hostname, username, password, port)
+    return getattr(nimbleclient, f'v{version}').NimOSClient(hostname, username, password, port)
