@@ -181,10 +181,17 @@ class NimOSAPIClient:
             'operationType': 'fetch'
         }
 
-    def get(self, endpoint, filter=None, **params):
+    def get(self, endpoint, filter=None, limit=None, start_from_id=None, **params):
         """Wrapper for GET requests with filters and advanced criteria"""
 
-        url = f'https://{self.hostname}:{self.port}/{endpoint}'
+        # Set the url if limit and/or start_from_id (pagination) is requested
+        if limit is not None:
+            url = f'https://{self.hostname}:{self.port}/{endpoint}?pageSize={limit}'
+
+            if start_from_id is not None:
+                url = f'https://{self.hostname}:{self.port}/{endpoint}?pageSize={limit}&id%3E{start_from_id}'
+        else:
+            url = f'https://{self.hostname}:{self.port}/{endpoint}'
 
         logging.debug("Query Params: %s", json.dumps(params, indent=4))
 
@@ -233,34 +240,25 @@ class NimOSAPIClient:
                 if response['endRow'] == response['totalRows']:
                     break
 
-                # Break when all available records are read or No more records to read
+                # Break when all available records are read or no more records to read
                 if len(response_data) == response['totalRows'] or len(response["data"]) == 0:
                     break
 
-                # When pageSize is being requested, then fetch all records using 'next_url'
-                if 'paging' in response:
-                    next_url = response['paging']['next_url']
+                # When limit/pageSize is requested, then return only the limit/pageSize no. of records
+                if ('pageSize' in params and params['pageSize'] is not None) or limit is not None:
+                    break
 
-                    # Remove the 'pageSize' from params as its already available in 'next_url'
-                    if 'pageSize' in params:
-                        del params['pageSize']
+                # When end_row is requested, then return only up to 'end_row' records
+                if 'endRow' in params and params['endRow'] == response['endRow']:
+                    break
 
-                    # Update URL for the next request call
-                    url = f'https://{self.hostname}:{self.port}{next_url}'
-
-                    logging.debug("[read_records_count: %s], [pending_rows: %s], [next_url: %s]", len(response_data), response['totalRows'], next_url)
+                # Set next start row index to continue reading more records
+                if 'startRow' in params:
+                    params['startRow'] += len(response["data"])
                 else:
-                    # When end_row is requested, then return only upto 'end_row' records
-                    if 'endRow' in params and params['endRow'] == response['endRow']:
-                        break
+                    params['startRow'] = len(response["data"])
 
-                    # Set next start row index to continue reading more records
-                    if 'startRow' in params:
-                        params['startRow'] += len(response["data"])
-                    else:
-                        params['startRow'] = len(response["data"])
-
-                    logging.debug("[read_records_count: %s], [total_rows: %s], [next_start_row: %s]", len(response_data), response['totalRows'], params['startRow'])
+                logging.debug("[read_records_count: %s], [total_rows: %s], [next_start_row: %s]", len(response_data), response['totalRows'], params['startRow'])
 
             logging.debug("Returning Data: %s", json.dumps(response_data, indent=4))
             logging.debug("Retrieved %d record(s) successfully", len(response_data))
@@ -368,7 +366,7 @@ class NimOSAPIClient:
         resp = self.get(f"{self._ENDPOINTS[resource]}/{ident}", **params)
         return resp['data'] if 'data' in resp else resp
 
-    def list_resources(self, resource, detail=False, filter=None, start_row=None, end_row=None, **params):
+    def list_resources(self, resource, detail=False, filter=None, limit=None, start_from_id=None, start_row=None, end_row=None, **params):
         if resource not in self._ENDPOINTS:
             raise ValueError(f"Unknown resource {resource}")
 
@@ -384,7 +382,7 @@ class NimOSAPIClient:
         if end_row is not None:
             params['endRow'] = end_row
 
-        resp = self.get(f"{self._ENDPOINTS[resource]}{'/detail' if detail else ''}", filter, **params)
+        resp = self.get(f"{self._ENDPOINTS[resource]}{'/detail' if detail else ''}", filter, limit, start_from_id, **params)
         return resp['data'] if 'data' in resp else resp
 
     def create_resource(self, resource, **params):
