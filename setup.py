@@ -3,18 +3,29 @@
 #
 
 import setuptools
+import os
+import re
 
-__version__ = '1.0.0'
+base_path = os.path.dirname(__file__)
+
+# Get the version (borrowed from urllib3)
+with open(os.path.join(base_path, "nimbleclient", "_version.py")) as fp:
+    VERSION = (
+        re.compile(r""".*__version__ = ["'](.*?)['"]""", re.S).match(fp.read()).group(1)
+    )
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 with open("requirements.txt") as requirements:
-        install_requires = requirements.readlines()
+    install_requires = requirements.readlines()
+
+# Duplicating into another variable in case if we want to have internal versioning later
+version = VERSION
 
 setuptools.setup(
     name="nimble-python-sdk",
-    version=__version__,
+    version=version,
     author="Suneethkumar Byadarahalli",
     author_email="suneethkumar.byadarahalli@hpe.com",
     maintainer="Suneethkumar Byadarahalli, George Costea",
@@ -46,3 +57,4 @@ setuptools.setup(
     ],
     python_requires='>=3.6',
 )
+
