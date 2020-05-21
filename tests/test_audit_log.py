@@ -31,7 +31,7 @@ def setup_teardown_for_each_test(before_running_all_testcase, request):
 @pytest.mark.skipif(SKIPTEST is True,
                     reason="skipped this test as SKIPTEST variable is true")
 def test_get_audit_log(setup_teardown_for_each_test):
-    resp = nimosclientbase.get_nimos_client().audit_log.get(pageSize=1)
+    resp = nimosclientbase.get_nimos_client().audit_log.get(endRow=3)
     assert resp is not None
 
 
@@ -40,10 +40,10 @@ def test_get_audit_log(setup_teardown_for_each_test):
 def test_get_audit_log_query_params(setup_teardown_for_each_test):
     resp = nimosclientbase.get_nimos_client().audit_log.list(
         detail=True,
-        pageSize=2)
+        endRow=2)
     assert resp is not None
     resp = nimosclientbase.get_nimos_client().audit_log.get(
-        pageSize=2,
+        endRow=2,
         fields="user_name,id,status")
     # assert that those fields are present
     assert resp.attrs.get("user_name") is not None
@@ -59,7 +59,7 @@ def test_query_invalid_params(setup_teardown_for_each_test):
     try:
         query_param = "junkparam"
         resp = nimosclientbase.get_nimos_client().audit_log.get(
-            pageSize=2,
+            endRow=2,
             fields=query_param)
         assert resp is not None
     except exceptions.NimOSAPIError as ex:

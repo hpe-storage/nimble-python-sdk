@@ -36,7 +36,7 @@ def setup_teardown_for_each_test(before_running_all_testcase, request):
                     reason="skipped this test as SKIPTEST variable is true")
 def test_get_spacedomains(setup_teardown_for_each_test):
     resp = nimosclientbase.get_nimos_client().space_domains.list(
-        detail=True, pageSize=2)
+        detail=True, pageSize=200)
     assert resp is not None
 
 

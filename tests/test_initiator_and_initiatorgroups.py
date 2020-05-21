@@ -197,7 +197,7 @@ def test_get_initiatorgroups(setup_teardown_for_each_test):
         assert ig_resp2.attrs.get("id") == initiatorgrp_to_delete[1]
         # get all the IG groups and check their initiator
         igrps = nimosclientbase.get_nimos_client(
-        ).initiator_groups.list(detail=True, pageSize=2)
+        ).initiator_groups.list(detail=True, pageSize=200)
 
         for igobj in igrps:
             if (igobj.attrs.get("name") == initiator_grp_name1

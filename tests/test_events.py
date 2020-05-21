@@ -32,7 +32,7 @@ def setup_teardown_for_each_test(before_running_all_testcase, request):
                     reason="skipped this test as SKIPTEST variable is true")
 def test_get_events(setup_teardown_for_each_test):
     resp = nimosclientbase.get_nimos_client().events.list(
-        detail=True, pageSize=2)
+        detail=True, endRow=2)
     assert resp is not None
 
 
@@ -40,10 +40,10 @@ def test_get_events(setup_teardown_for_each_test):
                     reason="skipped this test as SKIPTEST variable is true")
 def test_get_event_log_query_params(setup_teardown_for_each_test):
     resp = nimosclientbase.get_nimos_client().events.list(detail=True,
-                                                          pageSize=2)
+                                                          endRow=2)
     assert resp is not None
     resp = nimosclientbase.get_nimos_client().events.get(
-        pageSize=2,
+        endRow=2,
         fields="activity,id,category,severity")
     assert resp is not None
     # assert that those fields are present
@@ -61,7 +61,7 @@ def test_query_invalid_params(setup_teardown_for_each_test):
     try:
         queryparam = "junkparam"
         resp = nimosclientbase.get_nimos_client().events.get(
-            pageSize=2,
+            endRow=2,
             fields=queryparam)
         assert resp is not None
     except exceptions.NimOSAPIError as ex:

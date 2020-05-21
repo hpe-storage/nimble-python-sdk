@@ -54,7 +54,7 @@ def create_folders(folder_name, **kwargs):
                     reason="skipped this test as SKIPTEST variable is true")
 def test_get_folders(setup_teardown_for_each_test):
     resp = nimosclientbase.get_nimos_client().folders.list(
-        detail=True, pageSize=2)
+        detail=True, pageSize=200)
     assert resp is not None
 
 

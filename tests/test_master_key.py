@@ -17,6 +17,9 @@ master_key_to_delete = []
 @pytest.fixture(scope='module')
 def before_running_all_testcase(request):
     log("**** Starting Tests for master_key TestCase *****\n")
+    resp = nimosclientbase.get_nimos_client().master_key.get()
+    if resp is not None:
+        nimosclientbase.get_nimos_client().master_key.delete(resp.attrs.get("id"))
 
     def after_running_all_testcase():
         log("**** Completed Tests for master_key TestCase *****\n")

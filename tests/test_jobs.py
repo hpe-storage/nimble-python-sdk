@@ -45,6 +45,6 @@ def test_get_jobs(setup_teardown_for_each_test):
     autosupport_thread.start()
     time.sleep(4)
     resp = nimosclientbase.get_nimos_client().jobs.list(
-        detail=True, pageSize=2)
+        detail=True, pageSize=900)
     assert resp is not None
     autosupport_thread.join()
