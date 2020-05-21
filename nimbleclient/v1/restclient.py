@@ -7,8 +7,8 @@ import uuid
 import requests
 import json
 
-# from requests.packages.urllib3.exceptions import InsecureRequestWarning
 from ..exceptions import NimOSAuthenticationError, NimOSAPIError
+from .._version import __version__
 
 requests.packages.urllib3.disable_warnings(requests.packages.urllib3.exceptions.InsecureRequestWarning)
 
@@ -84,7 +84,7 @@ class NimOSAPIClient:
             'data': {
                 'username': username,
                 'password': password,
-                'app_name': 'NimOS Python SDK v1.0.0'
+                'app_name': f'NimOS Python SDK v{__version__}'
             }
         }
 
@@ -229,25 +229,38 @@ class NimOSAPIClient:
                 # Append to the resultant data
                 response_data.extend(response["data"])
 
-                # When pageSize is requested, then return only those no. of records
-                if 'pageSize' in params:
-                    break
-
-                # When end_row is requested, then return only upto 'end_row' records
-                if 'endRow' in params and params['endRow'] == response['endRow']:
+                # Break when all records are paginated (when pageSize is requested)
+                if response['endRow'] == response['totalRows']:
                     break
 
                 # Break when all available records are read or No more records to read
                 if len(response_data) == response['totalRows'] or len(response["data"]) == 0:
                     break
 
-                # Set next start row index to continue reading more records
-                if 'startRow' in params:
-                    params['startRow'] += len(response["data"])
-                else:
-                    params['startRow'] = 0
+                # When pageSize is being requested, then fetch all records using 'next_url'
+                if 'paging' in response:
+                    next_url = response['paging']['next_url']
 
-                logging.debug("[read_records_count: %s], [total_rows: %s], [next_start_row: %s]", len(response_data), response['totalRows'], params['startRow'])
+                    # Remove the 'pageSize' from params as its already available in 'next_url'
+                    if 'pageSize' in params:
+                        del params['pageSize']
+
+                    # Update URL for the next request call
+                    url = f'https://{self.hostname}:{self.port}{next_url}'
+
+                    logging.debug("[read_records_count: %s], [pending_rows: %s], [next_url: %s]", len(response_data), response['totalRows'], next_url)
+                else:
+                    # When end_row is requested, then return only upto 'end_row' records
+                    if 'endRow' in params and params['endRow'] == response['endRow']:
+                        break
+
+                    # Set next start row index to continue reading more records
+                    if 'startRow' in params:
+                        params['startRow'] += len(response["data"])
+                    else:
+                        params['startRow'] = len(response["data"])
+
+                    logging.debug("[read_records_count: %s], [total_rows: %s], [next_start_row: %s]", len(response_data), response['totalRows'], params['startRow'])
 
             logging.debug("Returning Data: %s", json.dumps(response_data, indent=4))
             logging.debug("Retrieved %d record(s) successfully", len(response_data))
