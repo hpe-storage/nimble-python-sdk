@@ -4,8 +4,7 @@ This is a Python Software Development Kit (SDK) for [HPE Nimble Storage](http://
 The SDK provides a pythonic client library to interact with the HPE Nimble Storage REST API. The code abstracts the lower-level API calls into Python objects that you can easily incorporate into any automation or DevOps workflows. Use it to create, modify and delete most resources like volumes, volume collections, initiator groups and more, as well as perform other tasks like snapshotting, cloning, restoring data, etc.
 
 # Synopsis
-
-See the [https://hpe-storage.github.io/nimble-python-sdk](documentation) on how to [install](https://hpe-storage.github.io/nimble-python-sdk/get_started/install/index.html), [use](https://hpe-storage.github.io/nimble-python-sdk/get_started/using/index.html) and some pre-cocked [workflows](https://hpe-storage.github.io/nimble-python-sdk/get_started/examples/index.html) for more elaborate examples.
+See [install](get_started/install/index.md), [using](get_started/using/index.md) and [example workflows](get_started/examples/index.md) for more elaborate examples.
 
 ```python
 $ pip install nimble-sdk
@@ -33,15 +32,3 @@ api.fibre_channel_interfaces         api.protocol_endpoints               api.wi
 api.fibre_channel_ports              api.replication_partners
 api.fibre_channel_sessions           api.shelves
 ```
-
-# Contributing
-
-Contributing guidelines are available in the [official documentation](https://hpe-storage.github.io/nimble-python-sdk/legal/contributing/index.html).
-
-# Community
-
-Join the HPE DEV slack by signing up at [slack.hpedev.io](slack.hpedev.io). HPE employees may sign in direct at [hpedev.slack.com](hpedev.slack.com) with a valid HPE address. We hang out in `#NimbleStorage`.
-
-# License
-
-See [LICENSE](LICENSE)

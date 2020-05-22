@@ -1,0 +1,4 @@
+mkdocs==1.0.4
+mkdocs-redirects
+markdown-fenced-code-tabs
+pydoc-markdown
