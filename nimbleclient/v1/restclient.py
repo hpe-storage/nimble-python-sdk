@@ -7,7 +7,7 @@ import uuid
 import requests
 
 from ..exceptions import NimOSAuthenticationError, NimOSAPIError
-from .._version import __version__
+from ..__init__ import __version__
 
 requests.packages.urllib3.disable_warnings(requests.packages.urllib3.exceptions.InsecureRequestWarning)
 
@@ -243,10 +243,9 @@ class NimOSAPIClient:
                 else:
                     params['startRow'] = len(response["data"])
 
-                logging.debug("[read_records_count: %s], [total_rows: %s], [next_start_row: %s]",
-                              len(response_data), response['totalRows'], params['startRow'])
+                logging.debug(f"[read_records_count: {len(response_data)}], [total_rows: {response['totalRows']}], [next_start_row: {params['startRow']}]")
 
-            logging.debug("Retrieved %d record(s) successfully", len(response_data))
+            logging.debug(f'Retrieved {len(response_data)} record(s)')
             return response_data
 
         except requests.exceptions.RequestException as error:

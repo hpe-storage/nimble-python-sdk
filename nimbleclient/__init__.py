@@ -11,6 +11,8 @@ from .query import (
     or_
 )
 
+__version__ = "1.0.0"
+
 __all__ = [
     "v1",
     "and_",
