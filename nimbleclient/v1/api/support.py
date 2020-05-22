@@ -9,16 +9,26 @@ from ...resource import Resource, Collection
 from ...exceptions import NimOSAPIOperationUnsupported
 
 
-class ApplicationCategory(Resource):
-    """Provides the list of application categories that are available, to classify volumes depending on the applications that use them.
+class Support(Resource):
+    """View and alter support-based parameters.
 
     # Parameters
-    id             : Identifier for the application category.
-    name           : Name of application category.
-    dedupe_enabled : Specifies if dedupe is enabled for performance policies associated with this application category.
-    creation_time  : Time when this application category was created.
-    last_modified  : Time when this application category was last modified.
+    id            : Object identifier for the group.
+    password_mode : Mode for support password.
+    array_count   : Count of arrays for support password.
+    array_list    : Details of support passwords for arrays.
     """
+
+    def cycle(self):
+        """Cycles the passwords for the group.
+
+        # Parameters
+        id : ID for the group.
+        """
+
+        return self._collection.cycle(
+            self.id
+        )
 
     def create(self, **kwargs):
         raise NimOSAPIOperationUnsupported("create operation not supported")
@@ -30,9 +40,23 @@ class ApplicationCategory(Resource):
         raise NimOSAPIOperationUnsupported("update operation not supported")
 
 
-class ApplicationCategoryList(Collection):
-    resource = ApplicationCategory
-    resource_type = "application_categories"
+class SupportList(Collection):
+    resource = Support
+    resource_type = "support"
+
+    def cycle(self, id):
+        """Cycles the passwords for the group.
+
+        # Parameters
+        id : ID for the group.
+        """
+
+        return self._client.perform_resource_action(
+            self.resource_type,
+            id,
+            'cycle',
+            id=id
+        )
 
     def create(self, **kwargs):
         raise NimOSAPIOperationUnsupported("create operation not supported")
