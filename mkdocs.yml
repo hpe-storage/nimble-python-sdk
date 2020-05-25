@@ -1,0 +1,93 @@
+site_name: 'HPE Nimble Storage Software Development Kit (SDK) for Python'
+site_description: 'Reference documentation for the HPE Nimble Storage SDK for Python'
+site_url: 'https://hpe-storage.github.io/nimble-python-sdk'
+site_author: 'Hewlett Packard Enterprise'
+theme: 
+  name: readthedocs
+  custom_dir: hpe_theme/
+repo_name: 'hpe-storage/nimble-python-sdk'
+repo_url: 'https://github.com/hpe-storage/nimble-python-sdk'
+copyright: 'Copyright 2020 Hewlett Packard Enterprise Development LP'
+extra_css:
+  - css/hpedev.css
+google_analytics:
+  - 'UA-79554149-4'
+  - 'auto'
+use_directory_urls: false
+edit_uri: ''
+markdown_extensions:
+  - admonition:
+  - toc:
+      permalink: True
+      separator: "_"
+  - markdown_fenced_code_tabs:
+      single_block_as_tab: False
+      active_class: 'active'
+      template: 'default'
+plugins:
+  - search:
+  - redirects:
+      redirect_maps:
+nav:
+  - GET STARTED:
+    - 'Installation': 'get_started/install/index.md'
+    - 'Using': 'get_started/using/index.md'
+    - 'Example workflows': 'get_started/examples/index.md'
+  - API REFERENCE:
+    - 'access_control_records': 'api/access_control_records.md'
+    - 'active_directory_memberships': 'api/active_directory_memberships.md'
+    - 'alarms': 'api/alarms.md'
+    - 'application_categories': 'api/application_categories.md'
+    - 'application_servers': 'api/application_servers.md'
+    - 'arrays': 'api/arrays.md'
+    - 'audit_log': 'api/audit_log.md'
+    - 'chap_users': 'api/chap_users.md'
+    - 'controllers': 'api/controllers.md'
+    - 'disks': 'api/disks.md'
+    - 'events': 'api/events.md'
+    - 'fibre_channel_configs': 'api/fibre_channel_configs.md'
+    - 'fibre_channel_initiator_aliases': 'api/fibre_channel_initiator_aliases.md'
+    - 'fibre_channel_interfaces': 'api/fibre_channel_interfaces.md'
+    - 'fibre_channel_ports': 'api/fibre_channel_ports.md'
+    - 'fibre_channel_sessions': 'api/fibre_channel_sessions.md'
+    - 'folders': 'api/folders.md'
+    - 'groups': 'api/groups.md'
+    - 'initiator_groups': 'api/initiator_groups.md'
+    - 'initiators': 'api/initiators.md'
+    - 'jobs': 'api/jobs.md'
+    - 'key_managers': 'api/key_managers.md'
+    - 'master_key': 'api/master_key.md'
+    - 'network_configs': 'api/network_configs.md'
+    - 'network_interfaces': 'api/network_interfaces.md'
+    - 'performance_policies': 'api/performance_policies.md'
+    - 'pools': 'api/pools.md'
+    - 'protection_schedules': 'api/protection_schedules.md'
+    - 'protection_templates': 'api/protection_templates.md'
+    - 'protocol_endpoints': 'api/protocol_endpoints.md'
+    - 'replication_partners': 'api/replication_partners.md'
+    - 'shelves': 'api/shelves.md'
+    - 'snapshot_collections': 'api/snapshot_collections.md'
+    - 'snapshots': 'api/snapshots.md'
+    - 'software_versions': 'api/software_versions.md'
+    - 'space_domains': 'api/space_domains.md'
+    - 'subnets': 'api/subnets.md'
+    - 'support': 'api/support.md'
+    - 'tokens': 'api/tokens.md'
+    - 'user_groups': 'api/user_groups.md'
+    - 'user_policies': 'api/user_policies.md'
+    - 'users': 'api/users.md'
+    - 'versions': 'api/versions.md'
+    - 'volume_collections': 'api/volume_collections.md'
+    - 'volumes': 'api/volumes.md'
+    - 'witnesses': 'api/witnesses.md'
+  - COMMUNITY:
+    - 'HPE Developer Community': 'https://developer.hpe.com'
+    - 'Sign up to HPE DEV on Slack': 'https://slack.hpedev.io'
+  - EXTERNAL LINKS:
+    - 'Nimble SDK on GitHub': 'https://github.com/hpe-storage/nimble-python-sdk'
+    - 'HPE Storage on GitHub': 'https://github.com/hpe-storage'
+    - 'Storage Automation on hpe.com': 'https://hpe.com/storage/management-automation'
+  - LEGAL:
+    - 'Contributing': 'legal/contributing/index.md'
+    - 'Support': 'legal/support/index.md'
+    - 'License': 'legal/license/index.md'

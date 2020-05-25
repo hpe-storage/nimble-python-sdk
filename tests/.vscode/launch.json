@@ -1,0 +1,46 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "name": "Python: pytest",
+            "type": "python",
+            "request": "launch",
+            "module": "pytest",
+            "console": "integratedTerminal",
+            //"justMyCode" : false,
+            //"program": "${file}",
+            "args": [
+              //  "--no-cov"
+              //"${workspaceFolder}\\tests\\test_*.py"
+              "${file}"
+            ],
+           // "pythonPath": "${workspaceFolder}/venv/bin",
+           // "program": "${workspaceFolder}/tests/*.py"
+
+        },
+        {
+            "name": "Python: pytest through debugger",
+            "type": "python",
+            "request": "launch",
+            "module": "pytest",
+            "console": "integratedTerminal",
+            //"program": "${file}",
+            "args": [
+                  "-m debug"
+            ],
+           // "pythonPath": "${workspaceFolder}/venv/bin",
+           // "program": "${workspaceFolder}/tests/*.py"
+        },
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
+    ]
+}
