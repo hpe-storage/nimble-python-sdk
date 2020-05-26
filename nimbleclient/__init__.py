@@ -11,6 +11,7 @@ from .query import (
     or_
 )
 
+# Version for NimbleOS SDK client package
 __version__ = "1.0.0"
 
 __all__ = [
@@ -21,7 +22,7 @@ __all__ = [
 ]
 
 
-def NimOSClient(hostname, username, password, port=5392, version=1):
+def NimOSClient(hostname, username, password, job_timeout=60, port=5392, version=1):
     """Instantiates Nimble client instance to interact with the NimOS REST API Server."""
 
-    return getattr(nimbleclient, f'v{version}').NimOSClient(hostname, username, password, port)
+    return getattr(nimbleclient, f'v{version}').NimOSClient(hostname, username, password, job_timeout, port)

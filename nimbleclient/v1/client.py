@@ -57,8 +57,8 @@ from .api.witnesses import WitnessList
 class NimOSClient:
     """Nimble client for NimOS v1 REST API."""
 
-    def __init__(self, hostname, username, password, port=5392):
-        self._client = NimOSAPIClient(hostname, username, password, port)
+    def __init__(self, hostname, username, password, job_timeout=60, port=5392):
+        self._client = NimOSAPIClient(hostname, username, password, job_timeout, port)
 
     @property
     def access_control_records(self):

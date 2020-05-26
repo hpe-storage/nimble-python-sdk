@@ -68,9 +68,10 @@ def run_internal(query_login, cleanup, noisy):
         if res:
             success_count += 1
     screen('\n\n{} of {} workflows SUCCEEDED'.format(success_count, wf_count), noisy)
+    return success_count, wf_count
 
 
-def run_external2(query_login, cleanup, noisy):
+def run_external(query_login, cleanup, noisy):
     if query_login:
         screen('\nERROR: --query_login is not supported in external mode. Please modify {} instead.\n'.
                format(config_file), noisy)
@@ -103,6 +104,6 @@ if __name__ == '__main__':
     query_login = True if '--query_login' in sys.argv else False
     cleanup = True if '--cleanup' in sys.argv else False
     if '--external' in sys.argv:
-        run_external2(query_login, cleanup, noisy)
+        run_external(query_login, cleanup, noisy)
     elif '--internal' in sys.argv:
         run_internal(query_login, cleanup, noisy)

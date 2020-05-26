@@ -69,8 +69,8 @@ class Collection:
         resp = self._client.update_resource(self.resource_type, id, **kwargs)
         return self.resource(resp['id'], resp, client=self._client, collection=self)
 
-    def delete(self, id):
-        return self._client.delete_resource(self.resource_type, id)
+    def delete(self, id, job_timeout=None):
+        return self._client.delete_resource(self.resource_type, id, job_timeout)
 
     def list(self, **kwargs):
         objs = self._client.list_resources(self.resource_type, **kwargs)

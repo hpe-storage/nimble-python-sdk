@@ -5,8 +5,11 @@
 import logging
 import uuid
 import requests
+import json
+import time
+import datetime
 
-from ..exceptions import NimOSAuthenticationError, NimOSAPIError
+from nimbleclient.exceptions import NimOSAuthenticationError, NimOSAPIError, NimOSClientJobTimeoutError
 from ..__init__ import __version__
 
 requests.packages.urllib3.disable_warnings(requests.packages.urllib3.exceptions.InsecureRequestWarning)
@@ -71,13 +74,14 @@ class NimOSAPIClient:
         'network_configs': 'v1/network_configs',
     }
 
-    def __init__(self, hostname, username, password, port=5392):
+    def __init__(self, hostname, username, password, job_timeout=60, port=5392):
         """Initialize a session to the NimOS REST API."""
 
         connection_hash = str(uuid.uuid3(uuid.NAMESPACE_OID, f'{hostname}{port}{username}{password}'))
 
         self.hostname = hostname
         self.port = port
+        self.job_timeout = job_timeout
 
         self.__auth = {
             'data': {
@@ -86,6 +90,8 @@ class NimOSAPIClient:
                 'app_name': f'NimOS Python SDK v{__version__}'
             }
         }
+        logging.debug("NimOSAPIClient created with [hostname: %s], [job_timeout: %s seconds], [port: %s], [SDK Version: %s]",
+                      hostname, job_timeout, port, f'v{__version__}')
 
         self.__connection_hash = connection_hash
 
@@ -258,9 +264,10 @@ class NimOSAPIClient:
             logging.exception(error)
             raise ConnectionError(f"Error retrieving data from {self.hostname}")
 
-    def delete(self, endpoint):
+    def delete(self, endpoint, job_timeout=None):
         """Wrapper for DELETE requests"""
 
+        logging.debug("job_timeout: [%s seconds]", job_timeout if job_timeout is not None else self.job_timeout)
         try:
             while 1:
                 response = requests.delete(
@@ -274,6 +281,14 @@ class NimOSAPIClient:
                         self._refresh_connection()
                     else:
                         raise NimOSAPIError(response.json())
+                elif response.status_code == 202:
+                    # Handle async job response
+                    job_response = response.json()
+                    if 'messages' in job_response and job_response['messages'][0]['code'] == 'SM_async_job_id':
+                        logging.debug("Got async job response: %s", json.dumps(job_response['messages'], indent=4))
+                        return self.job_handler(job_response['messages'][0]['arguments']['job_id'], job_timeout)
+                    else:
+                        break
                 else:
                     break
 
@@ -283,8 +298,10 @@ class NimOSAPIClient:
             logging.exception(error)
             raise ConnectionError(f"Error communicating with {self.hostname}")
 
-    def put(self, endpoint, **payload):
+    def put(self, endpoint, job_timeout=None, **payload):
         """Wrapper for PUT requests."""
+
+        logging.debug("job_timeout: [%s seconds]", job_timeout if job_timeout is not None else self.job_timeout)
 
         # Translate metadata dict to REST key-value pairs.
         # Ex: {'k1': 'k1', 'k2': 'v2'} ==> [{'key': 'k1', 'value': 'v1'}, {'key': 'k2', 'value': 'v2'}]
@@ -305,6 +322,14 @@ class NimOSAPIClient:
                         self._refresh_connection()
                     else:
                         raise NimOSAPIError(response.json())
+                elif response.status_code == 202:
+                    # Handle async job response
+                    job_response = response.json()
+                    if 'messages' in job_response and job_response['messages'][0]['code'] == 'SM_async_job_id':
+                        logging.debug("Got async job response: %s", json.dumps(job_response['messages'], indent=4))
+                        return self.job_handler(job_response['messages'][0]['arguments']['job_id'], job_timeout)
+                    else:
+                        break
                 else:
                     break
 
@@ -314,8 +339,10 @@ class NimOSAPIClient:
             logging.exception(error)
             raise ConnectionError(f"Error communicating with {self.hostname}")
 
-    def post(self, endpoint, **params):
+    def post(self, endpoint, job_timeout=None, **params):
         """Wrapper for POST requests"""
+
+        logging.debug("job_timeout: [%s seconds]", job_timeout if job_timeout is not None else self.job_timeout)
 
         # Translate metadata dict to REST key-value pairs.
         # Ex: {'k1': 'k1', 'k2': 'v2'} ==> [{'key': 'k1', 'value': 'v1'}, {'key': 'k2', 'value': 'v2'}]
@@ -336,6 +363,14 @@ class NimOSAPIClient:
                         self._refresh_connection()
                     else:
                         raise NimOSAPIError(response.json())
+                elif response.status_code == 202:
+                    # Handle async job response
+                    job_response = response.json()
+                    if 'messages' in job_response and job_response['messages'][0]['code'] == 'SM_async_job_id':
+                        logging.debug("Got async job response: %s", json.dumps(job_response['messages'], indent=4))
+                        return self.job_handler(job_response['messages'][0]['arguments']['job_id'], job_timeout)
+                    else:
+                        break
                 else:
                     break
 
@@ -371,11 +406,11 @@ class NimOSAPIClient:
         resp = self.post(self._ENDPOINTS[resource], **params)
         return resp['data'] if 'data' in resp else resp
 
-    def delete_resource(self, resource, ident):
+    def delete_resource(self, resource, ident, job_timeout=None):
         if resource not in self._ENDPOINTS:
             raise ValueError(f"Unknown resource {resource}")
 
-        resp = self.delete(f"{self._ENDPOINTS[resource]}/{ident}")
+        resp = self.delete(f"{self._ENDPOINTS[resource]}/{ident}", job_timeout)
         return resp['data'] if 'data' in resp else resp
 
     def update_resource(self, resource, ident, **params):
@@ -398,3 +433,38 @@ class NimOSAPIClient:
 
         resp = self.post(f"{self._ENDPOINTS[resource]}/actions/{action}", **params)
         return resp['data'] if 'data' in resp else resp
+
+    def job_handler(self, job_id, job_timeout, retry_interval=5):
+
+        # Use global/default job timeout if unspecified in the request
+        timeout_sec = job_timeout if job_timeout is not None else self.job_timeout
+
+        now = datetime.datetime.now()
+        expiry_time = now + datetime.timedelta(0, timeout_sec)
+        logging.debug(f"job_id: [{job_id}], job_timeout: [{timeout_sec} seconds], current_time: [{now}], job_retry_expiry_time: [{expiry_time}], retry_interval: [{retry_interval} seconds]")
+        while 1:
+            try:
+                # Get job status from Array
+                response = self.get_resource('jobs', job_id)
+                logging.debug("JOB STATUS RESPONSE: %s", json.dumps(response, indent=4))
+                if (response['state'] == 'done'):
+                    logging.info("Job with id '%s' completed with status '%s'", job_id, response['result'])
+                    break
+
+                if datetime.datetime.now().time() > expiry_time.time():
+                    logging.error("Job status retry timeout has expired after [%s] seconds, returning with client timeout exception", timeout_sec)
+                    raise NimOSClientJobTimeoutError(response)
+                else:
+                    #  Sleep n Wait
+                    if timeout_sec < retry_interval:
+                        logging.debug("Sleeping for [%s seconds] before next retry attempt ...", timeout_sec)
+                        time.sleep(timeout_sec)
+                    else:
+                        logging.debug("Sleeping for [%s seconds] before next retry attempt ...", retry_interval)
+                        time.sleep(retry_interval)
+
+            except requests.exceptions.RequestException as error:
+                logging.exception(error)
+                raise ConnectionError(f"Error communicating with {self.hostname}")
+
+        return response

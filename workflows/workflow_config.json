@@ -1,10 +1,11 @@
 {
-  "hostname":"brian-va.vlab.nimblestorage.com",
-  "username":"admin",
-  "password":"admin",
-  "vol_name":"wfvol",
-  "ig_name":"wfig",
-  "mk_name":"default",
-  "mk_phrase":"test-phrase11",
+  "hostname":"",
+  "username":"",
+  "password":"",
+
+  "volume_name":"wfvol",
+  "initiator_group_name":"wfig",
+  "master_key_name":"default",
+  "master_key_phrase":"test-phrase11",
   "protection_sched":"ps1"
 }
