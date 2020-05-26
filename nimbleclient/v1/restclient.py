@@ -447,7 +447,7 @@ class NimOSAPIClient:
                 # Get job status from Array
                 response = self.get_resource('jobs', job_id)
                 logging.debug("JOB STATUS RESPONSE: %s", json.dumps(response, indent=4))
-                if (response['state'] == '1done'):
+                if (response['state'] == 'done'):
                     logging.info("Job with id '%s' completed with status '%s'", job_id, response['result'])
                     break
 

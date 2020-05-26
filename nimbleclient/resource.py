@@ -62,7 +62,7 @@ class Collection:
                 return self.resource(objs[0]['id'] if 'id' in objs[0] else None, objs[0], client=self._client, collection=self)
 
     def create(self, name, **kwargs):
-        resp = self._client.create_resource(self.resource_type, name, **kwargs)
+        resp = self._client.create_resource(self.resource_type, name=name, **kwargs)
         return self.resource(resp['id'], resp, client=self._client, collection=self)
 
     def update(self, id, **kwargs):
