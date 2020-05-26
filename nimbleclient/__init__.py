@@ -11,6 +11,7 @@ from .query import (
     or_
 )
 
+# Version for NimbleOS SDK client package
 __version__ = "1.0.0"
 
 __all__ = [

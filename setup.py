@@ -3,8 +3,13 @@
 #
 
 import setuptools
+import os
 
-__version__ = '1.0.0'
+# Read the version from nimbleresults.__init__.__version__
+base_path = os.path.dirname(__file__)
+with open(os.path.join(base_path, 'nimbleclient', '__init__.py')) as fh:
+    info = fh.read()
+    version = [line for line in info.split('\n') if line.startswith('__version__')][0].split(' = ')[1][1:-1]
 
 with open('README.md', 'r') as fh:
     long_description = fh.read()
@@ -14,7 +19,7 @@ with open('requirements.txt') as requirements:
 
 setuptools.setup(
     name='nimble-sdk',
-    version=__version__,
+    version=version,
     author='HPE Nimble Storage DCS',
     author_email='nimble-dcs-storage-automation-eng@hpe.com',
     maintainer='Suneethkumar Byadarahalli, Alok Ranjan, George Costea',
@@ -29,7 +34,6 @@ setuptools.setup(
         'Source': 'https://github.com/hpe-storage/nimble-python-sdk',
         'Tracker': 'https://github.com/hpe-storage/nimble-python-sdk/issues',
         'Community': 'https://hpedev.io'
-
     },
     packages=setuptools.find_packages(),
     install_requires=install_requires,
