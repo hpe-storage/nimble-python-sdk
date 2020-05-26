@@ -31,5 +31,5 @@ def setup_teardown_for_each_test(before_running_all_testcase, request):
                     reason="skipped this test as SKIPTEST variable is true")
 def test_getprotocolendpoints(setup_teardown_for_each_test):
     resp = nimosclientbase.get_nimos_client(
-    ).protocol_endpoints.list(detail=True, pageSize=2)
+    ).protocol_endpoints.list(detail=True, limit=2)
     assert resp is not None

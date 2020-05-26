@@ -32,7 +32,7 @@ def setup_teardown_for_each_test(before_running_all_testcase, request):
                     reason="skipped this test as SKIPTEST variable is true")
 def test_get_pools(setup_teardown_for_each_test):
     resp = nimosclientbase.get_nimos_client().pools.list(
-        detail=True, pageSize=2)
+        detail=True, limit=2)
     assert resp is not None
     # doc shows it has 13 properties.but in replication setup it is 43.
     # just check the length

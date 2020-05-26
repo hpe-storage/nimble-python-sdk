@@ -73,7 +73,7 @@ def test_query_invalid_params(setup_teardown_for_each_test):
     try:
         query_param = "activity"
         resp = nimosclientbase.get_nimos_client().disks.get(
-            pageSize=2,
+            limit=2,
             fields=query_param)
         assert resp is not None
     except exceptions.NimOSAPIError as ex:
