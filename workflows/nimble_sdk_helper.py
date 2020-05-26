@@ -1,3 +1,6 @@
+# (c) Copyright 2020 Hewlett Packard Enterprise Development LP
+# @author bsorge
+
 import sys
 from nimbleclient.exceptions import NimOSAPIError
 from workflow_common import create_vol, create_initiator_group, create_access_control_rec, cleanup_vol,\
