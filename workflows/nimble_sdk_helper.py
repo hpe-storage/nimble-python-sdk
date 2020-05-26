@@ -149,7 +149,7 @@ def show_all_objects(client):
 
 def safe_cleanup(client, obj_dict):
     noisy_cleanup = True
-    print('\tDoing SAFE CLEANUP!')
+    print('\tDoing Safe Cleanup!')
     print('\tAll volumes, clones, snapshots, volume collection, initiator groups,')
     print('\tencryption keys and access control records created with this tool')
     print('\twill be removed from the system.\n')
@@ -206,11 +206,15 @@ def safe_cleanup(client, obj_dict):
 
 
 def unsafe_cleanup(client):
-    print('\tDoing UNSAFE CLEANUP!')
+    print('\tWARNING!!!!! Doing UNSAFE CLEANUP!\n')
     print('\tAll volumes, clones, snapshots, volume collection, initiator groups,')
     print('\tencryption keys and access control records will be removed from the system.')
-    answer = input('\n\tAre you sure you want to proceded? [y/N] : ')
+    answer = input('\n\tAre you sure you want to proceded? [yes/N] : ')
     if answer.lower() != 'y' and answer.lower() != 'yes':
+        return
+    if answer.lower() == 'y':
+        answer = input('\n\tPlease enter the entire word to perform UNSAFE CLEANUP [yes] : ')
+    if answer.lower() != 'yes':
         return
     print('\tDoing unsafe cleanup...\n')
     # Disassociate volumes from volcolls and delete volcolls
