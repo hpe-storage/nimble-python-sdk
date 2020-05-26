@@ -25,3 +25,7 @@ class NimOSCLIError(NimOSClientError):
 
 class NimOSAPIOperationUnsupported(NimOSClientError):
     """NimOS API Operation not supported"""
+
+
+class NimOSClientJobTimeoutError(NimOSClientError):
+    """NimOS Client job timeout failure"""

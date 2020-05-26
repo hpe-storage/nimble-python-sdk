@@ -62,15 +62,15 @@ class Collection:
                 return self.resource(objs[0]['id'] if 'id' in objs[0] else None, objs[0], client=self._client, collection=self)
 
     def create(self, name, **kwargs):
-        resp = self._client.create_resource(self.resource_type, name=name, **kwargs)
+        resp = self._client.create_resource(self.resource_type, name, **kwargs)
         return self.resource(resp['id'], resp, client=self._client, collection=self)
 
     def update(self, id, **kwargs):
         resp = self._client.update_resource(self.resource_type, id, **kwargs)
         return self.resource(resp['id'], resp, client=self._client, collection=self)
 
-    def delete(self, id):
-        return self._client.delete_resource(self.resource_type, id)
+    def delete(self, id, job_timeout=None):
+        return self._client.delete_resource(self.resource_type, id, job_timeout)
 
     def list(self, **kwargs):
         objs = self._client.list_resources(self.resource_type, **kwargs)
