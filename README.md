@@ -5,7 +5,7 @@ The SDK provides a pythonic client library to interact with the HPE Nimble Stora
 
 # Synopsis
 
-See the [https://hpe-storage.github.io/nimble-python-sdk](documentation) on how to [install](https://hpe-storage.github.io/nimble-python-sdk/get_started/install/index.html), [use](https://hpe-storage.github.io/nimble-python-sdk/get_started/using/index.html) and some pre-cocked [workflows](https://hpe-storage.github.io/nimble-python-sdk/get_started/examples/index.html) for more elaborate examples.
+See the [documentation](https://hpe-storage.github.io/nimble-python-sdk) on how to [install](https://hpe-storage.github.io/nimble-python-sdk/get_started/install/index.html), [use](https://hpe-storage.github.io/nimble-python-sdk/get_started/using/index.html) and some pre-cocked [workflows](https://hpe-storage.github.io/nimble-python-sdk/get_started/examples/index.html) for more elaborate examples.
 
 ```python
 $ pip install nimble-sdk
