@@ -8,17 +8,19 @@ from nimbleclient.v1 import NimOSClient
 from nimbleclient.exceptions import NimOSAuthenticationError
 
 config_file = 'workflow_config.json'
+# config file fields
 KEY_HNAME = 'hostname'
 KEY_UNAME = 'username'
 KEY_PWD = 'password'
-KEY_VOL = 'vol_name'
+KEY_VOL = 'volume_name'
+KEY_IG = 'initiator_group_name'
+KEY_MK = 'master_key_name'
+KEY_MK_PHRASE = 'master_key_phrase'
+KEY_PS = 'protection_sched'
+# genrated config fields
 KEY_ENCRYPT_VOL = 'encrypted_vol_name'
-KEY_IG = 'ig_name'
-KEY_MK = 'mk_name'
-KEY_MK_PHRASE = 'mk_phrase'
 KEY_CLONE = 'clone_name'
 KEY_SNAP = 'snap_name'
-KEY_PS = 'protection_sched'
 KEY_VOLCOLL = 'volcoll_name'
 
 
@@ -68,15 +70,23 @@ def handle_params(file, param_list):
 
 def login(query_login, noisy):
     client = None
+    hostname, username, password = None, None, None
+    config_dict = read_config()
+    if KEY_HNAME in config_dict:
+        hostname = config_dict[KEY_HNAME]
+    if KEY_UNAME in config_dict:
+        username = config_dict[KEY_UNAME]
+    if KEY_PWD in config_dict:
+        password = config_dict[KEY_PWD]
+    cred_list = [hostname, username, password]
+    if not query_login and (None in cred_list or '' in cred_list):
+        screen('\n\tFailed to find Nimble Array login credentials in {}.'.format(config_file), noisy)
+        screen('\tUpdate that file to remove login query.\n', noisy)
+        query_login = True
     if query_login:
         hostname = input('Enter the hostname: ')
         username = input('Enter the username: ')
         password = getpass.getpass(prompt='Enter the password: ', stream=None)
-    else:
-        config_dict = read_config()
-        hostname = config_dict['hostname']
-        username = config_dict['username']
-        password = config_dict['password']
     screen('\nAttempting to establish connection to array:', noisy)
     screen('\tHostname: {}'.format(hostname), noisy)
     screen('\tUsername: {}'.format(username), noisy)
