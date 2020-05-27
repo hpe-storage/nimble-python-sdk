@@ -207,7 +207,7 @@ def test_volume_page_size(setup_teardown_for_each_test):
         resp = create_volume(vol_name)
         resp_vol.append(resp)
     resp = nimosclientbase.get_nimos_client().volumes.list(
-        detail=True, pageSize=2)
+        detail=True, limit=2)
     assert resp is not None
     log("Successfully got just 2 items per page")
     assert resp.__len__() == 2
@@ -222,10 +222,10 @@ def test_invalid_volume_page_size(setup_teardown_for_each_test):
         create_volume(vol_name)
     try:
         nimosclientbase.get_nimos_client().volumes.list(
-            detail=True, pageSize=5000)
+            detail=True, limit=5000)
     except Exception as ex:
         if"SM_too_large_page_size" in str(ex):
-            log("Failed as expected. Invaild pagesize given")
+            log("Failed as expected. Invaild limit given")
         else:
             log(f"Failed with exception message : {str(ex)}")
             raise ex

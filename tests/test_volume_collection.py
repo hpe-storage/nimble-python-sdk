@@ -185,8 +185,6 @@ def test_promote_volcoll(setup_teardown_for_each_test):
     # check
     assert vol_associate_resp.get("volcoll_name") == volcoll_name1
     assert vol_associate_resp.get("volcoll_id") == volcoll_resp.attrs.get("id")
-    # try deleting the volcoll .this should fail as
-    # volume has not been disassocited
     try:
         nimosclientbase.get_nimos_client().volume_collections.promote(
             id=volcoll_resp.attrs.get("id"))

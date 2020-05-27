@@ -31,7 +31,7 @@ def setup_teardown_for_each_test(before_running_all_testcase, request):
                     reason="skipped this test as SKIPTEST variable is true")
 def test_get_groups(setup_teardown_for_each_test):
     resp = nimosclientbase.get_nimos_client().groups.list(
-        detail=True, pageSize=2)
+        detail=True, limit=2)
     assert resp is not None
 
 

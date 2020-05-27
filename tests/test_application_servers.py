@@ -61,7 +61,7 @@ def create_app_server(app_server, hostname="example.com", **kwargs):
 def test_get_app_server(setup_teardown_for_each_test):
     resp = create_app_server(app_server_name_1)
     resp = nimosclientbase.get_nimos_client().application_servers.list(
-        detail=True, pageSize=1)
+        detail=True, limit=1)
     assert resp is not None
 
 

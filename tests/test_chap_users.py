@@ -59,7 +59,7 @@ def test_get_chap_users(setup_teardown_for_each_test):
         description="created by testcase"
     )
     resp = nimosclientbase.get_nimos_client().chap_users.list(
-        detail=True, pageSize=2)
+        detail=True, limit=2)
     assert resp is not None
 
 
