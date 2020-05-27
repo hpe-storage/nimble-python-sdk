@@ -195,7 +195,9 @@ Simple interactions with the `volumes` endpoint. Refer to the [volumes](../../ap
 {}
 ```
 
-## Paginate volumes
+## Pagination
+
+The `list` operation of an API resource comes with `limit` and `from_id` attributes that provide means to paginate objects and perform operations in batches. The below example uses the `volumes` resource to paginate volume objects.
 
 ```python
 >>> pprint.pprint(api.volumes.list(limit=3))
