@@ -439,7 +439,8 @@ class NimOSAPIClient:
 
         now = datetime.datetime.now()
         expiry_time = now + datetime.timedelta(0, timeout_sec)
-        logging.debug(f"job_id: [{job_id}], job_timeout: [{timeout_sec} seconds], current_time: [{now}], job_retry_expiry_time: [{expiry_time}], retry_interval: [{retry_interval} seconds]")
+        logging.debug(f"job_id: [{job_id}], job_timeout: [{timeout_sec} seconds], current_time: [{now}]" +
+                      f"job_retry_expiry_time: [{expiry_time}], retry_interval: [{retry_interval} seconds]")
         while 1:
             try:
                 # Get job status from Array
