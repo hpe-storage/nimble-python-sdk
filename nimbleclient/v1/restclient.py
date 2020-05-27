@@ -243,9 +243,7 @@ class NimOSAPIClient:
                 if 'data' in response and len(response['data']) == 0:
                     break
 
-                # Add break condition when 'endRow' is equal to 'totalRows'.
-                # This is to handle 'controllers' list() operation in particular.
-                # The 'controllers' endpoint doesn't support 'startRow' or 'endRow' as valid query parameters in the URL.
+                # When 'endRow' is equal to 'totalRows', stop here.
                 if response['endRow'] == response['totalRows']:
                     break
 
