@@ -8,7 +8,7 @@ The examples are available to [browse on GitHub](https://github.com/hpe-storage/
 
 ## Setup
 
-Ensure Python 3.6+, `pip` and `git` is installed on your workstation. 
+Ensure Python 3.6+, `pip` and `git` is installed on your workstation (See [Requirements](../../index.md#requirements) for other dependencies).
 
 ```markdown
 pip install nimble-sdk

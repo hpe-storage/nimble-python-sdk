@@ -16,3 +16,6 @@ Alternatively, you can grab the latest source code from [GitHub](https://github.
 git clone https://github.com/hpe-storage/nimble-python-sdk.git
 python setup.py install
 ```
+
+!!! warning "Note" 
+    Python 3.6, a recent version of [Requests](https://requests.readthedocs.io) and NimbleOS 5.1.x is required.

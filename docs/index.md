@@ -32,3 +32,7 @@ api.fibre_channel_interfaces         api.protocol_endpoints               api.wi
 api.fibre_channel_ports              api.replication_partners
 api.fibre_channel_sessions           api.shelves
 ```
+
+# Requirements
+
+The HPE Nimble Storage SDK for Python supports NimbleOS 5.1.x or later and requires a recent version of [Requests](https://requests.readthedocs.io) along with Python 3.6 or newer.

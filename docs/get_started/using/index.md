@@ -6,12 +6,10 @@ Refer to the API reference for indivual resource manipulations. This introductio
 
 ## Using python interactively
 
-Python 3.6 or later is required and for illustrative purposes, the examples uses `python` interactively.
-
 From scratch on a `python` prompt.
 
 ```python
-$ python3
+$ python
 Python 3.7.7 (default, Mar 10 2020, 15:43:03)
 [Clang 11.0.0 (clang-1100.0.33.17)] on darwin
 Type "help", "copyright", "credits" or "license" for more information.

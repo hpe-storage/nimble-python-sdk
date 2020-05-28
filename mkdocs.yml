@@ -83,10 +83,12 @@ nav:
   - COMMUNITY:
     - 'HPE Developer Community': 'https://developer.hpe.com'
     - 'Sign up to HPE DEV on Slack': 'https://slack.hpedev.io'
+    - 'Got feedback?': 'https://github.com/hpe-storage/nimble-python-sdk/issues/new?title=I%20have%20some%20feedback%20on%20the%20Nimble%20SDK'
   - EXTERNAL LINKS:
     - 'Nimble SDK on GitHub': 'https://github.com/hpe-storage/nimble-python-sdk'
     - 'HPE Storage on GitHub': 'https://github.com/hpe-storage'
-    - 'Storage Automation on hpe.com': 'https://hpe.com/storage/management-automation'
+    - 'HPE Nimble Storage on hpe.com': 'https://hpe.com/storage/nimble'
+    - 'Storage Automation on hpe.com': 'https://hpe.com/storage/management'
   - LEGAL:
     - 'Contributing': 'legal/contributing/index.md'
     - 'Support': 'legal/support/index.md'
