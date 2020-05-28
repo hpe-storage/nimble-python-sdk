@@ -56,7 +56,7 @@ class Snapshot(Resource):
                                   replication.
     """
 
-    def bulk_create(self, replicate, snap_vol_list, vss_snap, job_timeout=None):
+    def bulk_create(self, replicate, snap_vol_list, vss_snap):
         """Create snapshots on the given set of volumes.
 
         # Parameters
@@ -70,8 +70,7 @@ class Snapshot(Resource):
             self,
             replicate,
             snap_vol_list,
-            vss_snap,
-            job_timeout
+            vss_snap
         )
 
 
@@ -79,7 +78,7 @@ class SnapshotList(Collection):
     resource = Snapshot
     resource_type = "snapshots"
 
-    def bulk_create(self, replicate, snap_vol_list, vss_snap, job_timeout=None):
+    def bulk_create(self, replicate, snap_vol_list, vss_snap):
         """Create snapshots on the given set of volumes.
 
         # Parameters
@@ -94,6 +93,5 @@ class SnapshotList(Collection):
             'bulk_create',
             replicate=replicate,
             snap_vol_list=snap_vol_list,
-            vss_snap=vss_snap,
-            job_timeout=job_timeout
+            vss_snap=vss_snap
         )

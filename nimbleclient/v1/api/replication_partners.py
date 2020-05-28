@@ -66,7 +66,7 @@ class ReplicationPartner(Resource):
     replication_direction            : Direction of replication configured with this partner.
     """
 
-    def pause(self, job_timeout=None):
+    def pause(self):
         """Pause replication for the specified partner.
 
         # Parameters
@@ -74,11 +74,10 @@ class ReplicationPartner(Resource):
         """
 
         return self._collection.pause(
-            self.id,
-            job_timeout
+            self.id
         )
 
-    def resume(self, job_timeout=None):
+    def resume(self):
         """Resume replication for the specified partner.
 
         # Parameters
@@ -86,11 +85,10 @@ class ReplicationPartner(Resource):
         """
 
         return self._collection.resume(
-            self.id,
-            job_timeout
+            self.id
         )
 
-    def test(self, job_timeout=None):
+    def test(self):
         """Test connectivity to the specified partner.
 
         # Parameters
@@ -98,8 +96,7 @@ class ReplicationPartner(Resource):
         """
 
         return self._collection.test(
-            self.id,
-            job_timeout
+            self.id
         )
 
 
@@ -107,7 +104,7 @@ class ReplicationPartnerList(Collection):
     resource = ReplicationPartner
     resource_type = "replication_partners"
 
-    def pause(self, id, job_timeout=None):
+    def pause(self, id):
         """Pause replication for the specified partner.
 
         # Parameters
@@ -118,11 +115,10 @@ class ReplicationPartnerList(Collection):
             self.resource_type,
             id,
             'pause',
-            id=id,
-            job_timeout=job_timeout
+            id=id
         )
 
-    def resume(self, id, job_timeout=None):
+    def resume(self, id):
         """Resume replication for the specified partner.
 
         # Parameters
@@ -133,11 +129,10 @@ class ReplicationPartnerList(Collection):
             self.resource_type,
             id,
             'resume',
-            id=id,
-            job_timeout=job_timeout
+            id=id
         )
 
-    def test(self, id, job_timeout=None):
+    def test(self, id):
         """Test connectivity to the specified partner.
 
         # Parameters
@@ -148,6 +143,5 @@ class ReplicationPartnerList(Collection):
             self.resource_type,
             id,
             'test',
-            id=id,
-            job_timeout=job_timeout
+            id=id
         )

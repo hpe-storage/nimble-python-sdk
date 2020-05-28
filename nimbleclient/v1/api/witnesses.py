@@ -22,7 +22,7 @@ class Witness(Resource):
     auto_switchover_messages : List of validation messages for automatic switchover of Group Management. This will be empty when there are no conflicts found.
     """
 
-    def test(self, job_timeout=None):
+    def test(self):
         """Tests and validates witness configuration between the array and the witness.
 
         # Parameters
@@ -30,8 +30,7 @@ class Witness(Resource):
         """
 
         return self._collection.test(
-            self.id,
-            job_timeout
+            self.id
         )
 
     def update(self, **kwargs):
@@ -42,7 +41,7 @@ class WitnessList(Collection):
     resource = Witness
     resource_type = "witnesses"
 
-    def test(self, id, job_timeout=None):
+    def test(self, id):
         """Tests and validates witness configuration between the array and the witness.
 
         # Parameters
@@ -53,8 +52,7 @@ class WitnessList(Collection):
             self.resource_type,
             id,
             'test',
-            id=id,
-            job_timeout=job_timeout
+            id=id
         )
 
     def create(self, **kwargs):

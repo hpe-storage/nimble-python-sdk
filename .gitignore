@@ -2,3 +2,5 @@
 *.pyc
 workflows/backup_local.command
 site
+.vscode/
+tests/.vscode/

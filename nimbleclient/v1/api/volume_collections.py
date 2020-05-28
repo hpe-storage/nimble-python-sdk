@@ -62,7 +62,7 @@ class VolumeCollection(Resource):
     srep_resync_percent           : Percentage of the resync progress for a synchronously replicated volume collection.
     """
 
-    def promote(self, job_timeout=None):
+    def promote(self):
         """Take ownership of the specified volume collection. The volumes associated with the volume collection will be set to online and be available for reading and writing.
         Replication will be disabled on the affected schedules and must be re-configured if desired. Snapshot retention for the affected schedules will be set to the greater of
         the current local or replica retention values. This operation is not supported for synchronous replication volume collections.
@@ -72,11 +72,10 @@ class VolumeCollection(Resource):
         """
 
         return self._collection.promote(
-            self.id,
-            job_timeout
+            self.id
         )
 
-    def demote(self, replication_partner_id, invoke_on_upstream_partner=False, job_timeout=None):
+    def demote(self, replication_partner_id, invoke_on_upstream_partner=False):
         """Release ownership of the specified volume collection. The volumes associated with the volume collection will set to offline and a snapshot will be created, then full
         control over the volume collection will be transferred to the new owner. This option can be used following a promote to revert the volume collection back to its prior
         configured state. This operation does not alter the configuration on the new owner itself, but does require the new owner to be running in order to obtain its identity
@@ -91,11 +90,10 @@ class VolumeCollection(Resource):
         return self._collection.demote(
             self.id,
             replication_partner_id,
-            invoke_on_upstream_partner,
-            job_timeout
+            invoke_on_upstream_partner
         )
 
-    def handover(self, replication_partner_id, invoke_on_upstream_partner=False, no_reverse=False, override_upstream_down=False, job_timeout=None):
+    def handover(self, replication_partner_id, invoke_on_upstream_partner=False, no_reverse=False, override_upstream_down=False):
         """Gracefully transfer ownership of the specified volume collection. This action can be used to pass control of the volume collection to the downstream replication partner.
         Ownership and full control over the volume collection will be given to the downstream replication partner. The volumes associated with the volume collection will be set to
         offline prior to the final snapshot being taken and replicated, thus ensuring full data synchronization as part of the transfer. By default, the new owner will
@@ -116,11 +114,10 @@ class VolumeCollection(Resource):
             replication_partner_id,
             invoke_on_upstream_partner,
             no_reverse,
-            override_upstream_down,
-            job_timeout
+            override_upstream_down
         )
 
-    def abort_handover(self, job_timeout=None):
+    def abort_handover(self):
         """Abort in-progress handover. If for some reason a previously invoked handover request is unable to complete, this action can be used to cancel it. This operation is not
         supported for synchronous replication volume collections.
 
@@ -129,11 +126,10 @@ class VolumeCollection(Resource):
         """
 
         return self._collection.abort_handover(
-            self.id,
-            job_timeout
+            self.id
         )
 
-    def validate(self, job_timeout=None):
+    def validate(self):
         """Validate a volume collection with either Microsoft VSS or VMware application synchronization.
 
         # Parameters
@@ -141,8 +137,7 @@ class VolumeCollection(Resource):
         """
 
         return self._collection.validate(
-            self.id,
-            job_timeout
+            self.id
         )
 
 
@@ -150,7 +145,7 @@ class VolumeCollectionList(Collection):
     resource = VolumeCollection
     resource_type = "volume_collections"
 
-    def promote(self, id, job_timeout=None):
+    def promote(self, id):
         """Take ownership of the specified volume collection. The volumes associated with the volume collection will be set to online and be available for reading and writing.
         Replication will be disabled on the affected schedules and must be re-configured if desired. Snapshot retention for the affected schedules will be set to the greater of
         the current local or replica retention values. This operation is not supported for synchronous replication volume collections.
@@ -163,11 +158,10 @@ class VolumeCollectionList(Collection):
             self.resource_type,
             id,
             'promote',
-            id=id,
-            job_timeout=job_timeout
+            id=id
         )
 
-    def demote(self, id, replication_partner_id, invoke_on_upstream_partner=False, job_timeout=None):
+    def demote(self, id, replication_partner_id, invoke_on_upstream_partner=False):
         """Release ownership of the specified volume collection. The volumes associated with the volume collection will set to offline and a snapshot will be created, then full
         control over the volume collection will be transferred to the new owner. This option can be used following a promote to revert the volume collection back to its prior
         configured state. This operation does not alter the configuration on the new owner itself, but does require the new owner to be running in order to obtain its identity
@@ -185,11 +179,10 @@ class VolumeCollectionList(Collection):
             'demote',
             id=id,
             replication_partner_id=replication_partner_id,
-            invoke_on_upstream_partner=invoke_on_upstream_partner,
-            job_timeout=job_timeout
+            invoke_on_upstream_partner=invoke_on_upstream_partner
         )
 
-    def handover(self, id, replication_partner_id, invoke_on_upstream_partner=False, no_reverse=False, override_upstream_down=False, job_timeout=None):
+    def handover(self, id, replication_partner_id, invoke_on_upstream_partner=False, no_reverse=False, override_upstream_down=False):
         """Gracefully transfer ownership of the specified volume collection. This action can be used to pass control of the volume collection to the downstream replication partner.
         Ownership and full control over the volume collection will be given to the downstream replication partner. The volumes associated with the volume collection will be set to
         offline prior to the final snapshot being taken and replicated, thus ensuring full data synchronization as part of the transfer. By default, the new owner will
@@ -213,11 +206,10 @@ class VolumeCollectionList(Collection):
             replication_partner_id=replication_partner_id,
             invoke_on_upstream_partner=invoke_on_upstream_partner,
             no_reverse=no_reverse,
-            override_upstream_down=override_upstream_down,
-            job_timeout=job_timeout
+            override_upstream_down=override_upstream_down
         )
 
-    def abort_handover(self, id, job_timeout=None):
+    def abort_handover(self, id):
         """Abort in-progress handover. If for some reason a previously invoked handover request is unable to complete, this action can be used to cancel it. This operation is not
         supported for synchronous replication volume collections.
 
@@ -229,11 +221,10 @@ class VolumeCollectionList(Collection):
             self.resource_type,
             id,
             'abort_handover',
-            id=id,
-            job_timeout=job_timeout
+            id=id
         )
 
-    def validate(self, id, job_timeout=None):
+    def validate(self, id):
         """Validate a volume collection with either Microsoft VSS or VMware application synchronization.
 
         # Parameters
@@ -244,6 +235,5 @@ class VolumeCollectionList(Collection):
             self.resource_type,
             id,
             'validate',
-            id=id,
-            job_timeout=job_timeout
+            id=id
         )

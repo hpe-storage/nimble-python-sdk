@@ -63,7 +63,7 @@ class Pool(Resource):
     is_default                    : Indicates if this is the default pool.
     """
 
-    def merge(self, target_pool_id, force=False, job_timeout=None):
+    def merge(self, target_pool_id, force=False):
         """Merge the specified pool into the target pool. All volumes on the specified pool are moved to the target pool and the specified pool is then deleted. All the arrays in the
         pool are assigned to the target pool.
 
@@ -76,8 +76,7 @@ class Pool(Resource):
         return self._collection.merge(
             self.id,
             target_pool_id,
-            force,
-            job_timeout
+            force
         )
 
 
@@ -85,7 +84,7 @@ class PoolList(Collection):
     resource = Pool
     resource_type = "pools"
 
-    def merge(self, id, target_pool_id, force=False, job_timeout=None):
+    def merge(self, id, target_pool_id, force=False):
         """Merge the specified pool into the target pool. All volumes on the specified pool are moved to the target pool and the specified pool is then deleted. All the arrays in the
         pool are assigned to the target pool.
 
@@ -101,6 +100,5 @@ class PoolList(Collection):
             'merge',
             id=id,
             target_pool_id=target_pool_id,
-            force=force,
-            job_timeout=job_timeout
+            force=force
         )
