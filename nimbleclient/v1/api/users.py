@@ -32,7 +32,7 @@ class User(Resource):
     logged_in          : User is currently logged in.
     """
 
-    def unlock(self):
+    def unlock(self, job_timeout=None):
         """Unlocks user account locked due to failed logins.
 
         # Parameters
@@ -40,7 +40,8 @@ class User(Resource):
         """
 
         return self._collection.unlock(
-            self.id
+            self.id,
+            job_timeout
         )
 
 
@@ -48,7 +49,7 @@ class UserList(Collection):
     resource = User
     resource_type = "users"
 
-    def unlock(self, id):
+    def unlock(self, id, job_timeout=None):
         """Unlocks user account locked due to failed logins.
 
         # Parameters
@@ -59,5 +60,6 @@ class UserList(Collection):
             self.resource_type,
             id,
             'unlock',
-            id=id
+            id=id,
+            job_timeout=job_timeout
         )

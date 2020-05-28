@@ -36,7 +36,7 @@ class Alarm(Resource):
     next_notification_time : Time when next reminder for the alarm will be sent.
     """
 
-    def acknowledge(self, remind_every_unit=None, remind_every=None):
+    def acknowledge(self, remind_every_unit=None, remind_every=None, job_timeout=None):
         """Acknowledge an alarm.
 
         # Parameters
@@ -48,10 +48,11 @@ class Alarm(Resource):
         return self._collection.acknowledge(
             self.id,
             remind_every,
-            remind_every_unit
+            remind_every_unit,
+            job_timeout
         )
 
-    def unacknowledge(self):
+    def unacknowledge(self, job_timeout=None):
         """Unacknowledge an alarm.
 
         # Parameters
@@ -59,7 +60,8 @@ class Alarm(Resource):
         """
 
         return self._collection.unacknowledge(
-            self.id
+            self.id,
+            job_timeout
         )
 
     def create(self, **kwargs):
@@ -70,7 +72,7 @@ class AlarmList(Collection):
     resource = Alarm
     resource_type = "alarms"
 
-    def acknowledge(self, id, remind_every_unit=None, remind_every=None):
+    def acknowledge(self, id, remind_every_unit=None, remind_every=None, job_timeout=None):
         """Acknowledge an alarm.
 
         # Parameters
@@ -85,10 +87,11 @@ class AlarmList(Collection):
             'acknowledge',
             id=id,
             remind_every_unit=remind_every_unit,
-            remind_every=remind_every
+            remind_every=remind_every,
+            job_timeout=job_timeout
         )
 
-    def unacknowledge(self, id):
+    def unacknowledge(self, id, job_timeout=None):
         """Unacknowledge an alarm.
 
         # Parameters
@@ -99,7 +102,8 @@ class AlarmList(Collection):
             self.resource_type,
             id,
             'unacknowledge',
-            id=id
+            id=id,
+            job_timeout=job_timeout
         )
 
     def create(self, **kwargs):

@@ -36,7 +36,7 @@ class Shelf(Resource):
     last_request         : Indicates this is the last request in a series of shelf add requests.
     """
 
-    def identify(self, cid, status):
+    def identify(self, cid, status, job_timeout=None):
         """Turn on chassis identifier for a controller.
 
         # Parameters
@@ -48,10 +48,11 @@ class Shelf(Resource):
         return self._collection.identify(
             self.id,
             cid,
-            status
+            status,
+            job_timeout
         )
 
-    def evacuate(self, driveset, cancel=False, dry_run=False, pause=False, resume=False, start=False):
+    def evacuate(self, driveset, cancel=False, dry_run=False, pause=False, resume=False, start=False, job_timeout=None):
         """Perform shelf evacuation.
 
         # Parameters
@@ -71,7 +72,8 @@ class Shelf(Resource):
             dry_run,
             pause,
             resume,
-            start
+            start,
+            job_timeout
         )
 
     def create(self, **kwargs):
@@ -85,7 +87,7 @@ class ShelfList(Collection):
     resource = Shelf
     resource_type = "shelves"
 
-    def identify(self, id, cid, status):
+    def identify(self, id, cid, status, job_timeout=None):
         """Turn on chassis identifier for a controller.
 
         # Parameters
@@ -100,10 +102,11 @@ class ShelfList(Collection):
             'identify',
             cid=cid,
             id=id,
-            status=status
+            status=status,
+            job_timeout=job_timeout
         )
 
-    def evacuate(self, id, driveset, cancel=False, dry_run=False, pause=False, resume=False, start=False):
+    def evacuate(self, id, driveset, cancel=False, dry_run=False, pause=False, resume=False, start=False, job_timeout=None):
         """Perform shelf evacuation.
 
         # Parameters
@@ -126,7 +129,8 @@ class ShelfList(Collection):
             dry_run=dry_run,
             pause=pause,
             resume=resume,
-            start=start
+            start=start,
+            job_timeout=job_timeout
         )
 
     def create(self, **kwargs):

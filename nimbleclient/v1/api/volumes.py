@@ -142,7 +142,7 @@ class Volume(Resource):
     srep_resync_percent           : Percentage of resync progress for synchronously replicated volume.
     """
 
-    def restore(self, base_snap_id):
+    def restore(self, base_snap_id, job_timeout=None):
         """Restore volume data from a previous snapshot.
 
         # Parameters
@@ -152,10 +152,11 @@ class Volume(Resource):
 
         return self._collection.restore(
             self.id,
-            base_snap_id
+            base_snap_id,
+            job_timeout
         )
 
-    def move(self, dest_pool_id, force_vvol=False):
+    def move(self, dest_pool_id, force_vvol=False, job_timeout=None):
         """Move a volume and its related volumes to another pool. To change a single volume's folder assignment (while remaining in the same pool), use a volume update operation to
         change the folder_id attribute.
 
@@ -170,10 +171,11 @@ class Volume(Resource):
         return self._collection.move(
             self.id,
             dest_pool_id,
-            force_vvol
+            force_vvol,
+            job_timeout
         )
 
-    def bulk_move(self, dest_pool_id, vol_ids, force_vvol=False):
+    def bulk_move(self, dest_pool_id, vol_ids, force_vvol=False, job_timeout=None):
         """Move volumes and their related volumes to another pool. To change a single volume's folder assignment (while remaining in the same pool), use a volume update operation to
         change the folder_id attribute.
 
@@ -189,10 +191,11 @@ class Volume(Resource):
             self,
             dest_pool_id,
             vol_ids,
-            force_vvol
+            force_vvol,
+            job_timeout
         )
 
-    def abort_move(self):
+    def abort_move(self, job_timeout=None):
         """Abort the in-progress move of the specified volume to another pool.
 
         # Parameters
@@ -200,10 +203,11 @@ class Volume(Resource):
         """
 
         return self._collection.abort_move(
-            self.id
+            self.id,
+            job_timeout
         )
 
-    def bulk_set_dedupe(self, dedupe_enabled, vol_ids):
+    def bulk_set_dedupe(self, dedupe_enabled, vol_ids, job_timeout=None):
         """Enable or disable dedupe on a list of volumes. If the volumes are not dedupe capable, the operation will fail for the specified volume.
 
         # Parameters
@@ -214,10 +218,11 @@ class Volume(Resource):
         return self._collection.bulk_set_dedupe(
             self,
             dedupe_enabled,
-            vol_ids
+            vol_ids,
+            job_timeout
         )
 
-    def bulk_set_online_and_offline(self, online, vol_ids):
+    def bulk_set_online_and_offline(self, online, vol_ids, job_timeout=None):
         """Bring a list of volumes online or offline.
 
         # Parameters
@@ -228,7 +233,8 @@ class Volume(Resource):
         return self._collection.bulk_set_online_and_offline(
             self,
             online,
-            vol_ids
+            vol_ids,
+            job_timeout
         )
 
     def online(self):
@@ -271,7 +277,7 @@ class VolumeList(Collection):
     resource = Volume
     resource_type = "volumes"
 
-    def restore(self, id, base_snap_id):
+    def restore(self, id, base_snap_id, job_timeout=None):
         """Restore volume data from a previous snapshot.
 
         # Parameters
@@ -284,10 +290,11 @@ class VolumeList(Collection):
             id,
             'restore',
             base_snap_id=base_snap_id,
-            id=id
+            id=id,
+            job_timeout=job_timeout
         )
 
-    def move(self, id, dest_pool_id, force_vvol=False):
+    def move(self, id, dest_pool_id, force_vvol=False, job_timeout=None):
         """Move a volume and its related volumes to another pool. To change a single volume's folder assignment (while remaining in the same pool), use a volume update operation to
         change the folder_id attribute.
 
@@ -305,10 +312,11 @@ class VolumeList(Collection):
             'move',
             dest_pool_id=dest_pool_id,
             id=id,
-            force_vvol=force_vvol
+            force_vvol=force_vvol,
+            job_timeout=job_timeout
         )
 
-    def bulk_move(self, dest_pool_id, vol_ids, force_vvol=False):
+    def bulk_move(self, dest_pool_id, vol_ids, force_vvol=False, job_timeout=None):
         """Move volumes and their related volumes to another pool. To change a single volume's folder assignment (while remaining in the same pool), use a volume update operation to
         change the folder_id attribute.
 
@@ -325,10 +333,11 @@ class VolumeList(Collection):
             'bulk_move',
             dest_pool_id=dest_pool_id,
             vol_ids=vol_ids,
-            force_vvol=force_vvol
+            force_vvol=force_vvol,
+            job_timeout=job_timeout
         )
 
-    def abort_move(self, id):
+    def abort_move(self, id, job_timeout=None):
         """Abort the in-progress move of the specified volume to another pool.
 
         # Parameters
@@ -339,10 +348,11 @@ class VolumeList(Collection):
             self.resource_type,
             id,
             'abort_move',
-            id=id
+            id=id,
+            job_timeout=job_timeout
         )
 
-    def bulk_set_dedupe(self, dedupe_enabled, vol_ids):
+    def bulk_set_dedupe(self, dedupe_enabled, vol_ids, job_timeout=None):
         """Enable or disable dedupe on a list of volumes. If the volumes are not dedupe capable, the operation will fail for the specified volume.
 
         # Parameters
@@ -354,10 +364,11 @@ class VolumeList(Collection):
             self.resource_type,
             'bulk_set_dedupe',
             dedupe_enabled=dedupe_enabled,
-            vol_ids=vol_ids
+            vol_ids=vol_ids,
+            job_timeout=job_timeout
         )
 
-    def bulk_set_online_and_offline(self, online, vol_ids):
+    def bulk_set_online_and_offline(self, online, vol_ids, job_timeout=None):
         """Bring a list of volumes online or offline.
 
         # Parameters
@@ -369,7 +380,8 @@ class VolumeList(Collection):
             self.resource_type,
             'bulk_set_online_and_offline',
             online=online,
-            vol_ids=vol_ids
+            vol_ids=vol_ids,
+            job_timeout=job_timeout
         )
 
     def online(self, id):

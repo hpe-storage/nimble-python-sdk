@@ -26,8 +26,9 @@ class KeyManager(Resource):
     vendor      : KMIP vendor name.
     """
 
-    def remove(self, passphrase=None):
-        """Remove external key manager.
+    def remove(self, passphrase=None, job_timeout=None):
+        """Remove external key manager. You must migrate the keys to an inactive external key manager before removing the active key manager. If you remove the active external key
+        manager the passphrase is used to enable the internal key manager.
 
         # Parameters
         id         : ID of the external key manager.
@@ -36,18 +37,21 @@ class KeyManager(Resource):
 
         return self._collection.remove(
             self.id,
-            passphrase
+            passphrase,
+            job_timeout
         )
 
-    def migrate_keys(self):
-        """Migrate volume encryption keys from source to destination.
+    def migrate_keys(self, job_timeout=None):
+        """Migrate volume encryption keys from the active key manager to the destination id given in the input. After successfully migrating the encryption keys, the destination key
+        manager is made the active key manager.
 
         # Parameters
         id : ID of the destination external key manager.
         """
 
         return self._collection.migrate_keys(
-            self.id
+            self.id,
+            job_timeout
         )
 
     def delete(self, **kwargs):
@@ -58,8 +62,9 @@ class KeyManagerList(Collection):
     resource = KeyManager
     resource_type = "key_managers"
 
-    def remove(self, id, passphrase=None):
-        """Remove external key manager.
+    def remove(self, id, passphrase=None, job_timeout=None):
+        """Remove external key manager. You must migrate the keys to an inactive external key manager before removing the active key manager. If you remove the active external key
+        manager the passphrase is used to enable the internal key manager.
 
         # Parameters
         id         : ID of the external key manager.
@@ -71,11 +76,13 @@ class KeyManagerList(Collection):
             id,
             'remove',
             id=id,
-            passphrase=passphrase
+            passphrase=passphrase,
+            job_timeout=job_timeout
         )
 
-    def migrate_keys(self, id):
-        """Migrate volume encryption keys from source to destination.
+    def migrate_keys(self, id, job_timeout=None):
+        """Migrate volume encryption keys from the active key manager to the destination id given in the input. After successfully migrating the encryption keys, the destination key
+        manager is made the active key manager.
 
         # Parameters
         id : ID of the destination external key manager.
@@ -85,7 +92,8 @@ class KeyManagerList(Collection):
             self.resource_type,
             id,
             'migrate_keys',
-            id=id
+            id=id,
+            job_timeout=job_timeout
         )
 
     def delete(self, **kwargs):

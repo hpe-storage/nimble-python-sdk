@@ -32,7 +32,7 @@ class NetworkConfig(Resource):
     ignore_validation_mask            : Indicates whether to ignore the validation.
     """
 
-    def activate_netconfig(self, ignore_validation_mask):
+    def activate_netconfig(self, ignore_validation_mask, job_timeout=None):
         """Activate a network configuration.
 
         # Parameters
@@ -42,10 +42,11 @@ class NetworkConfig(Resource):
 
         return self._collection.activate_netconfig(
             self.id,
-            ignore_validation_mask
+            ignore_validation_mask,
+            job_timeout
         )
 
-    def validate_netconfig(self, ignore_validation_mask):
+    def validate_netconfig(self, ignore_validation_mask, job_timeout=None):
         """Validate a network configuration.
 
         # Parameters
@@ -55,7 +56,8 @@ class NetworkConfig(Resource):
 
         return self._collection.validate_netconfig(
             self.id,
-            ignore_validation_mask
+            ignore_validation_mask,
+            job_timeout
         )
 
 
@@ -63,7 +65,7 @@ class NetworkConfigList(Collection):
     resource = NetworkConfig
     resource_type = "network_configs"
 
-    def activate_netconfig(self, id, ignore_validation_mask):
+    def activate_netconfig(self, id, ignore_validation_mask, job_timeout=None):
         """Activate a network configuration.
 
         # Parameters
@@ -76,10 +78,11 @@ class NetworkConfigList(Collection):
             id,
             'activate_netconfig',
             id=id,
-            ignore_validation_mask=ignore_validation_mask
+            ignore_validation_mask=ignore_validation_mask,
+            job_timeout=job_timeout
         )
 
-    def validate_netconfig(self, id, ignore_validation_mask):
+    def validate_netconfig(self, id, ignore_validation_mask, job_timeout=None):
         """Validate a network configuration.
 
         # Parameters
@@ -92,5 +95,6 @@ class NetworkConfigList(Collection):
             id,
             'validate_netconfig',
             id=id,
-            ignore_validation_mask=ignore_validation_mask
+            ignore_validation_mask=ignore_validation_mask,
+            job_timeout=job_timeout
         )

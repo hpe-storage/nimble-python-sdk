@@ -25,7 +25,7 @@ class ActiveDirectoryMembership(Resource):
     enabled             : Active Directory authentication is currently enabled.
     """
 
-    def remove(self, password, user, force=False):
+    def remove(self, password, user, force=False, job_timeout=None):
         """Leaves the Active Directory domain.
 
         # Parameters
@@ -39,10 +39,11 @@ class ActiveDirectoryMembership(Resource):
             self.id,
             password,
             user,
-            force
+            force,
+            job_timeout
         )
 
-    def report_status(self):
+    def report_status(self, job_timeout=None):
         """Reports the detail status of the Active Directory domain.
 
         # Parameters
@@ -50,10 +51,11 @@ class ActiveDirectoryMembership(Resource):
         """
 
         return self._collection.report_status(
-            self.id
+            self.id,
+            job_timeout
         )
 
-    def test_user(self, name):
+    def test_user(self, name, job_timeout=None):
         """Tests whether the user exist in the Active Directory. If the user is present, then the user's group and role information is reported.
 
         # Parameters
@@ -63,10 +65,11 @@ class ActiveDirectoryMembership(Resource):
 
         return self._collection.test_user(
             self.id,
-            name
+            name,
+            job_timeout
         )
 
-    def test_group(self, name):
+    def test_group(self, name, job_timeout=None):
         """Tests whether the user group exist in the Active Directory.
 
         # Parameters
@@ -76,7 +79,8 @@ class ActiveDirectoryMembership(Resource):
 
         return self._collection.test_group(
             self.id,
-            name
+            name,
+            job_timeout
         )
 
     def delete(self, **kwargs):
@@ -87,7 +91,7 @@ class ActiveDirectoryMembershipList(Collection):
     resource = ActiveDirectoryMembership
     resource_type = "active_directory_memberships"
 
-    def remove(self, id, password, user, force=False):
+    def remove(self, id, password, user, force=False, job_timeout=None):
         """Leaves the Active Directory domain.
 
         # Parameters
@@ -104,10 +108,11 @@ class ActiveDirectoryMembershipList(Collection):
             id=id,
             password=password,
             user=user,
-            force=force
+            force=force,
+            job_timeout=job_timeout
         )
 
-    def report_status(self, id):
+    def report_status(self, id, job_timeout=None):
         """Reports the detail status of the Active Directory domain.
 
         # Parameters
@@ -118,10 +123,11 @@ class ActiveDirectoryMembershipList(Collection):
             self.resource_type,
             id,
             'report_status',
-            id=id
+            id=id,
+            job_timeout=job_timeout
         )
 
-    def test_user(self, id, name):
+    def test_user(self, id, name, job_timeout=None):
         """Tests whether the user exist in the Active Directory. If the user is present, then the user's group and role information is reported.
 
         # Parameters
@@ -134,10 +140,11 @@ class ActiveDirectoryMembershipList(Collection):
             id,
             'test_user',
             id=id,
-            name=name
+            name=name,
+            job_timeout=job_timeout
         )
 
-    def test_group(self, id, name):
+    def test_group(self, id, name, job_timeout=None):
         """Tests whether the user group exist in the Active Directory.
 
         # Parameters
@@ -150,7 +157,8 @@ class ActiveDirectoryMembershipList(Collection):
             id,
             'test_group',
             id=id,
-            name=name
+            name=name,
+            job_timeout=job_timeout
         )
 
     def delete(self, **kwargs):
