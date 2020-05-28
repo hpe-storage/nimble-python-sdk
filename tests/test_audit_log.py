@@ -57,9 +57,10 @@ def test_get_audit_log_query_params(setup_teardown_for_each_test):
                     reason="skipped this test as SKIPTEST variable is true")
 def test_list_audit_logs(setup_teardown_for_each_test):
     resp = nimosclientbase.get_nimos_client().audit_log.list(limit=5)
+    limit = 500
     while 1:
-        resp = nimosclientbase.get_nimos_client().audit_log.list(limit=1000, from_id=resp[len(resp)-1].attrs.get("id"))
-        if len(resp) < 1000:
+        resp = nimosclientbase.get_nimos_client().audit_log.list(limit=limit, from_id=resp[len(resp)-1].attrs.get("id"))
+        if len(resp) < limit:
             break
     assert resp is not None
 

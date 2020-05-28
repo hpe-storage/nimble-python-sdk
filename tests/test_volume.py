@@ -544,7 +544,7 @@ def test_bulk_move_volume(setup_teardown_for_each_test):
                 break
         pool_id = poolobj.attrs.get("id")
         # move the volumes
-        moveresp = nimosclientbase.get_nimos_client().volumes.bulk_move(
+        moveresp = nimosclientbase.get_nimos_client(1).volumes.bulk_move(
             dest_pool_id=pool_id, vol_ids=vol_to_delete)
         assert moveresp is not None
         # abort the move now
@@ -561,6 +561,8 @@ def test_bulk_move_volume(setup_teardown_for_each_test):
         else:
             log(f"Failed with exception message : {str(ex)}")
             raise ex
+    except exceptions.NimOSClientJobTimeoutError as ex:
+        log(f"Failed as the job operation has timed out : {str(ex)}")
 
 
 @pytest.mark.skipif(SKIPTEST is True,
