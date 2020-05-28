@@ -72,17 +72,23 @@ def get_config_section_detail(section_name):
                 to_return[option] = config.get(section_name, option)
     return to_return
 
+# below function is designed for a singleton pattern.
+# ideally we should not be creating a new instance for each request.with async_job_changes to sdk
+# a new instance will be created each time if job_timeout is not 60. hence, any request which wants a different job
+# timeout should simply pass the desired value and a new instance will be returned to the caller
 
-def get_nimos_client():
+
+def get_nimos_client(job_timeout=60):
     global os_client
-    if os_client is None:
+    if os_client is None or job_timeout != 60:
         # Read the config which contains array credentials
         array_detail = get_config_section_detail(NIMBLE_ARRAY_CREDENTIALS)
         if(array_detail.__len__() == 3):
             os_client = client.NimOSClient(
                 array_detail[ARRAY_HOSTNAME],
                 array_detail[ARRAY_USERNAME],
-                array_detail[ARRAY_PASSWORD]
+                array_detail[ARRAY_PASSWORD],
+                job_timeout
             )
         else:
             raise Exception("Array Credentials not present in config file.")
