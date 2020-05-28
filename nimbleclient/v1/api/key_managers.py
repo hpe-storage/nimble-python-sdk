@@ -27,7 +27,8 @@ class KeyManager(Resource):
     """
 
     def remove(self, passphrase=None):
-        """Remove external key manager.
+        """Remove external key manager. You must migrate the keys to an inactive external key manager before removing the active key manager. If you remove the active external key
+        manager the passphrase is used to enable the internal key manager.
 
         # Parameters
         id         : ID of the external key manager.
@@ -40,7 +41,8 @@ class KeyManager(Resource):
         )
 
     def migrate_keys(self):
-        """Migrate volume encryption keys from source to destination.
+        """Migrate volume encryption keys from the active key manager to the destination id given in the input. After successfully migrating the encryption keys, the destination key
+        manager is made the active key manager.
 
         # Parameters
         id : ID of the destination external key manager.
@@ -59,7 +61,8 @@ class KeyManagerList(Collection):
     resource_type = "key_managers"
 
     def remove(self, id, passphrase=None):
-        """Remove external key manager.
+        """Remove external key manager. You must migrate the keys to an inactive external key manager before removing the active key manager. If you remove the active external key
+        manager the passphrase is used to enable the internal key manager.
 
         # Parameters
         id         : ID of the external key manager.
@@ -75,7 +78,8 @@ class KeyManagerList(Collection):
         )
 
     def migrate_keys(self, id):
-        """Migrate volume encryption keys from source to destination.
+        """Migrate volume encryption keys from the active key manager to the destination id given in the input. After successfully migrating the encryption keys, the destination key
+        manager is made the active key manager.
 
         # Parameters
         id : ID of the destination external key manager.

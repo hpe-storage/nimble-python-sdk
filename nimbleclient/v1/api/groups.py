@@ -155,7 +155,7 @@ class Group(Resource):
     snap_retn_meter_very_high              : Threshold for considering a volume as very high retention.
     """
 
-    def reboot(self):
+    def reboot(self, job_timeout=None):
         """Reboot all arrays in the group.
 
         # Parameters
@@ -163,10 +163,11 @@ class Group(Resource):
         """
 
         return self._collection.reboot(
-            self.id
+            self.id,
+            job_timeout
         )
 
-    def halt(self, force=False):
+    def halt(self, force=False, job_timeout=None):
         """Halt all arrays in the group.
 
         # Parameters
@@ -176,7 +177,8 @@ class Group(Resource):
 
         return self._collection.halt(
             self.id,
-            force
+            force,
+            job_timeout
         )
 
     def test_alert(self, level):
@@ -291,7 +293,7 @@ class Group(Resource):
             src_passphrase
         )
 
-    def merge(self, src_group_ip, src_group_name, src_password, src_username, force=False, skip_secondary_mgmt_ip=False, src_passphrase=None):
+    def merge(self, src_group_ip, src_group_name, src_password, src_username, force=False, skip_secondary_mgmt_ip=False, src_passphrase=None, job_timeout=None):
         """Perform group merge with the specified group.
 
         # Parameters
@@ -313,7 +315,8 @@ class Group(Resource):
             src_username,
             force,
             skip_secondary_mgmt_ip,
-            src_passphrase
+            src_passphrase,
+            job_timeout
         )
 
     def get_eula(self, force=False, format=None, locale=None, phase=None):
@@ -379,7 +382,7 @@ class GroupList(Collection):
     resource = Group
     resource_type = "groups"
 
-    def reboot(self, id):
+    def reboot(self, id, job_timeout=None):
         """Reboot all arrays in the group.
 
         # Parameters
@@ -390,10 +393,11 @@ class GroupList(Collection):
             self.resource_type,
             id,
             'reboot',
-            id=id
+            id=id,
+            job_timeout=job_timeout
         )
 
-    def halt(self, id, force=False):
+    def halt(self, id, force=False, job_timeout=None):
         """Halt all arrays in the group.
 
         # Parameters
@@ -406,7 +410,8 @@ class GroupList(Collection):
             id,
             'halt',
             id=id,
-            force=force
+            force=force,
+            job_timeout=job_timeout
         )
 
     def test_alert(self, id, level):
@@ -545,7 +550,7 @@ class GroupList(Collection):
             src_passphrase=src_passphrase
         )
 
-    def merge(self, id, src_group_ip, src_group_name, src_password, src_username, force=False, skip_secondary_mgmt_ip=False, src_passphrase=None):
+    def merge(self, id, src_group_ip, src_group_name, src_password, src_username, force=False, skip_secondary_mgmt_ip=False, src_passphrase=None, job_timeout=None):
         """Perform group merge with the specified group.
 
         # Parameters
@@ -570,7 +575,8 @@ class GroupList(Collection):
             src_username=src_username,
             force=force,
             skip_secondary_mgmt_ip=skip_secondary_mgmt_ip,
-            src_passphrase=src_passphrase
+            src_passphrase=src_passphrase,
+            job_timeout=job_timeout
         )
 
     def get_eula(self, id, force=False, format=None, locale=None, phase=None):

@@ -67,7 +67,7 @@ class Array(Resource):
     secondary_mgmt_ip             : Secondary management IP address for the Group.
     """
 
-    def failover(self, force=False):
+    def failover(self, force=False, job_timeout=None):
         """Perform a failover on the specified array.
 
         # Parameters
@@ -77,10 +77,11 @@ class Array(Resource):
 
         return self._collection.failover(
             self.id,
-            force
+            force,
+            job_timeout
         )
 
-    def halt(self):
+    def halt(self, job_timeout=None):
         """Halt the specified array. Restarting the array will require physically powering it back on.
 
         # Parameters
@@ -88,10 +89,11 @@ class Array(Resource):
         """
 
         return self._collection.halt(
-            self.id
+            self.id,
+            job_timeout
         )
 
-    def reboot(self):
+    def reboot(self, job_timeout=None):
         """Reboot the specified array.
 
         # Parameters
@@ -99,7 +101,8 @@ class Array(Resource):
         """
 
         return self._collection.reboot(
-            self.id
+            self.id,
+            job_timeout
         )
 
 
@@ -107,7 +110,7 @@ class ArrayList(Collection):
     resource = Array
     resource_type = "arrays"
 
-    def failover(self, id, force=False):
+    def failover(self, id, force=False, job_timeout=None):
         """Perform a failover on the specified array.
 
         # Parameters
@@ -120,10 +123,11 @@ class ArrayList(Collection):
             id,
             'failover',
             id=id,
-            force=force
+            force=force,
+            job_timeout=job_timeout
         )
 
-    def halt(self, id):
+    def halt(self, id, job_timeout=None):
         """Halt the specified array. Restarting the array will require physically powering it back on.
 
         # Parameters
@@ -134,10 +138,11 @@ class ArrayList(Collection):
             self.resource_type,
             id,
             'halt',
-            id=id
+            id=id,
+            job_timeout=job_timeout
         )
 
-    def reboot(self, id):
+    def reboot(self, id, job_timeout=None):
         """Reboot the specified array.
 
         # Parameters
@@ -148,5 +153,6 @@ class ArrayList(Collection):
             self.resource_type,
             id,
             'reboot',
-            id=id
+            id=id,
+            job_timeout=job_timeout
         )

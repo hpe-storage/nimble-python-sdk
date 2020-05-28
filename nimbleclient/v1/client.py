@@ -43,7 +43,6 @@ from .api.snapshots import SnapshotList
 from .api.software_versions import SoftwareVersionList
 from .api.space_domains import SpaceDomainList
 from .api.subnets import SubnetList
-from .api.support import SupportList
 from .api.tokens import TokenList
 from .api.user_groups import UserGroupList
 from .api.user_policies import UserPolicyList
@@ -207,10 +206,6 @@ class NimOSClient:
     @property
     def subnets(self):
         return SubnetList(self._client)
-
-    @property
-    def support(self):
-        return SupportList(self._client)
 
     @property
     def tokens(self):
