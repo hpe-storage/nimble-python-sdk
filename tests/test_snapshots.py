@@ -213,7 +213,8 @@ def test_bulk_create_snapshot(setup_teardown_for_each_test):
                                 vss_snap=False)
         assert snapshot_resp is not None
     except exceptions.NimOSAPIError as ex:
-        if "SM_http_not_found" in str(ex):
+        # fiji and below throws SM_http_bad_request as exception
+        if "SM_http_not_found" in str(ex) or "SM_http_bad_request" in str(ex):
             # this testcase will fail as wrong vol_id is passed.intention
             # is to make sure teh correct call goes through sdk
             log("Failed as expected. wrong vol id passed")

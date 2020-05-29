@@ -11,6 +11,7 @@ import configparser
 import os
 import threading
 
+# global variable
 
 # Below variable "SKIPTEST" is to be used if a user wants to just run one
 # particular function. They should set the value of this to 1 on command
@@ -19,6 +20,7 @@ import threading
 # easiest way is to change the value os.getenv('SKIPTEST', '0') TO
 # os.getenv('SKIPTEST', '1') "set SKIPTEST=1"
 SKIPTEST = bool(int(os.getenv('SKIPTEST', "0")))
+array_version = None
 log_folder = os.path.abspath(os.path.dirname(__file__)) + "//" + "logs".strip()
 
 try:
@@ -47,6 +49,29 @@ ARRAY_PASSWORD = "password"
 config_path = os.path.join(os.path.abspath(
     os.path.dirname(__file__)), "config.ini")
 os_client = None
+
+
+def is_array_version_above_or_equal(arr_version_to_check):
+    global array_version
+    if array_version is None:
+        return False
+    arr_version = array_version.split('.')
+    version_to_check = arr_version_to_check.split('.')
+    if arr_version[0] > version_to_check[0]:
+        return True
+    elif arr_version[0] >= version_to_check[0] and arr_version[1] >= version_to_check[1]:
+        return True
+    return False
+
+
+def get_array_version():
+    global array_version
+    resp = get_nimos_client().arrays.get()
+    assert resp is not None
+    array_version = resp.attrs.get("version")
+    assert array_version is not None
+    temp = array_version.split('-')
+    array_version = temp[0]
 
 
 def get_unique_string(baseName):
@@ -124,3 +149,5 @@ def log_to_file(tolog):
     tolog = "\n" + time + " " + str(tolog)
     log_file.write(tolog)
     lock.release()
+
+get_array_version()

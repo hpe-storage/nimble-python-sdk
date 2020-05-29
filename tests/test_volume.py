@@ -631,7 +631,8 @@ def test_restore_online_volume(setup_teardown_for_each_test):
             id=vol_resp.attrs.get("id"))
         assert vol_restore_resp is not None
     except exceptions.NimOSAPIError as ex:
-        if "SM_vol_not_offline_on_restore" in str(ex):
+        # fiji and below throws SM_eBusy as exception
+        if "SM_vol_not_offline_on_restore" in str(ex) or "SM_ebusy" in str(ex):
             log("Failed as expected. volume to restore is not offline")
         else:
             log(f"Failed with exception message : {str(ex)}")
