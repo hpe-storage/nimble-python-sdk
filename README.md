@@ -43,4 +43,4 @@ Join the HPE DEV slack by signing up at [slack.hpedev.io](https://slack.hpedev.i
 
 # License
 
-See [LICENSE](LICENSE)
+See [LICENSE](https://hpe-storage.github.io/nimble-python-sdk/legal/license/index.html)
