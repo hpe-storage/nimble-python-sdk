@@ -111,7 +111,7 @@ def test_arrays(setup_teardown_for_each_test):
         assert resp is not None
         assert resp.attrs.get("description") == "modified by testcase"
     except exceptions.NimOSAPIError as ex:
-        if "SM_enoent" in str(ex):
+        if "SM_enoent" in str(ex) or "SM_http_not_found" in str(ex):
             log("Failed as expected. no suc array object")
         else:
             log(f"Failed with exception message : {str(ex)}")

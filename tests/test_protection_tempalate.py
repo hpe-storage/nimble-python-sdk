@@ -144,7 +144,8 @@ def test_protection_template_for_vss_using_insufficient_arguments(
                                       )
         assert update_resp is not None
     except exceptions.NimOSAPIError as ex:
-        if "SM_protpol_not_specified" in str(ex):
+        # fiji and below throws SM_http_bad_request as exception
+        if "SM_protpol_not_specified" in str(ex) or "SM_http_bad_request" in str(ex):
             log(f"Failed as expected. App server not specifed")
         else:
             log(f"Failed with exception message : {str(ex)}")
