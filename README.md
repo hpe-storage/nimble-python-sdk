@@ -16,22 +16,21 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> from nimbleclient import NimOSClient 
 >>> api = NimOSClient("192.168.1.100", "admin", "admin")
 >>> api.
-api.access_control_records           api.folders                          api.snapshot_collections
-api.active_directory_memberships     api.groups                           api.snapshots
-api.alarms                           api.initiator_groups                 api.software_versions
-api.application_categories           api.initiators                       api.space_domains
-api.application_servers              api.jobs                             api.subnets
-api.arrays                           api.key_managers                     api.support
-api.audit_log                        api.master_key                       api.tokens
-api.chap_users                       api.network_configs                  api.user_groups
-api.controllers                      api.network_interfaces               api.user_policies
-api.disks                            api.performance_policies             api.users
-api.events                           api.pools                            api.versions
-api.fibre_channel_configs            api.protection_schedules             api.volume_collections
-api.fibre_channel_initiator_aliases  api.protection_templates             api.volumes
-api.fibre_channel_interfaces         api.protocol_endpoints               api.witnesses
-api.fibre_channel_ports              api.replication_partners
-api.fibre_channel_sessions           api.shelves
+api.access_control_records           api.fibre_channel_sessions           api.replication_partners
+api.active_directory_memberships     api.folders                          api.shelves
+api.alarms                           api.groups                           api.snapshot_collections
+api.application_categories           api.initiator_groups                 api.snapshots
+api.application_servers              api.initiators                       api.software_versions
+api.arrays                           api.jobs                             api.space_domains
+api.audit_log                        api.key_managers                     api.subnets
+api.chap_users                       api.master_key                       api.tokens
+api.controllers                      api.network_configs                  api.user_groups
+api.disks                            api.network_interfaces               api.user_policies
+api.events                           api.performance_policies             api.users
+api.fibre_channel_configs            api.pools                            api.versions
+api.fibre_channel_initiator_aliases  api.protection_schedules             api.volume_collections
+api.fibre_channel_interfaces         api.protection_templates             api.volumes
+api.fibre_channel_ports              api.protocol_endpoints               api.witnesses
 ```
 
 # Contributing
@@ -40,7 +39,7 @@ Contributing guidelines are available in the [official documentation](https://hp
 
 # Community
 
-Join the HPE DEV slack by signing up at [slack.hpedev.io](slack.hpedev.io). HPE employees may sign in direct at [hpedev.slack.com](hpedev.slack.com) with a valid HPE address. We hang out in `#NimbleStorage`.
+Join the HPE DEV slack by signing up at [slack.hpedev.io](https://slack.hpedev.io). HPE employees may sign in direct at [hpedev.slack.com](https://hpedev.slack.com) with a valid HPE address. We hang out in `#NimbleStorage`.
 
 # License
 
