@@ -26,6 +26,7 @@ __Parameters__
 - __slot                 __: Slot number for this interface.
 - __max_link_speed       __: Maximum speed of the link.
 - __nic_type             __: Interface type.
+- __ip_list              __: List of IP addresses assigned to this network interface.
 
 
 ## NetworkInterfaceList
