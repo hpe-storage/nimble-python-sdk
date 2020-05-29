@@ -242,10 +242,6 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="api/support.html">support</a>
-                </li>
-                <li class="">
-                    
     <a class="" href="api/tokens.html">tokens</a>
                 </li>
                 <li class="">
@@ -385,22 +381,21 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 &gt;&gt;&gt; from nimbleclient import NimOSClient 
 &gt;&gt;&gt; api = NimOSClient(&quot;192.168.1.100&quot;, &quot;admin&quot;, &quot;admin&quot;)
 &gt;&gt;&gt; api.
-api.access_control_records           api.folders                          api.snapshot_collections
-api.active_directory_memberships     api.groups                           api.snapshots
-api.alarms                           api.initiator_groups                 api.software_versions
-api.application_categories           api.initiators                       api.space_domains
-api.application_servers              api.jobs                             api.subnets
-api.arrays                           api.key_managers                     api.support
-api.audit_log                        api.master_key                       api.tokens
-api.chap_users                       api.network_configs                  api.user_groups
-api.controllers                      api.network_interfaces               api.user_policies
-api.disks                            api.performance_policies             api.users
-api.events                           api.pools                            api.versions
-api.fibre_channel_configs            api.protection_schedules             api.volume_collections
-api.fibre_channel_initiator_aliases  api.protection_templates             api.volumes
-api.fibre_channel_interfaces         api.protocol_endpoints               api.witnesses
-api.fibre_channel_ports              api.replication_partners
-api.fibre_channel_sessions           api.shelves
+api.access_control_records           api.fibre_channel_sessions           api.replication_partners
+api.active_directory_memberships     api.folders                          api.shelves
+api.alarms                           api.groups                           api.snapshot_collections
+api.application_categories           api.initiator_groups                 api.snapshots
+api.application_servers              api.initiators                       api.software_versions
+api.arrays                           api.jobs                             api.space_domains
+api.audit_log                        api.key_managers                     api.subnets
+api.chap_users                       api.master_key                       api.tokens
+api.controllers                      api.network_configs                  api.user_groups
+api.disks                            api.network_interfaces               api.user_policies
+api.events                           api.performance_policies             api.users
+api.fibre_channel_configs            api.pools                            api.versions
+api.fibre_channel_initiator_aliases  api.protection_schedules             api.volume_collections
+api.fibre_channel_interfaces         api.protection_templates             api.volumes
+api.fibre_channel_ports              api.protocol_endpoints               api.witnesses
 </code></pre></p>
 <h1 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h1>
 <p>The HPE Nimble Storage SDK for Python supports NimbleOS 5.1.x or later and requires a recent version of <a href="https://requests.readthedocs.io">Requests</a> along with Python 3.6 or newer.</p>
@@ -444,5 +439,5 @@ api.fibre_channel_sessions           api.shelves
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2020-05-29 16:20:10
+Build Date UTC : 2020-05-29 16:20:55
 -->
