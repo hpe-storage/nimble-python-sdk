@@ -53,7 +53,7 @@ os_client = None
 
 def is_array_version_above_or_equal(arr_version_to_check):
     global array_version
-    if array_version is None:
+    if array_version is None or arr_version_to_check is None:
         return False
     arr_version = array_version.split('.')
     version_to_check = arr_version_to_check.split('.')
