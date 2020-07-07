@@ -194,6 +194,9 @@ class NimOSAPIClient:
         if from_id is not None:
             url = f"{url}{'&' if limit is not None else '?'}id%3E{from_id}"
 
+        # Filter out None parameters
+        params = {k: v for k, v in params.items() if v is not None}
+
         try:
             # Init response data and query for more paginated data records if available
             response_data = []
@@ -304,6 +307,9 @@ class NimOSAPIClient:
         if 'metadata' in payload:
             payload['metadata'] = [{'key': key, 'value': payload['metadata'][key]} for key in payload['metadata']]
 
+        # Filter out None parameters
+        payload = {k: v for k, v in payload.items() if v is not None}
+
         try:
             while 1:
                 response = requests.put(
@@ -344,6 +350,9 @@ class NimOSAPIClient:
         # Ex: {'k1': 'k1', 'k2': 'v2'} ==> [{'key': 'k1', 'value': 'v1'}, {'key': 'k2', 'value': 'v2'}]
         if 'metadata' in params:
             params['metadata'] = [{'key': key, 'value': params['metadata'][key]} for key in params['metadata']]
+
+        # Filter out None parameters
+        params = {k: v for k, v in params.items() if v is not None}
 
         try:
             while 1:
