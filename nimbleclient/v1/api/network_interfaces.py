@@ -29,7 +29,6 @@ class NetworkInterface(Resource):
     slot                 : Slot number for this interface.
     max_link_speed       : Maximum speed of the link.
     nic_type             : Interface type.
-    ip_list              : List of IP addresses assigned to this network interface.
     """
 
     def create(self, **kwargs):
