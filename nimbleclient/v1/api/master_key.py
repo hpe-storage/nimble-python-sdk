@@ -21,8 +21,7 @@ class MasterKey(Resource):
     active         : Whether the master key is active or not.
     purge_age      : Default minimum age (in hours) of inactive encryption keys to be purged. '0' indicates to purge keys immediately.
     """
-
-    def purge_inactive(self, age=None):
+    def purge_inactive(self, **kwargs):
         """Purges encryption keys that have been inactive for the age or longer. If you do not specify an age, the keys will be purged immediately.
 
         # Parameters
@@ -32,7 +31,7 @@ class MasterKey(Resource):
 
         return self._collection.purge_inactive(
             self.id,
-            age
+            **kwargs
         )
 
 
@@ -40,7 +39,7 @@ class MasterKeyList(Collection):
     resource = MasterKey
     resource_type = "master_key"
 
-    def purge_inactive(self, id, age=None):
+    def purge_inactive(self, id, **kwargs):
         """Purges encryption keys that have been inactive for the age or longer. If you do not specify an age, the keys will be purged immediately.
 
         # Parameters
@@ -53,5 +52,5 @@ class MasterKeyList(Collection):
             id,
             'purge_inactive',
             id=id,
-            age=age
+            **kwargs
         )

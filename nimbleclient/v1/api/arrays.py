@@ -66,43 +66,42 @@ class Array(Resource):
     zconf_ipaddrs                 : List of link-local zero-configuration addresses of the array.
     secondary_mgmt_ip             : Secondary management IP address for the Group.
     """
-
-    def failover(self, force=False, job_timeout=None):
+    def failover(self, **kwargs):
         """Perform a failover on the specified array.
 
         # Parameters
         id    : ID of the array to perform failover on.
         force : Initiate failover without performing any precheck.
+        job_timeout: Job timeout in seconds.
         """
 
         return self._collection.failover(
             self.id,
-            force,
-            job_timeout
+            **kwargs
         )
-
-    def halt(self, job_timeout=None):
+    def halt(self, **kwargs):
         """Halt the specified array. Restarting the array will require physically powering it back on.
 
         # Parameters
         id : ID of the array to halt.
+        job_timeout: Job timeout in seconds.
         """
 
         return self._collection.halt(
             self.id,
-            job_timeout
+            **kwargs
         )
-
-    def reboot(self, job_timeout=None):
+    def reboot(self, **kwargs):
         """Reboot the specified array.
 
         # Parameters
         id : ID of the array to reboot.
+        job_timeout: Job timeout in seconds.
         """
 
         return self._collection.reboot(
             self.id,
-            job_timeout
+            **kwargs
         )
 
 
@@ -110,12 +109,13 @@ class ArrayList(Collection):
     resource = Array
     resource_type = "arrays"
 
-    def failover(self, id, force=False, job_timeout=None):
+    def failover(self, id, **kwargs):
         """Perform a failover on the specified array.
 
         # Parameters
         id    : ID of the array to perform failover on.
         force : Initiate failover without performing any precheck.
+        job_timeout: Job timeout in seconds.
         """
 
         return self._client.perform_resource_action(
@@ -123,15 +123,15 @@ class ArrayList(Collection):
             id,
             'failover',
             id=id,
-            force=force,
-            job_timeout=job_timeout
+            **kwargs
         )
 
-    def halt(self, id, job_timeout=None):
+    def halt(self, id, **kwargs):
         """Halt the specified array. Restarting the array will require physically powering it back on.
 
         # Parameters
         id : ID of the array to halt.
+        job_timeout: Job timeout in seconds.
         """
 
         return self._client.perform_resource_action(
@@ -139,14 +139,15 @@ class ArrayList(Collection):
             id,
             'halt',
             id=id,
-            job_timeout=job_timeout
+            **kwargs
         )
 
-    def reboot(self, id, job_timeout=None):
+    def reboot(self, id, **kwargs):
         """Reboot the specified array.
 
         # Parameters
         id : ID of the array to reboot.
+        job_timeout: Job timeout in seconds.
         """
 
         return self._client.perform_resource_action(
@@ -154,5 +155,5 @@ class ArrayList(Collection):
             id,
             'reboot',
             id=id,
-            job_timeout=job_timeout
+            **kwargs
         )

@@ -65,8 +65,7 @@ class ReplicationPartner(Resource):
     volume_list_count                : Count of volumes that are replicating from/to this partner.
     replication_direction            : Direction of replication configured with this partner.
     """
-
-    def pause(self):
+    def pause(self, **kwargs):
         """Pause replication for the specified partner.
 
         # Parameters
@@ -74,10 +73,10 @@ class ReplicationPartner(Resource):
         """
 
         return self._collection.pause(
-            self.id
+            self.id,
+            **kwargs
         )
-
-    def resume(self):
+    def resume(self, **kwargs):
         """Resume replication for the specified partner.
 
         # Parameters
@@ -85,10 +84,10 @@ class ReplicationPartner(Resource):
         """
 
         return self._collection.resume(
-            self.id
+            self.id,
+            **kwargs
         )
-
-    def test(self):
+    def test(self, **kwargs):
         """Test connectivity to the specified partner.
 
         # Parameters
@@ -96,7 +95,8 @@ class ReplicationPartner(Resource):
         """
 
         return self._collection.test(
-            self.id
+            self.id,
+            **kwargs
         )
 
 
@@ -104,7 +104,7 @@ class ReplicationPartnerList(Collection):
     resource = ReplicationPartner
     resource_type = "replication_partners"
 
-    def pause(self, id):
+    def pause(self, id, **kwargs):
         """Pause replication for the specified partner.
 
         # Parameters
@@ -115,10 +115,11 @@ class ReplicationPartnerList(Collection):
             self.resource_type,
             id,
             'pause',
-            id=id
+            id=id,
+            **kwargs
         )
 
-    def resume(self, id):
+    def resume(self, id, **kwargs):
         """Resume replication for the specified partner.
 
         # Parameters
@@ -129,10 +130,11 @@ class ReplicationPartnerList(Collection):
             self.resource_type,
             id,
             'resume',
-            id=id
+            id=id,
+            **kwargs
         )
 
-    def test(self, id):
+    def test(self, id, **kwargs):
         """Test connectivity to the specified partner.
 
         # Parameters
@@ -143,5 +145,6 @@ class ReplicationPartnerList(Collection):
             self.resource_type,
             id,
             'test',
-            id=id
+            id=id,
+            **kwargs
         )

@@ -77,8 +77,7 @@ class Folder(Resource):
                                     will be Fibre Channel. This field is meaningful only to VVol folder.
     tenant_id                     : Tenant ID of the folder. This is used to determine what tenant context the folder belongs to.
     """
-
-    def set_dedupe(self, dedupe_enabled):
+    def set_dedupe(self, dedupe_enabled, **kwargs):
         """Set dedupe enabled/disabled for all applicable volumes inside a folder.
 
         # Parameters
@@ -88,7 +87,8 @@ class Folder(Resource):
 
         return self._collection.set_dedupe(
             self.id,
-            dedupe_enabled
+            dedupe_enabled,
+            **kwargs
         )
 
 
@@ -96,7 +96,7 @@ class FolderList(Collection):
     resource = Folder
     resource_type = "folders"
 
-    def set_dedupe(self, id, dedupe_enabled):
+    def set_dedupe(self, id, dedupe_enabled, **kwargs):
         """Set dedupe enabled/disabled for all applicable volumes inside a folder.
 
         # Parameters
@@ -109,5 +109,6 @@ class FolderList(Collection):
             id,
             'set_dedupe',
             dedupe_enabled=dedupe_enabled,
-            id=id
+            id=id,
+            **kwargs
         )

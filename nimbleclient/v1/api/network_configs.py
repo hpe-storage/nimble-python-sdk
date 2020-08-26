@@ -31,8 +31,7 @@ class NetworkConfig(Resource):
     last_active                       : Time of last activity.
     ignore_validation_mask            : Indicates whether to ignore the validation.
     """
-
-    def activate_netconfig(self, ignore_validation_mask):
+    def activate_netconfig(self, ignore_validation_mask, **kwargs):
         """Activate a network configuration.
 
         # Parameters
@@ -42,10 +41,10 @@ class NetworkConfig(Resource):
 
         return self._collection.activate_netconfig(
             self.id,
-            ignore_validation_mask
+            ignore_validation_mask,
+            **kwargs
         )
-
-    def validate_netconfig(self, ignore_validation_mask):
+    def validate_netconfig(self, ignore_validation_mask, **kwargs):
         """Validate a network configuration.
 
         # Parameters
@@ -55,7 +54,8 @@ class NetworkConfig(Resource):
 
         return self._collection.validate_netconfig(
             self.id,
-            ignore_validation_mask
+            ignore_validation_mask,
+            **kwargs
         )
 
 
@@ -63,7 +63,7 @@ class NetworkConfigList(Collection):
     resource = NetworkConfig
     resource_type = "network_configs"
 
-    def activate_netconfig(self, id, ignore_validation_mask):
+    def activate_netconfig(self, id, ignore_validation_mask, **kwargs):
         """Activate a network configuration.
 
         # Parameters
@@ -76,10 +76,11 @@ class NetworkConfigList(Collection):
             id,
             'activate_netconfig',
             id=id,
-            ignore_validation_mask=ignore_validation_mask
+            ignore_validation_mask=ignore_validation_mask,
+            **kwargs
         )
 
-    def validate_netconfig(self, id, ignore_validation_mask):
+    def validate_netconfig(self, id, ignore_validation_mask, **kwargs):
         """Validate a network configuration.
 
         # Parameters
@@ -92,5 +93,6 @@ class NetworkConfigList(Collection):
             id,
             'validate_netconfig',
             id=id,
-            ignore_validation_mask=ignore_validation_mask
+            ignore_validation_mask=ignore_validation_mask,
+            **kwargs
         )

@@ -17,8 +17,7 @@ class FibreChannelConfig(Resource):
     array_list         : List of array Fibre Channel configs.
     group_leader_array : Name of the group leader array.
     """
-
-    def regenerate(self, precheck, wwnn_base_str):
+    def regenerate(self, precheck, wwnn_base_str, **kwargs):
         """Regenerate Fibre Channel configuration.
 
         # Parameters
@@ -30,10 +29,10 @@ class FibreChannelConfig(Resource):
         return self._collection.regenerate(
             self.id,
             precheck,
-            wwnn_base_str
+            wwnn_base_str,
+            **kwargs
         )
-
-    def hw_upgrade(self):
+    def hw_upgrade(self, **kwargs):
         """Update Fibre Channel configuration after hardware changes.
 
         # Parameters
@@ -41,7 +40,8 @@ class FibreChannelConfig(Resource):
         """
 
         return self._collection.hw_upgrade(
-            self.id
+            self.id,
+            **kwargs
         )
 
     def create(self, **kwargs):
@@ -58,7 +58,7 @@ class FibreChannelConfigList(Collection):
     resource = FibreChannelConfig
     resource_type = "fibre_channel_configs"
 
-    def regenerate(self, id, precheck, wwnn_base_str):
+    def regenerate(self, id, precheck, wwnn_base_str, **kwargs):
         """Regenerate Fibre Channel configuration.
 
         # Parameters
@@ -73,10 +73,11 @@ class FibreChannelConfigList(Collection):
             'regenerate',
             id=id,
             precheck=precheck,
-            wwnn_base_str=wwnn_base_str
+            wwnn_base_str=wwnn_base_str,
+            **kwargs
         )
 
-    def hw_upgrade(self, id):
+    def hw_upgrade(self, id, **kwargs):
         """Update Fibre Channel configuration after hardware changes.
 
         # Parameters
@@ -87,7 +88,8 @@ class FibreChannelConfigList(Collection):
             self.resource_type,
             id,
             'hw_upgrade',
-            id=id
+            id=id,
+            **kwargs
         )
 
     def create(self, **kwargs):

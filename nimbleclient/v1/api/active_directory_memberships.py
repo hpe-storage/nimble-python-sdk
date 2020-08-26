@@ -24,8 +24,7 @@ class ActiveDirectoryMembership(Resource):
     password            : Password for the Active Directory user.
     enabled             : Active Directory authentication is currently enabled.
     """
-
-    def remove(self, password, user, force=False):
+    def remove(self, password, user, **kwargs):
         """Leaves the Active Directory domain.
 
         # Parameters
@@ -39,10 +38,9 @@ class ActiveDirectoryMembership(Resource):
             self.id,
             password,
             user,
-            force
+            **kwargs
         )
-
-    def report_status(self):
+    def report_status(self, **kwargs):
         """Reports the detail status of the Active Directory domain.
 
         # Parameters
@@ -50,10 +48,10 @@ class ActiveDirectoryMembership(Resource):
         """
 
         return self._collection.report_status(
-            self.id
+            self.id,
+            **kwargs
         )
-
-    def test_user(self, name):
+    def test_user(self, name, **kwargs):
         """Tests whether the user exist in the Active Directory. If the user is present, then the user's group and role information is reported.
 
         # Parameters
@@ -63,10 +61,10 @@ class ActiveDirectoryMembership(Resource):
 
         return self._collection.test_user(
             self.id,
-            name
+            name,
+            **kwargs
         )
-
-    def test_group(self, name):
+    def test_group(self, name, **kwargs):
         """Tests whether the user group exist in the Active Directory.
 
         # Parameters
@@ -76,7 +74,8 @@ class ActiveDirectoryMembership(Resource):
 
         return self._collection.test_group(
             self.id,
-            name
+            name,
+            **kwargs
         )
 
     def delete(self, **kwargs):
@@ -87,7 +86,7 @@ class ActiveDirectoryMembershipList(Collection):
     resource = ActiveDirectoryMembership
     resource_type = "active_directory_memberships"
 
-    def remove(self, id, password, user, force=False):
+    def remove(self, id, password, user, **kwargs):
         """Leaves the Active Directory domain.
 
         # Parameters
@@ -104,10 +103,10 @@ class ActiveDirectoryMembershipList(Collection):
             id=id,
             password=password,
             user=user,
-            force=force
+            **kwargs
         )
 
-    def report_status(self, id):
+    def report_status(self, id, **kwargs):
         """Reports the detail status of the Active Directory domain.
 
         # Parameters
@@ -118,10 +117,11 @@ class ActiveDirectoryMembershipList(Collection):
             self.resource_type,
             id,
             'report_status',
-            id=id
+            id=id,
+            **kwargs
         )
 
-    def test_user(self, id, name):
+    def test_user(self, id, name, **kwargs):
         """Tests whether the user exist in the Active Directory. If the user is present, then the user's group and role information is reported.
 
         # Parameters
@@ -134,10 +134,11 @@ class ActiveDirectoryMembershipList(Collection):
             id,
             'test_user',
             id=id,
-            name=name
+            name=name,
+            **kwargs
         )
 
-    def test_group(self, id, name):
+    def test_group(self, id, name, **kwargs):
         """Tests whether the user group exist in the Active Directory.
 
         # Parameters
@@ -150,7 +151,8 @@ class ActiveDirectoryMembershipList(Collection):
             id,
             'test_group',
             id=id,
-            name=name
+            name=name,
+            **kwargs
         )
 
     def delete(self, **kwargs):

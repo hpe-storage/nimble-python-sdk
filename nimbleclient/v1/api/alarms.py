@@ -35,8 +35,7 @@ class Alarm(Resource):
     activity               : Description of activity performed and recorded in alarm.
     next_notification_time : Time when next reminder for the alarm will be sent.
     """
-
-    def acknowledge(self, remind_every_unit=None, remind_every=None):
+    def acknowledge(self, **kwargs):
         """Acknowledge an alarm.
 
         # Parameters
@@ -47,11 +46,9 @@ class Alarm(Resource):
 
         return self._collection.acknowledge(
             self.id,
-            remind_every,
-            remind_every_unit
+            **kwargs
         )
-
-    def unacknowledge(self):
+    def unacknowledge(self, **kwargs):
         """Unacknowledge an alarm.
 
         # Parameters
@@ -59,7 +56,8 @@ class Alarm(Resource):
         """
 
         return self._collection.unacknowledge(
-            self.id
+            self.id,
+            **kwargs
         )
 
     def create(self, **kwargs):
@@ -70,7 +68,7 @@ class AlarmList(Collection):
     resource = Alarm
     resource_type = "alarms"
 
-    def acknowledge(self, id, remind_every_unit=None, remind_every=None):
+    def acknowledge(self, id, **kwargs):
         """Acknowledge an alarm.
 
         # Parameters
@@ -84,11 +82,10 @@ class AlarmList(Collection):
             id,
             'acknowledge',
             id=id,
-            remind_every_unit=remind_every_unit,
-            remind_every=remind_every
+            **kwargs
         )
 
-    def unacknowledge(self, id):
+    def unacknowledge(self, id, **kwargs):
         """Unacknowledge an alarm.
 
         # Parameters
@@ -99,7 +96,8 @@ class AlarmList(Collection):
             self.resource_type,
             id,
             'unacknowledge',
-            id=id
+            id=id,
+            **kwargs
         )
 
     def create(self, **kwargs):
