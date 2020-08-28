@@ -21,8 +21,7 @@ class Witness(Resource):
     secure_mode              : To verify the witness host against CA cert and to apply possible security modes.
     auto_switchover_messages : List of validation messages for automatic switchover of Group Management. This will be empty when there are no conflicts found.
     """
-
-    def test(self):
+    def test(self, **kwargs):
         """Tests and validates witness configuration between the array and the witness.
 
         # Parameters
@@ -30,7 +29,8 @@ class Witness(Resource):
         """
 
         return self._collection.test(
-            self.id
+            self.id,
+            **kwargs
         )
 
     def update(self, **kwargs):
@@ -41,7 +41,7 @@ class WitnessList(Collection):
     resource = Witness
     resource_type = "witnesses"
 
-    def test(self, id):
+    def test(self, id, **kwargs):
         """Tests and validates witness configuration between the array and the witness.
 
         # Parameters
@@ -52,7 +52,8 @@ class WitnessList(Collection):
             self.resource_type,
             id,
             'test',
-            id=id
+            id=id,
+            **kwargs
         )
 
     def create(self, **kwargs):

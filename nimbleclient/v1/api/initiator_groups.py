@@ -34,8 +34,7 @@ class InitiatorGroup(Resource):
     num_connections  : Total number of connections from initiators in the initiator group.
     metadata         : Key-value pairs that augment an initiator group's attributes.
     """
-
-    def suggest_lun(self, vol_id=None):
+    def suggest_lun(self, **kwargs):
         """Suggest an LU number for the volume and initiator group combination.
 
         # Parameters
@@ -45,10 +44,9 @@ class InitiatorGroup(Resource):
 
         return self._collection.suggest_lun(
             self.id,
-            vol_id
+            **kwargs
         )
-
-    def validate_lun(self, lun, vol_id=None):
+    def validate_lun(self, lun, **kwargs):
         """Validate an LU number for the volume and initiator group combination.
 
         # Parameters
@@ -60,7 +58,7 @@ class InitiatorGroup(Resource):
         return self._collection.validate_lun(
             self.id,
             lun,
-            vol_id
+            **kwargs
         )
 
 
@@ -68,7 +66,7 @@ class InitiatorGroupList(Collection):
     resource = InitiatorGroup
     resource_type = "initiator_groups"
 
-    def suggest_lun(self, id, vol_id=None):
+    def suggest_lun(self, id, **kwargs):
         """Suggest an LU number for the volume and initiator group combination.
 
         # Parameters
@@ -81,10 +79,10 @@ class InitiatorGroupList(Collection):
             id,
             'suggest_lun',
             id=id,
-            vol_id=vol_id
+            **kwargs
         )
 
-    def validate_lun(self, id, lun, vol_id=None):
+    def validate_lun(self, id, lun, **kwargs):
         """Validate an LU number for the volume and initiator group combination.
 
         # Parameters
@@ -99,5 +97,5 @@ class InitiatorGroupList(Collection):
             'validate_lun',
             id=id,
             lun=lun,
-            vol_id=vol_id
+            **kwargs
         )

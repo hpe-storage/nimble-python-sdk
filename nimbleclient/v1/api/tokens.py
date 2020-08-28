@@ -25,8 +25,7 @@ class Token(Resource):
     expiry_time   : Time when this token will expire.
     server_uuid   : Non mandatory 36 character uuid returned by the server. Currently only the witness REST server returns one.
     """
-
-    def report_user_details(self):
+    def report_user_details(self, **kwargs):
         """Reports the user details for this token.
 
         # Parameters
@@ -34,7 +33,8 @@ class Token(Resource):
         """
 
         return self._collection.report_user_details(
-            self.id
+            self.id,
+            **kwargs
         )
 
     def update(self, **kwargs):
@@ -45,7 +45,7 @@ class TokenList(Collection):
     resource = Token
     resource_type = "tokens"
 
-    def report_user_details(self, id):
+    def report_user_details(self, id, **kwargs):
         """Reports the user details for this token.
 
         # Parameters
@@ -56,7 +56,8 @@ class TokenList(Collection):
             self.resource_type,
             id,
             'report_user_details',
-            id=id
+            id=id,
+            **kwargs
         )
 
     def create(self, **kwargs):

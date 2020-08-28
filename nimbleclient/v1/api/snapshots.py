@@ -55,8 +55,7 @@ class Snapshot(Resource):
     force                       : Forcibly delete the specified snapshot even if it is the last replicated collection. Doing so could lead to full re-seeding at the next
                                   replication.
     """
-
-    def bulk_create(self, replicate, snap_vol_list, vss_snap):
+    def bulk_create(self, replicate, snap_vol_list, vss_snap, **kwargs):
         """Create snapshots on the given set of volumes.
 
         # Parameters
@@ -70,7 +69,8 @@ class Snapshot(Resource):
             self,
             replicate,
             snap_vol_list,
-            vss_snap
+            vss_snap,
+            **kwargs
         )
 
 
@@ -78,7 +78,7 @@ class SnapshotList(Collection):
     resource = Snapshot
     resource_type = "snapshots"
 
-    def bulk_create(self, replicate, snap_vol_list, vss_snap):
+    def bulk_create(self, replicate, snap_vol_list, vss_snap, **kwargs):
         """Create snapshots on the given set of volumes.
 
         # Parameters
@@ -93,5 +93,6 @@ class SnapshotList(Collection):
             'bulk_create',
             replicate=replicate,
             snap_vol_list=snap_vol_list,
-            vss_snap=vss_snap
+            vss_snap=vss_snap,
+            **kwargs
         )

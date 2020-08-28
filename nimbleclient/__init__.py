@@ -12,7 +12,7 @@ from .query import (
 )
 
 # Version for NimbleOS SDK client package
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
 __all__ = [
     "v1",

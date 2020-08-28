@@ -52,6 +52,7 @@ class Group(Resource):
     syslogd_enabled                        : Is syslogd enabled on this system.
     syslogd_server                         : Hostname of the syslogd server.
     syslogd_port                           : Port number for syslogd server.
+    syslogd_servers                        : Hostname and/or port of the syslogd servers.
     vvol_enabled                           : Are vvols enabled on this group.
     iscsi_enabled                          : Whether iSCSI is enabled on this group.
     fc_enabled                             : Whether FC is enabled on this group.
@@ -154,34 +155,32 @@ class Group(Resource):
     snap_retn_meter_high                   : Threshold for considering a volume as high retention.
     snap_retn_meter_very_high              : Threshold for considering a volume as very high retention.
     """
-
-    def reboot(self, job_timeout=None):
+    def reboot(self, **kwargs):
         """Reboot all arrays in the group.
 
         # Parameters
         id : ID of the group to reboot.
+        job_timeout: Job timeout in seconds.
         """
 
         return self._collection.reboot(
             self.id,
-            job_timeout
+            **kwargs
         )
-
-    def halt(self, force=False, job_timeout=None):
+    def halt(self, **kwargs):
         """Halt all arrays in the group.
 
         # Parameters
         id    : ID of the group to halt.
         force : Halt remaining arrays when one or more is unreachable.
+        job_timeout: Job timeout in seconds.
         """
 
         return self._collection.halt(
             self.id,
-            force,
-            job_timeout
+            **kwargs
         )
-
-    def test_alert(self, level):
+    def test_alert(self, level, **kwargs):
         """Generate a test alert.
 
         # Parameters
@@ -191,10 +190,10 @@ class Group(Resource):
 
         return self._collection.test_alert(
             self.id,
-            level
+            level,
+            **kwargs
         )
-
-    def software_update_precheck(self, skip_precheck_mask=None):
+    def software_update_precheck(self, **kwargs):
         """Run software update precheck.
 
         # Parameters
@@ -204,10 +203,9 @@ class Group(Resource):
 
         return self._collection.software_update_precheck(
             self.id,
-            skip_precheck_mask
+            **kwargs
         )
-
-    def software_update_start(self, skip_start_check_mask=None):
+    def software_update_start(self, **kwargs):
         """Update the group software to the downloaded version.
 
         # Parameters
@@ -217,10 +215,9 @@ class Group(Resource):
 
         return self._collection.software_update_start(
             self.id,
-            skip_start_check_mask
+            **kwargs
         )
-
-    def software_download(self, version, force=False):
+    def software_download(self, version, **kwargs):
         """Download software update package.
 
         # Parameters
@@ -232,10 +229,9 @@ class Group(Resource):
         return self._collection.software_download(
             self.id,
             version,
-            force
+            **kwargs
         )
-
-    def software_cancel_download(self):
+    def software_cancel_download(self, **kwargs):
         """Cancel ongoing download of software.
 
         # Parameters
@@ -243,10 +239,10 @@ class Group(Resource):
         """
 
         return self._collection.software_cancel_download(
-            self.id
+            self.id,
+            **kwargs
         )
-
-    def software_update_resume(self):
+    def software_update_resume(self, **kwargs):
         """Resume stopped software update.
 
         # Parameters
@@ -254,10 +250,10 @@ class Group(Resource):
         """
 
         return self._collection.software_update_resume(
-            self.id
+            self.id,
+            **kwargs
         )
-
-    def get_group_discovered_list(self, group_name=None):
+    def get_group_discovered_list(self, **kwargs):
         """Get list of discovered groups with arrays that are initialized.
 
         # Parameters
@@ -267,10 +263,9 @@ class Group(Resource):
 
         return self._collection.get_group_discovered_list(
             self.id,
-            group_name
+            **kwargs
         )
-
-    def validate_merge(self, src_group_ip, src_group_name, src_password, src_username, skip_secondary_mgmt_ip=False, src_passphrase=None):
+    def validate_merge(self, src_group_ip, src_group_name, src_password, src_username, **kwargs):
         """Perform group merge validation.
 
         # Parameters
@@ -289,11 +284,9 @@ class Group(Resource):
             src_group_name,
             src_password,
             src_username,
-            skip_secondary_mgmt_ip,
-            src_passphrase
+            **kwargs
         )
-
-    def merge(self, src_group_ip, src_group_name, src_password, src_username, force=False, skip_secondary_mgmt_ip=False, src_passphrase=None, job_timeout=None):
+    def merge(self, src_group_ip, src_group_name, src_password, src_username, **kwargs):
         """Perform group merge with the specified group.
 
         # Parameters
@@ -305,6 +298,7 @@ class Group(Resource):
         src_passphrase         : Source group encryption passphrase.
         force                  : Ignore warnings and forcibly merge specified group with this group.
         skip_secondary_mgmt_ip : Skip check for secondary management IP address.
+        job_timeout            : Job timeout in seconds.
         """
 
         return self._collection.merge(
@@ -313,13 +307,9 @@ class Group(Resource):
             src_group_name,
             src_password,
             src_username,
-            force,
-            skip_secondary_mgmt_ip,
-            src_passphrase,
-            job_timeout
+            **kwargs
         )
-
-    def get_eula(self, force=False, format=None, locale=None, phase=None):
+    def get_eula(self, **kwargs):
         """Get URL to download EULA contents.
 
         # Parameters
@@ -332,13 +322,9 @@ class Group(Resource):
 
         return self._collection.get_eula(
             self.id,
-            force,
-            format,
-            locale,
-            phase
+            **kwargs
         )
-
-    def check_migrate(self):
+    def check_migrate(self, **kwargs):
         """Check if the group Management Service can be migrated to the group Management Service backup array.
 
         # Parameters
@@ -346,10 +332,10 @@ class Group(Resource):
         """
 
         return self._collection.check_migrate(
-            self.id
+            self.id,
+            **kwargs
         )
-
-    def migrate(self):
+    def migrate(self, **kwargs):
         """Migrate the group Management Service to the current group Management Service backup array.
 
         # Parameters
@@ -357,10 +343,10 @@ class Group(Resource):
         """
 
         return self._collection.migrate(
-            self.id
+            self.id,
+            **kwargs
         )
-
-    def get_timezone_list(self):
+    def get_timezone_list(self, **kwargs):
         """Get list of group timezones.
 
         # Parameters
@@ -368,7 +354,8 @@ class Group(Resource):
         """
 
         return self._collection.get_timezone_list(
-            self.id
+            self.id,
+            **kwargs
         )
 
     def create(self, **kwargs):
@@ -382,11 +369,12 @@ class GroupList(Collection):
     resource = Group
     resource_type = "groups"
 
-    def reboot(self, id, job_timeout=None):
+    def reboot(self, id, **kwargs):
         """Reboot all arrays in the group.
 
         # Parameters
         id : ID of the group to reboot.
+        job_timeout: Job timeout in seconds.
         """
 
         return self._client.perform_resource_action(
@@ -394,15 +382,16 @@ class GroupList(Collection):
             id,
             'reboot',
             id=id,
-            job_timeout=job_timeout
+            **kwargs
         )
 
-    def halt(self, id, force=False, job_timeout=None):
+    def halt(self, id, **kwargs):
         """Halt all arrays in the group.
 
         # Parameters
         id    : ID of the group to halt.
         force : Halt remaining arrays when one or more is unreachable.
+        job_timeout: Job timeout in seconds.
         """
 
         return self._client.perform_resource_action(
@@ -410,11 +399,10 @@ class GroupList(Collection):
             id,
             'halt',
             id=id,
-            force=force,
-            job_timeout=job_timeout
+            **kwargs
         )
 
-    def test_alert(self, id, level):
+    def test_alert(self, id, level, **kwargs):
         """Generate a test alert.
 
         # Parameters
@@ -427,10 +415,11 @@ class GroupList(Collection):
             id,
             'test_alert',
             id=id,
-            level=level
+            level=level,
+            **kwargs
         )
 
-    def software_update_precheck(self, id, skip_precheck_mask=None):
+    def software_update_precheck(self, id, **kwargs):
         """Run software update precheck.
 
         # Parameters
@@ -443,10 +432,10 @@ class GroupList(Collection):
             id,
             'software_update_precheck',
             id=id,
-            skip_precheck_mask=skip_precheck_mask
+            **kwargs
         )
 
-    def software_update_start(self, id, skip_start_check_mask=None):
+    def software_update_start(self, id, **kwargs):
         """Update the group software to the downloaded version.
 
         # Parameters
@@ -459,10 +448,10 @@ class GroupList(Collection):
             id,
             'software_update_start',
             id=id,
-            skip_start_check_mask=skip_start_check_mask
+            **kwargs
         )
 
-    def software_download(self, id, version, force=False):
+    def software_download(self, id, version, **kwargs):
         """Download software update package.
 
         # Parameters
@@ -477,10 +466,10 @@ class GroupList(Collection):
             'software_download',
             id=id,
             version=version,
-            force=force
+            **kwargs
         )
 
-    def software_cancel_download(self, id):
+    def software_cancel_download(self, id, **kwargs):
         """Cancel ongoing download of software.
 
         # Parameters
@@ -491,10 +480,11 @@ class GroupList(Collection):
             self.resource_type,
             id,
             'software_cancel_download',
-            id=id
+            id=id,
+            **kwargs
         )
 
-    def software_update_resume(self, id):
+    def software_update_resume(self, id, **kwargs):
         """Resume stopped software update.
 
         # Parameters
@@ -505,10 +495,11 @@ class GroupList(Collection):
             self.resource_type,
             id,
             'software_update_resume',
-            id=id
+            id=id,
+            **kwargs
         )
 
-    def get_group_discovered_list(self, id, group_name=None):
+    def get_group_discovered_list(self, id, **kwargs):
         """Get list of discovered groups with arrays that are initialized.
 
         # Parameters
@@ -521,10 +512,10 @@ class GroupList(Collection):
             id,
             'get_group_discovered_list',
             id=id,
-            group_name=group_name
+            **kwargs
         )
 
-    def validate_merge(self, id, src_group_ip, src_group_name, src_password, src_username, skip_secondary_mgmt_ip=False, src_passphrase=None):
+    def validate_merge(self, id, src_group_ip, src_group_name, src_password, src_username, **kwargs):
         """Perform group merge validation.
 
         # Parameters
@@ -546,11 +537,10 @@ class GroupList(Collection):
             src_group_name=src_group_name,
             src_password=src_password,
             src_username=src_username,
-            skip_secondary_mgmt_ip=skip_secondary_mgmt_ip,
-            src_passphrase=src_passphrase
+            **kwargs
         )
 
-    def merge(self, id, src_group_ip, src_group_name, src_password, src_username, force=False, skip_secondary_mgmt_ip=False, src_passphrase=None, job_timeout=None):
+    def merge(self, id, src_group_ip, src_group_name, src_password, src_username, **kwargs):
         """Perform group merge with the specified group.
 
         # Parameters
@@ -562,6 +552,7 @@ class GroupList(Collection):
         src_passphrase         : Source group encryption passphrase.
         force                  : Ignore warnings and forcibly merge specified group with this group.
         skip_secondary_mgmt_ip : Skip check for secondary management IP address.
+        job_timeout            : Job timeout in seconds.
         """
 
         return self._client.perform_resource_action(
@@ -573,13 +564,10 @@ class GroupList(Collection):
             src_group_name=src_group_name,
             src_password=src_password,
             src_username=src_username,
-            force=force,
-            skip_secondary_mgmt_ip=skip_secondary_mgmt_ip,
-            src_passphrase=src_passphrase,
-            job_timeout=job_timeout
+            **kwargs
         )
 
-    def get_eula(self, id, force=False, format=None, locale=None, phase=None):
+    def get_eula(self, id, **kwargs):
         """Get URL to download EULA contents.
 
         # Parameters
@@ -595,13 +583,10 @@ class GroupList(Collection):
             id,
             'get_eula',
             id=id,
-            force=force,
-            format=format,
-            locale=locale,
-            phase=phase
+            **kwargs
         )
 
-    def check_migrate(self, id):
+    def check_migrate(self, id, **kwargs):
         """Check if the group Management Service can be migrated to the group Management Service backup array.
 
         # Parameters
@@ -612,10 +597,11 @@ class GroupList(Collection):
             self.resource_type,
             id,
             'check_migrate',
-            id=id
+            id=id,
+            **kwargs
         )
 
-    def migrate(self, id):
+    def migrate(self, id, **kwargs):
         """Migrate the group Management Service to the current group Management Service backup array.
 
         # Parameters
@@ -626,10 +612,11 @@ class GroupList(Collection):
             self.resource_type,
             id,
             'migrate',
-            id=id
+            id=id,
+            **kwargs
         )
 
-    def get_timezone_list(self, id):
+    def get_timezone_list(self, id, **kwargs):
         """Get list of group timezones.
 
         # Parameters
@@ -640,7 +627,8 @@ class GroupList(Collection):
             self.resource_type,
             id,
             'get_timezone_list',
-            id=id
+            id=id,
+            **kwargs
         )
 
     def create(self, **kwargs):

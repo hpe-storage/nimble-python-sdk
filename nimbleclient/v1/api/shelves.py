@@ -35,8 +35,7 @@ class Shelf(Resource):
                            deduplication requirements.
     last_request         : Indicates this is the last request in a series of shelf add requests.
     """
-
-    def identify(self, cid, status):
+    def identify(self, cid, status, **kwargs):
         """Turn on chassis identifier for a controller.
 
         # Parameters
@@ -48,10 +47,10 @@ class Shelf(Resource):
         return self._collection.identify(
             self.id,
             cid,
-            status
+            status,
+            **kwargs
         )
-
-    def evacuate(self, driveset, cancel=False, dry_run=False, pause=False, resume=False, start=False):
+    def evacuate(self, driveset, **kwargs):
         """Perform shelf evacuation.
 
         # Parameters
@@ -67,11 +66,7 @@ class Shelf(Resource):
         return self._collection.evacuate(
             self.id,
             driveset,
-            cancel,
-            dry_run,
-            pause,
-            resume,
-            start
+            **kwargs
         )
 
     def create(self, **kwargs):
@@ -85,7 +80,7 @@ class ShelfList(Collection):
     resource = Shelf
     resource_type = "shelves"
 
-    def identify(self, id, cid, status):
+    def identify(self, id, cid, status, **kwargs):
         """Turn on chassis identifier for a controller.
 
         # Parameters
@@ -100,10 +95,11 @@ class ShelfList(Collection):
             'identify',
             cid=cid,
             id=id,
-            status=status
+            status=status,
+            **kwargs
         )
 
-    def evacuate(self, id, driveset, cancel=False, dry_run=False, pause=False, resume=False, start=False):
+    def evacuate(self, id, driveset, **kwargs):
         """Perform shelf evacuation.
 
         # Parameters
@@ -122,11 +118,7 @@ class ShelfList(Collection):
             'evacuate',
             driveset=driveset,
             id=id,
-            cancel=cancel,
-            dry_run=dry_run,
-            pause=pause,
-            resume=resume,
-            start=start
+            **kwargs
         )
 
     def create(self, **kwargs):

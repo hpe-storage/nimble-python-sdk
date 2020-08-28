@@ -62,8 +62,7 @@ class Pool(Resource):
     dedupe_all_volumes            : Indicates if dedupe is enabled by default for new volumes on this pool.
     is_default                    : Indicates if this is the default pool.
     """
-
-    def merge(self, target_pool_id, force=False):
+    def merge(self, target_pool_id, **kwargs):
         """Merge the specified pool into the target pool. All volumes on the specified pool are moved to the target pool and the specified pool is then deleted. All the arrays in the
         pool are assigned to the target pool.
 
@@ -76,7 +75,7 @@ class Pool(Resource):
         return self._collection.merge(
             self.id,
             target_pool_id,
-            force
+            **kwargs
         )
 
 
@@ -84,7 +83,7 @@ class PoolList(Collection):
     resource = Pool
     resource_type = "pools"
 
-    def merge(self, id, target_pool_id, force=False):
+    def merge(self, id, target_pool_id, **kwargs):
         """Merge the specified pool into the target pool. All volumes on the specified pool are moved to the target pool and the specified pool is then deleted. All the arrays in the
         pool are assigned to the target pool.
 
@@ -100,5 +99,5 @@ class PoolList(Collection):
             'merge',
             id=id,
             target_pool_id=target_pool_id,
-            force=force
+            **kwargs
         )
