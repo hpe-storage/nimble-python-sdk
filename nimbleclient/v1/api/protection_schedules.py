@@ -48,6 +48,8 @@ class ProtectionSchedule(Resource):
     disable_appsync               : Disables application synchronized snapshots and creates crash consistent snapshots instead.
     schedule_type                 : Normal schedules have internal timers which drive snapshot creation. An externally driven schedule has no internal timers. All snapshot
                                     activity is driven by an external trigger. In other words, these schedules are used only for externally driven manual snapshots.
+    active                        : A schedule is active only if it is owned by the same owner as the volume collection. Only active schedules of a volume collection participate
+                                    in the creation of snapshots and replication.
     creation_time                 : Time when this protection schedule was created.
     last_modified                 : Time when this protection schedule was last modified.
     last_mod_sched_time           : Time when the timing of the protection schedule was last modified.

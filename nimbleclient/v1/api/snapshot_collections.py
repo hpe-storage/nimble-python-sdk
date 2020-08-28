@@ -25,6 +25,7 @@ class SnapshotCollection(Resource):
                                  snapshot_collection was created by synchronous replication.
     peer_snapcoll_id           : ID of the peer snapshot collection created by synchronous replication. Field will be null if no peer snapshot_collection was created by
                                  synchronous replication.
+    num_snaps                  : Current number of live, non-hidden snaps in this collection.
     is_complete                : Is complete.
     is_manual                  : Is manual.
     is_external_trigger        : Is externally triggered.

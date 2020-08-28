@@ -51,7 +51,7 @@ class Array(Resource):
     extended_model                : Extended model of the array.
     is_supported_hw_config        : Whether it is a supported hardware config.
     gig_nic_port_count            : Count of 1G NIC Ports installed on the array.
-    ten_gig_sfp_nic_port_count    : Count of 10G SFP NIC Ports installed on the array.
+    ten_gig_sfp_nic_port_count    : Count of SFP NIC Ports installed on the array capable of 10G, 25G or 100G speeds.
     ten_gig_t_nic_port_count      : Count of 10G BaseT NIC Ports installed on the array.
     fc_port_count                 : Count of Fibre Channel Ports installed on the array.
     public_key                    : Public key of the array.

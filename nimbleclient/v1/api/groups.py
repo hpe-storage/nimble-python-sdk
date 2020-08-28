@@ -52,6 +52,7 @@ class Group(Resource):
     syslogd_enabled                        : Is syslogd enabled on this system.
     syslogd_server                         : Hostname of the syslogd server.
     syslogd_port                           : Port number for syslogd server.
+    syslogd_servers                        : Hostname and/or port of the syslogd servers.
     vvol_enabled                           : Are vvols enabled on this group.
     iscsi_enabled                          : Whether iSCSI is enabled on this group.
     fc_enabled                             : Whether FC is enabled on this group.

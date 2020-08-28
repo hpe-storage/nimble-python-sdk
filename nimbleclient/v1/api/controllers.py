@@ -19,6 +19,7 @@ class Controller(Resource):
     array_id            : Rest ID of the array containing this controller.
     partial_response_ok : Indicate that it is ok to provide partially available response.
     serial              : Serial number for this controller.
+    model               : Model of this controller.
     hostname            : Host name for the controller.
     support_address     : IP address used for support.
     support_netmask     : IP netmask used for support.
