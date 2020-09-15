@@ -346,6 +346,8 @@ def test_get_suggested_lun(setup_teardown_for_each_test):
     except exceptions.NimOSAPIError as ex:
         if "SM_invalid_arg_value" in str(ex):
             log(f"Failed as expected. Invalid param value")
+        elif "SM_not_fc_initiatorgrp" in str(ex):
+            log(f"Failed as expected. Inavlid setup")
         else:
             log(f"Failed with exception message : {str(ex)}")
             raise ex
@@ -375,6 +377,8 @@ def test_validate_lun(setup_teardown_for_each_test):
     except exceptions.NimOSAPIError as ex:
         if "SM_invalid_arg_value" in str(ex):
             log(f"Failed as expected. Invalid param value")
+        elif "SM_not_fc_initiatorgrp" in str(ex):
+            log(f"Failed as expected. Inavlid setup")
         else:
             log(f"Failed with exception message : {str(ex)}")
             raise ex
