@@ -524,7 +524,7 @@ def test_delete_clone_volume(setup_teardown_for_each_test):
 
 
 @pytest.mark.skipif(SKIPTEST is True or nimosclientbase.get_nimos_client().pools.list().__len__() < 2,
-                    reason="skipped this test as SKIPTEST variable is true")
+                    reason="skipped this test as SKIPTEST variable is true or its not a multi pool setup")
 def test_bulk_move_volume(setup_teardown_for_each_test):
     try:
         orig_vol_pool_name = ""
