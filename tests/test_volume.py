@@ -523,8 +523,8 @@ def test_delete_clone_volume(setup_teardown_for_each_test):
             raise ex
 
 
-@pytest.mark.skipif(SKIPTEST is True,
-                    reason="skipped this test as SKIPTEST variable is true")
+@pytest.mark.skipif(SKIPTEST is True or nimosclientbase.get_nimos_client().pools.list().__len__() < 2,
+                    reason="skipped this test as SKIPTEST variable is true or its not a multi pool setup")
 def test_bulk_move_volume(setup_teardown_for_each_test):
     try:
         orig_vol_pool_name = ""
@@ -606,6 +606,8 @@ def test_bulk_set_dedupe(setup_teardown_for_each_test):
         if "SM_pool_dedupe_incapable" in str(ex):
             log("Failed as expected. pool is not"
                 "capable of hosting dedup volumes")
+        elif "Object is already in requested state" in str(ex):
+            log("Failed as expected. Object already in that state.")
         else:
             log(f"Failed with exception message : {str(ex)}")
             raise ex
