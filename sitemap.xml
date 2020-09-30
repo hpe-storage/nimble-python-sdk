@@ -2,242 +2,242 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/get_started/install/index.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/get_started/using/index.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/get_started/examples/index.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/access_control_records.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/active_directory_memberships.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/alarms.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/application_categories.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/application_servers.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/arrays.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/audit_log.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/chap_users.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/controllers.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/disks.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/events.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/fibre_channel_configs.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/fibre_channel_initiator_aliases.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/fibre_channel_interfaces.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/fibre_channel_ports.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/fibre_channel_sessions.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/folders.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/groups.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/initiator_groups.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/initiators.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/jobs.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/key_managers.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/master_key.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/network_configs.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/network_interfaces.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/performance_policies.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/pools.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/protection_schedules.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/protection_templates.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/protocol_endpoints.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/replication_partners.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/shelves.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/snapshot_collections.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/snapshots.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/software_versions.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/space_domains.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/subnets.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/tokens.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/user_groups.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/user_policies.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/users.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/versions.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/volume_collections.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/volumes.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/api/witnesses.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
@@ -277,17 +277,17 @@
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/legal/contributing/index.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/legal/support/index.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://hpe-storage.github.io/nimble-python-sdk/legal/license/index.html</loc>
-     <lastmod>2020-05-29</lastmod>
+     <lastmod>2020-09-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
