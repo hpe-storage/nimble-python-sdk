@@ -18,4 +18,4 @@ python setup.py install
 ```
 
 !!! warning "Note" 
-    Python 3.6, a recent version of [Requests](https://requests.readthedocs.io) and NimbleOS 5.1.x is required.
+    Python 3.6, a recent version of [Requests](https://requests.readthedocs.io) and NimbleOS 5.0 is required.

@@ -1,6 +1,6 @@
 # Contribution Guide
 
-We welcome and encourage community contributions to csi-driver.
+We welcome and encourage community contributions to nimble-python-sdk
 
 ## Contributing
 
