@@ -12,7 +12,7 @@ from .query import (
 )
 
 # Version for NimbleOS SDK client package
-__version__ = "1.1.0"
+__version__ = "1.2.0"
 
 __all__ = [
     "v1",
@@ -22,7 +22,7 @@ __all__ = [
 ]
 
 
-def NimOSClient(hostname, username, password, job_timeout=60, port=5392, version=1):
+def NimOSClient(hostname, username, password, app_name=None, job_timeout=60, port=5392, version=1):
     """Instantiates Nimble client instance to interact with the NimOS REST API Server."""
 
-    return getattr(nimbleclient, f'v{version}').NimOSClient(hostname, username, password, job_timeout, port)
+    return getattr(nimbleclient, f'v{version}').NimOSClient(hostname, username, password, app_name, job_timeout, port)
