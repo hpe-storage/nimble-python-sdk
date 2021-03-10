@@ -37,6 +37,10 @@ api.fibre_channel_ports              api.protocol_endpoints               api.wi
 
 The HPE Nimble Storage SDK for Python supports NimbleOS 5.0 or later and requires a recent version of [Requests](https://requests.readthedocs.io) along with Python 3.6 or newer.
 
+# Support
+
+HPE Nimble Storage SDK for Python is supported by HPE when used with HPE Nimble Storage arrays on valid support contracts. Please send an email to [support@nimblestorage.com](mailto:support@nimblestorage.com) to get started with any issue you might need assistance with. Engage with your HPE representative for other means on how to get in touch with Nimble support directly.
+
 # Contributing
 
 Contributing guidelines are available in the [official documentation](https://hpe-storage.github.io/nimble-python-sdk/legal/contributing/index.html).
