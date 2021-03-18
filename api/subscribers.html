@@ -18,7 +18,7 @@
     <meta property="og:image:width" content="1200"/>
     <meta property="og:image:height" content="630"/>
     
-  <title>folders - HPE Nimble Storage Software Development Kit (SDK) for Python</title>
+  <title>subscribers - HPE Nimble Storage Software Development Kit (SDK) for Python</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -28,9 +28,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "folders";
-    var mkdocs_page_input_path = "api/folders.md";
-    var mkdocs_page_url = "/nimble-python-sdk/api/folders.html";
+    var mkdocs_page_name = "subscribers";
+    var mkdocs_page_input_path = "api/subscribers.md";
+    var mkdocs_page_url = "/nimble-python-sdk/api/subscribers.html";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js" defer></script>
@@ -156,23 +156,9 @@
                     
     <a class="" href="fibre_channel_sessions.html">fibre_channel_sessions</a>
                 </li>
-                <li class=" current">
+                <li class="">
                     
-    <a class="current" href="folders.html">folders</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l3"><a href="#nimbleclientv1apifolders">nimbleclient.v1.api.folders</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#folder">Folder</a></li>
-        
-            <li><a class="toctree-l4" href="#folderlist">FolderList</a></li>
-        
-        </ul>
-    
-
-    </ul>
+    <a class="" href="folders.html">folders</a>
                 </li>
                 <li class="">
                     
@@ -258,9 +244,23 @@
                     
     <a class="" href="subnets.html">subnets</a>
                 </li>
-                <li class="">
+                <li class=" current">
                     
-    <a class="" href="subscribers.html">subscribers</a>
+    <a class="current" href="subscribers.html">subscribers</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#nimbleclientv1apisubscribers">nimbleclient.v1.api.subscribers</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#subscriber">Subscriber</a></li>
+        
+            <li><a class="toctree-l4" href="#subscriberlist">SubscriberList</a></li>
+        
+        </ul>
+    
+
+    </ul>
                 </li>
                 <li class="">
                     
@@ -388,7 +388,7 @@
         
       
     
-    <li>folders</li>
+    <li>subscribers</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -398,80 +398,25 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apifolders">nimbleclient.v1.api.folders<a class="headerlink" href="#nimbleclientv1apifolders" title="Permanent link">&para;</a></h1>
-<h2 id="folder">Folder<a class="headerlink" href="#folder" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>Folder(self, id, attrs=None, client=None, collection=None)
+                <h1 id="nimbleclientv1apisubscribers">nimbleclient.v1.api.subscribers<a class="headerlink" href="#nimbleclientv1apisubscribers" title="Permanent link">&para;</a></h1>
+<h2 id="subscriber">Subscriber<a class="headerlink" href="#subscriber" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>Subscriber(self, id, attrs=None, client=None, collection=None)
 </code></pre></p>
-<p>Folders are a way to group volumes, as well as a way to apply space constraints to them.</p>
+<p>Subscribers are websocket based notification clients that can subscribe to interesting operations and events and recieve notifications whenever the subscribed to operations
+and events happen on the array.</p>
 <p><strong>Parameters</strong></p>
 <ul>
-<li><strong>id                            </strong>: Identifier for the folder.</li>
-<li><strong>name                          </strong>: Name of folder.</li>
-<li><strong>fqn                           </strong>: Fully qualified name of folder in the pool.</li>
-<li><strong>full_name                     </strong>: Fully qualified name of folder in the group.</li>
-<li><strong>search_name                   </strong>: Name of folder used for object search.</li>
-<li><strong>description                   </strong>: Text description of folder.</li>
-<li><strong>pool_name                     </strong>: Name of the pool where the folder resides.</li>
-<li><strong>pool_id                       </strong>: ID of the pool where the folder resides.</li>
-<li><strong>limit_bytes_specified         </strong>: Indicates whether the folder has a limit.</li>
-<li><strong>limit_bytes                   </strong>: Folder limit size in bytes. By default, a folder (except SMIS and VVol types) does not have a limit. If limit_bytes is not specified when a
-                                folder is created, or if limit_bytes is set to the largest possible 64-bit signed integer (9223372036854775807), then the folder has no limit.
-                                Otherwise, a limit smaller than the capacity of the pool can be set. On output, if the folder has a limit, the limit_bytes_specified attribute
-                                will be true and limit_bytes will be the limit. If the folder does not have a limit, the limit_bytes_specified attribute will be false and
-                                limit_bytes will be interpreted based on the value of the usage_valid attribute. If the usage_valid attribute is true, limits_byte will be the
-                                capacity of the pool. Otherwise, limits_bytes is not meaningful and can be null. SMIS and VVol folders require a size limit. This attribute is
-                                superseded by limit_size_bytes.</li>
-<li><strong>limit_size_bytes              </strong>: Folder size limit in bytes. If limit_size_bytes is not specified when a folder is created, or if limit_size_bytes is set to -1, then the folder
-                                has no limit. Otherwise, a limit smaller than the capacity of the pool can be set. Folders with an agent_type of 'smis' or 'vvol' must have a
-                                size limit.</li>
-<li><strong>provisioned_limit_size_bytes  </strong>: Limit on the provisioned size of volumes in a folder. If provisioned_limit_size_bytes is not specified when a folder is created, or if
-                                provisioned_limit_size_bytes is set to -1, then the folder has no provisioned size limit.</li>
-<li><strong>overdraft_limit_pct           </strong>: Amount of space to consider as overdraft range for this folder as a percentage of folder used limit. Valid values are from 0% - 200%. This is
-                                the limit above the folder usage limit beyond which enforcement action(volume offline/non-writable) is issued.</li>
-<li><strong>capacity_bytes                </strong>: Capacity of the folder in bytes. If the folder's size has a usage limit, capacity_bytes will be the folder's usage limit. If the folder's size
-                                does not have a usage limit, capacity_bytes will be the pool's capacity. This field is meaningful only when the usage_valid attribute is true.</li>
-<li><strong>free_space_bytes              </strong>: Free space in the folder in bytes. If the folder has a usage limit, free_space_bytes will be the folder's free space (the folder's usage limit
-                                minus the folder's space usage). If the folder does not have a usage limit, free_space_bytes will be the pool's free space. This field is
-                                meaningful only when the usage_valid attribute is true.</li>
-<li><strong>provisioned_bytes             </strong>: Sum of provisioned size of volumes in the folder.</li>
-<li><strong>usage_bytes                   </strong>: Sum of mapped usage and snapshot uncompressed usage of volumes in the folder.</li>
-<li><strong>volume_mapped_bytes           </strong>: Sum of mapped usage of volumes in the folder.</li>
-<li><strong>usage_valid                   </strong>: Indicate whether the space usage attributes of folder are valid.</li>
-<li><strong>agent_type                    </strong>: External management agent type.</li>
-<li><strong>inherited_vol_perfpol_id      </strong>: Identifier of the default performance policy for a newly created volume.</li>
-<li><strong>inherited_vol_perfpol_name    </strong>: Name of the default performance policy for a newly created volume.</li>
-<li><strong>unused_reserve_bytes          </strong>: Unused reserve of volumes in the folder in bytes. This field is meaningful only when the usage_valid attribute is true.</li>
-<li><strong>unused_snap_reserve_bytes     </strong>: Unused reserve of snapshots of volumes in the folder in bytes. This field is meaningful only when the usage_valid attribute is true.</li>
-<li><strong>compressed_vol_usage_bytes    </strong>: Compressed usage of volumes in the folder. This field is meaningful only when the usage_valid attribute is true.</li>
-<li><strong>compressed_snap_usage_bytes   </strong>: Compressed usage of snapshots in the folder. This field is meaningful only when the usage_valid attribute is true.</li>
-<li><strong>uncompressed_vol_usage_bytes  </strong>: Uncompressed usage of volumes in the folder. This field is meaningful only when the usage_valid attribute is true.</li>
-<li><strong>uncompressed_snap_usage_bytes </strong>: Uncompressed usage of snapshots in the folder. This field is meaningful only when the usage_valid attribute is true.</li>
-<li><strong>vol_compression_ratio         </strong>: Compression ratio of volumes in the folder. This field is meaningful only when the usage_valid attribute is true.</li>
-<li><strong>snap_compression_ratio        </strong>: Compression ratio of snapshots in the folder. This field is meaningful only when the usage_valid attribute is true.</li>
-<li><strong>compression_ratio             </strong>: Compression savings for the folder expressed as ratio. This field is meaningful only when the usage_valid attribute is true.</li>
-<li><strong>creation_time                 </strong>: Time when this folder was created.</li>
-<li><strong>last_modified                 </strong>: Time when this folder was last modified.</li>
-<li><strong>num_snaps                     </strong>: Number of snapshots inside the folder. This attribute is deprecated and has no meaningful value.</li>
-<li><strong>num_snapcolls                 </strong>: Number of snapshot collections inside the folder. This attribute is deprecated and has no meaningful value.</li>
-<li><strong>app_uuid                      </strong>: Application identifier of the folder.</li>
-<li><strong>volume_list                   </strong>: List of volumes contained by the folder.</li>
-<li><strong>appserver_id                  </strong>: Identifier of the application server associated with the folder.</li>
-<li><strong>appserver_name                </strong>: Name of the application server associated with the folder.</li>
-<li><strong>folset_id                     </strong>: Identifier of the folder set associated with the folder. Only VVol folder can be associated with the folder set. The folder and the containing
-                                folder set must be associated with the same application server.</li>
-<li><strong>folset_name                   </strong>: Name of the folder set associated with the folder. Only VVol folder can be associated with the folder set. The folder and the containing folder
-                                set must be associated with the same application server.</li>
-<li><strong>limit_iops                    </strong>: IOPS limit for this folder. If limit_iops is not specified when a folder is created, or if limit_iops is set to -1, then the folder has no IOPS
-                                limit. IOPS limit should be in range [256, 4294967294] or -1 for unlimited.</li>
-<li><strong>limit_mbps                    </strong>: Throughput limit for this folder in MB/s. If limit_mbps is not specified when a folder is created, or if limit_mbps is set to -1, then the
-                                folder has no throughput limit. MBPS limit should be in range [1, 4294967294] or -1 for unlimited.</li>
-<li><strong>access_protocol               </strong>: Access protocol of the folder. This attribute is used by the VASA Provider to determine the access protocol of the bind request. If not
-                                specified in the creation request, it will be the access protocol supported by the group. If the group supports multiple protocols, the default
-                                will be Fibre Channel. This field is meaningful only to VVol folder.</li>
-<li><strong>tenant_id                     </strong>: Tenant ID of the folder. This is used to determine what tenant context the folder belongs to.</li>
+<li><strong>id                     </strong>: Identifier for subscriber.</li>
+<li><strong>type                   </strong>: This is generally used to indicate the type of subscriber e.g. SMIS/GUI/ThirdParty etc. This is free form and doesn't need to be unique.</li>
+<li><strong>renew_interval         </strong>: The interval in seconds within which the subscriber is expected to send a renew message over the websocket channel in case there is no traffic on the
+                         websocket channel.</li>
+<li><strong>renew_response_timeout </strong>: The interval in seconds after the subscriber sends a renew message within which the subscriber expects to get a response.</li>
+<li><strong>is_connected           </strong>: True if the subscriber has an active websocket connection.</li>
+<li><strong>notification_count     </strong>: Number of notifications sent to subscriber.</li>
+<li><strong>force                  </strong>: Forcibly modify a connected subscriber.</li>
 </ul>
-<h2 id="folderlist">FolderList<a class="headerlink" href="#folderlist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>FolderList(self, client=None)
+<h2 id="subscriberlist">SubscriberList<a class="headerlink" href="#subscriberlist" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>SubscriberList(self, client=None)
 </code></pre></p>
               
             </div>
@@ -481,10 +426,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="groups.html" class="btn btn-neutral float-right" title="groups">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="subscriptions.html" class="btn btn-neutral float-right" title="subscriptions">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="fibre_channel_sessions.html" class="btn btn-neutral" title="fibre_channel_sessions"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="subnets.html" class="btn btn-neutral" title="subnets"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -510,10 +455,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="fibre_channel_sessions.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="subnets.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="groups.html" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="subscriptions.html" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
