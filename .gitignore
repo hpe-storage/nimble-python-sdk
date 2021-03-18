@@ -4,3 +4,6 @@ workflows/backup_local.command
 site
 .vscode/
 tests/.vscode/
+build
+dist
+nimble_sdk.egg-info
