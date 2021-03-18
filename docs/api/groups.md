@@ -49,6 +49,7 @@ __Parameters__
 - __syslogd_enabled                        __: Is syslogd enabled on this system.
 - __syslogd_server                         __: Hostname of the syslogd server.
 - __syslogd_port                           __: Port number for syslogd server.
+- __syslogd_servers                        __: Hostname and/or port of the syslogd servers.
 - __vvol_enabled                           __: Are vvols enabled on this group.
 - __iscsi_enabled                          __: Whether iSCSI is enabled on this group.
 - __fc_enabled                             __: Whether FC is enabled on this group.

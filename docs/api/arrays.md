@@ -49,7 +49,7 @@ __Parameters__
 - __extended_model                __: Extended model of the array.
 - __is_supported_hw_config        __: Whether it is a supported hardware config.
 - __gig_nic_port_count            __: Count of 1G NIC Ports installed on the array.
-- __ten_gig_sfp_nic_port_count    __: Count of 10G SFP NIC Ports installed on the array.
+- __ten_gig_sfp_nic_port_count    __: Count of SFP NIC Ports installed on the array capable of 10G, 25G or 100G speeds.
 - __ten_gig_t_nic_port_count      __: Count of 10G BaseT NIC Ports installed on the array.
 - __fc_port_count                 __: Count of Fibre Channel Ports installed on the array.
 - __public_key                    __: Public key of the array.
