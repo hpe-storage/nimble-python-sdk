@@ -48,6 +48,7 @@ class NimOSAPIClient:
         'initiators': 'v1/initiators',
         'jobs': 'v1/jobs',
         'key_managers': 'v1/key_managers',
+        'ldap_domains': 'v1/ldap_domains',
         'master_key': 'v1/master_key',
         'network_configs': 'v1/network_configs',
         'network_interfaces': 'v1/network_interfaces',
@@ -63,6 +64,8 @@ class NimOSAPIClient:
         'software_versions': 'v1/software_versions',
         'space_domains': 'v1/space_domains',
         'subnets': 'v1/subnets',
+        'subscribers': 'v1/subscribers',
+        'subscriptions': 'v1/subscriptions',
         'tokens': 'v1/tokens',
         'user_groups': 'v1/user_groups',
         'user_policies': 'v1/user_policies',
@@ -73,7 +76,7 @@ class NimOSAPIClient:
         'witnesses': 'v1/witnesses',
     }
 
-    def __init__(self, hostname, username, password, app_name=None, job_timeout=60, port=5392):
+    def __init__(self, hostname, username, password, job_timeout=60, port=5392):
         """Initialize a session to the NimOS REST API."""
 
         connection_hash = str(uuid.uuid3(uuid.NAMESPACE_OID, f'{hostname}{port}{username}{password}'))
@@ -82,17 +85,11 @@ class NimOSAPIClient:
         self.port = port
         self.job_timeout = job_timeout
 
-        if app_name is None:
-            self.app_info = f'NimOS Python SDK v{__version__}'
-        else:
-            self.app_info = app_name
-
-        logging.debug(f"Instantiating NimOS client for App '{self.app_info}'")
         self.__auth = {
             'data': {
                 'username': username,
                 'password': password,
-                'app_name': self.app_info
+                'app_name': f'NimOS Python SDK v{__version__}'
             }
         }
         logging.debug(f"NimOSAPIClient created with [hostname: {hostname}], [job_timeout: {job_timeout} seconds], [port: {port}], [SDK Version: v{__version__}]")

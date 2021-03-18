@@ -28,6 +28,7 @@ from .api.initiator_groups import InitiatorGroupList
 from .api.initiators import InitiatorList
 from .api.jobs import JobList
 from .api.key_managers import KeyManagerList
+from .api.ldap_domains import LdapDomainList
 from .api.master_key import MasterKeyList
 from .api.network_configs import NetworkConfigList
 from .api.network_interfaces import NetworkInterfaceList
@@ -43,6 +44,8 @@ from .api.snapshots import SnapshotList
 from .api.software_versions import SoftwareVersionList
 from .api.space_domains import SpaceDomainList
 from .api.subnets import SubnetList
+from .api.subscribers import SubscriberList
+from .api.subscriptions import SubscriptionList
 from .api.tokens import TokenList
 from .api.user_groups import UserGroupList
 from .api.user_policies import UserPolicyList
@@ -56,8 +59,8 @@ from .api.witnesses import WitnessList
 class NimOSClient:
     """Nimble client for NimOS v1 REST API."""
 
-    def __init__(self, hostname, username, password, app_name=None, job_timeout=60, port=5392):
-        self._client = NimOSAPIClient(hostname, username, password, app_name, job_timeout, port)
+    def __init__(self, hostname, username, password, job_timeout=60, port=5392):
+        self._client = NimOSAPIClient(hostname, username, password, job_timeout, port)
 
     @property
     def access_control_records(self):
@@ -148,6 +151,10 @@ class NimOSClient:
         return KeyManagerList(self._client)
 
     @property
+    def ldap_domains(self):
+        return LdapDomainList(self._client)
+
+    @property
     def master_key(self):
         return MasterKeyList(self._client)
 
@@ -206,6 +213,14 @@ class NimOSClient:
     @property
     def subnets(self):
         return SubnetList(self._client)
+
+    @property
+    def subscribers(self):
+        return SubscriberList(self._client)
+
+    @property
+    def subscriptions(self):
+        return SubscriptionList(self._client)
 
     @property
     def tokens(self):
