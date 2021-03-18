@@ -23,6 +23,7 @@ __Parameters__
                              snapshot_collection was created by synchronous replication.
 - __peer_snapcoll_id           __: ID of the peer snapshot collection created by synchronous replication. Field will be null if no peer snapshot_collection was created by
                              synchronous replication.
+- __num_snaps                  __: Current number of live, non-hidden snaps in this collection.
 - __is_complete                __: Is complete.
 - __is_manual                  __: Is manual.
 - __is_external_trigger        __: Is externally triggered.

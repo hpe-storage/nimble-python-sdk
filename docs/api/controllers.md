@@ -16,6 +16,7 @@ __Parameters__
 - __array_id            __: Rest ID of the array containing this controller.
 - __partial_response_ok __: Indicate that it is ok to provide partially available response.
 - __serial              __: Serial number for this controller.
+- __model               __: Model of this controller.
 - __hostname            __: Host name for the controller.
 - __support_address     __: IP address used for support.
 - __support_netmask     __: IP netmask used for support.
