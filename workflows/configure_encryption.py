@@ -53,6 +53,7 @@ class configure_encryption:
             mod_encryption = grp.attrs['encryption_config']
             mod_encryption.pop('master_key_set')
             mod_encryption.pop('encryption_active')
+            mod_encryption.pop('encryption_key_manager', None)
             if mod_encryption['mode'] == 'available':
                 mod_encryption['mode'] = 'secure'
             elif mod_encryption['mode'] == 'secure':
