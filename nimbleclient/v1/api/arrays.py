@@ -48,6 +48,7 @@ class Array(Resource):
     dedupe_capacity_bytes         : The dedupe capacity of a hybrid array. Does not apply to all-flash arrays.
     dedupe_usage_bytes            : The dedupe usage of a hybrid array. Does not apply to all-flash arrays.
     is_fully_dedupe_capable       : Is array fully capable to dedupe its usable capacity.
+    dedupe_disabled               : Is data deduplication disabled for this array.
     extended_model                : Extended model of the array.
     is_supported_hw_config        : Whether it is a supported hardware config.
     gig_nic_port_count            : Count of 1G NIC Ports installed on the array.

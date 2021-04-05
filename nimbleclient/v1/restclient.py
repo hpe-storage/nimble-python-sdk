@@ -67,6 +67,7 @@ class NimOSAPIClient:
         'subscribers': 'v1/subscribers',
         'subscriptions': 'v1/subscriptions',
         'tokens': 'v1/tokens',
+        'trusted_oauth_issuers': 'v1/trusted_oauth_issuers',
         'user_groups': 'v1/user_groups',
         'user_policies': 'v1/user_policies',
         'users': 'v1/users',

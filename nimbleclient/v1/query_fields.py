@@ -128,6 +128,7 @@ class ArrayFields():
     dedupe_capacity_bytes = _Field('dedupe_capacity_bytes')
     dedupe_usage_bytes = _Field('dedupe_usage_bytes')
     is_fully_dedupe_capable = _Field('is_fully_dedupe_capable')
+    dedupe_disabled = _Field('dedupe_disabled')
     extended_model = _Field('extended_model')
     is_supported_hw_config = _Field('is_supported_hw_config')
     gig_nic_port_count = _Field('gig_nic_port_count')
@@ -179,6 +180,7 @@ class ChapUserFields():
     description = _Field('description')
     password = _Field('password')
     initiator_iqns = _Field('initiator_iqns')
+    tenant_id = _Field('tenant_id')
     creation_time = _Field('creation_time')
     last_modified = _Field('last_modified')
     vol_list = _Field('vol_list')
@@ -426,6 +428,7 @@ class GroupFields():
     alarms_enabled = _Field('alarms_enabled')
     vss_validation_timeout = _Field('vss_validation_timeout')
     auto_switchover_enabled = _Field('auto_switchover_enabled')
+    software_subscription_enabled = _Field('software_subscription_enabled')
     auto_switchover_messages = _Field('auto_switchover_messages')
     merge_state = _Field('merge_state')
     merge_group_name = _Field('merge_group_name')
@@ -602,6 +605,7 @@ class MasterKeyFields():
     id = _Field('id')
     name = _Field('name')
     passphrase = _Field('passphrase')
+    halfkey = _Field('halfkey')
     new_passphrase = _Field('new_passphrase')
     active = _Field('active')
     purge_age = _Field('purge_age')
@@ -1061,6 +1065,15 @@ class TokenFields():
     last_modified = _Field('last_modified')
     expiry_time = _Field('expiry_time')
     server_uuid = _Field('server_uuid')
+    grant_type = _Field('grant_type')
+    assertion = _Field('assertion')
+
+
+class TrustedOauthIssuerFields():
+    id = _Field('id')
+    name = _Field('name')
+    jwks_url = _Field('jwks_url')
+    key_set = _Field('key_set')
 
 
 class UserGroupFields():
@@ -1105,6 +1118,8 @@ class UserFields():
     last_modified = _Field('last_modified')
     full_name = _Field('full_name')
     email_addr = _Field('email_addr')
+    tenant_id = _Field('tenant_id')
+    tenant_key = _Field('tenant_key')
     disabled = _Field('disabled')
     auth_lock = _Field('auth_lock')
     last_login = _Field('last_login')
