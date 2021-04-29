@@ -23,6 +23,7 @@ class ChapUser(Resource):
     initiator_iqns : List of iSCSI initiators. To be configured with this CHAP user for iSCSI Group Target CHAP authentication. This attribute cannot be modified at the same time
                      with other attributes. If any specified initiator is already associated with another CHAP user, it will be replaced by this CHAP user for future CHAP
                      authentication.
+    tenant_id      : Identifier for the tenant.
     creation_time  : Time when this CHAP user was created.
     last_modified  : Time when this CHAP user was last modified.
     vol_list       : List of volumes associated with this CHAP user.
