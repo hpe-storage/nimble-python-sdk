@@ -17,6 +17,7 @@ class MasterKey(Resource):
     id             : Identifier of the master key.
     name           : Name of the master key. The only allowed value is "default".
     passphrase     : Passphrase used to protect the master key, required during creation, enabling/disabling the key and change the passphrase to a new value.
+    halfkey        : When changing the passphrase, this authenticates the change operation, for support use only.
     new_passphrase : When changing the passphrase, this attribute specifies the new value of the passphrase.
     active         : Whether the master key is active or not.
     purge_age      : Default minimum age (in hours) of inactive encryption keys to be purged. '0' indicates to purge keys immediately.

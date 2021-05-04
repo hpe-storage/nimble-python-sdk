@@ -25,6 +25,8 @@ class User(Resource):
     last_modified      : Time when this user was last modified.
     full_name          : Fully qualified name of the user.
     email_addr         : Email address of the user.
+    tenant_id          : Identifier for the tenant.
+    tenant_key         : Tenant secret key for encrypting the password.
     disabled           : User is currently disabled.
     auth_lock          : User was locked due to failed logins.
     last_login         : Last login time.
