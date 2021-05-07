@@ -76,6 +76,7 @@ class Group(Resource):
     alarms_enabled                         : Whether alarm feature is enabled.
     vss_validation_timeout                 : The amount of time in seconds to validate Microsoft VSS application synchronization before timing out.
     auto_switchover_enabled                : Whether automatic switchover of Group management services feature is enabled.
+    software_subscription_enabled          : Whether software subscription of Group management services feature is enabled.
     auto_switchover_messages               : List of validation messages for automatic switchover of Group Management. This will be empty when there are no conflicts found.
     merge_state                            : State of group merge.
     merge_group_name                       : Group that we're being merged with.

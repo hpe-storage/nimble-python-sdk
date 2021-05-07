@@ -47,6 +47,7 @@ from .api.subnets import SubnetList
 from .api.subscribers import SubscriberList
 from .api.subscriptions import SubscriptionList
 from .api.tokens import TokenList
+from .api.trusted_oauth_issuers import TrustedOauthIssuerList
 from .api.user_groups import UserGroupList
 from .api.user_policies import UserPolicyList
 from .api.users import UserList
@@ -225,6 +226,10 @@ class NimOSClient:
     @property
     def tokens(self):
         return TokenList(self._client)
+
+    @property
+    def trusted_oauth_issuers(self):
+        return TrustedOauthIssuerList(self._client)
 
     @property
     def user_groups(self):

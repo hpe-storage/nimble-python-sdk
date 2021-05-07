@@ -24,6 +24,8 @@ class Token(Resource):
     last_modified : Time when this token was last modified.
     expiry_time   : Time when this token will expire.
     server_uuid   : Non mandatory 36 character uuid returned by the server. Currently only the witness REST server returns one.
+    grant_type    : OAuth grant type, currently only support 'urn:ietf:params:oauth:grant-type:jwt-bearer'.
+    assertion     : OAuth assertion, currently expecting a JWT token.
     """
     def report_user_details(self, **kwargs):
         """Reports the user details for this token.
