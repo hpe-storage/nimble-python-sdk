@@ -22,7 +22,8 @@ __all__ = [
 ]
 
 
-def NimOSClient(hostname, username, password, app_name=None, job_timeout=60, port=5392, version=1):
+def NimOSClient(hostname, username, password, app_name=None, job_timeout=60, port=5392, version=1, tenant_aware=False):
     """Instantiates Nimble client instance to interact with the NimOS REST API Server."""
-
-    return getattr(nimbleclient, f'v{version}').NimOSClient(hostname, username, password, app_name, job_timeout, port)
+    return getattr(nimbleclient, f'v{version}').\
+        NimOSClient(hostname, username, password, app_name,
+                    job_timeout, port, tenant_aware)

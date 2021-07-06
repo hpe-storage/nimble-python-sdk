@@ -22,8 +22,8 @@ class Group(Resource):
     smtp_auth_password                     : Password to authenticate with SMTP Server.
     smtp_encrypt_type                      : Level of encryption for SMTP. Requires use of SMTP Authentication if encryption is enabled.
     autosupport_enabled                    : Whether to send autosupport.
-    allow_analytics_gui                    : Specify whether to allow HPE Nimble Storage to use Google Analytics in the GUI.  HPE Nimble Storage uses Google Analytics to gather
-                                             data related to GUI usage.  The data gathered is used to evaluate and improve the product.
+    allow_analytics_gui                    : Specify whether to use Google Analytics in the GUI. HPE Storage uses Google Analytics to gather data related to GUI usage. The data
+                                             gathered is used to evaluate and improve the product.
     allow_support_tunnel                   : Whether to allow support tunnel.
     proxy_server                           : Hostname or IP Address of HTTP Proxy Server. Setting this attribute to an empty string will unset all proxy settings.
     proxy_port                             : Proxy Port of HTTP Proxy Server.
@@ -77,6 +77,8 @@ class Group(Resource):
     vss_validation_timeout                 : The amount of time in seconds to validate Microsoft VSS application synchronization before timing out.
     auto_switchover_enabled                : Whether automatic switchover of Group management services feature is enabled.
     software_subscription_enabled          : Whether software subscription of Group management services feature is enabled.
+    cloud_enabled                          : Specifies whether cloud management is enabled.
+    is_cloud_connected                     : Whether array is connected to cloud services.
     auto_switchover_messages               : List of validation messages for automatic switchover of Group Management. This will be empty when there are no conflicts found.
     merge_state                            : State of group merge.
     merge_group_name                       : Group that we're being merged with.

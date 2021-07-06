@@ -60,8 +60,8 @@ from .api.witnesses import WitnessList
 class NimOSClient:
     """Nimble client for NimOS v1 REST API."""
 
-    def __init__(self, hostname, username, password, app_name=None, job_timeout=60, port=5392):
-        self._client = NimOSAPIClient(hostname, username, password, app_name, job_timeout, port)
+    def __init__(self, hostname, username, password, app_name=None, job_timeout=60, port=5392, tenant_aware=False):
+        self._client = NimOSAPIClient(hostname, username, password, app_name, job_timeout, port, tenant_aware)
 
     @property
     def access_control_records(self):

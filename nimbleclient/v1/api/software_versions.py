@@ -19,7 +19,7 @@ class SoftwareVersion(Resource):
     status                 : Status of version.
     total_bytes            : Size of version.
     downloaded_bytes       : Number of bytes downloaded for the version.
-    blacklist_reason       : Reason for blacklisting the version. Empty if version is not blacklisted.
+    blacklist_reason       : Reason for denylisting the version. Empty if version is not denylisted.
     release_date           : Date when software version was released.
     is_manually_downloaded : Whether or not the version was downloaded manually.
     release_status         : Release status of software version.
