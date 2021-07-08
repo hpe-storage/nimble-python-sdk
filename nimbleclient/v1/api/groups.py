@@ -22,8 +22,8 @@ class Group(Resource):
     smtp_auth_password                     : Password to authenticate with SMTP Server.
     smtp_encrypt_type                      : Level of encryption for SMTP. Requires use of SMTP Authentication if encryption is enabled.
     autosupport_enabled                    : Whether to send autosupport.
-    allow_analytics_gui                    : Specify whether to allow HPE Nimble Storage to use Google Analytics in the GUI.  HPE Nimble Storage uses Google Analytics to gather
-                                             data related to GUI usage.  The data gathered is used to evaluate and improve the product.
+    allow_analytics_gui                    : Specify whether to use Google Analytics in the GUI. HPE Storage uses Google Analytics to gather data related to GUI usage. The data
+                                             gathered is used to evaluate and improve the product.
     allow_support_tunnel                   : Whether to allow support tunnel.
     proxy_server                           : Hostname or IP Address of HTTP Proxy Server. Setting this attribute to an empty string will unset all proxy settings.
     proxy_port                             : Proxy Port of HTTP Proxy Server.

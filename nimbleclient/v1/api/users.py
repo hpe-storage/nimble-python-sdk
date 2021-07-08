@@ -20,6 +20,8 @@ class User(Resource):
     role               : Role of the user.
     password           : User's login password.
     auth_password      : Authorization password for changing password.
+    otp_type           : Type of One Time Password authentication in use.
+    otp_reset          : When sent as true, this causes a reset of the One Time Password secret for the user.
     inactivity_timeout : The amount of time that the user session is inactive before timing out. A value of 0 indicates that the timeout is taken from the group setting.
     creation_time      : Time when this user was created.
     last_modified      : Time when this user was last modified.
