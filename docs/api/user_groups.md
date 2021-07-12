@@ -1,11 +1,18 @@
+# Table of Contents
 
-# nimbleclient.v1.api.user_groups
+* [nimbleclient.v1.api.user\_groups](#nimbleclient.v1.api.user_groups)
+  * [UserGroup](#nimbleclient.v1.api.user_groups.UserGroup)
 
+<a name="nimbleclient.v1.api.user_groups"></a>
+# nimbleclient.v1.api.user\_groups
 
+<a name="nimbleclient.v1.api.user_groups.UserGroup"></a>
 ## UserGroup
+
 ```python
-UserGroup(self, id, attrs=None, client=None, collection=None)
+class UserGroup(Resource)
 ```
+
 Represents Active Directory groups configured to manage the system.
 
 __Parameters__
@@ -22,10 +29,4 @@ __Parameters__
 - __external_id        __: External ID of the user group. In Active Directory, it is the group's SID (Security Identifier).
 - __domain_id          __: Identifier of the domain this user group belongs to.
 - __domain_name        __: Role of the user.
-
-
-## UserGroupList
-```python
-UserGroupList(self, client=None)
-```
 

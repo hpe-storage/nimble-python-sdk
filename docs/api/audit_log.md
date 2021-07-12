@@ -1,11 +1,18 @@
+# Table of Contents
 
-# nimbleclient.v1.api.audit_log
+* [nimbleclient.v1.api.audit\_log](#nimbleclient.v1.api.audit_log)
+  * [AuditLog](#nimbleclient.v1.api.audit_log.AuditLog)
 
+<a name="nimbleclient.v1.api.audit_log"></a>
+# nimbleclient.v1.api.audit\_log
 
+<a name="nimbleclient.v1.api.audit_log.AuditLog"></a>
 ## AuditLog
+
 ```python
-AuditLog(self, id, attrs=None, client=None, collection=None)
+class AuditLog(Resource)
 ```
+
 View audit log.
 
 __Parameters__
@@ -31,10 +38,4 @@ __Parameters__
 - __category            __: Category of the audit log record.
 - __activity_type       __: Type of activity performed, for example, create, update or delete.
 - __activity            __: Description of activity performed and recorded in audit log.
-
-
-## AuditLogList
-```python
-AuditLogList(self, client=None)
-```
 

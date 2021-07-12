@@ -1,11 +1,18 @@
+# Table of Contents
 
-# nimbleclient.v1.api.snapshot_collections
+* [nimbleclient.v1.api.snapshot\_collections](#nimbleclient.v1.api.snapshot_collections)
+  * [SnapshotCollection](#nimbleclient.v1.api.snapshot_collections.SnapshotCollection)
 
+<a name="nimbleclient.v1.api.snapshot_collections"></a>
+# nimbleclient.v1.api.snapshot\_collections
 
+<a name="nimbleclient.v1.api.snapshot_collections.SnapshotCollection"></a>
 ## SnapshotCollection
+
 ```python
-SnapshotCollection(self, id, attrs=None, client=None, collection=None)
+class SnapshotCollection(Resource)
 ```
+
 Snapshot collections are collections of scheduled snapshots that are taken from volumes sharing a volume collection. Snapshot collections are replicated in the order that the
 collections were taken.
 
@@ -56,10 +63,4 @@ __Parameters__
 - __metadata                   __: Key-value pairs that augment a snapshot collection's attributes.
 - __force                      __: Forcibly delete the specified snapshot collection even if it is the last replicated snapshot. Doing so could lead to full re-seeding at the next
                              replication.
-
-
-## SnapshotCollectionList
-```python
-SnapshotCollectionList(self, client=None)
-```
 

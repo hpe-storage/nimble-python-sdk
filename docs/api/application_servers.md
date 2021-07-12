@@ -1,11 +1,18 @@
+# Table of Contents
 
-# nimbleclient.v1.api.application_servers
+* [nimbleclient.v1.api.application\_servers](#nimbleclient.v1.api.application_servers)
+  * [ApplicationServer](#nimbleclient.v1.api.application_servers.ApplicationServer)
 
+<a name="nimbleclient.v1.api.application_servers"></a>
+# nimbleclient.v1.api.application\_servers
 
+<a name="nimbleclient.v1.api.application_servers.ApplicationServer"></a>
 ## ApplicationServer
+
 ```python
-ApplicationServer(self, id, attrs=None, client=None, collection=None)
+class ApplicationServer(Resource)
 ```
+
 An application server is an external agent that collaborates with an array to manage storage resources; for example, Volume Shadow Copy Service (VSS) or VMware.
 
 __Parameters__
@@ -21,10 +28,4 @@ __Parameters__
 - __metadata      __: Key-value pairs that augment an application server's attributes.
 - __creation_time __: Time when this application server was created.
 - __last_modified __: Time when this application server was last modified.
-
-
-## ApplicationServerList
-```python
-ApplicationServerList(self, client=None)
-```
 

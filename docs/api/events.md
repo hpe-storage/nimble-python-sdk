@@ -1,11 +1,18 @@
+# Table of Contents
 
+* [nimbleclient.v1.api.events](#nimbleclient.v1.api.events)
+  * [Event](#nimbleclient.v1.api.events.Event)
+
+<a name="nimbleclient.v1.api.events"></a>
 # nimbleclient.v1.api.events
 
-
+<a name="nimbleclient.v1.api.events.Event"></a>
 ## Event
+
 ```python
-Event(self, id, attrs=None, client=None, collection=None)
+class Event(Resource)
 ```
+
 View events.
 
 __Parameters__
@@ -25,10 +32,4 @@ __Parameters__
 - __params      __: Arguments provided for event creation in key-value structure. Until KV implementation for events, will ignore keys (though keys must be non-empty) and take
               values positionally.
 - __tenant_id   __: Tenant ID of the event. This is used to determine what tenant context the event belongs to.
-
-
-## EventList
-```python
-EventList(self, client=None)
-```
 

@@ -1,11 +1,18 @@
+# Table of Contents
 
-# nimbleclient.v1.api.space_domains
+* [nimbleclient.v1.api.space\_domains](#nimbleclient.v1.api.space_domains)
+  * [SpaceDomain](#nimbleclient.v1.api.space_domains.SpaceDomain)
 
+<a name="nimbleclient.v1.api.space_domains"></a>
+# nimbleclient.v1.api.space\_domains
 
+<a name="nimbleclient.v1.api.space_domains.SpaceDomain"></a>
 ## SpaceDomain
+
 ```python
-SpaceDomain(self, id, attrs=None, client=None, collection=None)
+class SpaceDomain(Resource)
 ```
+
 A space domain is created for each application category and block size for each each pool.
 
 __Parameters__
@@ -37,10 +44,4 @@ __Parameters__
 - __compression_ratio        __: Compression savings for the space domain expressed as ratio.
 - __dedupe_ratio             __: Deduplication savings for the space domain expressed as ratio.
 - __clone_ratio              __: Clone savings for the space domain expressed as ratio.
-
-
-## SpaceDomainList
-```python
-SpaceDomainList(self, client=None)
-```
 

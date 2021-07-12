@@ -1,11 +1,23 @@
+# Table of Contents
 
-# nimbleclient.v1.api.initiator_groups
+* [nimbleclient.v1.api.initiator\_groups](#nimbleclient.v1.api.initiator_groups)
+  * [InitiatorGroup](#nimbleclient.v1.api.initiator_groups.InitiatorGroup)
+    * [suggest\_lun](#nimbleclient.v1.api.initiator_groups.InitiatorGroup.suggest_lun)
+    * [validate\_lun](#nimbleclient.v1.api.initiator_groups.InitiatorGroup.validate_lun)
+  * [InitiatorGroupList](#nimbleclient.v1.api.initiator_groups.InitiatorGroupList)
+    * [suggest\_lun](#nimbleclient.v1.api.initiator_groups.InitiatorGroupList.suggest_lun)
+    * [validate\_lun](#nimbleclient.v1.api.initiator_groups.InitiatorGroupList.validate_lun)
 
+<a name="nimbleclient.v1.api.initiator_groups"></a>
+# nimbleclient.v1.api.initiator\_groups
 
+<a name="nimbleclient.v1.api.initiator_groups.InitiatorGroup"></a>
 ## InitiatorGroup
+
 ```python
-InitiatorGroup(self, id, attrs=None, client=None, collection=None)
+class InitiatorGroup(Resource)
 ```
+
 Manage initiator groups for initiator authentication. An initiator group is a set of initiators that can be configured as part of your ACL to access a specific volume through
 group membership.
 
@@ -32,9 +44,68 @@ __Parameters__
 - __num_connections  __: Total number of connections from initiators in the initiator group.
 - __metadata         __: Key-value pairs that augment an initiator group's attributes.
 
+<a name="nimbleclient.v1.api.initiator_groups.InitiatorGroup.suggest_lun"></a>
+#### suggest\_lun
 
-## InitiatorGroupList
 ```python
-InitiatorGroupList(self, client=None)
+ | suggest_lun(**kwargs)
 ```
+
+Suggest an LU number for the volume and initiator group combination.
+
+__Parameters__
+
+- __id     __: ID of the initiator group.
+- __vol_id __: ID of the volume.
+
+<a name="nimbleclient.v1.api.initiator_groups.InitiatorGroup.validate_lun"></a>
+#### validate\_lun
+
+```python
+ | validate_lun(lun, **kwargs)
+```
+
+Validate an LU number for the volume and initiator group combination.
+
+__Parameters__
+
+- __id     __: ID of the initiator group.
+- __vol_id __: ID of the volume.
+- __lun    __: LU number to validate in decimal.
+
+<a name="nimbleclient.v1.api.initiator_groups.InitiatorGroupList"></a>
+## InitiatorGroupList
+
+```python
+class InitiatorGroupList(Collection)
+```
+
+<a name="nimbleclient.v1.api.initiator_groups.InitiatorGroupList.suggest_lun"></a>
+#### suggest\_lun
+
+```python
+ | suggest_lun(id, **kwargs)
+```
+
+Suggest an LU number for the volume and initiator group combination.
+
+__Parameters__
+
+- __id     __: ID of the initiator group.
+- __vol_id __: ID of the volume.
+
+<a name="nimbleclient.v1.api.initiator_groups.InitiatorGroupList.validate_lun"></a>
+#### validate\_lun
+
+```python
+ | validate_lun(id, lun, **kwargs)
+```
+
+Validate an LU number for the volume and initiator group combination.
+
+__Parameters__
+
+- __id     __: ID of the initiator group.
+- __vol_id __: ID of the volume.
+- __lun    __: LU number to validate in decimal.
 

@@ -1,11 +1,18 @@
+# Table of Contents
 
+* [nimbleclient.v1.api.initiators](#nimbleclient.v1.api.initiators)
+  * [Initiator](#nimbleclient.v1.api.initiators.Initiator)
+
+<a name="nimbleclient.v1.api.initiators"></a>
 # nimbleclient.v1.api.initiators
 
-
+<a name="nimbleclient.v1.api.initiators.Initiator"></a>
 ## Initiator
+
 ```python
-Initiator(self, id, attrs=None, client=None, collection=None)
+class Initiator(Resource)
 ```
+
 Manage initiators in initiator groups. An initiator group has a set of initiators that can be configured as part of your ACL to access a specific volume through group
 membership.
 
@@ -31,10 +38,4 @@ __Parameters__
 - __creation_time           __: Time when this initiator group was created.
 - __last_modified           __: Time when this initiator group was last modified.
 - __override_existing_alias __: Forcibly add Fibre Channel initiator to initiator group by updating or removing conflicting Fibre Channel initiator aliases.
-
-
-## InitiatorList
-```python
-InitiatorList(self, client=None)
-```
 

@@ -1,11 +1,18 @@
+# Table of Contents
 
+* [nimbleclient.v1.api.jobs](#nimbleclient.v1.api.jobs)
+  * [Job](#nimbleclient.v1.api.jobs.Job)
+
+<a name="nimbleclient.v1.api.jobs"></a>
 # nimbleclient.v1.api.jobs
 
-
+<a name="nimbleclient.v1.api.jobs.Job"></a>
 ## Job
+
 ```python
-Job(self, id, attrs=None, client=None, collection=None)
+class Job(Resource)
 ```
+
 Jobs are operations in progress in the system.
 
 __Parameters__
@@ -28,10 +35,4 @@ __Parameters__
 - __state                     __: Status of the job.
 - __result                    __: Result of the job.
 - __total_phases              __: Total number of phases of the job.
-
-
-## JobList
-```python
-JobList(self, client=None)
-```
 

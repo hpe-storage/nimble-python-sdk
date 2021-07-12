@@ -1,11 +1,18 @@
+# Table of Contents
 
+* [nimbleclient.v1.api.subnets](#nimbleclient.v1.api.subnets)
+  * [Subnet](#nimbleclient.v1.api.subnets.Subnet)
+
+<a name="nimbleclient.v1.api.subnets"></a>
 # nimbleclient.v1.api.subnets
 
-
+<a name="nimbleclient.v1.api.subnets.Subnet"></a>
 ## Subnet
+
 ```python
-Subnet(self, id, attrs=None, client=None, collection=None)
+class Subnet(Resource)
 ```
+
 Search subnets information. Many networking tasks require that objects such as replication partners are either on the same network or have a route to a secondary network.
 Subnets let you create logical addressing for selective routing.
 
@@ -26,10 +33,4 @@ __Parameters__
 - __last_modified        __: Time when this subnet configuration was last modified.
 - __failover             __: Failover setting of the subnet.
 - __failover_enable_time __: Failover for this subnet will be enabled again at the time specified by failover_enable_time.
-
-
-## SubnetList
-```python
-SubnetList(self, client=None)
-```
 

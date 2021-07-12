@@ -1,11 +1,18 @@
+# Table of Contents
 
-# nimbleclient.v1.api.protection_schedules
+* [nimbleclient.v1.api.protection\_schedules](#nimbleclient.v1.api.protection_schedules)
+  * [ProtectionSchedule](#nimbleclient.v1.api.protection_schedules.ProtectionSchedule)
 
+<a name="nimbleclient.v1.api.protection_schedules"></a>
+# nimbleclient.v1.api.protection\_schedules
 
+<a name="nimbleclient.v1.api.protection_schedules.ProtectionSchedule"></a>
 ## ProtectionSchedule
+
 ```python
-ProtectionSchedule(self, id, attrs=None, client=None, collection=None)
+class ProtectionSchedule(Resource)
 ```
+
 Manage protection schedules used in protection templates.
 
 __Parameters__
@@ -77,10 +84,4 @@ __Parameters__
                                       performed on a different array. Do not perform a subsequent Group Management Service takeover on a different array as it will lead to
                                       irreconcilable conflicts. This limitation is cleared once the Group management service backup array has successfully synchronized after
                                       reconnection.
-
-
-## ProtectionScheduleList
-```python
-ProtectionScheduleList(self, client=None)
-```
 

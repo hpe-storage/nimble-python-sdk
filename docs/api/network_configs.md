@@ -1,11 +1,23 @@
+# Table of Contents
 
-# nimbleclient.v1.api.network_configs
+* [nimbleclient.v1.api.network\_configs](#nimbleclient.v1.api.network_configs)
+  * [NetworkConfig](#nimbleclient.v1.api.network_configs.NetworkConfig)
+    * [activate\_netconfig](#nimbleclient.v1.api.network_configs.NetworkConfig.activate_netconfig)
+    * [validate\_netconfig](#nimbleclient.v1.api.network_configs.NetworkConfig.validate_netconfig)
+  * [NetworkConfigList](#nimbleclient.v1.api.network_configs.NetworkConfigList)
+    * [activate\_netconfig](#nimbleclient.v1.api.network_configs.NetworkConfigList.activate_netconfig)
+    * [validate\_netconfig](#nimbleclient.v1.api.network_configs.NetworkConfigList.validate_netconfig)
 
+<a name="nimbleclient.v1.api.network_configs"></a>
+# nimbleclient.v1.api.network\_configs
 
+<a name="nimbleclient.v1.api.network_configs.NetworkConfig"></a>
 ## NetworkConfig
+
 ```python
-NetworkConfig(self, id, attrs=None, client=None, collection=None)
+class NetworkConfig(Resource)
 ```
+
 Manage group wide network configuration. The three possible network configurations include active, backup and an optional draft configuration.
 
 __Parameters__
@@ -29,9 +41,66 @@ __Parameters__
 - __last_active                       __: Time of last activity.
 - __ignore_validation_mask            __: Indicates whether to ignore the validation.
 
+<a name="nimbleclient.v1.api.network_configs.NetworkConfig.activate_netconfig"></a>
+#### activate\_netconfig
 
-## NetworkConfigList
 ```python
-NetworkConfigList(self, client=None)
+ | activate_netconfig(ignore_validation_mask, **kwargs)
 ```
+
+Activate a network configuration.
+
+__Parameters__
+
+- __id                     __: ID of the netconfig to activate.
+- __ignore_validation_mask __: Whether to ignore validation or not.
+
+<a name="nimbleclient.v1.api.network_configs.NetworkConfig.validate_netconfig"></a>
+#### validate\_netconfig
+
+```python
+ | validate_netconfig(ignore_validation_mask, **kwargs)
+```
+
+Validate a network configuration.
+
+__Parameters__
+
+- __id                     __: ID of the netconfig to validate.
+- __ignore_validation_mask __: Whether to ignore validation or not.
+
+<a name="nimbleclient.v1.api.network_configs.NetworkConfigList"></a>
+## NetworkConfigList
+
+```python
+class NetworkConfigList(Collection)
+```
+
+<a name="nimbleclient.v1.api.network_configs.NetworkConfigList.activate_netconfig"></a>
+#### activate\_netconfig
+
+```python
+ | activate_netconfig(id, ignore_validation_mask, **kwargs)
+```
+
+Activate a network configuration.
+
+__Parameters__
+
+- __id                     __: ID of the netconfig to activate.
+- __ignore_validation_mask __: Whether to ignore validation or not.
+
+<a name="nimbleclient.v1.api.network_configs.NetworkConfigList.validate_netconfig"></a>
+#### validate\_netconfig
+
+```python
+ | validate_netconfig(id, ignore_validation_mask, **kwargs)
+```
+
+Validate a network configuration.
+
+__Parameters__
+
+- __id                     __: ID of the netconfig to validate.
+- __ignore_validation_mask __: Whether to ignore validation or not.
 

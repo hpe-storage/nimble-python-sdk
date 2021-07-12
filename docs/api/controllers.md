@@ -1,11 +1,18 @@
+# Table of Contents
 
+* [nimbleclient.v1.api.controllers](#nimbleclient.v1.api.controllers)
+  * [Controller](#nimbleclient.v1.api.controllers.Controller)
+
+<a name="nimbleclient.v1.api.controllers"></a>
 # nimbleclient.v1.api.controllers
 
-
+<a name="nimbleclient.v1.api.controllers.Controller"></a>
 ## Controller
+
 ```python
-Controller(self, id, attrs=None, client=None, collection=None)
+class Controller(Resource)
 ```
+
 Controller is a redundant collection of hardware capable of running the array software.
 
 __Parameters__
@@ -33,10 +40,4 @@ __Parameters__
 - __nvme_cards_enabled  __: Indicates if the NVMe accelerator card is enabled.
 - __nvme_cards          __: List of NVMe accelerator cards.
 - __asup_time           __: Time of the last autosupport by the controller.
-
-
-## ControllerList
-```python
-ControllerList(self, client=None)
-```
 

@@ -1,11 +1,18 @@
+# Table of Contents
 
-# nimbleclient.v1.api.network_interfaces
+* [nimbleclient.v1.api.network\_interfaces](#nimbleclient.v1.api.network_interfaces)
+  * [NetworkInterface](#nimbleclient.v1.api.network_interfaces.NetworkInterface)
 
+<a name="nimbleclient.v1.api.network_interfaces"></a>
+# nimbleclient.v1.api.network\_interfaces
 
+<a name="nimbleclient.v1.api.network_interfaces.NetworkInterface"></a>
 ## NetworkInterface
+
 ```python
-NetworkInterface(self, id, attrs=None, client=None, collection=None)
+class NetworkInterface(Resource)
 ```
+
 Manage per array network interface configuration.
 
 __Parameters__
@@ -27,10 +34,4 @@ __Parameters__
 - __max_link_speed       __: Maximum speed of the link.
 - __nic_type             __: Interface type.
 - __ip_list              __: List of IP addresses assigned to this network interface.
-
-
-## NetworkInterfaceList
-```python
-NetworkInterfaceList(self, client=None)
-```
 

@@ -1,11 +1,21 @@
+# Table of Contents
 
+* [nimbleclient.v1.api.folders](#nimbleclient.v1.api.folders)
+  * [Folder](#nimbleclient.v1.api.folders.Folder)
+    * [set\_dedupe](#nimbleclient.v1.api.folders.Folder.set_dedupe)
+  * [FolderList](#nimbleclient.v1.api.folders.FolderList)
+    * [set\_dedupe](#nimbleclient.v1.api.folders.FolderList.set_dedupe)
+
+<a name="nimbleclient.v1.api.folders"></a>
 # nimbleclient.v1.api.folders
 
-
+<a name="nimbleclient.v1.api.folders.Folder"></a>
 ## Folder
+
 ```python
-Folder(self, id, attrs=None, client=None, collection=None)
+class Folder(Resource)
 ```
+
 Folders are a way to group volumes, as well as a way to apply space constraints to them.
 
 __Parameters__
@@ -75,9 +85,38 @@ __Parameters__
                                 will be Fibre Channel. This field is meaningful only to VVol folder.
 - __tenant_id                     __: Tenant ID of the folder. This is used to determine what tenant context the folder belongs to.
 
+<a name="nimbleclient.v1.api.folders.Folder.set_dedupe"></a>
+#### set\_dedupe
 
-## FolderList
 ```python
-FolderList(self, client=None)
+ | set_dedupe(dedupe_enabled, **kwargs)
 ```
+
+Set dedupe enabled/disabled for all applicable volumes inside a folder.
+
+__Parameters__
+
+- __dedupe_enabled __: Enable/disable dedupe.
+- __id             __: Folder containing the volumes to enable/disable dedupe on.
+
+<a name="nimbleclient.v1.api.folders.FolderList"></a>
+## FolderList
+
+```python
+class FolderList(Collection)
+```
+
+<a name="nimbleclient.v1.api.folders.FolderList.set_dedupe"></a>
+#### set\_dedupe
+
+```python
+ | set_dedupe(id, dedupe_enabled, **kwargs)
+```
+
+Set dedupe enabled/disabled for all applicable volumes inside a folder.
+
+__Parameters__
+
+- __dedupe_enabled __: Enable/disable dedupe.
+- __id             __: Folder containing the volumes to enable/disable dedupe on.
 

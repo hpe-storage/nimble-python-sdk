@@ -1,11 +1,21 @@
+# Table of Contents
 
+* [nimbleclient.v1.api.pools](#nimbleclient.v1.api.pools)
+  * [Pool](#nimbleclient.v1.api.pools.Pool)
+    * [merge](#nimbleclient.v1.api.pools.Pool.merge)
+  * [PoolList](#nimbleclient.v1.api.pools.PoolList)
+    * [merge](#nimbleclient.v1.api.pools.PoolList.merge)
+
+<a name="nimbleclient.v1.api.pools"></a>
 # nimbleclient.v1.api.pools
 
-
+<a name="nimbleclient.v1.api.pools.Pool"></a>
 ## Pool
+
 ```python
-Pool(self, id, attrs=None, client=None, collection=None)
+class Pool(Resource)
 ```
+
 Manage pools. Pools are an aggregation of arrays.
 
 __Parameters__
@@ -60,9 +70,42 @@ __Parameters__
 - __dedupe_all_volumes            __: Indicates if dedupe is enabled by default for new volumes on this pool.
 - __is_default                    __: Indicates if this is the default pool.
 
+<a name="nimbleclient.v1.api.pools.Pool.merge"></a>
+#### merge
 
-## PoolList
 ```python
-PoolList(self, client=None)
+ | merge(target_pool_id, **kwargs)
 ```
+
+Merge the specified pool into the target pool. All volumes on the specified pool are moved to the target pool and the specified pool is then deleted. All the arrays in the
+pool are assigned to the target pool.
+
+__Parameters__
+
+- __id             __: ID of the specified pool.
+- __target_pool_id __: ID of the target pool.
+- __force          __: Forcibly merge the specified pool into target pool.
+
+<a name="nimbleclient.v1.api.pools.PoolList"></a>
+## PoolList
+
+```python
+class PoolList(Collection)
+```
+
+<a name="nimbleclient.v1.api.pools.PoolList.merge"></a>
+#### merge
+
+```python
+ | merge(id, target_pool_id, **kwargs)
+```
+
+Merge the specified pool into the target pool. All volumes on the specified pool are moved to the target pool and the specified pool is then deleted. All the arrays in the
+pool are assigned to the target pool.
+
+__Parameters__
+
+- __id             __: ID of the specified pool.
+- __target_pool_id __: ID of the target pool.
+- __force          __: Forcibly merge the specified pool into target pool.
 

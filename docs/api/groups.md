@@ -1,11 +1,49 @@
+# Table of Contents
 
+* [nimbleclient.v1.api.groups](#nimbleclient.v1.api.groups)
+  * [Group](#nimbleclient.v1.api.groups.Group)
+    * [reboot](#nimbleclient.v1.api.groups.Group.reboot)
+    * [halt](#nimbleclient.v1.api.groups.Group.halt)
+    * [test\_alert](#nimbleclient.v1.api.groups.Group.test_alert)
+    * [software\_update\_precheck](#nimbleclient.v1.api.groups.Group.software_update_precheck)
+    * [software\_update\_start](#nimbleclient.v1.api.groups.Group.software_update_start)
+    * [software\_download](#nimbleclient.v1.api.groups.Group.software_download)
+    * [software\_cancel\_download](#nimbleclient.v1.api.groups.Group.software_cancel_download)
+    * [software\_update\_resume](#nimbleclient.v1.api.groups.Group.software_update_resume)
+    * [get\_group\_discovered\_list](#nimbleclient.v1.api.groups.Group.get_group_discovered_list)
+    * [validate\_merge](#nimbleclient.v1.api.groups.Group.validate_merge)
+    * [merge](#nimbleclient.v1.api.groups.Group.merge)
+    * [get\_eula](#nimbleclient.v1.api.groups.Group.get_eula)
+    * [check\_migrate](#nimbleclient.v1.api.groups.Group.check_migrate)
+    * [migrate](#nimbleclient.v1.api.groups.Group.migrate)
+    * [get\_timezone\_list](#nimbleclient.v1.api.groups.Group.get_timezone_list)
+  * [GroupList](#nimbleclient.v1.api.groups.GroupList)
+    * [reboot](#nimbleclient.v1.api.groups.GroupList.reboot)
+    * [halt](#nimbleclient.v1.api.groups.GroupList.halt)
+    * [test\_alert](#nimbleclient.v1.api.groups.GroupList.test_alert)
+    * [software\_update\_precheck](#nimbleclient.v1.api.groups.GroupList.software_update_precheck)
+    * [software\_update\_start](#nimbleclient.v1.api.groups.GroupList.software_update_start)
+    * [software\_download](#nimbleclient.v1.api.groups.GroupList.software_download)
+    * [software\_cancel\_download](#nimbleclient.v1.api.groups.GroupList.software_cancel_download)
+    * [software\_update\_resume](#nimbleclient.v1.api.groups.GroupList.software_update_resume)
+    * [get\_group\_discovered\_list](#nimbleclient.v1.api.groups.GroupList.get_group_discovered_list)
+    * [validate\_merge](#nimbleclient.v1.api.groups.GroupList.validate_merge)
+    * [merge](#nimbleclient.v1.api.groups.GroupList.merge)
+    * [get\_eula](#nimbleclient.v1.api.groups.GroupList.get_eula)
+    * [check\_migrate](#nimbleclient.v1.api.groups.GroupList.check_migrate)
+    * [migrate](#nimbleclient.v1.api.groups.GroupList.migrate)
+    * [get\_timezone\_list](#nimbleclient.v1.api.groups.GroupList.get_timezone_list)
+
+<a name="nimbleclient.v1.api.groups"></a>
 # nimbleclient.v1.api.groups
 
-
+<a name="nimbleclient.v1.api.groups.Group"></a>
 ## Group
+
 ```python
-Group(self, id, attrs=None, client=None, collection=None)
+class Group(Resource)
 ```
+
 Group is a collection of arrays operating together organized into storage pools.
 
 __Parameters__
@@ -73,6 +111,7 @@ __Parameters__
 - __alarms_enabled                         __: Whether alarm feature is enabled.
 - __vss_validation_timeout                 __: The amount of time in seconds to validate Microsoft VSS application synchronization before timing out.
 - __auto_switchover_enabled                __: Whether automatic switchover of Group management services feature is enabled.
+- __software_subscription_enabled          __: Whether software subscription of Group management services feature is enabled.
 - __auto_switchover_messages               __: List of validation messages for automatic switchover of Group Management. This will be empty when there are no conflicts found.
 - __merge_state                            __: State of group merge.
 - __merge_group_name                       __: Group that we're being merged with.
@@ -152,9 +191,454 @@ __Parameters__
 - __snap_retn_meter_high                   __: Threshold for considering a volume as high retention.
 - __snap_retn_meter_very_high              __: Threshold for considering a volume as very high retention.
 
+<a name="nimbleclient.v1.api.groups.Group.reboot"></a>
+#### reboot
 
-## GroupList
 ```python
-GroupList(self, client=None)
+ | reboot(**kwargs)
 ```
+
+Reboot all arrays in the group.
+
+__Parameters__
+
+- __id __: ID of the group to reboot.
+- __job_timeout__: Job timeout in seconds.
+
+<a name="nimbleclient.v1.api.groups.Group.halt"></a>
+#### halt
+
+```python
+ | halt(**kwargs)
+```
+
+Halt all arrays in the group.
+
+__Parameters__
+
+- __id    __: ID of the group to halt.
+- __force __: Halt remaining arrays when one or more is unreachable.
+- __job_timeout__: Job timeout in seconds.
+
+<a name="nimbleclient.v1.api.groups.Group.test_alert"></a>
+#### test\_alert
+
+```python
+ | test_alert(level, **kwargs)
+```
+
+Generate a test alert.
+
+__Parameters__
+
+- __id    __: ID of the group.
+- __level __: Level of the test alert.
+
+<a name="nimbleclient.v1.api.groups.Group.software_update_precheck"></a>
+#### software\_update\_precheck
+
+```python
+ | software_update_precheck(**kwargs)
+```
+
+Run software update precheck.
+
+__Parameters__
+
+- __id                 __: ID of the group.
+- __skip_precheck_mask __: Flag to allow skipping certain types of prechecks.
+
+<a name="nimbleclient.v1.api.groups.Group.software_update_start"></a>
+#### software\_update\_start
+
+```python
+ | software_update_start(**kwargs)
+```
+
+Update the group software to the downloaded version.
+
+__Parameters__
+
+- __id                    __: ID of the group.
+- __skip_start_check_mask __: Flag to allow skipping certain types of checks.
+
+<a name="nimbleclient.v1.api.groups.Group.software_download"></a>
+#### software\_download
+
+```python
+ | software_download(version, **kwargs)
+```
+
+Download software update package.
+
+__Parameters__
+
+- __id      __: ID of the group.
+- __version __: Version string to download.
+- __force   __: Flag to force download.
+
+<a name="nimbleclient.v1.api.groups.Group.software_cancel_download"></a>
+#### software\_cancel\_download
+
+```python
+ | software_cancel_download(**kwargs)
+```
+
+Cancel ongoing download of software.
+
+__Parameters__
+
+- __id __: ID of the group.
+
+<a name="nimbleclient.v1.api.groups.Group.software_update_resume"></a>
+#### software\_update\_resume
+
+```python
+ | software_update_resume(**kwargs)
+```
+
+Resume stopped software update.
+
+__Parameters__
+
+- __id __: ID of the group.
+
+<a name="nimbleclient.v1.api.groups.Group.get_group_discovered_list"></a>
+#### get\_group\_discovered\_list
+
+```python
+ | get_group_discovered_list(**kwargs)
+```
+
+Get list of discovered groups with arrays that are initialized.
+
+__Parameters__
+
+- __id         __: ID of the group.
+- __group_name __: Name of the group requested to be discovered.
+
+<a name="nimbleclient.v1.api.groups.Group.validate_merge"></a>
+#### validate\_merge
+
+```python
+ | validate_merge(src_group_ip, src_group_name, src_password, src_username, **kwargs)
+```
+
+Perform group merge validation.
+
+__Parameters__
+
+- __id                     __: ID of the group.
+- __src_group_name         __: Name of the source group.
+- __src_group_ip           __: IP address of the source group.
+- __src_username           __: Username of the source group.
+- __src_password           __: Password of the source group.
+- __src_passphrase         __: Source group encryption passphrase.
+- __skip_secondary_mgmt_ip __: Skip check for secondary management IP address.
+
+<a name="nimbleclient.v1.api.groups.Group.merge"></a>
+#### merge
+
+```python
+ | merge(src_group_ip, src_group_name, src_password, src_username, **kwargs)
+```
+
+Perform group merge with the specified group.
+
+__Parameters__
+
+- __id                     __: ID of the group.
+- __src_group_name         __: Name of the source group.
+- __src_group_ip           __: IP address of the source group.
+- __src_username           __: Username of the source group.
+- __src_password           __: Password of the source group.
+- __src_passphrase         __: Source group encryption passphrase.
+- __force                  __: Ignore warnings and forcibly merge specified group with this group.
+- __skip_secondary_mgmt_ip __: Skip check for secondary management IP address.
+- __job_timeout            __: Job timeout in seconds.
+
+<a name="nimbleclient.v1.api.groups.Group.get_eula"></a>
+#### get\_eula
+
+```python
+ | get_eula(**kwargs)
+```
+
+Get URL to download EULA contents.
+
+__Parameters__
+
+- __id     __: ID of the group.
+- __locale __: Locale of EULA contents. Default is en.
+- __format __: Format of EULA contents. Default is HTML.
+- __phase  __: Phase of EULA contents. Default is setup.
+- __force  __: Flag to force EULA.
+
+<a name="nimbleclient.v1.api.groups.Group.check_migrate"></a>
+#### check\_migrate
+
+```python
+ | check_migrate(**kwargs)
+```
+
+Check if the group Management Service can be migrated to the group Management Service backup array.
+
+__Parameters__
+
+- __id __: ID of the group.
+
+<a name="nimbleclient.v1.api.groups.Group.migrate"></a>
+#### migrate
+
+```python
+ | migrate(**kwargs)
+```
+
+Migrate the group Management Service to the current group Management Service backup array.
+
+__Parameters__
+
+- __id __: ID of the group.
+
+<a name="nimbleclient.v1.api.groups.Group.get_timezone_list"></a>
+#### get\_timezone\_list
+
+```python
+ | get_timezone_list(**kwargs)
+```
+
+Get list of group timezones.
+
+__Parameters__
+
+- __id __: ID of the group.
+
+<a name="nimbleclient.v1.api.groups.GroupList"></a>
+## GroupList
+
+```python
+class GroupList(Collection)
+```
+
+<a name="nimbleclient.v1.api.groups.GroupList.reboot"></a>
+#### reboot
+
+```python
+ | reboot(id, **kwargs)
+```
+
+Reboot all arrays in the group.
+
+__Parameters__
+
+- __id __: ID of the group to reboot.
+- __job_timeout__: Job timeout in seconds.
+
+<a name="nimbleclient.v1.api.groups.GroupList.halt"></a>
+#### halt
+
+```python
+ | halt(id, **kwargs)
+```
+
+Halt all arrays in the group.
+
+__Parameters__
+
+- __id    __: ID of the group to halt.
+- __force __: Halt remaining arrays when one or more is unreachable.
+- __job_timeout__: Job timeout in seconds.
+
+<a name="nimbleclient.v1.api.groups.GroupList.test_alert"></a>
+#### test\_alert
+
+```python
+ | test_alert(id, level, **kwargs)
+```
+
+Generate a test alert.
+
+__Parameters__
+
+- __id    __: ID of the group.
+- __level __: Level of the test alert.
+
+<a name="nimbleclient.v1.api.groups.GroupList.software_update_precheck"></a>
+#### software\_update\_precheck
+
+```python
+ | software_update_precheck(id, **kwargs)
+```
+
+Run software update precheck.
+
+__Parameters__
+
+- __id                 __: ID of the group.
+- __skip_precheck_mask __: Flag to allow skipping certain types of prechecks.
+
+<a name="nimbleclient.v1.api.groups.GroupList.software_update_start"></a>
+#### software\_update\_start
+
+```python
+ | software_update_start(id, **kwargs)
+```
+
+Update the group software to the downloaded version.
+
+__Parameters__
+
+- __id                    __: ID of the group.
+- __skip_start_check_mask __: Flag to allow skipping certain types of checks.
+
+<a name="nimbleclient.v1.api.groups.GroupList.software_download"></a>
+#### software\_download
+
+```python
+ | software_download(id, version, **kwargs)
+```
+
+Download software update package.
+
+__Parameters__
+
+- __id      __: ID of the group.
+- __version __: Version string to download.
+- __force   __: Flag to force download.
+
+<a name="nimbleclient.v1.api.groups.GroupList.software_cancel_download"></a>
+#### software\_cancel\_download
+
+```python
+ | software_cancel_download(id, **kwargs)
+```
+
+Cancel ongoing download of software.
+
+__Parameters__
+
+- __id __: ID of the group.
+
+<a name="nimbleclient.v1.api.groups.GroupList.software_update_resume"></a>
+#### software\_update\_resume
+
+```python
+ | software_update_resume(id, **kwargs)
+```
+
+Resume stopped software update.
+
+__Parameters__
+
+- __id __: ID of the group.
+
+<a name="nimbleclient.v1.api.groups.GroupList.get_group_discovered_list"></a>
+#### get\_group\_discovered\_list
+
+```python
+ | get_group_discovered_list(id, **kwargs)
+```
+
+Get list of discovered groups with arrays that are initialized.
+
+__Parameters__
+
+- __id         __: ID of the group.
+- __group_name __: Name of the group requested to be discovered.
+
+<a name="nimbleclient.v1.api.groups.GroupList.validate_merge"></a>
+#### validate\_merge
+
+```python
+ | validate_merge(id, src_group_ip, src_group_name, src_password, src_username, **kwargs)
+```
+
+Perform group merge validation.
+
+__Parameters__
+
+- __id                     __: ID of the group.
+- __src_group_name         __: Name of the source group.
+- __src_group_ip           __: IP address of the source group.
+- __src_username           __: Username of the source group.
+- __src_password           __: Password of the source group.
+- __src_passphrase         __: Source group encryption passphrase.
+- __skip_secondary_mgmt_ip __: Skip check for secondary management IP address.
+
+<a name="nimbleclient.v1.api.groups.GroupList.merge"></a>
+#### merge
+
+```python
+ | merge(id, src_group_ip, src_group_name, src_password, src_username, **kwargs)
+```
+
+Perform group merge with the specified group.
+
+__Parameters__
+
+- __id                     __: ID of the group.
+- __src_group_name         __: Name of the source group.
+- __src_group_ip           __: IP address of the source group.
+- __src_username           __: Username of the source group.
+- __src_password           __: Password of the source group.
+- __src_passphrase         __: Source group encryption passphrase.
+- __force                  __: Ignore warnings and forcibly merge specified group with this group.
+- __skip_secondary_mgmt_ip __: Skip check for secondary management IP address.
+- __job_timeout            __: Job timeout in seconds.
+
+<a name="nimbleclient.v1.api.groups.GroupList.get_eula"></a>
+#### get\_eula
+
+```python
+ | get_eula(id, **kwargs)
+```
+
+Get URL to download EULA contents.
+
+__Parameters__
+
+- __id     __: ID of the group.
+- __locale __: Locale of EULA contents. Default is en.
+- __format __: Format of EULA contents. Default is HTML.
+- __phase  __: Phase of EULA contents. Default is setup.
+- __force  __: Flag to force EULA.
+
+<a name="nimbleclient.v1.api.groups.GroupList.check_migrate"></a>
+#### check\_migrate
+
+```python
+ | check_migrate(id, **kwargs)
+```
+
+Check if the group Management Service can be migrated to the group Management Service backup array.
+
+__Parameters__
+
+- __id __: ID of the group.
+
+<a name="nimbleclient.v1.api.groups.GroupList.migrate"></a>
+#### migrate
+
+```python
+ | migrate(id, **kwargs)
+```
+
+Migrate the group Management Service to the current group Management Service backup array.
+
+__Parameters__
+
+- __id __: ID of the group.
+
+<a name="nimbleclient.v1.api.groups.GroupList.get_timezone_list"></a>
+#### get\_timezone\_list
+
+```python
+ | get_timezone_list(id, **kwargs)
+```
+
+Get list of group timezones.
+
+__Parameters__
+
+- __id __: ID of the group.
 

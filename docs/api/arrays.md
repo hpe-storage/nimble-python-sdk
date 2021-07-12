@@ -1,11 +1,25 @@
+# Table of Contents
 
+* [nimbleclient.v1.api.arrays](#nimbleclient.v1.api.arrays)
+  * [Array](#nimbleclient.v1.api.arrays.Array)
+    * [failover](#nimbleclient.v1.api.arrays.Array.failover)
+    * [halt](#nimbleclient.v1.api.arrays.Array.halt)
+    * [reboot](#nimbleclient.v1.api.arrays.Array.reboot)
+  * [ArrayList](#nimbleclient.v1.api.arrays.ArrayList)
+    * [failover](#nimbleclient.v1.api.arrays.ArrayList.failover)
+    * [halt](#nimbleclient.v1.api.arrays.ArrayList.halt)
+    * [reboot](#nimbleclient.v1.api.arrays.ArrayList.reboot)
+
+<a name="nimbleclient.v1.api.arrays"></a>
 # nimbleclient.v1.api.arrays
 
-
+<a name="nimbleclient.v1.api.arrays.Array"></a>
 ## Array
+
 ```python
-Array(self, id, attrs=None, client=None, collection=None)
+class Array(Resource)
 ```
+
 Retrieve information of specified arrays. The array is the management and configuration for the underlying physical hardware array box.
 
 __Parameters__
@@ -46,7 +60,10 @@ __Parameters__
 - __dedupe_capacity_bytes         __: The dedupe capacity of a hybrid array. Does not apply to all-flash arrays.
 - __dedupe_usage_bytes            __: The dedupe usage of a hybrid array. Does not apply to all-flash arrays.
 - __is_fully_dedupe_capable       __: Is array fully capable to dedupe its usable capacity.
+- __dedupe_disabled               __: Is data deduplication disabled for this array.
 - __extended_model                __: Extended model of the array.
+- __oem                           __: OEM brand of the array.
+- __brand                         __: Brand of the array.
 - __is_supported_hw_config        __: Whether it is a supported hardware config.
 - __gig_nic_port_count            __: Count of 1G NIC Ports installed on the array.
 - __ten_gig_sfp_nic_port_count    __: Count of SFP NIC Ports installed on the array capable of 10G, 25G or 100G speeds.
@@ -64,9 +81,96 @@ __Parameters__
 - __zconf_ipaddrs                 __: List of link-local zero-configuration addresses of the array.
 - __secondary_mgmt_ip             __: Secondary management IP address for the Group.
 
+<a name="nimbleclient.v1.api.arrays.Array.failover"></a>
+#### failover
 
-## ArrayList
 ```python
-ArrayList(self, client=None)
+ | failover(**kwargs)
 ```
+
+Perform a failover on the specified array.
+
+__Parameters__
+
+- __id    __: ID of the array to perform failover on.
+- __force __: Initiate failover without performing any precheck.
+- __job_timeout__: Job timeout in seconds.
+
+<a name="nimbleclient.v1.api.arrays.Array.halt"></a>
+#### halt
+
+```python
+ | halt(**kwargs)
+```
+
+Halt the specified array. Restarting the array will require physically powering it back on.
+
+__Parameters__
+
+- __id __: ID of the array to halt.
+- __job_timeout__: Job timeout in seconds.
+
+<a name="nimbleclient.v1.api.arrays.Array.reboot"></a>
+#### reboot
+
+```python
+ | reboot(**kwargs)
+```
+
+Reboot the specified array.
+
+__Parameters__
+
+- __id __: ID of the array to reboot.
+- __job_timeout__: Job timeout in seconds.
+
+<a name="nimbleclient.v1.api.arrays.ArrayList"></a>
+## ArrayList
+
+```python
+class ArrayList(Collection)
+```
+
+<a name="nimbleclient.v1.api.arrays.ArrayList.failover"></a>
+#### failover
+
+```python
+ | failover(id, **kwargs)
+```
+
+Perform a failover on the specified array.
+
+__Parameters__
+
+- __id    __: ID of the array to perform failover on.
+- __force __: Initiate failover without performing any precheck.
+- __job_timeout__: Job timeout in seconds.
+
+<a name="nimbleclient.v1.api.arrays.ArrayList.halt"></a>
+#### halt
+
+```python
+ | halt(id, **kwargs)
+```
+
+Halt the specified array. Restarting the array will require physically powering it back on.
+
+__Parameters__
+
+- __id __: ID of the array to halt.
+- __job_timeout__: Job timeout in seconds.
+
+<a name="nimbleclient.v1.api.arrays.ArrayList.reboot"></a>
+#### reboot
+
+```python
+ | reboot(id, **kwargs)
+```
+
+Reboot the specified array.
+
+__Parameters__
+
+- __id __: ID of the array to reboot.
+- __job_timeout__: Job timeout in seconds.
 

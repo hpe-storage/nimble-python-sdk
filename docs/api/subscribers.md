@@ -1,11 +1,18 @@
+# Table of Contents
 
+* [nimbleclient.v1.api.subscribers](#nimbleclient.v1.api.subscribers)
+  * [Subscriber](#nimbleclient.v1.api.subscribers.Subscriber)
+
+<a name="nimbleclient.v1.api.subscribers"></a>
 # nimbleclient.v1.api.subscribers
 
-
+<a name="nimbleclient.v1.api.subscribers.Subscriber"></a>
 ## Subscriber
+
 ```python
-Subscriber(self, id, attrs=None, client=None, collection=None)
+class Subscriber(Resource)
 ```
+
 Subscribers are websocket based notification clients that can subscribe to interesting operations and events and recieve notifications whenever the subscribed to operations
 and events happen on the array.
 
@@ -19,10 +26,4 @@ __Parameters__
 - __is_connected           __: True if the subscriber has an active websocket connection.
 - __notification_count     __: Number of notifications sent to subscriber.
 - __force                  __: Forcibly modify a connected subscriber.
-
-
-## SubscriberList
-```python
-SubscriberList(self, client=None)
-```
 
