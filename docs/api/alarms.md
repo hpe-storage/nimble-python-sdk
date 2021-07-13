@@ -1,11 +1,23 @@
+# Table of Contents
 
+* [nimbleclient.v1.api.alarms](#nimbleclient.v1.api.alarms)
+  * [Alarm](#nimbleclient.v1.api.alarms.Alarm)
+    * [acknowledge](#nimbleclient.v1.api.alarms.Alarm.acknowledge)
+    * [unacknowledge](#nimbleclient.v1.api.alarms.Alarm.unacknowledge)
+  * [AlarmList](#nimbleclient.v1.api.alarms.AlarmList)
+    * [acknowledge](#nimbleclient.v1.api.alarms.AlarmList.acknowledge)
+    * [unacknowledge](#nimbleclient.v1.api.alarms.AlarmList.unacknowledge)
+
+<a name="nimbleclient.v1.api.alarms"></a>
 # nimbleclient.v1.api.alarms
 
-
+<a name="nimbleclient.v1.api.alarms.Alarm"></a>
 ## Alarm
+
 ```python
-Alarm(self, id, attrs=None, client=None, collection=None)
+class Alarm(Resource)
 ```
+
 View alarms.
 
 __Parameters__
@@ -32,9 +44,66 @@ __Parameters__
 - __activity               __: Description of activity performed and recorded in alarm.
 - __next_notification_time __: Time when next reminder for the alarm will be sent.
 
+<a name="nimbleclient.v1.api.alarms.Alarm.acknowledge"></a>
+#### acknowledge
 
-## AlarmList
 ```python
-AlarmList(self, client=None)
+ | acknowledge(**kwargs)
 ```
+
+Acknowledge an alarm.
+
+__Parameters__
+
+- __id                __: ID of the acknowledged alarm.
+- __remind_every      __: Notification frequency unit.
+- __remind_every_unit __: Period unit.
+
+<a name="nimbleclient.v1.api.alarms.Alarm.unacknowledge"></a>
+#### unacknowledge
+
+```python
+ | unacknowledge(**kwargs)
+```
+
+Unacknowledge an alarm.
+
+__Parameters__
+
+- __id __: ID of the acknowledged alarm.
+
+<a name="nimbleclient.v1.api.alarms.AlarmList"></a>
+## AlarmList
+
+```python
+class AlarmList(Collection)
+```
+
+<a name="nimbleclient.v1.api.alarms.AlarmList.acknowledge"></a>
+#### acknowledge
+
+```python
+ | acknowledge(id, **kwargs)
+```
+
+Acknowledge an alarm.
+
+__Parameters__
+
+- __id                __: ID of the acknowledged alarm.
+- __remind_every      __: Notification frequency unit.
+- __remind_every_unit __: Period unit.
+
+<a name="nimbleclient.v1.api.alarms.AlarmList.unacknowledge"></a>
+#### unacknowledge
+
+```python
+ | unacknowledge(id, **kwargs)
+```
+
+Unacknowledge an alarm.
+
+__Parameters__
+
+- __id __: ID of the acknowledged alarm.
 

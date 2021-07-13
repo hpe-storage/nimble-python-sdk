@@ -1,11 +1,18 @@
+# Table of Contents
 
+* [nimbleclient.v1.api.disks](#nimbleclient.v1.api.disks)
+  * [Disk](#nimbleclient.v1.api.disks.Disk)
+
+<a name="nimbleclient.v1.api.disks"></a>
 # nimbleclient.v1.api.disks
 
-
+<a name="nimbleclient.v1.api.disks.Disk"></a>
 ## Disk
+
 ```python
-Disk(self, id, attrs=None, client=None, collection=None)
+class Disk(Resource)
 ```
+
 Disks are used for storing user data.
 
 __Parameters__
@@ -42,10 +49,4 @@ __Parameters__
 - __array_name                __: Name of array the disk belongs to.
 - __array_id                  __: ID of array the disk belongs to.
 - __partial_response_ok       __: Indicate that it is okay to provide partially available response.
-
-
-## DiskList
-```python
-DiskList(self, client=None)
-```
 

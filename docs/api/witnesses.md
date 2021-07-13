@@ -1,11 +1,21 @@
+# Table of Contents
 
+* [nimbleclient.v1.api.witnesses](#nimbleclient.v1.api.witnesses)
+  * [Witness](#nimbleclient.v1.api.witnesses.Witness)
+    * [test](#nimbleclient.v1.api.witnesses.Witness.test)
+  * [WitnessList](#nimbleclient.v1.api.witnesses.WitnessList)
+    * [test](#nimbleclient.v1.api.witnesses.WitnessList.test)
+
+<a name="nimbleclient.v1.api.witnesses"></a>
 # nimbleclient.v1.api.witnesses
 
-
+<a name="nimbleclient.v1.api.witnesses.Witness"></a>
 ## Witness
+
 ```python
-Witness(self, id, attrs=None, client=None, collection=None)
+class Witness(Resource)
 ```
+
 Manage witness host configuration.
 
 __Parameters__
@@ -18,9 +28,36 @@ __Parameters__
 - __secure_mode              __: To verify the witness host against CA cert and to apply possible security modes.
 - __auto_switchover_messages __: List of validation messages for automatic switchover of Group Management. This will be empty when there are no conflicts found.
 
+<a name="nimbleclient.v1.api.witnesses.Witness.test"></a>
+#### test
 
-## WitnessList
 ```python
-WitnessList(self, client=None)
+ | test(**kwargs)
 ```
+
+Tests and validates witness configuration between the array and the witness.
+
+__Parameters__
+
+- __id __: ID of the witness.
+
+<a name="nimbleclient.v1.api.witnesses.WitnessList"></a>
+## WitnessList
+
+```python
+class WitnessList(Collection)
+```
+
+<a name="nimbleclient.v1.api.witnesses.WitnessList.test"></a>
+#### test
+
+```python
+ | test(id, **kwargs)
+```
+
+Tests and validates witness configuration between the array and the witness.
+
+__Parameters__
+
+- __id __: ID of the witness.
 

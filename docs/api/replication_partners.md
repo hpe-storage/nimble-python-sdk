@@ -1,11 +1,25 @@
+# Table of Contents
 
-# nimbleclient.v1.api.replication_partners
+* [nimbleclient.v1.api.replication\_partners](#nimbleclient.v1.api.replication_partners)
+  * [ReplicationPartner](#nimbleclient.v1.api.replication_partners.ReplicationPartner)
+    * [pause](#nimbleclient.v1.api.replication_partners.ReplicationPartner.pause)
+    * [resume](#nimbleclient.v1.api.replication_partners.ReplicationPartner.resume)
+    * [test](#nimbleclient.v1.api.replication_partners.ReplicationPartner.test)
+  * [ReplicationPartnerList](#nimbleclient.v1.api.replication_partners.ReplicationPartnerList)
+    * [pause](#nimbleclient.v1.api.replication_partners.ReplicationPartnerList.pause)
+    * [resume](#nimbleclient.v1.api.replication_partners.ReplicationPartnerList.resume)
+    * [test](#nimbleclient.v1.api.replication_partners.ReplicationPartnerList.test)
 
+<a name="nimbleclient.v1.api.replication_partners"></a>
+# nimbleclient.v1.api.replication\_partners
 
+<a name="nimbleclient.v1.api.replication_partners.ReplicationPartner"></a>
 ## ReplicationPartner
+
 ```python
-ReplicationPartner(self, id, attrs=None, client=None, collection=None)
+class ReplicationPartner(Resource)
 ```
+
 Manage replication partner. Replication partners let one storage array talk to another for replication purposes. The two arrays must be able to communicate over a network, and
 use ports 4213 and 4214. Replication partners have the same name as the remote group. Replication partners can be reciprocal, upstream (the source of replicas), or downstream
 (the receiver of replicas) partners.
@@ -63,9 +77,88 @@ __Parameters__
 - __volume_list_count                __: Count of volumes that are replicating from/to this partner.
 - __replication_direction            __: Direction of replication configured with this partner.
 
+<a name="nimbleclient.v1.api.replication_partners.ReplicationPartner.pause"></a>
+#### pause
 
-## ReplicationPartnerList
 ```python
-ReplicationPartnerList(self, client=None)
+ | pause(**kwargs)
 ```
+
+Pause replication for the specified partner.
+
+__Parameters__
+
+- __id __: ID of the partner to pause.
+
+<a name="nimbleclient.v1.api.replication_partners.ReplicationPartner.resume"></a>
+#### resume
+
+```python
+ | resume(**kwargs)
+```
+
+Resume replication for the specified partner.
+
+__Parameters__
+
+- __id __: ID of the partner to resume.
+
+<a name="nimbleclient.v1.api.replication_partners.ReplicationPartner.test"></a>
+#### test
+
+```python
+ | test(**kwargs)
+```
+
+Test connectivity to the specified partner.
+
+__Parameters__
+
+- __id __: ID of the partner to test.
+
+<a name="nimbleclient.v1.api.replication_partners.ReplicationPartnerList"></a>
+## ReplicationPartnerList
+
+```python
+class ReplicationPartnerList(Collection)
+```
+
+<a name="nimbleclient.v1.api.replication_partners.ReplicationPartnerList.pause"></a>
+#### pause
+
+```python
+ | pause(id, **kwargs)
+```
+
+Pause replication for the specified partner.
+
+__Parameters__
+
+- __id __: ID of the partner to pause.
+
+<a name="nimbleclient.v1.api.replication_partners.ReplicationPartnerList.resume"></a>
+#### resume
+
+```python
+ | resume(id, **kwargs)
+```
+
+Resume replication for the specified partner.
+
+__Parameters__
+
+- __id __: ID of the partner to resume.
+
+<a name="nimbleclient.v1.api.replication_partners.ReplicationPartnerList.test"></a>
+#### test
+
+```python
+ | test(id, **kwargs)
+```
+
+Test connectivity to the specified partner.
+
+__Parameters__
+
+- __id __: ID of the partner to test.
 

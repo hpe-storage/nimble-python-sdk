@@ -1,15 +1,18 @@
+# Table of Contents
 
-# nimbleclient.v1.api.fibre_channel_interfaces
+* [nimbleclient.v1.api.fibre\_channel\_interfaces](#nimbleclient.v1.api.fibre_channel_interfaces)
+  * [FibreChannelInterface](#nimbleclient.v1.api.fibre_channel_interfaces.FibreChannelInterface)
 
+<a name="nimbleclient.v1.api.fibre_channel_interfaces"></a>
+# nimbleclient.v1.api.fibre\_channel\_interfaces
 
+<a name="nimbleclient.v1.api.fibre_channel_interfaces.FibreChannelInterface"></a>
 ## FibreChannelInterface
+
 ```python
-FibreChannelInterface(self,
-                      id,
-                      attrs=None,
-                      client=None,
-                      collection=None)
+class FibreChannelInterface(Resource)
 ```
+
 Represent information of specified Fibre Channel interfaces. Fibre Channel interfaces are hosted on Fibre Channel ports to provide data access.
 
 __Parameters__
@@ -34,10 +37,4 @@ __Parameters__
 - __port                 __: HBA port number for this Fibre Channel port.
 - __link_info            __: Information about the Fibre Channel link at which interface is operating.
 - __fabric_info          __: Fibre Channel fabric information.
-
-
-## FibreChannelInterfaceList
-```python
-FibreChannelInterfaceList(self, client=None)
-```
 

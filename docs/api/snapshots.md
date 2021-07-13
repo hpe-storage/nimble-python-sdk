@@ -1,11 +1,21 @@
+# Table of Contents
 
+* [nimbleclient.v1.api.snapshots](#nimbleclient.v1.api.snapshots)
+  * [Snapshot](#nimbleclient.v1.api.snapshots.Snapshot)
+    * [bulk\_create](#nimbleclient.v1.api.snapshots.Snapshot.bulk_create)
+  * [SnapshotList](#nimbleclient.v1.api.snapshots.SnapshotList)
+    * [bulk\_create](#nimbleclient.v1.api.snapshots.SnapshotList.bulk_create)
+
+<a name="nimbleclient.v1.api.snapshots"></a>
 # nimbleclient.v1.api.snapshots
 
-
+<a name="nimbleclient.v1.api.snapshots.Snapshot"></a>
 ## Snapshot
+
 ```python
-Snapshot(self, id, attrs=None, client=None, collection=None)
+class Snapshot(Resource)
 ```
+
 Snapshots are point-in-time copies of a volume. Snapshots are managed the same way you manage volumes. In reality, snapshots are volumes: they can be accessed by initiators,
 are subject to the same controls, can be modified, and have the same restrictions as volumes. Snapshots can be cloned and replicated. The initial snapshot uses no space: it
 shares the original data with the source volume. Each successive snapshot captures the changes that have occurred on the volume. The changed blocks are compressed.
@@ -53,9 +63,42 @@ __Parameters__
 - __force                       __: Forcibly delete the specified snapshot even if it is the last replicated collection. Doing so could lead to full re-seeding at the next
                               replication.
 
+<a name="nimbleclient.v1.api.snapshots.Snapshot.bulk_create"></a>
+#### bulk\_create
 
-## SnapshotList
 ```python
-SnapshotList(self, client=None)
+ | bulk_create(replicate, snap_vol_list, vss_snap, **kwargs)
 ```
+
+Create snapshots on the given set of volumes.
+
+__Parameters__
+
+- __snap_vol_list __: List of volumes to snapshot and corresponding snapshot creation attributes. VSS application-synchronized snapshot must specify the 'writable' parameter and
+                set it to true.
+- __replicate     __: Allow snapshot to be replicated.
+- __vss_snap      __: VSS app-synchronized snapshot; we don't support creation of non app-synchronized sanpshots through this interface; must be set to true.
+
+<a name="nimbleclient.v1.api.snapshots.SnapshotList"></a>
+## SnapshotList
+
+```python
+class SnapshotList(Collection)
+```
+
+<a name="nimbleclient.v1.api.snapshots.SnapshotList.bulk_create"></a>
+#### bulk\_create
+
+```python
+ | bulk_create(replicate, snap_vol_list, vss_snap, **kwargs)
+```
+
+Create snapshots on the given set of volumes.
+
+__Parameters__
+
+- __snap_vol_list __: List of volumes to snapshot and corresponding snapshot creation attributes. VSS application-synchronized snapshot must specify the 'writable' parameter and
+                set it to true.
+- __replicate     __: Allow snapshot to be replicated.
+- __vss_snap      __: VSS app-synchronized snapshot; we don't support creation of non app-synchronized sanpshots through this interface; must be set to true.
 

@@ -1,11 +1,39 @@
+# Table of Contents
 
+* [nimbleclient.v1.api.volumes](#nimbleclient.v1.api.volumes)
+  * [Volume](#nimbleclient.v1.api.volumes.Volume)
+    * [restore](#nimbleclient.v1.api.volumes.Volume.restore)
+    * [move](#nimbleclient.v1.api.volumes.Volume.move)
+    * [bulk\_move](#nimbleclient.v1.api.volumes.Volume.bulk_move)
+    * [abort\_move](#nimbleclient.v1.api.volumes.Volume.abort_move)
+    * [bulk\_set\_dedupe](#nimbleclient.v1.api.volumes.Volume.bulk_set_dedupe)
+    * [bulk\_set\_online\_and\_offline](#nimbleclient.v1.api.volumes.Volume.bulk_set_online_and_offline)
+    * [online](#nimbleclient.v1.api.volumes.Volume.online)
+    * [offline](#nimbleclient.v1.api.volumes.Volume.offline)
+    * [associate](#nimbleclient.v1.api.volumes.Volume.associate)
+    * [dissociate](#nimbleclient.v1.api.volumes.Volume.dissociate)
+  * [VolumeList](#nimbleclient.v1.api.volumes.VolumeList)
+    * [restore](#nimbleclient.v1.api.volumes.VolumeList.restore)
+    * [move](#nimbleclient.v1.api.volumes.VolumeList.move)
+    * [bulk\_move](#nimbleclient.v1.api.volumes.VolumeList.bulk_move)
+    * [abort\_move](#nimbleclient.v1.api.volumes.VolumeList.abort_move)
+    * [bulk\_set\_dedupe](#nimbleclient.v1.api.volumes.VolumeList.bulk_set_dedupe)
+    * [bulk\_set\_online\_and\_offline](#nimbleclient.v1.api.volumes.VolumeList.bulk_set_online_and_offline)
+    * [online](#nimbleclient.v1.api.volumes.VolumeList.online)
+    * [offline](#nimbleclient.v1.api.volumes.VolumeList.offline)
+    * [associate](#nimbleclient.v1.api.volumes.VolumeList.associate)
+    * [dissociate](#nimbleclient.v1.api.volumes.VolumeList.dissociate)
+
+<a name="nimbleclient.v1.api.volumes"></a>
 # nimbleclient.v1.api.volumes
 
-
+<a name="nimbleclient.v1.api.volumes.Volume"></a>
 ## Volume
+
 ```python
-Volume(self, id, attrs=None, client=None, collection=None)
+class Volume(Resource)
 ```
+
 Volumes are the basic storage units from which the total capacity is apportioned. The terms volume and LUN are used interchangeably.The number of volumes per array depends on
 storage allocation.
 
@@ -137,9 +165,280 @@ __Parameters__
 - __srep_last_sync                __: Time when synchronously replicated volume was last synchronized.
 - __srep_resync_percent           __: Percentage of resync progress for synchronously replicated volume.
 
+<a name="nimbleclient.v1.api.volumes.Volume.restore"></a>
+#### restore
 
-## VolumeList
 ```python
-VolumeList(self, client=None)
+ | restore(base_snap_id, **kwargs)
 ```
+
+Restore volume data from a previous snapshot.
+
+__Parameters__
+
+- __id           __: ID of the restored volume.
+- __base_snap_id __: ID of the snapshot to which this the volume is restored.
+
+<a name="nimbleclient.v1.api.volumes.Volume.move"></a>
+#### move
+
+```python
+ | move(dest_pool_id, **kwargs)
+```
+
+Move a volume and its related volumes to another pool. To change a single volume's folder assignment (while remaining in the same pool), use a volume update operation to
+change the folder_id attribute.
+
+__Parameters__
+
+- __id           __: ID of the volume to move.
+- __dest_pool_id __: ID of the destination pool or folder. Specify a pool ID when the volumes should not be in a folder; otherwise, specify a folder ID and the pool will be
+               derived from the folder.
+- __force_vvol   __: Forcibly move a Virtual Volume. Moving Virtual Volume is disruptive to the vCenter, hence it should only be done by the VASA Provider (VP). This flag should
+               only be set by the VP when it calls this API.
+
+<a name="nimbleclient.v1.api.volumes.Volume.bulk_move"></a>
+#### bulk\_move
+
+```python
+ | bulk_move(dest_pool_id, vol_ids, **kwargs)
+```
+
+Move volumes and their related volumes to another pool. To change a single volume's folder assignment (while remaining in the same pool), use a volume update operation to
+change the folder_id attribute.
+
+__Parameters__
+
+- __vol_ids      __: IDs of the volumes to move.
+- __dest_pool_id __: ID of the destination pool or folder. Specify a pool ID when the volumes should not be in a folder; otherwise, specify a folder ID and the pool will be
+               derived from the folder.
+- __force_vvol   __: Forcibly move a Virtual Volume. Moving Virtual Volume is disruptive to the vCenter, hence it should only be done by the VASA Provider (VP). This flag should
+               only be set by the VP when it calls this API.
+
+<a name="nimbleclient.v1.api.volumes.Volume.abort_move"></a>
+#### abort\_move
+
+```python
+ | abort_move(**kwargs)
+```
+
+Abort the in-progress move of the specified volume to another pool.
+
+__Parameters__
+
+- __id __: ID of the volume to stop moving to a different pool.
+
+<a name="nimbleclient.v1.api.volumes.Volume.bulk_set_dedupe"></a>
+#### bulk\_set\_dedupe
+
+```python
+ | bulk_set_dedupe(dedupe_enabled, vol_ids, **kwargs)
+```
+
+Enable or disable dedupe on a list of volumes. If the volumes are not dedupe capable, the operation will fail for the specified volume.
+
+__Parameters__
+
+- __vol_ids        __: IDs of the volumes to enable/disable dedupe.
+- __dedupe_enabled __: Dedupe property to be applied to the list of volumes.
+
+<a name="nimbleclient.v1.api.volumes.Volume.bulk_set_online_and_offline"></a>
+#### bulk\_set\_online\_and\_offline
+
+```python
+ | bulk_set_online_and_offline(online, vol_ids, **kwargs)
+```
+
+Bring a list of volumes online or offline.
+
+__Parameters__
+
+- __vol_ids __: IDs of the volumes to set online or offline.
+- __online  __: Desired state of the volumes. "true" for online, "false" for offline.
+
+<a name="nimbleclient.v1.api.volumes.Volume.online"></a>
+#### online
+
+```python
+ | online()
+```
+
+Bring volume online.
+
+<a name="nimbleclient.v1.api.volumes.Volume.offline"></a>
+#### offline
+
+```python
+ | offline()
+```
+
+Take volume offline.
+
+<a name="nimbleclient.v1.api.volumes.Volume.associate"></a>
+#### associate
+
+```python
+ | associate(volcoll)
+```
+
+Associate the volume to a volume_collection.
+
+<a name="nimbleclient.v1.api.volumes.Volume.dissociate"></a>
+#### dissociate
+
+```python
+ | dissociate()
+```
+
+Dissociate the volume from a volume collection.
+
+<a name="nimbleclient.v1.api.volumes.VolumeList"></a>
+## VolumeList
+
+```python
+class VolumeList(Collection)
+```
+
+<a name="nimbleclient.v1.api.volumes.VolumeList.restore"></a>
+#### restore
+
+```python
+ | restore(id, base_snap_id, **kwargs)
+```
+
+Restore volume data from a previous snapshot.
+
+__Parameters__
+
+- __id           __: ID of the restored volume.
+- __base_snap_id __: ID of the snapshot to which this the volume is restored.
+
+<a name="nimbleclient.v1.api.volumes.VolumeList.move"></a>
+#### move
+
+```python
+ | move(id, dest_pool_id, **kwargs)
+```
+
+Move a volume and its related volumes to another pool. To change a single volume's folder assignment (while remaining in the same pool), use a volume update operation to
+change the folder_id attribute.
+
+__Parameters__
+
+- __id           __: ID of the volume to move.
+- __dest_pool_id __: ID of the destination pool or folder. Specify a pool ID when the volumes should not be in a folder; otherwise, specify a folder ID and the pool will be
+               derived from the folder.
+- __force_vvol   __: Forcibly move a Virtual Volume. Moving Virtual Volume is disruptive to the vCenter, hence it should only be done by the VASA Provider (VP). This flag should
+               only be set by the VP when it calls this API.
+
+<a name="nimbleclient.v1.api.volumes.VolumeList.bulk_move"></a>
+#### bulk\_move
+
+```python
+ | bulk_move(dest_pool_id, vol_ids, **kwargs)
+```
+
+Move volumes and their related volumes to another pool. To change a single volume's folder assignment (while remaining in the same pool), use a volume update operation to
+change the folder_id attribute.
+
+__Parameters__
+
+- __vol_ids      __: IDs of the volumes to move.
+- __dest_pool_id __: ID of the destination pool or folder. Specify a pool ID when the volumes should not be in a folder; otherwise, specify a folder ID and the pool will be
+               derived from the folder.
+- __force_vvol   __: Forcibly move a Virtual Volume. Moving Virtual Volume is disruptive to the vCenter, hence it should only be done by the VASA Provider (VP). This flag should
+               only be set by the VP when it calls this API.
+
+<a name="nimbleclient.v1.api.volumes.VolumeList.abort_move"></a>
+#### abort\_move
+
+```python
+ | abort_move(id, **kwargs)
+```
+
+Abort the in-progress move of the specified volume to another pool.
+
+__Parameters__
+
+- __id __: ID of the volume to stop moving to a different pool.
+
+<a name="nimbleclient.v1.api.volumes.VolumeList.bulk_set_dedupe"></a>
+#### bulk\_set\_dedupe
+
+```python
+ | bulk_set_dedupe(dedupe_enabled, vol_ids, **kwargs)
+```
+
+Enable or disable dedupe on a list of volumes. If the volumes are not dedupe capable, the operation will fail for the specified volume.
+
+__Parameters__
+
+- __vol_ids        __: IDs of the volumes to enable/disable dedupe.
+- __dedupe_enabled __: Dedupe property to be applied to the list of volumes.
+
+<a name="nimbleclient.v1.api.volumes.VolumeList.bulk_set_online_and_offline"></a>
+#### bulk\_set\_online\_and\_offline
+
+```python
+ | bulk_set_online_and_offline(online, vol_ids, **kwargs)
+```
+
+Bring a list of volumes online or offline.
+
+__Parameters__
+
+- __vol_ids __: IDs of the volumes to set online or offline.
+- __online  __: Desired state of the volumes. "true" for online, "false" for offline.
+
+<a name="nimbleclient.v1.api.volumes.VolumeList.online"></a>
+#### online
+
+```python
+ | online(id)
+```
+
+Bring volume online.
+
+__Parameters__
+
+- __id __: ID of the volume.
+
+<a name="nimbleclient.v1.api.volumes.VolumeList.offline"></a>
+#### offline
+
+```python
+ | offline(id)
+```
+
+Take volume offline.
+
+__Parameters__
+
+- __id __: ID of the volume.
+
+<a name="nimbleclient.v1.api.volumes.VolumeList.associate"></a>
+#### associate
+
+```python
+ | associate(id, volcoll)
+```
+
+Associate the volume to a volume_collection
+
+__Parameters__
+
+- __id __: ID of the volume.
+
+<a name="nimbleclient.v1.api.volumes.VolumeList.dissociate"></a>
+#### dissociate
+
+```python
+ | dissociate(id)
+```
+
+Dissociate the volume from a volume collection
+
+__Parameters__
+
+- __id __: ID of the volume.
 

@@ -1,11 +1,18 @@
+# Table of Contents
 
+* [nimbleclient.v1.api.subscriptions](#nimbleclient.v1.api.subscriptions)
+  * [Subscription](#nimbleclient.v1.api.subscriptions.Subscription)
+
+<a name="nimbleclient.v1.api.subscriptions"></a>
 # nimbleclient.v1.api.subscriptions
 
-
+<a name="nimbleclient.v1.api.subscriptions.Subscription"></a>
 ## Subscription
+
 ```python
-Subscription(self, id, attrs=None, client=None, collection=None)
+class Subscription(Resource)
 ```
+
 Subscriptions represent the list of object types or alerts that a websocket client is interested in getting notifications for. Each subscription belongs to a single
 notification client.
 
@@ -19,10 +26,4 @@ __Parameters__
 - __operation         __: The operation that the notification subscriber is interested in. Applies only to audit log based notifications.
 - __event_target_type __: The kind of events or alerts that the notification subscriber is interested in. Applies only to events based notifications.
 - __event_severity    __: The severity of events that the notification subscriber is interested in. Applies only to events based notifications.
-
-
-## SubscriptionList
-```python
-SubscriptionList(self, client=None)
-```
 

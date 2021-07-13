@@ -1,13 +1,20 @@
+# Table of Contents
 
-# nimbleclient.v1.api.performance_policies
+* [nimbleclient.v1.api.performance\_policies](#nimbleclient.v1.api.performance_policies)
+  * [PerformancePolicy](#nimbleclient.v1.api.performance_policies.PerformancePolicy)
 
+<a name="nimbleclient.v1.api.performance_policies"></a>
+# nimbleclient.v1.api.performance\_policies
 
+<a name="nimbleclient.v1.api.performance_policies.PerformancePolicy"></a>
 ## PerformancePolicy
+
 ```python
-PerformancePolicy(self, id, attrs=None, client=None, collection=None)
+class PerformancePolicy(Resource)
 ```
+
 Manage performance policies. A performance policy is a set of optimizations including block size, compression, and caching, to ensure that the volume's performance is the best
-configuration for its intended use like databases or log files. By default, a volume uses the \"default\" performance policy, which is set to use 4096 byte blocks with full
+configuration for its intended use like databases or log files. By default, a volume uses the \\"default\\" performance policy, which is set to use 4096 byte blocks with full
 compression and caching enabled. For replicated volumes, the same performance policy must exist on each replication partner.
 
 __Parameters__
@@ -35,10 +42,4 @@ __Parameters__
 - __sample_rate           __: Sample rate value.
 - __volume_count          __: Number of volumes using this performance policy.
 - __dedupe_override_pools __: List of pools that override performance policy's dedupe setting.
-
-
-## PerformancePolicyList
-```python
-PerformancePolicyList(self, client=None)
-```
 

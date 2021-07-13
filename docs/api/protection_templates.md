@@ -1,11 +1,18 @@
+# Table of Contents
 
-# nimbleclient.v1.api.protection_templates
+* [nimbleclient.v1.api.protection\_templates](#nimbleclient.v1.api.protection_templates)
+  * [ProtectionTemplate](#nimbleclient.v1.api.protection_templates.ProtectionTemplate)
 
+<a name="nimbleclient.v1.api.protection_templates"></a>
+# nimbleclient.v1.api.protection\_templates
 
+<a name="nimbleclient.v1.api.protection_templates.ProtectionTemplate"></a>
 ## ProtectionTemplate
+
 ```python
-ProtectionTemplate(self, id, attrs=None, client=None, collection=None)
+class ProtectionTemplate(Resource)
 ```
+
 Manage protection templates. Protection templates are sets of snapshot schedules, replication schedules, and retention limits that can be used to prefill the protection
 information when creating new volume collections. A volume collection, once created, is not affected by edits to the protection template that was used to create it. All the
 volumes assigned to a volume collection use the same settings. You cannot edit or delete the predefined protection templates provided by storage array, but you can create
@@ -27,16 +34,10 @@ __Parameters__
 - __vcenter_hostname __: VMware vCenter hostname. Custom port number can be specified with vCenter hostname using :.
 - __vcenter_username __: VMware vCenter username.
 - __vcenter_password __: VMware vCenter password.
-- __agent_hostname   __: Generic Backup agent hostname. Custom port number can be specified with agent hostname using \":\".
+- __agent_hostname   __: Generic Backup agent hostname. Custom port number can be specified with agent hostname using \\":\\".
 - __agent_username   __: Generic Backup agent username.
 - __agent_password   __: Generic Backup agent password.
 - __creation_time    __: Time when this protection template was created.
 - __last_modified    __: Time when this protection template was last modified.
 - __schedule_list    __: List of schedules for this protection policy.
-
-
-## ProtectionTemplateList
-```python
-ProtectionTemplateList(self, client=None)
-```
 

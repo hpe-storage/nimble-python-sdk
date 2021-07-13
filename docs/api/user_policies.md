@@ -1,11 +1,18 @@
+# Table of Contents
 
-# nimbleclient.v1.api.user_policies
+* [nimbleclient.v1.api.user\_policies](#nimbleclient.v1.api.user_policies)
+  * [UserPolicy](#nimbleclient.v1.api.user_policies.UserPolicy)
 
+<a name="nimbleclient.v1.api.user_policies"></a>
+# nimbleclient.v1.api.user\_policies
 
+<a name="nimbleclient.v1.api.user_policies.UserPolicy"></a>
 ## UserPolicy
+
 ```python
-UserPolicy(self, id, attrs=None, client=None, collection=None)
+class UserPolicy(Resource)
 ```
+
 Manages the password policies configured for the group.
 
 __Parameters__
@@ -20,10 +27,4 @@ __Parameters__
 - __previous_diff    __: Number of characters that must be different from the previous password. Allowed range is [1, 255] inclusive.
 - __no_reuse         __: Number of times that a password must change before you can reuse a previous password. Allowed range is [1,20] inclusive.
 - __max_sessions     __: Maximum number of sessions allowed for a group. Allowed range is [10, 1000] inclusive. '0' indicates no limit.
-
-
-## UserPolicyList
-```python
-UserPolicyList(self, client=None)
-```
 

@@ -1,11 +1,18 @@
+# Table of Contents
 
-# nimbleclient.v1.api.fibre_channel_ports
+* [nimbleclient.v1.api.fibre\_channel\_ports](#nimbleclient.v1.api.fibre_channel_ports)
+  * [FibreChannelPort](#nimbleclient.v1.api.fibre_channel_ports.FibreChannelPort)
 
+<a name="nimbleclient.v1.api.fibre_channel_ports"></a>
+# nimbleclient.v1.api.fibre\_channel\_ports
 
+<a name="nimbleclient.v1.api.fibre_channel_ports.FibreChannelPort"></a>
 ## FibreChannelPort
+
 ```python
-FibreChannelPort(self, id, attrs=None, client=None, collection=None)
+class FibreChannelPort(Resource)
 ```
+
 Fibre Channel ports provide data access. This API provides the list of all Fibre Channel ports configured on the arrays.
 
 __Parameters__
@@ -22,10 +29,4 @@ __Parameters__
 - __link_info            __: Information about the Fibre Channel link associated with this port.
 - __rx_power             __: SFP RX power in uW.
 - __tx_power             __: SFP TX power in uW.
-
-
-## FibreChannelPortList
-```python
-FibreChannelPortList(self, client=None)
-```
 

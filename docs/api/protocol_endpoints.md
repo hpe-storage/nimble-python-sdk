@@ -1,11 +1,18 @@
+# Table of Contents
 
-# nimbleclient.v1.api.protocol_endpoints
+* [nimbleclient.v1.api.protocol\_endpoints](#nimbleclient.v1.api.protocol_endpoints)
+  * [ProtocolEndpoint](#nimbleclient.v1.api.protocol_endpoints.ProtocolEndpoint)
 
+<a name="nimbleclient.v1.api.protocol_endpoints"></a>
+# nimbleclient.v1.api.protocol\_endpoints
 
+<a name="nimbleclient.v1.api.protocol_endpoints.ProtocolEndpoint"></a>
 ## ProtocolEndpoint
+
 ```python
-ProtocolEndpoint(self, id, attrs=None, client=None, collection=None)
+class ProtocolEndpoint(Resource)
 ```
+
 Protocol endpoints are administrative logical units (LUs) in an LU conglomerate to be used with VMware Virtual Volumes.
 
 __Parameters__
@@ -31,10 +38,4 @@ __Parameters__
 - __access_protocol        __: Access protocol of the protocol endpoint. Only initiator groups with the same access protocol can access the protocol endpoint. If not specified in
                          the creation request, it will be the access protocol supported by the group. If the group supports multiple protocols, the default will be Fibre
                          Channel.
-
-
-## ProtocolEndpointList
-```python
-ProtocolEndpointList(self, client=None)
-```
 

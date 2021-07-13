@@ -1,11 +1,18 @@
+# Table of Contents
 
-# nimbleclient.v1.api.access_control_records
+* [nimbleclient.v1.api.access\_control\_records](#nimbleclient.v1.api.access_control_records)
+  * [AccessControlRecord](#nimbleclient.v1.api.access_control_records.AccessControlRecord)
 
+<a name="nimbleclient.v1.api.access_control_records"></a>
+# nimbleclient.v1.api.access\_control\_records
 
+<a name="nimbleclient.v1.api.access_control_records.AccessControlRecord"></a>
 ## AccessControlRecord
+
 ```python
-AccessControlRecord(self, id, attrs=None, client=None, collection=None)
+class AccessControlRecord(Resource)
 ```
+
 Manage access control records for volumes.
 
 __Parameters__
@@ -36,10 +43,4 @@ __Parameters__
 - __creation_time        __: Time when this access control record was created.
 - __last_modified        __: Time when this access control record was last modified.
 - __access_protocol      __: Access protocol of the volume.
-
-
-## AccessControlRecordList
-```python
-AccessControlRecordList(self, client=None)
-```
 

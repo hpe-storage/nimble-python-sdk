@@ -1,11 +1,18 @@
+# Table of Contents
 
-# nimbleclient.v1.api.software_versions
+* [nimbleclient.v1.api.software\_versions](#nimbleclient.v1.api.software_versions)
+  * [SoftwareVersion](#nimbleclient.v1.api.software_versions.SoftwareVersion)
 
+<a name="nimbleclient.v1.api.software_versions"></a>
+# nimbleclient.v1.api.software\_versions
 
+<a name="nimbleclient.v1.api.software_versions.SoftwareVersion"></a>
 ## SoftwareVersion
+
 ```python
-SoftwareVersion(self, id, attrs=None, client=None, collection=None)
+class SoftwareVersion(Resource)
 ```
+
 Show the software version.
 
 __Parameters__
@@ -21,10 +28,4 @@ __Parameters__
 - __is_manually_downloaded __: Whether or not the version was downloaded manually.
 - __release_status         __: Release status of software version.
 - __no_partial_response    __: Indicate that it is not ok to provide partially available response.
-
-
-## SoftwareVersionList
-```python
-SoftwareVersionList(self, client=None)
-```
 

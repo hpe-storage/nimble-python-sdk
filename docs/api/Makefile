@@ -12,5 +12,11 @@ apis = $(shell (ls ../../nimbleclient/v1/api/*[a-z].py | \
 class = nimbleclient.v1.api
 
 all:
-	for api in $(apis); do pydocmd simple $(class).$${api}+ > $${api}.md;done
+	for api in $(apis); do pydoc-markdown -I ../../ -m $(class).$${api} '{ \
+      renderer: { \
+        type: markdown, \
+          render_toc: true, \
+          descriptive_class_title: false, \
+        } \
+	}' > $${api}.md;done
 	for api in $(apis); do echo "    - '$${api}': 'api/$${api}.md'";done
