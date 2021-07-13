@@ -205,6 +205,9 @@
     <a class="current" href="pools.html">pools</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apipools">nimbleclient.v1.api.pools</a></li>
     
         <ul>
@@ -269,6 +272,10 @@
                 <li class="">
                     
     <a class="" href="tokens.html">tokens</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
                 </li>
                 <li class="">
                     
@@ -398,9 +405,23 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apipools">nimbleclient.v1.api.pools<a class="headerlink" href="#nimbleclientv1apipools" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.pools">nimbleclient.v1.api.pools</a></li>
+<li><a href="#nimbleclient.v1.api.pools.Pool">Pool</a><ul>
+<li><a href="#nimbleclient.v1.api.pools.Pool.merge">merge</a></li>
+</ul>
+</li>
+<li><a href="#nimbleclient.v1.api.pools.PoolList">PoolList</a><ul>
+<li><a href="#nimbleclient.v1.api.pools.PoolList.merge">merge</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="nimbleclient.v1.api.pools"></a></p>
+<h1 id="nimbleclientv1apipools">nimbleclient.v1.api.pools<a class="headerlink" href="#nimbleclientv1apipools" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.pools.Pool"></a></p>
 <h2 id="pool">Pool<a class="headerlink" href="#pool" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>Pool(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class Pool(Resource)
 </code></pre></p>
 <p>Manage pools. Pools are an aggregation of arrays.</p>
 <p><strong>Parameters</strong></p>
@@ -455,9 +476,34 @@
 <li><strong>dedupe_all_volumes            </strong>: Indicates if dedupe is enabled by default for new volumes on this pool.</li>
 <li><strong>is_default                    </strong>: Indicates if this is the default pool.</li>
 </ul>
-<h2 id="poollist">PoolList<a class="headerlink" href="#poollist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>PoolList(self, client=None)
+<p><a name="nimbleclient.v1.api.pools.Pool.merge"></a></p>
+<h4 id="merge">merge<a class="headerlink" href="#merge" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | merge(target_pool_id, **kwargs)
 </code></pre></p>
+<p>Merge the specified pool into the target pool. All volumes on the specified pool are moved to the target pool and the specified pool is then deleted. All the arrays in the
+pool are assigned to the target pool.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id             </strong>: ID of the specified pool.</li>
+<li><strong>target_pool_id </strong>: ID of the target pool.</li>
+<li><strong>force          </strong>: Forcibly merge the specified pool into target pool.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.pools.PoolList"></a></p>
+<h2 id="poollist">PoolList<a class="headerlink" href="#poollist" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>class PoolList(Collection)
+</code></pre></p>
+<p><a name="nimbleclient.v1.api.pools.PoolList.merge"></a></p>
+<h4 id="merge_1">merge<a class="headerlink" href="#merge_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | merge(id, target_pool_id, **kwargs)
+</code></pre></p>
+<p>Merge the specified pool into the target pool. All volumes on the specified pool are moved to the target pool and the specified pool is then deleted. All the arrays in the
+pool are assigned to the target pool.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id             </strong>: ID of the specified pool.</li>
+<li><strong>target_pool_id </strong>: ID of the target pool.</li>
+<li><strong>force          </strong>: Forcibly merge the specified pool into target pool.</li>
+</ul>
               
             </div>
           </div>

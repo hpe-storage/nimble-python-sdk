@@ -137,13 +137,14 @@
     <a class="current" href="events.html">events</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apievents">nimbleclient.v1.api.events</a></li>
     
         <ul>
         
             <li><a class="toctree-l4" href="#event">Event</a></li>
-        
-            <li><a class="toctree-l4" href="#eventlist">EventList</a></li>
         
         </ul>
     
@@ -269,6 +270,10 @@
                 <li class="">
                     
     <a class="" href="tokens.html">tokens</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
                 </li>
                 <li class="">
                     
@@ -398,9 +403,16 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apievents">nimbleclient.v1.api.events<a class="headerlink" href="#nimbleclientv1apievents" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.events">nimbleclient.v1.api.events</a></li>
+<li><a href="#nimbleclient.v1.api.events.Event">Event</a></li>
+</ul>
+<p><a name="nimbleclient.v1.api.events"></a></p>
+<h1 id="nimbleclientv1apievents">nimbleclient.v1.api.events<a class="headerlink" href="#nimbleclientv1apievents" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.events.Event"></a></p>
 <h2 id="event">Event<a class="headerlink" href="#event" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>Event(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class Event(Resource)
 </code></pre></p>
 <p>View events.</p>
 <p><strong>Parameters</strong></p>
@@ -421,9 +433,6 @@
               values positionally.</li>
 <li><strong>tenant_id   </strong>: Tenant ID of the event. This is used to determine what tenant context the event belongs to.</li>
 </ul>
-<h2 id="eventlist">EventList<a class="headerlink" href="#eventlist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>EventList(self, client=None)
-</code></pre></p>
               
             </div>
           </div>

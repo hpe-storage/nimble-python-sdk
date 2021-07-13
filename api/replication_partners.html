@@ -221,6 +221,9 @@
     <a class="current" href="replication_partners.html">replication_partners</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apireplication_partners">nimbleclient.v1.api.replication_partners</a></li>
     
         <ul>
@@ -269,6 +272,10 @@
                 <li class="">
                     
     <a class="" href="tokens.html">tokens</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
                 </li>
                 <li class="">
                     
@@ -398,9 +405,27 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apireplication_partners">nimbleclient.v1.api.replication_partners<a class="headerlink" href="#nimbleclientv1apireplication_partners" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.replication_partners">nimbleclient.v1.api.replication_partners</a></li>
+<li><a href="#nimbleclient.v1.api.replication_partners.ReplicationPartner">ReplicationPartner</a><ul>
+<li><a href="#nimbleclient.v1.api.replication_partners.ReplicationPartner.pause">pause</a></li>
+<li><a href="#nimbleclient.v1.api.replication_partners.ReplicationPartner.resume">resume</a></li>
+<li><a href="#nimbleclient.v1.api.replication_partners.ReplicationPartner.test">test</a></li>
+</ul>
+</li>
+<li><a href="#nimbleclient.v1.api.replication_partners.ReplicationPartnerList">ReplicationPartnerList</a><ul>
+<li><a href="#nimbleclient.v1.api.replication_partners.ReplicationPartnerList.pause">pause</a></li>
+<li><a href="#nimbleclient.v1.api.replication_partners.ReplicationPartnerList.resume">resume</a></li>
+<li><a href="#nimbleclient.v1.api.replication_partners.ReplicationPartnerList.test">test</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="nimbleclient.v1.api.replication_partners"></a></p>
+<h1 id="nimbleclientv1apireplication_partners">nimbleclient.v1.api.replication_partners<a class="headerlink" href="#nimbleclientv1apireplication_partners" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.replication_partners.ReplicationPartner"></a></p>
 <h2 id="replicationpartner">ReplicationPartner<a class="headerlink" href="#replicationpartner" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>ReplicationPartner(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class ReplicationPartner(Resource)
 </code></pre></p>
 <p>Manage replication partner. Replication partners let one storage array talk to another for replication purposes. The two arrays must be able to communicate over a network, and
 use ports 4213 and 4214. Replication partners have the same name as the remote group. Replication partners can be reciprocal, upstream (the source of replicas), or downstream
@@ -458,9 +483,64 @@ use ports 4213 and 4214. Replication partners have the same name as the remote g
 <li><strong>volume_list_count                </strong>: Count of volumes that are replicating from/to this partner.</li>
 <li><strong>replication_direction            </strong>: Direction of replication configured with this partner.</li>
 </ul>
-<h2 id="replicationpartnerlist">ReplicationPartnerList<a class="headerlink" href="#replicationpartnerlist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>ReplicationPartnerList(self, client=None)
+<p><a name="nimbleclient.v1.api.replication_partners.ReplicationPartner.pause"></a></p>
+<h4 id="pause">pause<a class="headerlink" href="#pause" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | pause(**kwargs)
 </code></pre></p>
+<p>Pause replication for the specified partner.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the partner to pause.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.replication_partners.ReplicationPartner.resume"></a></p>
+<h4 id="resume">resume<a class="headerlink" href="#resume" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | resume(**kwargs)
+</code></pre></p>
+<p>Resume replication for the specified partner.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the partner to resume.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.replication_partners.ReplicationPartner.test"></a></p>
+<h4 id="test">test<a class="headerlink" href="#test" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | test(**kwargs)
+</code></pre></p>
+<p>Test connectivity to the specified partner.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the partner to test.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.replication_partners.ReplicationPartnerList"></a></p>
+<h2 id="replicationpartnerlist">ReplicationPartnerList<a class="headerlink" href="#replicationpartnerlist" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>class ReplicationPartnerList(Collection)
+</code></pre></p>
+<p><a name="nimbleclient.v1.api.replication_partners.ReplicationPartnerList.pause"></a></p>
+<h4 id="pause_1">pause<a class="headerlink" href="#pause_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | pause(id, **kwargs)
+</code></pre></p>
+<p>Pause replication for the specified partner.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the partner to pause.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.replication_partners.ReplicationPartnerList.resume"></a></p>
+<h4 id="resume_1">resume<a class="headerlink" href="#resume_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | resume(id, **kwargs)
+</code></pre></p>
+<p>Resume replication for the specified partner.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the partner to resume.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.replication_partners.ReplicationPartnerList.test"></a></p>
+<h4 id="test_1">test<a class="headerlink" href="#test_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | test(id, **kwargs)
+</code></pre></p>
+<p>Test connectivity to the specified partner.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the partner to test.</li>
+</ul>
               
             </div>
           </div>

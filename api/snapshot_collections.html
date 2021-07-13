@@ -229,13 +229,14 @@
     <a class="current" href="snapshot_collections.html">snapshot_collections</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apisnapshot_collections">nimbleclient.v1.api.snapshot_collections</a></li>
     
         <ul>
         
             <li><a class="toctree-l4" href="#snapshotcollection">SnapshotCollection</a></li>
-        
-            <li><a class="toctree-l4" href="#snapshotcollectionlist">SnapshotCollectionList</a></li>
         
         </ul>
     
@@ -269,6 +270,10 @@
                 <li class="">
                     
     <a class="" href="tokens.html">tokens</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
                 </li>
                 <li class="">
                     
@@ -398,9 +403,16 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apisnapshot_collections">nimbleclient.v1.api.snapshot_collections<a class="headerlink" href="#nimbleclientv1apisnapshot_collections" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.snapshot_collections">nimbleclient.v1.api.snapshot_collections</a></li>
+<li><a href="#nimbleclient.v1.api.snapshot_collections.SnapshotCollection">SnapshotCollection</a></li>
+</ul>
+<p><a name="nimbleclient.v1.api.snapshot_collections"></a></p>
+<h1 id="nimbleclientv1apisnapshot_collections">nimbleclient.v1.api.snapshot_collections<a class="headerlink" href="#nimbleclientv1apisnapshot_collections" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.snapshot_collections.SnapshotCollection"></a></p>
 <h2 id="snapshotcollection">SnapshotCollection<a class="headerlink" href="#snapshotcollection" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>SnapshotCollection(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class SnapshotCollection(Resource)
 </code></pre></p>
 <p>Snapshot collections are collections of scheduled snapshots that are taken from volumes sharing a volume collection. Snapshot collections are replicated in the order that the
 collections were taken.</p>
@@ -452,9 +464,6 @@ collections were taken.</p>
 <li><strong>force                      </strong>: Forcibly delete the specified snapshot collection even if it is the last replicated snapshot. Doing so could lead to full re-seeding at the next
                              replication.</li>
 </ul>
-<h2 id="snapshotcollectionlist">SnapshotCollectionList<a class="headerlink" href="#snapshotcollectionlist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>SnapshotCollectionList(self, client=None)
-</code></pre></p>
               
             </div>
           </div>

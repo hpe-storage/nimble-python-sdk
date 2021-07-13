@@ -258,6 +258,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="user_groups.html">user_groups</a>
                 </li>
                 <li class="">
@@ -277,6 +281,9 @@
     <a class="current" href="volume_collections.html">volume_collections</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apivolume_collections">nimbleclient.v1.api.volume_collections</a></li>
     
         <ul>
@@ -398,9 +405,31 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apivolume_collections">nimbleclient.v1.api.volume_collections<a class="headerlink" href="#nimbleclientv1apivolume_collections" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.volume_collections">nimbleclient.v1.api.volume_collections</a></li>
+<li><a href="#nimbleclient.v1.api.volume_collections.VolumeCollection">VolumeCollection</a><ul>
+<li><a href="#nimbleclient.v1.api.volume_collections.VolumeCollection.promote">promote</a></li>
+<li><a href="#nimbleclient.v1.api.volume_collections.VolumeCollection.demote">demote</a></li>
+<li><a href="#nimbleclient.v1.api.volume_collections.VolumeCollection.handover">handover</a></li>
+<li><a href="#nimbleclient.v1.api.volume_collections.VolumeCollection.abort_handover">abort_handover</a></li>
+<li><a href="#nimbleclient.v1.api.volume_collections.VolumeCollection.validate">validate</a></li>
+</ul>
+</li>
+<li><a href="#nimbleclient.v1.api.volume_collections.VolumeCollectionList">VolumeCollectionList</a><ul>
+<li><a href="#nimbleclient.v1.api.volume_collections.VolumeCollectionList.promote">promote</a></li>
+<li><a href="#nimbleclient.v1.api.volume_collections.VolumeCollectionList.demote">demote</a></li>
+<li><a href="#nimbleclient.v1.api.volume_collections.VolumeCollectionList.handover">handover</a></li>
+<li><a href="#nimbleclient.v1.api.volume_collections.VolumeCollectionList.abort_handover">abort_handover</a></li>
+<li><a href="#nimbleclient.v1.api.volume_collections.VolumeCollectionList.validate">validate</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="nimbleclient.v1.api.volume_collections"></a></p>
+<h1 id="nimbleclientv1apivolume_collections">nimbleclient.v1.api.volume_collections<a class="headerlink" href="#nimbleclientv1apivolume_collections" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.volume_collections.VolumeCollection"></a></p>
 <h2 id="volumecollection">VolumeCollection<a class="headerlink" href="#volumecollection" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>VolumeCollection(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class VolumeCollection(Resource)
 </code></pre></p>
 <p>Manage volume collections. Volume collections are logical groups of volumes that share protection characteristics such as snapshot and replication schedules. Volume
 collections can be created from scratch or based on predefined protection templates.</p>
@@ -454,9 +483,134 @@ collections can be created from scratch or based on predefined protection templa
 <li><strong>srep_last_sync                </strong>: Time when a synchronously replicated volume collection was last synchronized.</li>
 <li><strong>srep_resync_percent           </strong>: Percentage of the resync progress for a synchronously replicated volume collection.</li>
 </ul>
-<h2 id="volumecollectionlist">VolumeCollectionList<a class="headerlink" href="#volumecollectionlist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>VolumeCollectionList(self, client=None)
+<p><a name="nimbleclient.v1.api.volume_collections.VolumeCollection.promote"></a></p>
+<h4 id="promote">promote<a class="headerlink" href="#promote" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | promote(**kwargs)
 </code></pre></p>
+<p>Take ownership of the specified volume collection. The volumes associated with the volume collection will be set to online and be available for reading and writing.
+Replication will be disabled on the affected schedules and must be re-configured if desired. Snapshot retention for the affected schedules will be set to the greater of
+the current local or replica retention values. This operation is not supported for synchronous replication volume collections.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the promoted volume collection.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.volume_collections.VolumeCollection.demote"></a></p>
+<h4 id="demote">demote<a class="headerlink" href="#demote" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | demote(replication_partner_id, **kwargs)
+</code></pre></p>
+<p>Release ownership of the specified volume collection. The volumes associated with the volume collection will set to offline and a snapshot will be created, then full
+control over the volume collection will be transferred to the new owner. This option can be used following a promote to revert the volume collection back to its prior
+configured state. This operation does not alter the configuration on the new owner itself, but does require the new owner to be running in order to obtain its identity
+information. This operation is not supported for synchronous replication volume collections.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id                         </strong>: ID of the demoted volume collection.</li>
+<li><strong>replication_partner_id     </strong>: ID of the new owner. If invoke_on_upstream_partner is provided, utilize the ID of the current owner i.e. upstream replication partner.</li>
+<li><strong>invoke_on_upstream_partner </strong>: Invoke demote request on upstream partner. Default: 'false'. This operation is not supported for synchronous replication volume vollections.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.volume_collections.VolumeCollection.handover"></a></p>
+<h4 id="handover">handover<a class="headerlink" href="#handover" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | handover(replication_partner_id, **kwargs)
+</code></pre></p>
+<p>Gracefully transfer ownership of the specified volume collection. This action can be used to pass control of the volume collection to the downstream replication partner.
+Ownership and full control over the volume collection will be given to the downstream replication partner. The volumes associated with the volume collection will be set to
+offline prior to the final snapshot being taken and replicated, thus ensuring full data synchronization as part of the transfer. By default, the new owner will
+automatically begin replicating the volume collection back to this node when the handover completes.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id                         </strong>: ID of the volume collection be handed over to the downstream replication partner.</li>
+<li><strong>replication_partner_id     </strong>: ID of the new owner.</li>
+<li><strong>no_reverse                 </strong>: Do not automatically reverse direction of replication. Using this argument will prevent the new owner from automatically replicating the</li>
+<li><strong>volume collection to this node when the handover completes. The default behavior is to enable replication back to this node. Default</strong>: 'false'.</li>
+<li><strong>invoke_on_upstream_partner </strong>: Invoke handover request on upstream partner. Default: 'false'. This operation is not supported for synchronous replication volume vollections.</li>
+<li><strong>override_upstream_down     </strong>: Allow the handover request to proceed even if upstream array is down. The default behavior is to return an error when upstream is down. This</li>
+<li><strong>option is applicable for synchronous replication only. Default</strong>: 'false'.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.volume_collections.VolumeCollection.abort_handover"></a></p>
+<h4 id="abort_handover">abort_handover<a class="headerlink" href="#abort_handover" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | abort_handover(**kwargs)
+</code></pre></p>
+<p>Abort in-progress handover. If for some reason a previously invoked handover request is unable to complete, this action can be used to cancel it. This operation is not
+supported for synchronous replication volume collections.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the volume collection on which to abort handover.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.volume_collections.VolumeCollection.validate"></a></p>
+<h4 id="validate">validate<a class="headerlink" href="#validate" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | validate(**kwargs)
+</code></pre></p>
+<p>Validate a volume collection with either Microsoft VSS or VMware application synchronization.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the volume collection that is to be validated.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.volume_collections.VolumeCollectionList"></a></p>
+<h2 id="volumecollectionlist">VolumeCollectionList<a class="headerlink" href="#volumecollectionlist" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>class VolumeCollectionList(Collection)
+</code></pre></p>
+<p><a name="nimbleclient.v1.api.volume_collections.VolumeCollectionList.promote"></a></p>
+<h4 id="promote_1">promote<a class="headerlink" href="#promote_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | promote(id, **kwargs)
+</code></pre></p>
+<p>Take ownership of the specified volume collection. The volumes associated with the volume collection will be set to online and be available for reading and writing.
+Replication will be disabled on the affected schedules and must be re-configured if desired. Snapshot retention for the affected schedules will be set to the greater of
+the current local or replica retention values. This operation is not supported for synchronous replication volume collections.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the promoted volume collection.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.volume_collections.VolumeCollectionList.demote"></a></p>
+<h4 id="demote_1">demote<a class="headerlink" href="#demote_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | demote(id, replication_partner_id, **kwargs)
+</code></pre></p>
+<p>Release ownership of the specified volume collection. The volumes associated with the volume collection will set to offline and a snapshot will be created, then full
+control over the volume collection will be transferred to the new owner. This option can be used following a promote to revert the volume collection back to its prior
+configured state. This operation does not alter the configuration on the new owner itself, but does require the new owner to be running in order to obtain its identity
+information. This operation is not supported for synchronous replication volume collections.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id                         </strong>: ID of the demoted volume collection.</li>
+<li><strong>replication_partner_id     </strong>: ID of the new owner. If invoke_on_upstream_partner is provided, utilize the ID of the current owner i.e. upstream replication partner.</li>
+<li><strong>invoke_on_upstream_partner </strong>: Invoke demote request on upstream partner. Default: 'false'. This operation is not supported for synchronous replication volume vollections.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.volume_collections.VolumeCollectionList.handover"></a></p>
+<h4 id="handover_1">handover<a class="headerlink" href="#handover_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | handover(id, replication_partner_id, **kwargs)
+</code></pre></p>
+<p>Gracefully transfer ownership of the specified volume collection. This action can be used to pass control of the volume collection to the downstream replication partner.
+Ownership and full control over the volume collection will be given to the downstream replication partner. The volumes associated with the volume collection will be set to
+offline prior to the final snapshot being taken and replicated, thus ensuring full data synchronization as part of the transfer. By default, the new owner will
+automatically begin replicating the volume collection back to this node when the handover completes.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id                         </strong>: ID of the volume collection be handed over to the downstream replication partner.</li>
+<li><strong>replication_partner_id     </strong>: ID of the new owner.</li>
+<li><strong>no_reverse                 </strong>: Do not automatically reverse direction of replication. Using this argument will prevent the new owner from automatically replicating the</li>
+<li><strong>volume collection to this node when the handover completes. The default behavior is to enable replication back to this node. Default</strong>: 'false'.</li>
+<li><strong>invoke_on_upstream_partner </strong>: Invoke handover request on upstream partner. Default: 'false'. This operation is not supported for synchronous replication volume vollections.</li>
+<li><strong>override_upstream_down     </strong>: Allow the handover request to proceed even if upstream array is down. The default behavior is to return an error when upstream is down. This</li>
+<li><strong>option is applicable for synchronous replication only. Default</strong>: 'false'.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.volume_collections.VolumeCollectionList.abort_handover"></a></p>
+<h4 id="abort_handover_1">abort_handover<a class="headerlink" href="#abort_handover_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | abort_handover(id, **kwargs)
+</code></pre></p>
+<p>Abort in-progress handover. If for some reason a previously invoked handover request is unable to complete, this action can be used to cancel it. This operation is not
+supported for synchronous replication volume collections.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the volume collection on which to abort handover.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.volume_collections.VolumeCollectionList.validate"></a></p>
+<h4 id="validate_1">validate<a class="headerlink" href="#validate_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | validate(id, **kwargs)
+</code></pre></p>
+<p>Validate a volume collection with either Microsoft VSS or VMware application synchronization.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the volume collection that is to be validated.</li>
+</ul>
               
             </div>
           </div>

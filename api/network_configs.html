@@ -193,6 +193,9 @@
     <a class="current" href="network_configs.html">network_configs</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apinetwork_configs">nimbleclient.v1.api.network_configs</a></li>
     
         <ul>
@@ -269,6 +272,10 @@
                 <li class="">
                     
     <a class="" href="tokens.html">tokens</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
                 </li>
                 <li class="">
                     
@@ -398,9 +405,25 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apinetwork_configs">nimbleclient.v1.api.network_configs<a class="headerlink" href="#nimbleclientv1apinetwork_configs" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.network_configs">nimbleclient.v1.api.network_configs</a></li>
+<li><a href="#nimbleclient.v1.api.network_configs.NetworkConfig">NetworkConfig</a><ul>
+<li><a href="#nimbleclient.v1.api.network_configs.NetworkConfig.activate_netconfig">activate_netconfig</a></li>
+<li><a href="#nimbleclient.v1.api.network_configs.NetworkConfig.validate_netconfig">validate_netconfig</a></li>
+</ul>
+</li>
+<li><a href="#nimbleclient.v1.api.network_configs.NetworkConfigList">NetworkConfigList</a><ul>
+<li><a href="#nimbleclient.v1.api.network_configs.NetworkConfigList.activate_netconfig">activate_netconfig</a></li>
+<li><a href="#nimbleclient.v1.api.network_configs.NetworkConfigList.validate_netconfig">validate_netconfig</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="nimbleclient.v1.api.network_configs"></a></p>
+<h1 id="nimbleclientv1apinetwork_configs">nimbleclient.v1.api.network_configs<a class="headerlink" href="#nimbleclientv1apinetwork_configs" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.network_configs.NetworkConfig"></a></p>
 <h2 id="networkconfig">NetworkConfig<a class="headerlink" href="#networkconfig" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>NetworkConfig(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class NetworkConfig(Resource)
 </code></pre></p>
 <p>Manage group wide network configuration. The three possible network configurations include active, backup and an optional draft configuration.</p>
 <p><strong>Parameters</strong></p>
@@ -424,9 +447,50 @@
 <li><strong>last_active                       </strong>: Time of last activity.</li>
 <li><strong>ignore_validation_mask            </strong>: Indicates whether to ignore the validation.</li>
 </ul>
-<h2 id="networkconfiglist">NetworkConfigList<a class="headerlink" href="#networkconfiglist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>NetworkConfigList(self, client=None)
+<p><a name="nimbleclient.v1.api.network_configs.NetworkConfig.activate_netconfig"></a></p>
+<h4 id="activate_netconfig">activate_netconfig<a class="headerlink" href="#activate_netconfig" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | activate_netconfig(ignore_validation_mask, **kwargs)
 </code></pre></p>
+<p>Activate a network configuration.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id                     </strong>: ID of the netconfig to activate.</li>
+<li><strong>ignore_validation_mask </strong>: Whether to ignore validation or not.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.network_configs.NetworkConfig.validate_netconfig"></a></p>
+<h4 id="validate_netconfig">validate_netconfig<a class="headerlink" href="#validate_netconfig" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | validate_netconfig(ignore_validation_mask, **kwargs)
+</code></pre></p>
+<p>Validate a network configuration.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id                     </strong>: ID of the netconfig to validate.</li>
+<li><strong>ignore_validation_mask </strong>: Whether to ignore validation or not.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.network_configs.NetworkConfigList"></a></p>
+<h2 id="networkconfiglist">NetworkConfigList<a class="headerlink" href="#networkconfiglist" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>class NetworkConfigList(Collection)
+</code></pre></p>
+<p><a name="nimbleclient.v1.api.network_configs.NetworkConfigList.activate_netconfig"></a></p>
+<h4 id="activate_netconfig_1">activate_netconfig<a class="headerlink" href="#activate_netconfig_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | activate_netconfig(id, ignore_validation_mask, **kwargs)
+</code></pre></p>
+<p>Activate a network configuration.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id                     </strong>: ID of the netconfig to activate.</li>
+<li><strong>ignore_validation_mask </strong>: Whether to ignore validation or not.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.network_configs.NetworkConfigList.validate_netconfig"></a></p>
+<h4 id="validate_netconfig_1">validate_netconfig<a class="headerlink" href="#validate_netconfig_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | validate_netconfig(id, ignore_validation_mask, **kwargs)
+</code></pre></p>
+<p>Validate a network configuration.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id                     </strong>: ID of the netconfig to validate.</li>
+<li><strong>ignore_validation_mask </strong>: Whether to ignore validation or not.</li>
+</ul>
               
             </div>
           </div>

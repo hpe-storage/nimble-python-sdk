@@ -249,13 +249,14 @@
     <a class="current" href="subscribers.html">subscribers</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apisubscribers">nimbleclient.v1.api.subscribers</a></li>
     
         <ul>
         
             <li><a class="toctree-l4" href="#subscriber">Subscriber</a></li>
-        
-            <li><a class="toctree-l4" href="#subscriberlist">SubscriberList</a></li>
         
         </ul>
     
@@ -269,6 +270,10 @@
                 <li class="">
                     
     <a class="" href="tokens.html">tokens</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
                 </li>
                 <li class="">
                     
@@ -398,9 +403,16 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apisubscribers">nimbleclient.v1.api.subscribers<a class="headerlink" href="#nimbleclientv1apisubscribers" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.subscribers">nimbleclient.v1.api.subscribers</a></li>
+<li><a href="#nimbleclient.v1.api.subscribers.Subscriber">Subscriber</a></li>
+</ul>
+<p><a name="nimbleclient.v1.api.subscribers"></a></p>
+<h1 id="nimbleclientv1apisubscribers">nimbleclient.v1.api.subscribers<a class="headerlink" href="#nimbleclientv1apisubscribers" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.subscribers.Subscriber"></a></p>
 <h2 id="subscriber">Subscriber<a class="headerlink" href="#subscriber" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>Subscriber(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class Subscriber(Resource)
 </code></pre></p>
 <p>Subscribers are websocket based notification clients that can subscribe to interesting operations and events and recieve notifications whenever the subscribed to operations
 and events happen on the array.</p>
@@ -415,9 +427,6 @@ and events happen on the array.</p>
 <li><strong>notification_count     </strong>: Number of notifications sent to subscriber.</li>
 <li><strong>force                  </strong>: Forcibly modify a connected subscriber.</li>
 </ul>
-<h2 id="subscriberlist">SubscriberList<a class="headerlink" href="#subscriberlist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>SubscriberList(self, client=None)
-</code></pre></p>
               
             </div>
           </div>

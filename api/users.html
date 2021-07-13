@@ -258,6 +258,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="user_groups.html">user_groups</a>
                 </li>
                 <li class="">
@@ -269,6 +273,9 @@
     <a class="current" href="users.html">users</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apiusers">nimbleclient.v1.api.users</a></li>
     
         <ul>
@@ -398,9 +405,23 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apiusers">nimbleclient.v1.api.users<a class="headerlink" href="#nimbleclientv1apiusers" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.users">nimbleclient.v1.api.users</a></li>
+<li><a href="#nimbleclient.v1.api.users.User">User</a><ul>
+<li><a href="#nimbleclient.v1.api.users.User.unlock">unlock</a></li>
+</ul>
+</li>
+<li><a href="#nimbleclient.v1.api.users.UserList">UserList</a><ul>
+<li><a href="#nimbleclient.v1.api.users.UserList.unlock">unlock</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="nimbleclient.v1.api.users"></a></p>
+<h1 id="nimbleclientv1apiusers">nimbleclient.v1.api.users<a class="headerlink" href="#nimbleclientv1apiusers" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.users.User"></a></p>
 <h2 id="user">User<a class="headerlink" href="#user" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>User(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class User(Resource)
 </code></pre></p>
 <p>Represents users configured to manage the system.</p>
 <p><strong>Parameters</strong></p>
@@ -418,15 +439,36 @@
 <li><strong>last_modified      </strong>: Time when this user was last modified.</li>
 <li><strong>full_name          </strong>: Fully qualified name of the user.</li>
 <li><strong>email_addr         </strong>: Email address of the user.</li>
+<li><strong>tenant_id          </strong>: Identifier for the tenant.</li>
+<li><strong>tenant_key         </strong>: Tenant secret key for encrypting the password.</li>
 <li><strong>disabled           </strong>: User is currently disabled.</li>
 <li><strong>auth_lock          </strong>: User was locked due to failed logins.</li>
 <li><strong>last_login         </strong>: Last login time.</li>
 <li><strong>last_logout        </strong>: Last logout time.</li>
 <li><strong>logged_in          </strong>: User is currently logged in.</li>
 </ul>
-<h2 id="userlist">UserList<a class="headerlink" href="#userlist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>UserList(self, client=None)
+<p><a name="nimbleclient.v1.api.users.User.unlock"></a></p>
+<h4 id="unlock">unlock<a class="headerlink" href="#unlock" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | unlock(**kwargs)
 </code></pre></p>
+<p>Unlocks user account locked due to failed logins.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID for the user.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.users.UserList"></a></p>
+<h2 id="userlist">UserList<a class="headerlink" href="#userlist" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>class UserList(Collection)
+</code></pre></p>
+<p><a name="nimbleclient.v1.api.users.UserList.unlock"></a></p>
+<h4 id="unlock_1">unlock<a class="headerlink" href="#unlock_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | unlock(id, **kwargs)
+</code></pre></p>
+<p>Unlocks user account locked due to failed logins.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID for the user.</li>
+</ul>
               
             </div>
           </div>

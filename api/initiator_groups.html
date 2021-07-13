@@ -169,6 +169,9 @@
     <a class="current" href="initiator_groups.html">initiator_groups</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apiinitiator_groups">nimbleclient.v1.api.initiator_groups</a></li>
     
         <ul>
@@ -269,6 +272,10 @@
                 <li class="">
                     
     <a class="" href="tokens.html">tokens</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
                 </li>
                 <li class="">
                     
@@ -398,9 +405,25 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apiinitiator_groups">nimbleclient.v1.api.initiator_groups<a class="headerlink" href="#nimbleclientv1apiinitiator_groups" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.initiator_groups">nimbleclient.v1.api.initiator_groups</a></li>
+<li><a href="#nimbleclient.v1.api.initiator_groups.InitiatorGroup">InitiatorGroup</a><ul>
+<li><a href="#nimbleclient.v1.api.initiator_groups.InitiatorGroup.suggest_lun">suggest_lun</a></li>
+<li><a href="#nimbleclient.v1.api.initiator_groups.InitiatorGroup.validate_lun">validate_lun</a></li>
+</ul>
+</li>
+<li><a href="#nimbleclient.v1.api.initiator_groups.InitiatorGroupList">InitiatorGroupList</a><ul>
+<li><a href="#nimbleclient.v1.api.initiator_groups.InitiatorGroupList.suggest_lun">suggest_lun</a></li>
+<li><a href="#nimbleclient.v1.api.initiator_groups.InitiatorGroupList.validate_lun">validate_lun</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="nimbleclient.v1.api.initiator_groups"></a></p>
+<h1 id="nimbleclientv1apiinitiator_groups">nimbleclient.v1.api.initiator_groups<a class="headerlink" href="#nimbleclientv1apiinitiator_groups" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.initiator_groups.InitiatorGroup"></a></p>
 <h2 id="initiatorgroup">InitiatorGroup<a class="headerlink" href="#initiatorgroup" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>InitiatorGroup(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class InitiatorGroup(Resource)
 </code></pre></p>
 <p>Manage initiator groups for initiator authentication. An initiator group is a set of initiators that can be configured as part of your ACL to access a specific volume through
 group membership.</p>
@@ -427,9 +450,52 @@ group membership.</p>
 <li><strong>num_connections  </strong>: Total number of connections from initiators in the initiator group.</li>
 <li><strong>metadata         </strong>: Key-value pairs that augment an initiator group's attributes.</li>
 </ul>
-<h2 id="initiatorgrouplist">InitiatorGroupList<a class="headerlink" href="#initiatorgrouplist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>InitiatorGroupList(self, client=None)
+<p><a name="nimbleclient.v1.api.initiator_groups.InitiatorGroup.suggest_lun"></a></p>
+<h4 id="suggest_lun">suggest_lun<a class="headerlink" href="#suggest_lun" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | suggest_lun(**kwargs)
 </code></pre></p>
+<p>Suggest an LU number for the volume and initiator group combination.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id     </strong>: ID of the initiator group.</li>
+<li><strong>vol_id </strong>: ID of the volume.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.initiator_groups.InitiatorGroup.validate_lun"></a></p>
+<h4 id="validate_lun">validate_lun<a class="headerlink" href="#validate_lun" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | validate_lun(lun, **kwargs)
+</code></pre></p>
+<p>Validate an LU number for the volume and initiator group combination.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id     </strong>: ID of the initiator group.</li>
+<li><strong>vol_id </strong>: ID of the volume.</li>
+<li><strong>lun    </strong>: LU number to validate in decimal.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.initiator_groups.InitiatorGroupList"></a></p>
+<h2 id="initiatorgrouplist">InitiatorGroupList<a class="headerlink" href="#initiatorgrouplist" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>class InitiatorGroupList(Collection)
+</code></pre></p>
+<p><a name="nimbleclient.v1.api.initiator_groups.InitiatorGroupList.suggest_lun"></a></p>
+<h4 id="suggest_lun_1">suggest_lun<a class="headerlink" href="#suggest_lun_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | suggest_lun(id, **kwargs)
+</code></pre></p>
+<p>Suggest an LU number for the volume and initiator group combination.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id     </strong>: ID of the initiator group.</li>
+<li><strong>vol_id </strong>: ID of the volume.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.initiator_groups.InitiatorGroupList.validate_lun"></a></p>
+<h4 id="validate_lun_1">validate_lun<a class="headerlink" href="#validate_lun_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | validate_lun(id, lun, **kwargs)
+</code></pre></p>
+<p>Validate an LU number for the volume and initiator group combination.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id     </strong>: ID of the initiator group.</li>
+<li><strong>vol_id </strong>: ID of the volume.</li>
+<li><strong>lun    </strong>: LU number to validate in decimal.</li>
+</ul>
               
             </div>
           </div>

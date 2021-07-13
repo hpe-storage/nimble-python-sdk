@@ -253,13 +253,14 @@
     <a class="current" href="subscriptions.html">subscriptions</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apisubscriptions">nimbleclient.v1.api.subscriptions</a></li>
     
         <ul>
         
             <li><a class="toctree-l4" href="#subscription">Subscription</a></li>
-        
-            <li><a class="toctree-l4" href="#subscriptionlist">SubscriptionList</a></li>
         
         </ul>
     
@@ -269,6 +270,10 @@
                 <li class="">
                     
     <a class="" href="tokens.html">tokens</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
                 </li>
                 <li class="">
                     
@@ -398,9 +403,16 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apisubscriptions">nimbleclient.v1.api.subscriptions<a class="headerlink" href="#nimbleclientv1apisubscriptions" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.subscriptions">nimbleclient.v1.api.subscriptions</a></li>
+<li><a href="#nimbleclient.v1.api.subscriptions.Subscription">Subscription</a></li>
+</ul>
+<p><a name="nimbleclient.v1.api.subscriptions"></a></p>
+<h1 id="nimbleclientv1apisubscriptions">nimbleclient.v1.api.subscriptions<a class="headerlink" href="#nimbleclientv1apisubscriptions" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.subscriptions.Subscription"></a></p>
 <h2 id="subscription">Subscription<a class="headerlink" href="#subscription" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>Subscription(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class Subscription(Resource)
 </code></pre></p>
 <p>Subscriptions represent the list of object types or alerts that a websocket client is interested in getting notifications for. Each subscription belongs to a single
 notification client.</p>
@@ -415,9 +427,6 @@ notification client.</p>
 <li><strong>event_target_type </strong>: The kind of events or alerts that the notification subscriber is interested in. Applies only to events based notifications.</li>
 <li><strong>event_severity    </strong>: The severity of events that the notification subscriber is interested in. Applies only to events based notifications.</li>
 </ul>
-<h2 id="subscriptionlist">SubscriptionList<a class="headerlink" href="#subscriptionlist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>SubscriptionList(self, client=None)
-</code></pre></p>
               
             </div>
           </div>

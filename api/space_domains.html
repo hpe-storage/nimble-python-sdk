@@ -241,13 +241,14 @@
     <a class="current" href="space_domains.html">space_domains</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apispace_domains">nimbleclient.v1.api.space_domains</a></li>
     
         <ul>
         
             <li><a class="toctree-l4" href="#spacedomain">SpaceDomain</a></li>
-        
-            <li><a class="toctree-l4" href="#spacedomainlist">SpaceDomainList</a></li>
         
         </ul>
     
@@ -269,6 +270,10 @@
                 <li class="">
                     
     <a class="" href="tokens.html">tokens</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
                 </li>
                 <li class="">
                     
@@ -398,9 +403,16 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apispace_domains">nimbleclient.v1.api.space_domains<a class="headerlink" href="#nimbleclientv1apispace_domains" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.space_domains">nimbleclient.v1.api.space_domains</a></li>
+<li><a href="#nimbleclient.v1.api.space_domains.SpaceDomain">SpaceDomain</a></li>
+</ul>
+<p><a name="nimbleclient.v1.api.space_domains"></a></p>
+<h1 id="nimbleclientv1apispace_domains">nimbleclient.v1.api.space_domains<a class="headerlink" href="#nimbleclientv1apispace_domains" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.space_domains.SpaceDomain"></a></p>
 <h2 id="spacedomain">SpaceDomain<a class="headerlink" href="#spacedomain" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>SpaceDomain(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class SpaceDomain(Resource)
 </code></pre></p>
 <p>A space domain is created for each application category and block size for each each pool.</p>
 <p><strong>Parameters</strong></p>
@@ -433,9 +445,6 @@
 <li><strong>dedupe_ratio             </strong>: Deduplication savings for the space domain expressed as ratio.</li>
 <li><strong>clone_ratio              </strong>: Clone savings for the space domain expressed as ratio.</li>
 </ul>
-<h2 id="spacedomainlist">SpaceDomainList<a class="headerlink" href="#spacedomainlist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>SpaceDomainList(self, client=None)
-</code></pre></p>
               
             </div>
           </div>

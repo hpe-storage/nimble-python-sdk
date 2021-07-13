@@ -197,13 +197,14 @@
     <a class="current" href="network_interfaces.html">network_interfaces</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apinetwork_interfaces">nimbleclient.v1.api.network_interfaces</a></li>
     
         <ul>
         
             <li><a class="toctree-l4" href="#networkinterface">NetworkInterface</a></li>
-        
-            <li><a class="toctree-l4" href="#networkinterfacelist">NetworkInterfaceList</a></li>
         
         </ul>
     
@@ -269,6 +270,10 @@
                 <li class="">
                     
     <a class="" href="tokens.html">tokens</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
                 </li>
                 <li class="">
                     
@@ -398,9 +403,16 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apinetwork_interfaces">nimbleclient.v1.api.network_interfaces<a class="headerlink" href="#nimbleclientv1apinetwork_interfaces" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.network_interfaces">nimbleclient.v1.api.network_interfaces</a></li>
+<li><a href="#nimbleclient.v1.api.network_interfaces.NetworkInterface">NetworkInterface</a></li>
+</ul>
+<p><a name="nimbleclient.v1.api.network_interfaces"></a></p>
+<h1 id="nimbleclientv1apinetwork_interfaces">nimbleclient.v1.api.network_interfaces<a class="headerlink" href="#nimbleclientv1apinetwork_interfaces" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.network_interfaces.NetworkInterface"></a></p>
 <h2 id="networkinterface">NetworkInterface<a class="headerlink" href="#networkinterface" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>NetworkInterface(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class NetworkInterface(Resource)
 </code></pre></p>
 <p>Manage per array network interface configuration.</p>
 <p><strong>Parameters</strong></p>
@@ -423,9 +435,6 @@
 <li><strong>nic_type             </strong>: Interface type.</li>
 <li><strong>ip_list              </strong>: List of IP addresses assigned to this network interface.</li>
 </ul>
-<h2 id="networkinterfacelist">NetworkInterfaceList<a class="headerlink" href="#networkinterfacelist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>NetworkInterfaceList(self, client=None)
-</code></pre></p>
               
             </div>
           </div>

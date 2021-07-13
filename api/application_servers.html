@@ -113,13 +113,14 @@
     <a class="current" href="application_servers.html">application_servers</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apiapplication_servers">nimbleclient.v1.api.application_servers</a></li>
     
         <ul>
         
             <li><a class="toctree-l4" href="#applicationserver">ApplicationServer</a></li>
-        
-            <li><a class="toctree-l4" href="#applicationserverlist">ApplicationServerList</a></li>
         
         </ul>
     
@@ -272,6 +273,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="user_groups.html">user_groups</a>
                 </li>
                 <li class="">
@@ -398,9 +403,16 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apiapplication_servers">nimbleclient.v1.api.application_servers<a class="headerlink" href="#nimbleclientv1apiapplication_servers" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.application_servers">nimbleclient.v1.api.application_servers</a></li>
+<li><a href="#nimbleclient.v1.api.application_servers.ApplicationServer">ApplicationServer</a></li>
+</ul>
+<p><a name="nimbleclient.v1.api.application_servers"></a></p>
+<h1 id="nimbleclientv1apiapplication_servers">nimbleclient.v1.api.application_servers<a class="headerlink" href="#nimbleclientv1apiapplication_servers" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.application_servers.ApplicationServer"></a></p>
 <h2 id="applicationserver">ApplicationServer<a class="headerlink" href="#applicationserver" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>ApplicationServer(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class ApplicationServer(Resource)
 </code></pre></p>
 <p>An application server is an external agent that collaborates with an array to manage storage resources; for example, Volume Shadow Copy Service (VSS) or VMware.</p>
 <p><strong>Parameters</strong></p>
@@ -417,9 +429,6 @@
 <li><strong>creation_time </strong>: Time when this application server was created.</li>
 <li><strong>last_modified </strong>: Time when this application server was last modified.</li>
 </ul>
-<h2 id="applicationserverlist">ApplicationServerList<a class="headerlink" href="#applicationserverlist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>ApplicationServerList(self, client=None)
-</code></pre></p>
               
             </div>
           </div>

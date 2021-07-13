@@ -149,13 +149,14 @@
     <a class="current" href="fibre_channel_interfaces.html">fibre_channel_interfaces</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apifibre_channel_interfaces">nimbleclient.v1.api.fibre_channel_interfaces</a></li>
     
         <ul>
         
             <li><a class="toctree-l4" href="#fibrechannelinterface">FibreChannelInterface</a></li>
-        
-            <li><a class="toctree-l4" href="#fibrechannelinterfacelist">FibreChannelInterfaceList</a></li>
         
         </ul>
     
@@ -269,6 +270,10 @@
                 <li class="">
                     
     <a class="" href="tokens.html">tokens</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
                 </li>
                 <li class="">
                     
@@ -398,13 +403,16 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apifibre_channel_interfaces">nimbleclient.v1.api.fibre_channel_interfaces<a class="headerlink" href="#nimbleclientv1apifibre_channel_interfaces" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.fibre_channel_interfaces">nimbleclient.v1.api.fibre_channel_interfaces</a></li>
+<li><a href="#nimbleclient.v1.api.fibre_channel_interfaces.FibreChannelInterface">FibreChannelInterface</a></li>
+</ul>
+<p><a name="nimbleclient.v1.api.fibre_channel_interfaces"></a></p>
+<h1 id="nimbleclientv1apifibre_channel_interfaces">nimbleclient.v1.api.fibre_channel_interfaces<a class="headerlink" href="#nimbleclientv1apifibre_channel_interfaces" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.fibre_channel_interfaces.FibreChannelInterface"></a></p>
 <h2 id="fibrechannelinterface">FibreChannelInterface<a class="headerlink" href="#fibrechannelinterface" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>FibreChannelInterface(self,
-                      id,
-                      attrs=None,
-                      client=None,
-                      collection=None)
+<p> <pre><code class=python>class FibreChannelInterface(Resource)
 </code></pre></p>
 <p>Represent information of specified Fibre Channel interfaces. Fibre Channel interfaces are hosted on Fibre Channel ports to provide data access.</p>
 <p><strong>Parameters</strong></p>
@@ -430,9 +438,6 @@
 <li><strong>link_info            </strong>: Information about the Fibre Channel link at which interface is operating.</li>
 <li><strong>fabric_info          </strong>: Fibre Channel fabric information.</li>
 </ul>
-<h2 id="fibrechannelinterfacelist">FibreChannelInterfaceList<a class="headerlink" href="#fibrechannelinterfacelist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>FibreChannelInterfaceList(self, client=None)
-</code></pre></p>
               
             </div>
           </div>

@@ -217,13 +217,14 @@
     <a class="current" href="protocol_endpoints.html">protocol_endpoints</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apiprotocol_endpoints">nimbleclient.v1.api.protocol_endpoints</a></li>
     
         <ul>
         
             <li><a class="toctree-l4" href="#protocolendpoint">ProtocolEndpoint</a></li>
-        
-            <li><a class="toctree-l4" href="#protocolendpointlist">ProtocolEndpointList</a></li>
         
         </ul>
     
@@ -269,6 +270,10 @@
                 <li class="">
                     
     <a class="" href="tokens.html">tokens</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
                 </li>
                 <li class="">
                     
@@ -398,9 +403,16 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apiprotocol_endpoints">nimbleclient.v1.api.protocol_endpoints<a class="headerlink" href="#nimbleclientv1apiprotocol_endpoints" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.protocol_endpoints">nimbleclient.v1.api.protocol_endpoints</a></li>
+<li><a href="#nimbleclient.v1.api.protocol_endpoints.ProtocolEndpoint">ProtocolEndpoint</a></li>
+</ul>
+<p><a name="nimbleclient.v1.api.protocol_endpoints"></a></p>
+<h1 id="nimbleclientv1apiprotocol_endpoints">nimbleclient.v1.api.protocol_endpoints<a class="headerlink" href="#nimbleclientv1apiprotocol_endpoints" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.protocol_endpoints.ProtocolEndpoint"></a></p>
 <h2 id="protocolendpoint">ProtocolEndpoint<a class="headerlink" href="#protocolendpoint" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>ProtocolEndpoint(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class ProtocolEndpoint(Resource)
 </code></pre></p>
 <p>Protocol endpoints are administrative logical units (LUs) in an LU conglomerate to be used with VMware Virtual Volumes.</p>
 <p><strong>Parameters</strong></p>
@@ -427,9 +439,6 @@
                          the creation request, it will be the access protocol supported by the group. If the group supports multiple protocols, the default will be Fibre
                          Channel.</li>
 </ul>
-<h2 id="protocolendpointlist">ProtocolEndpointList<a class="headerlink" href="#protocolendpointlist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>ProtocolEndpointList(self, client=None)
-</code></pre></p>
               
             </div>
           </div>

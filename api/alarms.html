@@ -105,6 +105,9 @@
     <a class="current" href="alarms.html">alarms</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apialarms">nimbleclient.v1.api.alarms</a></li>
     
         <ul>
@@ -272,6 +275,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="user_groups.html">user_groups</a>
                 </li>
                 <li class="">
@@ -398,9 +405,25 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apialarms">nimbleclient.v1.api.alarms<a class="headerlink" href="#nimbleclientv1apialarms" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.alarms">nimbleclient.v1.api.alarms</a></li>
+<li><a href="#nimbleclient.v1.api.alarms.Alarm">Alarm</a><ul>
+<li><a href="#nimbleclient.v1.api.alarms.Alarm.acknowledge">acknowledge</a></li>
+<li><a href="#nimbleclient.v1.api.alarms.Alarm.unacknowledge">unacknowledge</a></li>
+</ul>
+</li>
+<li><a href="#nimbleclient.v1.api.alarms.AlarmList">AlarmList</a><ul>
+<li><a href="#nimbleclient.v1.api.alarms.AlarmList.acknowledge">acknowledge</a></li>
+<li><a href="#nimbleclient.v1.api.alarms.AlarmList.unacknowledge">unacknowledge</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="nimbleclient.v1.api.alarms"></a></p>
+<h1 id="nimbleclientv1apialarms">nimbleclient.v1.api.alarms<a class="headerlink" href="#nimbleclientv1apialarms" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.alarms.Alarm"></a></p>
 <h2 id="alarm">Alarm<a class="headerlink" href="#alarm" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>Alarm(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class Alarm(Resource)
 </code></pre></p>
 <p>View alarms.</p>
 <p><strong>Parameters</strong></p>
@@ -427,9 +450,50 @@
 <li><strong>activity               </strong>: Description of activity performed and recorded in alarm.</li>
 <li><strong>next_notification_time </strong>: Time when next reminder for the alarm will be sent.</li>
 </ul>
-<h2 id="alarmlist">AlarmList<a class="headerlink" href="#alarmlist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>AlarmList(self, client=None)
+<p><a name="nimbleclient.v1.api.alarms.Alarm.acknowledge"></a></p>
+<h4 id="acknowledge">acknowledge<a class="headerlink" href="#acknowledge" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | acknowledge(**kwargs)
 </code></pre></p>
+<p>Acknowledge an alarm.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id                </strong>: ID of the acknowledged alarm.</li>
+<li><strong>remind_every      </strong>: Notification frequency unit.</li>
+<li><strong>remind_every_unit </strong>: Period unit.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.alarms.Alarm.unacknowledge"></a></p>
+<h4 id="unacknowledge">unacknowledge<a class="headerlink" href="#unacknowledge" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | unacknowledge(**kwargs)
+</code></pre></p>
+<p>Unacknowledge an alarm.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the acknowledged alarm.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.alarms.AlarmList"></a></p>
+<h2 id="alarmlist">AlarmList<a class="headerlink" href="#alarmlist" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>class AlarmList(Collection)
+</code></pre></p>
+<p><a name="nimbleclient.v1.api.alarms.AlarmList.acknowledge"></a></p>
+<h4 id="acknowledge_1">acknowledge<a class="headerlink" href="#acknowledge_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | acknowledge(id, **kwargs)
+</code></pre></p>
+<p>Acknowledge an alarm.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id                </strong>: ID of the acknowledged alarm.</li>
+<li><strong>remind_every      </strong>: Notification frequency unit.</li>
+<li><strong>remind_every_unit </strong>: Period unit.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.alarms.AlarmList.unacknowledge"></a></p>
+<h4 id="unacknowledge_1">unacknowledge<a class="headerlink" href="#unacknowledge_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | unacknowledge(id, **kwargs)
+</code></pre></p>
+<p>Unacknowledge an alarm.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the acknowledged alarm.</li>
+</ul>
               
             </div>
           </div>

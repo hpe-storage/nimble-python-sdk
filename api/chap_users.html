@@ -125,13 +125,14 @@
     <a class="current" href="chap_users.html">chap_users</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apichap_users">nimbleclient.v1.api.chap_users</a></li>
     
         <ul>
         
             <li><a class="toctree-l4" href="#chapuser">ChapUser</a></li>
-        
-            <li><a class="toctree-l4" href="#chapuserlist">ChapUserList</a></li>
         
         </ul>
     
@@ -272,6 +273,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="user_groups.html">user_groups</a>
                 </li>
                 <li class="">
@@ -398,9 +403,16 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apichap_users">nimbleclient.v1.api.chap_users<a class="headerlink" href="#nimbleclientv1apichap_users" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.chap_users">nimbleclient.v1.api.chap_users</a></li>
+<li><a href="#nimbleclient.v1.api.chap_users.ChapUser">ChapUser</a></li>
+</ul>
+<p><a name="nimbleclient.v1.api.chap_users"></a></p>
+<h1 id="nimbleclientv1apichap_users">nimbleclient.v1.api.chap_users<a class="headerlink" href="#nimbleclientv1apichap_users" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.chap_users.ChapUser"></a></p>
 <h2 id="chapuser">ChapUser<a class="headerlink" href="#chapuser" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>ChapUser(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class ChapUser(Resource)
 </code></pre></p>
 <p>Manage Challenge-Response Handshake Authentication Protocol (CHAP) user accounts. CHAP users are one method of access control for iSCSI initiators. Each CHAP user has a CHAP
 password, sometimes called a CHAP secret. The CHAP passwords must match on the array and on the iSCSI initiator in order for the array to authenicate the initiator and allow
@@ -416,14 +428,12 @@ it access. The CHAP user information must exist on both the array and the iSCSI 
 <li><strong>initiator_iqns </strong>: List of iSCSI initiators. To be configured with this CHAP user for iSCSI Group Target CHAP authentication. This attribute cannot be modified at the same time
                  with other attributes. If any specified initiator is already associated with another CHAP user, it will be replaced by this CHAP user for future CHAP
                  authentication.</li>
+<li><strong>tenant_id      </strong>: Identifier for the tenant.</li>
 <li><strong>creation_time  </strong>: Time when this CHAP user was created.</li>
 <li><strong>last_modified  </strong>: Time when this CHAP user was last modified.</li>
 <li><strong>vol_list       </strong>: List of volumes associated with this CHAP user.</li>
 <li><strong>vol_count      </strong>: Count of volumes associated with this CHAP user.</li>
 </ul>
-<h2 id="chapuserlist">ChapUserList<a class="headerlink" href="#chapuserlist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>ChapUserList(self, client=None)
-</code></pre></p>
               
             </div>
           </div>

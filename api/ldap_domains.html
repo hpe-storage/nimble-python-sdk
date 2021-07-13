@@ -185,6 +185,9 @@
     <a class="current" href="ldap_domains.html">ldap_domains</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apildap_domains">nimbleclient.v1.api.ldap_domains</a></li>
     
         <ul>
@@ -269,6 +272,10 @@
                 <li class="">
                     
     <a class="" href="tokens.html">tokens</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
                 </li>
                 <li class="">
                     
@@ -398,9 +405,27 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apildap_domains">nimbleclient.v1.api.ldap_domains<a class="headerlink" href="#nimbleclientv1apildap_domains" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.ldap_domains">nimbleclient.v1.api.ldap_domains</a></li>
+<li><a href="#nimbleclient.v1.api.ldap_domains.LdapDomain">LdapDomain</a><ul>
+<li><a href="#nimbleclient.v1.api.ldap_domains.LdapDomain.test_user">test_user</a></li>
+<li><a href="#nimbleclient.v1.api.ldap_domains.LdapDomain.test_group">test_group</a></li>
+<li><a href="#nimbleclient.v1.api.ldap_domains.LdapDomain.report_status">report_status</a></li>
+</ul>
+</li>
+<li><a href="#nimbleclient.v1.api.ldap_domains.LdapDomainList">LdapDomainList</a><ul>
+<li><a href="#nimbleclient.v1.api.ldap_domains.LdapDomainList.test_user">test_user</a></li>
+<li><a href="#nimbleclient.v1.api.ldap_domains.LdapDomainList.test_group">test_group</a></li>
+<li><a href="#nimbleclient.v1.api.ldap_domains.LdapDomainList.report_status">report_status</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="nimbleclient.v1.api.ldap_domains"></a></p>
+<h1 id="nimbleclientv1apildap_domains">nimbleclient.v1.api.ldap_domains<a class="headerlink" href="#nimbleclientv1apildap_domains" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.ldap_domains.LdapDomain"></a></p>
 <h2 id="ldapdomain">LdapDomain<a class="headerlink" href="#ldapdomain" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>LdapDomain(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class LdapDomain(Resource)
 </code></pre></p>
 <p>Manages the storage array's membership with LDAP servers.</p>
 <p><strong>Parameters</strong></p>
@@ -419,9 +444,68 @@
 <li><strong>group_search_base_list </strong>: A set of upto 10 Relative Distinguished Names, relative to the Base DN, from which to search for Group objects.</li>
 <li><strong>schema_type            </strong>: Enum values are OpenLDAP or AD.</li>
 </ul>
-<h2 id="ldapdomainlist">LdapDomainList<a class="headerlink" href="#ldapdomainlist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>LdapDomainList(self, client=None)
+<p><a name="nimbleclient.v1.api.ldap_domains.LdapDomain.test_user"></a></p>
+<h4 id="test_user">test_user<a class="headerlink" href="#test_user" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | test_user(user, **kwargs)
 </code></pre></p>
+<p>Tests whether the user exist in the given LDAP Domain.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id   </strong>: Unique identifier for the LDAP Domain.</li>
+<li><strong>user </strong>: Name of the LDAP Domain user.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.ldap_domains.LdapDomain.test_group"></a></p>
+<h4 id="test_group">test_group<a class="headerlink" href="#test_group" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | test_group(group, **kwargs)
+</code></pre></p>
+<p>Tests whether the user group exist in the given LDAP Domain.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id    </strong>: Unique identifier for the LDAP Domain.</li>
+<li><strong>group </strong>: Name of the group.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.ldap_domains.LdapDomain.report_status"></a></p>
+<h4 id="report_status">report_status<a class="headerlink" href="#report_status" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | report_status(**kwargs)
+</code></pre></p>
+<p>Reports the LDAP connectivity status of the given LDAP ID.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: Unique identifier for the LDAP Domain.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.ldap_domains.LdapDomainList"></a></p>
+<h2 id="ldapdomainlist">LdapDomainList<a class="headerlink" href="#ldapdomainlist" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>class LdapDomainList(Collection)
+</code></pre></p>
+<p><a name="nimbleclient.v1.api.ldap_domains.LdapDomainList.test_user"></a></p>
+<h4 id="test_user_1">test_user<a class="headerlink" href="#test_user_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | test_user(id, user, **kwargs)
+</code></pre></p>
+<p>Tests whether the user exist in the given LDAP Domain.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id   </strong>: Unique identifier for the LDAP Domain.</li>
+<li><strong>user </strong>: Name of the LDAP Domain user.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.ldap_domains.LdapDomainList.test_group"></a></p>
+<h4 id="test_group_1">test_group<a class="headerlink" href="#test_group_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | test_group(id, group, **kwargs)
+</code></pre></p>
+<p>Tests whether the user group exist in the given LDAP Domain.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id    </strong>: Unique identifier for the LDAP Domain.</li>
+<li><strong>group </strong>: Name of the group.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.ldap_domains.LdapDomainList.report_status"></a></p>
+<h4 id="report_status_1">report_status<a class="headerlink" href="#report_status_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | report_status(id, **kwargs)
+</code></pre></p>
+<p>Reports the LDAP connectivity status of the given LDAP ID.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: Unique identifier for the LDAP Domain.</li>
+</ul>
               
             </div>
           </div>

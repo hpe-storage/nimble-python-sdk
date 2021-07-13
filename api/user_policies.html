@@ -258,6 +258,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="user_groups.html">user_groups</a>
                 </li>
                 <li class=" current">
@@ -265,13 +269,14 @@
     <a class="current" href="user_policies.html">user_policies</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apiuser_policies">nimbleclient.v1.api.user_policies</a></li>
     
         <ul>
         
             <li><a class="toctree-l4" href="#userpolicy">UserPolicy</a></li>
-        
-            <li><a class="toctree-l4" href="#userpolicylist">UserPolicyList</a></li>
         
         </ul>
     
@@ -398,9 +403,16 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apiuser_policies">nimbleclient.v1.api.user_policies<a class="headerlink" href="#nimbleclientv1apiuser_policies" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.user_policies">nimbleclient.v1.api.user_policies</a></li>
+<li><a href="#nimbleclient.v1.api.user_policies.UserPolicy">UserPolicy</a></li>
+</ul>
+<p><a name="nimbleclient.v1.api.user_policies"></a></p>
+<h1 id="nimbleclientv1apiuser_policies">nimbleclient.v1.api.user_policies<a class="headerlink" href="#nimbleclientv1apiuser_policies" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.user_policies.UserPolicy"></a></p>
 <h2 id="userpolicy">UserPolicy<a class="headerlink" href="#userpolicy" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>UserPolicy(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class UserPolicy(Resource)
 </code></pre></p>
 <p>Manages the password policies configured for the group.</p>
 <p><strong>Parameters</strong></p>
@@ -416,9 +428,6 @@
 <li><strong>no_reuse         </strong>: Number of times that a password must change before you can reuse a previous password. Allowed range is [1,20] inclusive.</li>
 <li><strong>max_sessions     </strong>: Maximum number of sessions allowed for a group. Allowed range is [10, 1000] inclusive. '0' indicates no limit.</li>
 </ul>
-<h2 id="userpolicylist">UserPolicyList<a class="headerlink" href="#userpolicylist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>UserPolicyList(self, client=None)
-</code></pre></p>
               
             </div>
           </div>

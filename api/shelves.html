@@ -225,6 +225,9 @@
     <a class="current" href="shelves.html">shelves</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apishelves">nimbleclient.v1.api.shelves</a></li>
     
         <ul>
@@ -269,6 +272,10 @@
                 <li class="">
                     
     <a class="" href="tokens.html">tokens</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
                 </li>
                 <li class="">
                     
@@ -398,9 +405,25 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apishelves">nimbleclient.v1.api.shelves<a class="headerlink" href="#nimbleclientv1apishelves" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.shelves">nimbleclient.v1.api.shelves</a></li>
+<li><a href="#nimbleclient.v1.api.shelves.Shelf">Shelf</a><ul>
+<li><a href="#nimbleclient.v1.api.shelves.Shelf.identify">identify</a></li>
+<li><a href="#nimbleclient.v1.api.shelves.Shelf.evacuate">evacuate</a></li>
+</ul>
+</li>
+<li><a href="#nimbleclient.v1.api.shelves.ShelfList">ShelfList</a><ul>
+<li><a href="#nimbleclient.v1.api.shelves.ShelfList.identify">identify</a></li>
+<li><a href="#nimbleclient.v1.api.shelves.ShelfList.evacuate">evacuate</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="nimbleclient.v1.api.shelves"></a></p>
+<h1 id="nimbleclientv1apishelves">nimbleclient.v1.api.shelves<a class="headerlink" href="#nimbleclientv1apishelves" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.shelves.Shelf"></a></p>
 <h2 id="shelf">Shelf<a class="headerlink" href="#shelf" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>Shelf(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class Shelf(Resource)
 </code></pre></p>
 <p>Disk shelf and head unit houses disks and controller.</p>
 <p><strong>Parameters</strong></p>
@@ -427,9 +450,62 @@
                        deduplication requirements.</li>
 <li><strong>last_request         </strong>: Indicates this is the last request in a series of shelf add requests.</li>
 </ul>
-<h2 id="shelflist">ShelfList<a class="headerlink" href="#shelflist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>ShelfList(self, client=None)
+<p><a name="nimbleclient.v1.api.shelves.Shelf.identify"></a></p>
+<h4 id="identify">identify<a class="headerlink" href="#identify" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | identify(cid, status, **kwargs)
 </code></pre></p>
+<p>Turn on chassis identifier for a controller.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id     </strong>: ID of shelf.</li>
+<li><strong>cid    </strong>: Possible values: 'A', 'B'.</li>
+<li><strong>status </strong>: Status value of identifier to set.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.shelves.Shelf.evacuate"></a></p>
+<h4 id="evacuate">evacuate<a class="headerlink" href="#evacuate" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | evacuate(driveset, **kwargs)
+</code></pre></p>
+<p>Perform shelf evacuation.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id       </strong>: ID of shelf.</li>
+<li><strong>driveset </strong>: Driveset to evacuate.</li>
+<li><strong>dry_run  </strong>: Argument to perform a dry run, not the actual shelf evacuation.</li>
+<li><strong>start    </strong>: Argument to perform the shelf evacuation.</li>
+<li><strong>cancel   </strong>: Argument to cancel the shelf evacuation.</li>
+<li><strong>pause    </strong>: Argument to pause the shelf evacuation.</li>
+<li><strong>resume   </strong>: Argument to resume the shelf evacuation.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.shelves.ShelfList"></a></p>
+<h2 id="shelflist">ShelfList<a class="headerlink" href="#shelflist" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>class ShelfList(Collection)
+</code></pre></p>
+<p><a name="nimbleclient.v1.api.shelves.ShelfList.identify"></a></p>
+<h4 id="identify_1">identify<a class="headerlink" href="#identify_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | identify(id, cid, status, **kwargs)
+</code></pre></p>
+<p>Turn on chassis identifier for a controller.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id     </strong>: ID of shelf.</li>
+<li><strong>cid    </strong>: Possible values: 'A', 'B'.</li>
+<li><strong>status </strong>: Status value of identifier to set.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.shelves.ShelfList.evacuate"></a></p>
+<h4 id="evacuate_1">evacuate<a class="headerlink" href="#evacuate_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | evacuate(id, driveset, **kwargs)
+</code></pre></p>
+<p>Perform shelf evacuation.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id       </strong>: ID of shelf.</li>
+<li><strong>driveset </strong>: Driveset to evacuate.</li>
+<li><strong>dry_run  </strong>: Argument to perform a dry run, not the actual shelf evacuation.</li>
+<li><strong>start    </strong>: Argument to perform the shelf evacuation.</li>
+<li><strong>cancel   </strong>: Argument to cancel the shelf evacuation.</li>
+<li><strong>pause    </strong>: Argument to pause the shelf evacuation.</li>
+<li><strong>resume   </strong>: Argument to resume the shelf evacuation.</li>
+</ul>
               
             </div>
           </div>

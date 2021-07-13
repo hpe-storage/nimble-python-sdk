@@ -233,6 +233,9 @@
     <a class="current" href="snapshots.html">snapshots</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apisnapshots">nimbleclient.v1.api.snapshots</a></li>
     
         <ul>
@@ -269,6 +272,10 @@
                 <li class="">
                     
     <a class="" href="tokens.html">tokens</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
                 </li>
                 <li class="">
                     
@@ -398,9 +405,23 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apisnapshots">nimbleclient.v1.api.snapshots<a class="headerlink" href="#nimbleclientv1apisnapshots" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.snapshots">nimbleclient.v1.api.snapshots</a></li>
+<li><a href="#nimbleclient.v1.api.snapshots.Snapshot">Snapshot</a><ul>
+<li><a href="#nimbleclient.v1.api.snapshots.Snapshot.bulk_create">bulk_create</a></li>
+</ul>
+</li>
+<li><a href="#nimbleclient.v1.api.snapshots.SnapshotList">SnapshotList</a><ul>
+<li><a href="#nimbleclient.v1.api.snapshots.SnapshotList.bulk_create">bulk_create</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="nimbleclient.v1.api.snapshots"></a></p>
+<h1 id="nimbleclientv1apisnapshots">nimbleclient.v1.api.snapshots<a class="headerlink" href="#nimbleclientv1apisnapshots" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.snapshots.Snapshot"></a></p>
 <h2 id="snapshot">Snapshot<a class="headerlink" href="#snapshot" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>Snapshot(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class Snapshot(Resource)
 </code></pre></p>
 <p>Snapshots are point-in-time copies of a volume. Snapshots are managed the same way you manage volumes. In reality, snapshots are volumes: they can be accessed by initiators,
 are subject to the same controls, can be modified, and have the same restrictions as volumes. Snapshots can be cloned and replicated. The initial snapshot uses no space: it
@@ -448,9 +469,34 @@ shares the original data with the source volume. Each successive snapshot captur
 <li><strong>force                       </strong>: Forcibly delete the specified snapshot even if it is the last replicated collection. Doing so could lead to full re-seeding at the next
                               replication.</li>
 </ul>
-<h2 id="snapshotlist">SnapshotList<a class="headerlink" href="#snapshotlist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>SnapshotList(self, client=None)
+<p><a name="nimbleclient.v1.api.snapshots.Snapshot.bulk_create"></a></p>
+<h4 id="bulk_create">bulk_create<a class="headerlink" href="#bulk_create" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | bulk_create(replicate, snap_vol_list, vss_snap, **kwargs)
 </code></pre></p>
+<p>Create snapshots on the given set of volumes.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>snap_vol_list </strong>: List of volumes to snapshot and corresponding snapshot creation attributes. VSS application-synchronized snapshot must specify the 'writable' parameter and
+                set it to true.</li>
+<li><strong>replicate     </strong>: Allow snapshot to be replicated.</li>
+<li><strong>vss_snap      </strong>: VSS app-synchronized snapshot; we don't support creation of non app-synchronized sanpshots through this interface; must be set to true.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.snapshots.SnapshotList"></a></p>
+<h2 id="snapshotlist">SnapshotList<a class="headerlink" href="#snapshotlist" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>class SnapshotList(Collection)
+</code></pre></p>
+<p><a name="nimbleclient.v1.api.snapshots.SnapshotList.bulk_create"></a></p>
+<h4 id="bulk_create_1">bulk_create<a class="headerlink" href="#bulk_create_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | bulk_create(replicate, snap_vol_list, vss_snap, **kwargs)
+</code></pre></p>
+<p>Create snapshots on the given set of volumes.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>snap_vol_list </strong>: List of volumes to snapshot and corresponding snapshot creation attributes. VSS application-synchronized snapshot must specify the 'writable' parameter and
+                set it to true.</li>
+<li><strong>replicate     </strong>: Allow snapshot to be replicated.</li>
+<li><strong>vss_snap      </strong>: VSS app-synchronized snapshot; we don't support creation of non app-synchronized sanpshots through this interface; must be set to true.</li>
+</ul>
               
             </div>
           </div>

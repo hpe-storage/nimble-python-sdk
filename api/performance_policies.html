@@ -201,13 +201,14 @@
     <a class="current" href="performance_policies.html">performance_policies</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apiperformance_policies">nimbleclient.v1.api.performance_policies</a></li>
     
         <ul>
         
             <li><a class="toctree-l4" href="#performancepolicy">PerformancePolicy</a></li>
-        
-            <li><a class="toctree-l4" href="#performancepolicylist">PerformancePolicyList</a></li>
         
         </ul>
     
@@ -269,6 +270,10 @@
                 <li class="">
                     
     <a class="" href="tokens.html">tokens</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
                 </li>
                 <li class="">
                     
@@ -398,9 +403,16 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apiperformance_policies">nimbleclient.v1.api.performance_policies<a class="headerlink" href="#nimbleclientv1apiperformance_policies" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.performance_policies">nimbleclient.v1.api.performance_policies</a></li>
+<li><a href="#nimbleclient.v1.api.performance_policies.PerformancePolicy">PerformancePolicy</a></li>
+</ul>
+<p><a name="nimbleclient.v1.api.performance_policies"></a></p>
+<h1 id="nimbleclientv1apiperformance_policies">nimbleclient.v1.api.performance_policies<a class="headerlink" href="#nimbleclientv1apiperformance_policies" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.performance_policies.PerformancePolicy"></a></p>
 <h2 id="performancepolicy">PerformancePolicy<a class="headerlink" href="#performancepolicy" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>PerformancePolicy(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class PerformancePolicy(Resource)
 </code></pre></p>
 <p>Manage performance policies. A performance policy is a set of optimizations including block size, compression, and caching, to ensure that the volume's performance is the best
 configuration for its intended use like databases or log files. By default, a volume uses the \"default\" performance policy, which is set to use 4096 byte blocks with full
@@ -431,9 +443,6 @@ compression and caching enabled. For replicated volumes, the same performance po
 <li><strong>volume_count          </strong>: Number of volumes using this performance policy.</li>
 <li><strong>dedupe_override_pools </strong>: List of pools that override performance policy's dedupe setting.</li>
 </ul>
-<h2 id="performancepolicylist">PerformancePolicyList<a class="headerlink" href="#performancepolicylist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>PerformancePolicyList(self, client=None)
-</code></pre></p>
               
             </div>
           </div>

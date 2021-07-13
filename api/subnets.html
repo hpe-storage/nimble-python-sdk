@@ -245,13 +245,14 @@
     <a class="current" href="subnets.html">subnets</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apisubnets">nimbleclient.v1.api.subnets</a></li>
     
         <ul>
         
             <li><a class="toctree-l4" href="#subnet">Subnet</a></li>
-        
-            <li><a class="toctree-l4" href="#subnetlist">SubnetList</a></li>
         
         </ul>
     
@@ -269,6 +270,10 @@
                 <li class="">
                     
     <a class="" href="tokens.html">tokens</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
                 </li>
                 <li class="">
                     
@@ -398,9 +403,16 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apisubnets">nimbleclient.v1.api.subnets<a class="headerlink" href="#nimbleclientv1apisubnets" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.subnets">nimbleclient.v1.api.subnets</a></li>
+<li><a href="#nimbleclient.v1.api.subnets.Subnet">Subnet</a></li>
+</ul>
+<p><a name="nimbleclient.v1.api.subnets"></a></p>
+<h1 id="nimbleclientv1apisubnets">nimbleclient.v1.api.subnets<a class="headerlink" href="#nimbleclientv1apisubnets" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.subnets.Subnet"></a></p>
 <h2 id="subnet">Subnet<a class="headerlink" href="#subnet" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>Subnet(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class Subnet(Resource)
 </code></pre></p>
 <p>Search subnets information. Many networking tasks require that objects such as replication partners are either on the same network or have a route to a secondary network.
 Subnets let you create logical addressing for selective routing.</p>
@@ -422,9 +434,6 @@ Subnets let you create logical addressing for selective routing.</p>
 <li><strong>failover             </strong>: Failover setting of the subnet.</li>
 <li><strong>failover_enable_time </strong>: Failover for this subnet will be enabled again at the time specified by failover_enable_time.</li>
 </ul>
-<h2 id="subnetlist">SubnetList<a class="headerlink" href="#subnetlist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>SubnetList(self, client=None)
-</code></pre></p>
               
             </div>
           </div>

@@ -258,6 +258,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="user_groups.html">user_groups</a>
                 </li>
                 <li class="">
@@ -281,6 +285,9 @@
     <a class="current" href="volumes.html">volumes</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apivolumes">nimbleclient.v1.api.volumes</a></li>
     
         <ul>
@@ -398,9 +405,41 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apivolumes">nimbleclient.v1.api.volumes<a class="headerlink" href="#nimbleclientv1apivolumes" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.volumes">nimbleclient.v1.api.volumes</a></li>
+<li><a href="#nimbleclient.v1.api.volumes.Volume">Volume</a><ul>
+<li><a href="#nimbleclient.v1.api.volumes.Volume.restore">restore</a></li>
+<li><a href="#nimbleclient.v1.api.volumes.Volume.move">move</a></li>
+<li><a href="#nimbleclient.v1.api.volumes.Volume.bulk_move">bulk_move</a></li>
+<li><a href="#nimbleclient.v1.api.volumes.Volume.abort_move">abort_move</a></li>
+<li><a href="#nimbleclient.v1.api.volumes.Volume.bulk_set_dedupe">bulk_set_dedupe</a></li>
+<li><a href="#nimbleclient.v1.api.volumes.Volume.bulk_set_online_and_offline">bulk_set_online_and_offline</a></li>
+<li><a href="#nimbleclient.v1.api.volumes.Volume.online">online</a></li>
+<li><a href="#nimbleclient.v1.api.volumes.Volume.offline">offline</a></li>
+<li><a href="#nimbleclient.v1.api.volumes.Volume.associate">associate</a></li>
+<li><a href="#nimbleclient.v1.api.volumes.Volume.dissociate">dissociate</a></li>
+</ul>
+</li>
+<li><a href="#nimbleclient.v1.api.volumes.VolumeList">VolumeList</a><ul>
+<li><a href="#nimbleclient.v1.api.volumes.VolumeList.restore">restore</a></li>
+<li><a href="#nimbleclient.v1.api.volumes.VolumeList.move">move</a></li>
+<li><a href="#nimbleclient.v1.api.volumes.VolumeList.bulk_move">bulk_move</a></li>
+<li><a href="#nimbleclient.v1.api.volumes.VolumeList.abort_move">abort_move</a></li>
+<li><a href="#nimbleclient.v1.api.volumes.VolumeList.bulk_set_dedupe">bulk_set_dedupe</a></li>
+<li><a href="#nimbleclient.v1.api.volumes.VolumeList.bulk_set_online_and_offline">bulk_set_online_and_offline</a></li>
+<li><a href="#nimbleclient.v1.api.volumes.VolumeList.online">online</a></li>
+<li><a href="#nimbleclient.v1.api.volumes.VolumeList.offline">offline</a></li>
+<li><a href="#nimbleclient.v1.api.volumes.VolumeList.associate">associate</a></li>
+<li><a href="#nimbleclient.v1.api.volumes.VolumeList.dissociate">dissociate</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="nimbleclient.v1.api.volumes"></a></p>
+<h1 id="nimbleclientv1apivolumes">nimbleclient.v1.api.volumes<a class="headerlink" href="#nimbleclientv1apivolumes" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.volumes.Volume"></a></p>
 <h2 id="volume">Volume<a class="headerlink" href="#volume" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>Volume(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class Volume(Resource)
 </code></pre></p>
 <p>Volumes are the basic storage units from which the total capacity is apportioned. The terms volume and LUN are used interchangeably.The number of volumes per array depends on
 storage allocation.</p>
@@ -532,9 +571,200 @@ storage allocation.</p>
 <li><strong>srep_last_sync                </strong>: Time when synchronously replicated volume was last synchronized.</li>
 <li><strong>srep_resync_percent           </strong>: Percentage of resync progress for synchronously replicated volume.</li>
 </ul>
-<h2 id="volumelist">VolumeList<a class="headerlink" href="#volumelist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>VolumeList(self, client=None)
+<p><a name="nimbleclient.v1.api.volumes.Volume.restore"></a></p>
+<h4 id="restore">restore<a class="headerlink" href="#restore" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | restore(base_snap_id, **kwargs)
 </code></pre></p>
+<p>Restore volume data from a previous snapshot.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id           </strong>: ID of the restored volume.</li>
+<li><strong>base_snap_id </strong>: ID of the snapshot to which this the volume is restored.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.volumes.Volume.move"></a></p>
+<h4 id="move">move<a class="headerlink" href="#move" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | move(dest_pool_id, **kwargs)
+</code></pre></p>
+<p>Move a volume and its related volumes to another pool. To change a single volume's folder assignment (while remaining in the same pool), use a volume update operation to
+change the folder_id attribute.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id           </strong>: ID of the volume to move.</li>
+<li><strong>dest_pool_id </strong>: ID of the destination pool or folder. Specify a pool ID when the volumes should not be in a folder; otherwise, specify a folder ID and the pool will be
+               derived from the folder.</li>
+<li><strong>force_vvol   </strong>: Forcibly move a Virtual Volume. Moving Virtual Volume is disruptive to the vCenter, hence it should only be done by the VASA Provider (VP). This flag should
+               only be set by the VP when it calls this API.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.volumes.Volume.bulk_move"></a></p>
+<h4 id="bulk_move">bulk_move<a class="headerlink" href="#bulk_move" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | bulk_move(dest_pool_id, vol_ids, **kwargs)
+</code></pre></p>
+<p>Move volumes and their related volumes to another pool. To change a single volume's folder assignment (while remaining in the same pool), use a volume update operation to
+change the folder_id attribute.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>vol_ids      </strong>: IDs of the volumes to move.</li>
+<li><strong>dest_pool_id </strong>: ID of the destination pool or folder. Specify a pool ID when the volumes should not be in a folder; otherwise, specify a folder ID and the pool will be
+               derived from the folder.</li>
+<li><strong>force_vvol   </strong>: Forcibly move a Virtual Volume. Moving Virtual Volume is disruptive to the vCenter, hence it should only be done by the VASA Provider (VP). This flag should
+               only be set by the VP when it calls this API.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.volumes.Volume.abort_move"></a></p>
+<h4 id="abort_move">abort_move<a class="headerlink" href="#abort_move" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | abort_move(**kwargs)
+</code></pre></p>
+<p>Abort the in-progress move of the specified volume to another pool.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the volume to stop moving to a different pool.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.volumes.Volume.bulk_set_dedupe"></a></p>
+<h4 id="bulk_set_dedupe">bulk_set_dedupe<a class="headerlink" href="#bulk_set_dedupe" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | bulk_set_dedupe(dedupe_enabled, vol_ids, **kwargs)
+</code></pre></p>
+<p>Enable or disable dedupe on a list of volumes. If the volumes are not dedupe capable, the operation will fail for the specified volume.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>vol_ids        </strong>: IDs of the volumes to enable/disable dedupe.</li>
+<li><strong>dedupe_enabled </strong>: Dedupe property to be applied to the list of volumes.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.volumes.Volume.bulk_set_online_and_offline"></a></p>
+<h4 id="bulk_set_online_and_offline">bulk_set_online_and_offline<a class="headerlink" href="#bulk_set_online_and_offline" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | bulk_set_online_and_offline(online, vol_ids, **kwargs)
+</code></pre></p>
+<p>Bring a list of volumes online or offline.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>vol_ids </strong>: IDs of the volumes to set online or offline.</li>
+<li><strong>online  </strong>: Desired state of the volumes. "true" for online, "false" for offline.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.volumes.Volume.online"></a></p>
+<h4 id="online">online<a class="headerlink" href="#online" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | online()
+</code></pre></p>
+<p>Bring volume online.</p>
+<p><a name="nimbleclient.v1.api.volumes.Volume.offline"></a></p>
+<h4 id="offline">offline<a class="headerlink" href="#offline" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | offline()
+</code></pre></p>
+<p>Take volume offline.</p>
+<p><a name="nimbleclient.v1.api.volumes.Volume.associate"></a></p>
+<h4 id="associate">associate<a class="headerlink" href="#associate" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | associate(volcoll)
+</code></pre></p>
+<p>Associate the volume to a volume_collection.</p>
+<p><a name="nimbleclient.v1.api.volumes.Volume.dissociate"></a></p>
+<h4 id="dissociate">dissociate<a class="headerlink" href="#dissociate" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | dissociate()
+</code></pre></p>
+<p>Dissociate the volume from a volume collection.</p>
+<p><a name="nimbleclient.v1.api.volumes.VolumeList"></a></p>
+<h2 id="volumelist">VolumeList<a class="headerlink" href="#volumelist" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>class VolumeList(Collection)
+</code></pre></p>
+<p><a name="nimbleclient.v1.api.volumes.VolumeList.restore"></a></p>
+<h4 id="restore_1">restore<a class="headerlink" href="#restore_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | restore(id, base_snap_id, **kwargs)
+</code></pre></p>
+<p>Restore volume data from a previous snapshot.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id           </strong>: ID of the restored volume.</li>
+<li><strong>base_snap_id </strong>: ID of the snapshot to which this the volume is restored.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.volumes.VolumeList.move"></a></p>
+<h4 id="move_1">move<a class="headerlink" href="#move_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | move(id, dest_pool_id, **kwargs)
+</code></pre></p>
+<p>Move a volume and its related volumes to another pool. To change a single volume's folder assignment (while remaining in the same pool), use a volume update operation to
+change the folder_id attribute.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id           </strong>: ID of the volume to move.</li>
+<li><strong>dest_pool_id </strong>: ID of the destination pool or folder. Specify a pool ID when the volumes should not be in a folder; otherwise, specify a folder ID and the pool will be
+               derived from the folder.</li>
+<li><strong>force_vvol   </strong>: Forcibly move a Virtual Volume. Moving Virtual Volume is disruptive to the vCenter, hence it should only be done by the VASA Provider (VP). This flag should
+               only be set by the VP when it calls this API.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.volumes.VolumeList.bulk_move"></a></p>
+<h4 id="bulk_move_1">bulk_move<a class="headerlink" href="#bulk_move_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | bulk_move(dest_pool_id, vol_ids, **kwargs)
+</code></pre></p>
+<p>Move volumes and their related volumes to another pool. To change a single volume's folder assignment (while remaining in the same pool), use a volume update operation to
+change the folder_id attribute.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>vol_ids      </strong>: IDs of the volumes to move.</li>
+<li><strong>dest_pool_id </strong>: ID of the destination pool or folder. Specify a pool ID when the volumes should not be in a folder; otherwise, specify a folder ID and the pool will be
+               derived from the folder.</li>
+<li><strong>force_vvol   </strong>: Forcibly move a Virtual Volume. Moving Virtual Volume is disruptive to the vCenter, hence it should only be done by the VASA Provider (VP). This flag should
+               only be set by the VP when it calls this API.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.volumes.VolumeList.abort_move"></a></p>
+<h4 id="abort_move_1">abort_move<a class="headerlink" href="#abort_move_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | abort_move(id, **kwargs)
+</code></pre></p>
+<p>Abort the in-progress move of the specified volume to another pool.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the volume to stop moving to a different pool.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.volumes.VolumeList.bulk_set_dedupe"></a></p>
+<h4 id="bulk_set_dedupe_1">bulk_set_dedupe<a class="headerlink" href="#bulk_set_dedupe_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | bulk_set_dedupe(dedupe_enabled, vol_ids, **kwargs)
+</code></pre></p>
+<p>Enable or disable dedupe on a list of volumes. If the volumes are not dedupe capable, the operation will fail for the specified volume.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>vol_ids        </strong>: IDs of the volumes to enable/disable dedupe.</li>
+<li><strong>dedupe_enabled </strong>: Dedupe property to be applied to the list of volumes.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.volumes.VolumeList.bulk_set_online_and_offline"></a></p>
+<h4 id="bulk_set_online_and_offline_1">bulk_set_online_and_offline<a class="headerlink" href="#bulk_set_online_and_offline_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | bulk_set_online_and_offline(online, vol_ids, **kwargs)
+</code></pre></p>
+<p>Bring a list of volumes online or offline.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>vol_ids </strong>: IDs of the volumes to set online or offline.</li>
+<li><strong>online  </strong>: Desired state of the volumes. "true" for online, "false" for offline.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.volumes.VolumeList.online"></a></p>
+<h4 id="online_1">online<a class="headerlink" href="#online_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | online(id)
+</code></pre></p>
+<p>Bring volume online.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the volume.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.volumes.VolumeList.offline"></a></p>
+<h4 id="offline_1">offline<a class="headerlink" href="#offline_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | offline(id)
+</code></pre></p>
+<p>Take volume offline.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the volume.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.volumes.VolumeList.associate"></a></p>
+<h4 id="associate_1">associate<a class="headerlink" href="#associate_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | associate(id, volcoll)
+</code></pre></p>
+<p>Associate the volume to a volume_collection</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the volume.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.volumes.VolumeList.dissociate"></a></p>
+<h4 id="dissociate_1">dissociate<a class="headerlink" href="#dissociate_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | dissociate(id)
+</code></pre></p>
+<p>Dissociate the volume from a volume collection</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the volume.</li>
+</ul>
               
             </div>
           </div>

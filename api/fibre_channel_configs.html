@@ -141,6 +141,9 @@
     <a class="current" href="fibre_channel_configs.html">fibre_channel_configs</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apifibre_channel_configs">nimbleclient.v1.api.fibre_channel_configs</a></li>
     
         <ul>
@@ -272,6 +275,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="user_groups.html">user_groups</a>
                 </li>
                 <li class="">
@@ -398,9 +405,25 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apifibre_channel_configs">nimbleclient.v1.api.fibre_channel_configs<a class="headerlink" href="#nimbleclientv1apifibre_channel_configs" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.fibre_channel_configs">nimbleclient.v1.api.fibre_channel_configs</a></li>
+<li><a href="#nimbleclient.v1.api.fibre_channel_configs.FibreChannelConfig">FibreChannelConfig</a><ul>
+<li><a href="#nimbleclient.v1.api.fibre_channel_configs.FibreChannelConfig.regenerate">regenerate</a></li>
+<li><a href="#nimbleclient.v1.api.fibre_channel_configs.FibreChannelConfig.hw_upgrade">hw_upgrade</a></li>
+</ul>
+</li>
+<li><a href="#nimbleclient.v1.api.fibre_channel_configs.FibreChannelConfigList">FibreChannelConfigList</a><ul>
+<li><a href="#nimbleclient.v1.api.fibre_channel_configs.FibreChannelConfigList.regenerate">regenerate</a></li>
+<li><a href="#nimbleclient.v1.api.fibre_channel_configs.FibreChannelConfigList.hw_upgrade">hw_upgrade</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="nimbleclient.v1.api.fibre_channel_configs"></a></p>
+<h1 id="nimbleclientv1apifibre_channel_configs">nimbleclient.v1.api.fibre_channel_configs<a class="headerlink" href="#nimbleclientv1apifibre_channel_configs" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.fibre_channel_configs.FibreChannelConfig"></a></p>
 <h2 id="fibrechannelconfig">FibreChannelConfig<a class="headerlink" href="#fibrechannelconfig" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>FibreChannelConfig(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class FibreChannelConfig(Resource)
 </code></pre></p>
 <p>Manage group wide Fibre Channel configuration.</p>
 <p><strong>Parameters</strong></p>
@@ -409,9 +432,50 @@
 <li><strong>array_list         </strong>: List of array Fibre Channel configs.</li>
 <li><strong>group_leader_array </strong>: Name of the group leader array.</li>
 </ul>
-<h2 id="fibrechannelconfiglist">FibreChannelConfigList<a class="headerlink" href="#fibrechannelconfiglist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>FibreChannelConfigList(self, client=None)
+<p><a name="nimbleclient.v1.api.fibre_channel_configs.FibreChannelConfig.regenerate"></a></p>
+<h4 id="regenerate">regenerate<a class="headerlink" href="#regenerate" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | regenerate(precheck, wwnn_base_str, **kwargs)
 </code></pre></p>
+<p>Regenerate Fibre Channel configuration.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id            </strong>: ID of the Fibre Channel configuration.</li>
+<li><strong>wwnn_base_str </strong>: Base World Wide Node Name(WWNN).</li>
+<li><strong>precheck      </strong>: Check if the interfaces are offline before regenerating the WWNN (World Wide Node Name).</li>
+</ul>
+<p><a name="nimbleclient.v1.api.fibre_channel_configs.FibreChannelConfig.hw_upgrade"></a></p>
+<h4 id="hw_upgrade">hw_upgrade<a class="headerlink" href="#hw_upgrade" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | hw_upgrade(**kwargs)
+</code></pre></p>
+<p>Update Fibre Channel configuration after hardware changes.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the Fibre Channel configuration.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.fibre_channel_configs.FibreChannelConfigList"></a></p>
+<h2 id="fibrechannelconfiglist">FibreChannelConfigList<a class="headerlink" href="#fibrechannelconfiglist" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>class FibreChannelConfigList(Collection)
+</code></pre></p>
+<p><a name="nimbleclient.v1.api.fibre_channel_configs.FibreChannelConfigList.regenerate"></a></p>
+<h4 id="regenerate_1">regenerate<a class="headerlink" href="#regenerate_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | regenerate(id, precheck, wwnn_base_str, **kwargs)
+</code></pre></p>
+<p>Regenerate Fibre Channel configuration.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id            </strong>: ID of the Fibre Channel configuration.</li>
+<li><strong>wwnn_base_str </strong>: Base World Wide Node Name(WWNN).</li>
+<li><strong>precheck      </strong>: Check if the interfaces are offline before regenerating the WWNN (World Wide Node Name).</li>
+</ul>
+<p><a name="nimbleclient.v1.api.fibre_channel_configs.FibreChannelConfigList.hw_upgrade"></a></p>
+<h4 id="hw_upgrade_1">hw_upgrade<a class="headerlink" href="#hw_upgrade_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | hw_upgrade(id, **kwargs)
+</code></pre></p>
+<p>Update Fibre Channel configuration after hardware changes.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the Fibre Channel configuration.</li>
+</ul>
               
             </div>
           </div>

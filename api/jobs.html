@@ -177,13 +177,14 @@
     <a class="current" href="jobs.html">jobs</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apijobs">nimbleclient.v1.api.jobs</a></li>
     
         <ul>
         
             <li><a class="toctree-l4" href="#job">Job</a></li>
-        
-            <li><a class="toctree-l4" href="#joblist">JobList</a></li>
         
         </ul>
     
@@ -269,6 +270,10 @@
                 <li class="">
                     
     <a class="" href="tokens.html">tokens</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
                 </li>
                 <li class="">
                     
@@ -398,9 +403,16 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apijobs">nimbleclient.v1.api.jobs<a class="headerlink" href="#nimbleclientv1apijobs" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.jobs">nimbleclient.v1.api.jobs</a></li>
+<li><a href="#nimbleclient.v1.api.jobs.Job">Job</a></li>
+</ul>
+<p><a name="nimbleclient.v1.api.jobs"></a></p>
+<h1 id="nimbleclientv1apijobs">nimbleclient.v1.api.jobs<a class="headerlink" href="#nimbleclientv1apijobs" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.jobs.Job"></a></p>
 <h2 id="job">Job<a class="headerlink" href="#job" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>Job(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class Job(Resource)
 </code></pre></p>
 <p>Jobs are operations in progress in the system.</p>
 <p><strong>Parameters</strong></p>
@@ -424,9 +436,6 @@
 <li><strong>result                    </strong>: Result of the job.</li>
 <li><strong>total_phases              </strong>: Total number of phases of the job.</li>
 </ul>
-<h2 id="joblist">JobList<a class="headerlink" href="#joblist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>JobList(self, client=None)
-</code></pre></p>
               
             </div>
           </div>

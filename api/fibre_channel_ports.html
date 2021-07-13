@@ -153,13 +153,14 @@
     <a class="current" href="fibre_channel_ports.html">fibre_channel_ports</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apifibre_channel_ports">nimbleclient.v1.api.fibre_channel_ports</a></li>
     
         <ul>
         
             <li><a class="toctree-l4" href="#fibrechannelport">FibreChannelPort</a></li>
-        
-            <li><a class="toctree-l4" href="#fibrechannelportlist">FibreChannelPortList</a></li>
         
         </ul>
     
@@ -269,6 +270,10 @@
                 <li class="">
                     
     <a class="" href="tokens.html">tokens</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
                 </li>
                 <li class="">
                     
@@ -398,9 +403,16 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apifibre_channel_ports">nimbleclient.v1.api.fibre_channel_ports<a class="headerlink" href="#nimbleclientv1apifibre_channel_ports" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.fibre_channel_ports">nimbleclient.v1.api.fibre_channel_ports</a></li>
+<li><a href="#nimbleclient.v1.api.fibre_channel_ports.FibreChannelPort">FibreChannelPort</a></li>
+</ul>
+<p><a name="nimbleclient.v1.api.fibre_channel_ports"></a></p>
+<h1 id="nimbleclientv1apifibre_channel_ports">nimbleclient.v1.api.fibre_channel_ports<a class="headerlink" href="#nimbleclientv1apifibre_channel_ports" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.fibre_channel_ports.FibreChannelPort"></a></p>
 <h2 id="fibrechannelport">FibreChannelPort<a class="headerlink" href="#fibrechannelport" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>FibreChannelPort(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class FibreChannelPort(Resource)
 </code></pre></p>
 <p>Fibre Channel ports provide data access. This API provides the list of all Fibre Channel ports configured on the arrays.</p>
 <p><strong>Parameters</strong></p>
@@ -418,9 +430,6 @@
 <li><strong>rx_power             </strong>: SFP RX power in uW.</li>
 <li><strong>tx_power             </strong>: SFP TX power in uW.</li>
 </ul>
-<h2 id="fibrechannelportlist">FibreChannelPortList<a class="headerlink" href="#fibrechannelportlist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>FibreChannelPortList(self, client=None)
-</code></pre></p>
               
             </div>
           </div>

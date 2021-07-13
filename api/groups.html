@@ -165,6 +165,9 @@
     <a class="current" href="groups.html">groups</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apigroups">nimbleclient.v1.api.groups</a></li>
     
         <ul>
@@ -269,6 +272,10 @@
                 <li class="">
                     
     <a class="" href="tokens.html">tokens</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
                 </li>
                 <li class="">
                     
@@ -398,9 +405,51 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apigroups">nimbleclient.v1.api.groups<a class="headerlink" href="#nimbleclientv1apigroups" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.groups">nimbleclient.v1.api.groups</a></li>
+<li><a href="#nimbleclient.v1.api.groups.Group">Group</a><ul>
+<li><a href="#nimbleclient.v1.api.groups.Group.reboot">reboot</a></li>
+<li><a href="#nimbleclient.v1.api.groups.Group.halt">halt</a></li>
+<li><a href="#nimbleclient.v1.api.groups.Group.test_alert">test_alert</a></li>
+<li><a href="#nimbleclient.v1.api.groups.Group.software_update_precheck">software_update_precheck</a></li>
+<li><a href="#nimbleclient.v1.api.groups.Group.software_update_start">software_update_start</a></li>
+<li><a href="#nimbleclient.v1.api.groups.Group.software_download">software_download</a></li>
+<li><a href="#nimbleclient.v1.api.groups.Group.software_cancel_download">software_cancel_download</a></li>
+<li><a href="#nimbleclient.v1.api.groups.Group.software_update_resume">software_update_resume</a></li>
+<li><a href="#nimbleclient.v1.api.groups.Group.get_group_discovered_list">get_group_discovered_list</a></li>
+<li><a href="#nimbleclient.v1.api.groups.Group.validate_merge">validate_merge</a></li>
+<li><a href="#nimbleclient.v1.api.groups.Group.merge">merge</a></li>
+<li><a href="#nimbleclient.v1.api.groups.Group.get_eula">get_eula</a></li>
+<li><a href="#nimbleclient.v1.api.groups.Group.check_migrate">check_migrate</a></li>
+<li><a href="#nimbleclient.v1.api.groups.Group.migrate">migrate</a></li>
+<li><a href="#nimbleclient.v1.api.groups.Group.get_timezone_list">get_timezone_list</a></li>
+</ul>
+</li>
+<li><a href="#nimbleclient.v1.api.groups.GroupList">GroupList</a><ul>
+<li><a href="#nimbleclient.v1.api.groups.GroupList.reboot">reboot</a></li>
+<li><a href="#nimbleclient.v1.api.groups.GroupList.halt">halt</a></li>
+<li><a href="#nimbleclient.v1.api.groups.GroupList.test_alert">test_alert</a></li>
+<li><a href="#nimbleclient.v1.api.groups.GroupList.software_update_precheck">software_update_precheck</a></li>
+<li><a href="#nimbleclient.v1.api.groups.GroupList.software_update_start">software_update_start</a></li>
+<li><a href="#nimbleclient.v1.api.groups.GroupList.software_download">software_download</a></li>
+<li><a href="#nimbleclient.v1.api.groups.GroupList.software_cancel_download">software_cancel_download</a></li>
+<li><a href="#nimbleclient.v1.api.groups.GroupList.software_update_resume">software_update_resume</a></li>
+<li><a href="#nimbleclient.v1.api.groups.GroupList.get_group_discovered_list">get_group_discovered_list</a></li>
+<li><a href="#nimbleclient.v1.api.groups.GroupList.validate_merge">validate_merge</a></li>
+<li><a href="#nimbleclient.v1.api.groups.GroupList.merge">merge</a></li>
+<li><a href="#nimbleclient.v1.api.groups.GroupList.get_eula">get_eula</a></li>
+<li><a href="#nimbleclient.v1.api.groups.GroupList.check_migrate">check_migrate</a></li>
+<li><a href="#nimbleclient.v1.api.groups.GroupList.migrate">migrate</a></li>
+<li><a href="#nimbleclient.v1.api.groups.GroupList.get_timezone_list">get_timezone_list</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="nimbleclient.v1.api.groups"></a></p>
+<h1 id="nimbleclientv1apigroups">nimbleclient.v1.api.groups<a class="headerlink" href="#nimbleclientv1apigroups" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.groups.Group"></a></p>
 <h2 id="group">Group<a class="headerlink" href="#group" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>Group(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class Group(Resource)
 </code></pre></p>
 <p>Group is a collection of arrays operating together organized into storage pools.</p>
 <p><strong>Parameters</strong></p>
@@ -468,6 +517,7 @@
 <li><strong>alarms_enabled                         </strong>: Whether alarm feature is enabled.</li>
 <li><strong>vss_validation_timeout                 </strong>: The amount of time in seconds to validate Microsoft VSS application synchronization before timing out.</li>
 <li><strong>auto_switchover_enabled                </strong>: Whether automatic switchover of Group management services feature is enabled.</li>
+<li><strong>software_subscription_enabled          </strong>: Whether software subscription of Group management services feature is enabled.</li>
 <li><strong>auto_switchover_messages               </strong>: List of validation messages for automatic switchover of Group Management. This will be empty when there are no conflicts found.</li>
 <li><strong>merge_state                            </strong>: State of group merge.</li>
 <li><strong>merge_group_name                       </strong>: Group that we're being merged with.</li>
@@ -547,9 +597,334 @@
 <li><strong>snap_retn_meter_high                   </strong>: Threshold for considering a volume as high retention.</li>
 <li><strong>snap_retn_meter_very_high              </strong>: Threshold for considering a volume as very high retention.</li>
 </ul>
-<h2 id="grouplist">GroupList<a class="headerlink" href="#grouplist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>GroupList(self, client=None)
+<p><a name="nimbleclient.v1.api.groups.Group.reboot"></a></p>
+<h4 id="reboot">reboot<a class="headerlink" href="#reboot" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | reboot(**kwargs)
 </code></pre></p>
+<p>Reboot all arrays in the group.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the group to reboot.</li>
+<li><strong>job_timeout</strong>: Job timeout in seconds.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.groups.Group.halt"></a></p>
+<h4 id="halt">halt<a class="headerlink" href="#halt" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | halt(**kwargs)
+</code></pre></p>
+<p>Halt all arrays in the group.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id    </strong>: ID of the group to halt.</li>
+<li><strong>force </strong>: Halt remaining arrays when one or more is unreachable.</li>
+<li><strong>job_timeout</strong>: Job timeout in seconds.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.groups.Group.test_alert"></a></p>
+<h4 id="test_alert">test_alert<a class="headerlink" href="#test_alert" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | test_alert(level, **kwargs)
+</code></pre></p>
+<p>Generate a test alert.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id    </strong>: ID of the group.</li>
+<li><strong>level </strong>: Level of the test alert.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.groups.Group.software_update_precheck"></a></p>
+<h4 id="software_update_precheck">software_update_precheck<a class="headerlink" href="#software_update_precheck" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | software_update_precheck(**kwargs)
+</code></pre></p>
+<p>Run software update precheck.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id                 </strong>: ID of the group.</li>
+<li><strong>skip_precheck_mask </strong>: Flag to allow skipping certain types of prechecks.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.groups.Group.software_update_start"></a></p>
+<h4 id="software_update_start">software_update_start<a class="headerlink" href="#software_update_start" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | software_update_start(**kwargs)
+</code></pre></p>
+<p>Update the group software to the downloaded version.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id                    </strong>: ID of the group.</li>
+<li><strong>skip_start_check_mask </strong>: Flag to allow skipping certain types of checks.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.groups.Group.software_download"></a></p>
+<h4 id="software_download">software_download<a class="headerlink" href="#software_download" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | software_download(version, **kwargs)
+</code></pre></p>
+<p>Download software update package.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id      </strong>: ID of the group.</li>
+<li><strong>version </strong>: Version string to download.</li>
+<li><strong>force   </strong>: Flag to force download.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.groups.Group.software_cancel_download"></a></p>
+<h4 id="software_cancel_download">software_cancel_download<a class="headerlink" href="#software_cancel_download" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | software_cancel_download(**kwargs)
+</code></pre></p>
+<p>Cancel ongoing download of software.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the group.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.groups.Group.software_update_resume"></a></p>
+<h4 id="software_update_resume">software_update_resume<a class="headerlink" href="#software_update_resume" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | software_update_resume(**kwargs)
+</code></pre></p>
+<p>Resume stopped software update.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the group.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.groups.Group.get_group_discovered_list"></a></p>
+<h4 id="get_group_discovered_list">get_group_discovered_list<a class="headerlink" href="#get_group_discovered_list" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | get_group_discovered_list(**kwargs)
+</code></pre></p>
+<p>Get list of discovered groups with arrays that are initialized.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id         </strong>: ID of the group.</li>
+<li><strong>group_name </strong>: Name of the group requested to be discovered.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.groups.Group.validate_merge"></a></p>
+<h4 id="validate_merge">validate_merge<a class="headerlink" href="#validate_merge" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | validate_merge(src_group_ip, src_group_name, src_password, src_username, **kwargs)
+</code></pre></p>
+<p>Perform group merge validation.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id                     </strong>: ID of the group.</li>
+<li><strong>src_group_name         </strong>: Name of the source group.</li>
+<li><strong>src_group_ip           </strong>: IP address of the source group.</li>
+<li><strong>src_username           </strong>: Username of the source group.</li>
+<li><strong>src_password           </strong>: Password of the source group.</li>
+<li><strong>src_passphrase         </strong>: Source group encryption passphrase.</li>
+<li><strong>skip_secondary_mgmt_ip </strong>: Skip check for secondary management IP address.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.groups.Group.merge"></a></p>
+<h4 id="merge">merge<a class="headerlink" href="#merge" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | merge(src_group_ip, src_group_name, src_password, src_username, **kwargs)
+</code></pre></p>
+<p>Perform group merge with the specified group.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id                     </strong>: ID of the group.</li>
+<li><strong>src_group_name         </strong>: Name of the source group.</li>
+<li><strong>src_group_ip           </strong>: IP address of the source group.</li>
+<li><strong>src_username           </strong>: Username of the source group.</li>
+<li><strong>src_password           </strong>: Password of the source group.</li>
+<li><strong>src_passphrase         </strong>: Source group encryption passphrase.</li>
+<li><strong>force                  </strong>: Ignore warnings and forcibly merge specified group with this group.</li>
+<li><strong>skip_secondary_mgmt_ip </strong>: Skip check for secondary management IP address.</li>
+<li><strong>job_timeout            </strong>: Job timeout in seconds.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.groups.Group.get_eula"></a></p>
+<h4 id="get_eula">get_eula<a class="headerlink" href="#get_eula" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | get_eula(**kwargs)
+</code></pre></p>
+<p>Get URL to download EULA contents.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id     </strong>: ID of the group.</li>
+<li><strong>locale </strong>: Locale of EULA contents. Default is en.</li>
+<li><strong>format </strong>: Format of EULA contents. Default is HTML.</li>
+<li><strong>phase  </strong>: Phase of EULA contents. Default is setup.</li>
+<li><strong>force  </strong>: Flag to force EULA.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.groups.Group.check_migrate"></a></p>
+<h4 id="check_migrate">check_migrate<a class="headerlink" href="#check_migrate" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | check_migrate(**kwargs)
+</code></pre></p>
+<p>Check if the group Management Service can be migrated to the group Management Service backup array.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the group.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.groups.Group.migrate"></a></p>
+<h4 id="migrate">migrate<a class="headerlink" href="#migrate" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | migrate(**kwargs)
+</code></pre></p>
+<p>Migrate the group Management Service to the current group Management Service backup array.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the group.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.groups.Group.get_timezone_list"></a></p>
+<h4 id="get_timezone_list">get_timezone_list<a class="headerlink" href="#get_timezone_list" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | get_timezone_list(**kwargs)
+</code></pre></p>
+<p>Get list of group timezones.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the group.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.groups.GroupList"></a></p>
+<h2 id="grouplist">GroupList<a class="headerlink" href="#grouplist" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>class GroupList(Collection)
+</code></pre></p>
+<p><a name="nimbleclient.v1.api.groups.GroupList.reboot"></a></p>
+<h4 id="reboot_1">reboot<a class="headerlink" href="#reboot_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | reboot(id, **kwargs)
+</code></pre></p>
+<p>Reboot all arrays in the group.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the group to reboot.</li>
+<li><strong>job_timeout</strong>: Job timeout in seconds.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.groups.GroupList.halt"></a></p>
+<h4 id="halt_1">halt<a class="headerlink" href="#halt_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | halt(id, **kwargs)
+</code></pre></p>
+<p>Halt all arrays in the group.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id    </strong>: ID of the group to halt.</li>
+<li><strong>force </strong>: Halt remaining arrays when one or more is unreachable.</li>
+<li><strong>job_timeout</strong>: Job timeout in seconds.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.groups.GroupList.test_alert"></a></p>
+<h4 id="test_alert_1">test_alert<a class="headerlink" href="#test_alert_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | test_alert(id, level, **kwargs)
+</code></pre></p>
+<p>Generate a test alert.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id    </strong>: ID of the group.</li>
+<li><strong>level </strong>: Level of the test alert.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.groups.GroupList.software_update_precheck"></a></p>
+<h4 id="software_update_precheck_1">software_update_precheck<a class="headerlink" href="#software_update_precheck_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | software_update_precheck(id, **kwargs)
+</code></pre></p>
+<p>Run software update precheck.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id                 </strong>: ID of the group.</li>
+<li><strong>skip_precheck_mask </strong>: Flag to allow skipping certain types of prechecks.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.groups.GroupList.software_update_start"></a></p>
+<h4 id="software_update_start_1">software_update_start<a class="headerlink" href="#software_update_start_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | software_update_start(id, **kwargs)
+</code></pre></p>
+<p>Update the group software to the downloaded version.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id                    </strong>: ID of the group.</li>
+<li><strong>skip_start_check_mask </strong>: Flag to allow skipping certain types of checks.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.groups.GroupList.software_download"></a></p>
+<h4 id="software_download_1">software_download<a class="headerlink" href="#software_download_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | software_download(id, version, **kwargs)
+</code></pre></p>
+<p>Download software update package.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id      </strong>: ID of the group.</li>
+<li><strong>version </strong>: Version string to download.</li>
+<li><strong>force   </strong>: Flag to force download.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.groups.GroupList.software_cancel_download"></a></p>
+<h4 id="software_cancel_download_1">software_cancel_download<a class="headerlink" href="#software_cancel_download_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | software_cancel_download(id, **kwargs)
+</code></pre></p>
+<p>Cancel ongoing download of software.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the group.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.groups.GroupList.software_update_resume"></a></p>
+<h4 id="software_update_resume_1">software_update_resume<a class="headerlink" href="#software_update_resume_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | software_update_resume(id, **kwargs)
+</code></pre></p>
+<p>Resume stopped software update.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the group.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.groups.GroupList.get_group_discovered_list"></a></p>
+<h4 id="get_group_discovered_list_1">get_group_discovered_list<a class="headerlink" href="#get_group_discovered_list_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | get_group_discovered_list(id, **kwargs)
+</code></pre></p>
+<p>Get list of discovered groups with arrays that are initialized.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id         </strong>: ID of the group.</li>
+<li><strong>group_name </strong>: Name of the group requested to be discovered.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.groups.GroupList.validate_merge"></a></p>
+<h4 id="validate_merge_1">validate_merge<a class="headerlink" href="#validate_merge_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | validate_merge(id, src_group_ip, src_group_name, src_password, src_username, **kwargs)
+</code></pre></p>
+<p>Perform group merge validation.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id                     </strong>: ID of the group.</li>
+<li><strong>src_group_name         </strong>: Name of the source group.</li>
+<li><strong>src_group_ip           </strong>: IP address of the source group.</li>
+<li><strong>src_username           </strong>: Username of the source group.</li>
+<li><strong>src_password           </strong>: Password of the source group.</li>
+<li><strong>src_passphrase         </strong>: Source group encryption passphrase.</li>
+<li><strong>skip_secondary_mgmt_ip </strong>: Skip check for secondary management IP address.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.groups.GroupList.merge"></a></p>
+<h4 id="merge_1">merge<a class="headerlink" href="#merge_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | merge(id, src_group_ip, src_group_name, src_password, src_username, **kwargs)
+</code></pre></p>
+<p>Perform group merge with the specified group.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id                     </strong>: ID of the group.</li>
+<li><strong>src_group_name         </strong>: Name of the source group.</li>
+<li><strong>src_group_ip           </strong>: IP address of the source group.</li>
+<li><strong>src_username           </strong>: Username of the source group.</li>
+<li><strong>src_password           </strong>: Password of the source group.</li>
+<li><strong>src_passphrase         </strong>: Source group encryption passphrase.</li>
+<li><strong>force                  </strong>: Ignore warnings and forcibly merge specified group with this group.</li>
+<li><strong>skip_secondary_mgmt_ip </strong>: Skip check for secondary management IP address.</li>
+<li><strong>job_timeout            </strong>: Job timeout in seconds.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.groups.GroupList.get_eula"></a></p>
+<h4 id="get_eula_1">get_eula<a class="headerlink" href="#get_eula_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | get_eula(id, **kwargs)
+</code></pre></p>
+<p>Get URL to download EULA contents.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id     </strong>: ID of the group.</li>
+<li><strong>locale </strong>: Locale of EULA contents. Default is en.</li>
+<li><strong>format </strong>: Format of EULA contents. Default is HTML.</li>
+<li><strong>phase  </strong>: Phase of EULA contents. Default is setup.</li>
+<li><strong>force  </strong>: Flag to force EULA.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.groups.GroupList.check_migrate"></a></p>
+<h4 id="check_migrate_1">check_migrate<a class="headerlink" href="#check_migrate_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | check_migrate(id, **kwargs)
+</code></pre></p>
+<p>Check if the group Management Service can be migrated to the group Management Service backup array.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the group.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.groups.GroupList.migrate"></a></p>
+<h4 id="migrate_1">migrate<a class="headerlink" href="#migrate_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | migrate(id, **kwargs)
+</code></pre></p>
+<p>Migrate the group Management Service to the current group Management Service backup array.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the group.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.groups.GroupList.get_timezone_list"></a></p>
+<h4 id="get_timezone_list_1">get_timezone_list<a class="headerlink" href="#get_timezone_list_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | get_timezone_list(id, **kwargs)
+</code></pre></p>
+<p>Get list of group timezones.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the group.</li>
+</ul>
               
             </div>
           </div>

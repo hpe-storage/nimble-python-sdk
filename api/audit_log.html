@@ -121,13 +121,14 @@
     <a class="current" href="audit_log.html">audit_log</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apiaudit_log">nimbleclient.v1.api.audit_log</a></li>
     
         <ul>
         
             <li><a class="toctree-l4" href="#auditlog">AuditLog</a></li>
-        
-            <li><a class="toctree-l4" href="#auditloglist">AuditLogList</a></li>
         
         </ul>
     
@@ -272,6 +273,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="user_groups.html">user_groups</a>
                 </li>
                 <li class="">
@@ -398,9 +403,16 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apiaudit_log">nimbleclient.v1.api.audit_log<a class="headerlink" href="#nimbleclientv1apiaudit_log" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.audit_log">nimbleclient.v1.api.audit_log</a></li>
+<li><a href="#nimbleclient.v1.api.audit_log.AuditLog">AuditLog</a></li>
+</ul>
+<p><a name="nimbleclient.v1.api.audit_log"></a></p>
+<h1 id="nimbleclientv1apiaudit_log">nimbleclient.v1.api.audit_log<a class="headerlink" href="#nimbleclientv1apiaudit_log" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.audit_log.AuditLog"></a></p>
 <h2 id="auditlog">AuditLog<a class="headerlink" href="#auditlog" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>AuditLog(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class AuditLog(Resource)
 </code></pre></p>
 <p>View audit log.</p>
 <p><strong>Parameters</strong></p>
@@ -427,9 +439,6 @@
 <li><strong>activity_type       </strong>: Type of activity performed, for example, create, update or delete.</li>
 <li><strong>activity            </strong>: Description of activity performed and recorded in audit log.</li>
 </ul>
-<h2 id="auditloglist">AuditLogList<a class="headerlink" href="#auditloglist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>AuditLogList(self, client=None)
-</code></pre></p>
               
             </div>
           </div>

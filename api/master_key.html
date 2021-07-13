@@ -189,6 +189,9 @@
     <a class="current" href="master_key.html">master_key</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apimaster_key">nimbleclient.v1.api.master_key</a></li>
     
         <ul>
@@ -269,6 +272,10 @@
                 <li class="">
                     
     <a class="" href="tokens.html">tokens</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
                 </li>
                 <li class="">
                     
@@ -398,9 +405,23 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apimaster_key">nimbleclient.v1.api.master_key<a class="headerlink" href="#nimbleclientv1apimaster_key" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.master_key">nimbleclient.v1.api.master_key</a></li>
+<li><a href="#nimbleclient.v1.api.master_key.MasterKey">MasterKey</a><ul>
+<li><a href="#nimbleclient.v1.api.master_key.MasterKey.purge_inactive">purge_inactive</a></li>
+</ul>
+</li>
+<li><a href="#nimbleclient.v1.api.master_key.MasterKeyList">MasterKeyList</a><ul>
+<li><a href="#nimbleclient.v1.api.master_key.MasterKeyList.purge_inactive">purge_inactive</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="nimbleclient.v1.api.master_key"></a></p>
+<h1 id="nimbleclientv1apimaster_key">nimbleclient.v1.api.master_key<a class="headerlink" href="#nimbleclientv1apimaster_key" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.master_key.MasterKey"></a></p>
 <h2 id="masterkey">MasterKey<a class="headerlink" href="#masterkey" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>MasterKey(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class MasterKey(Resource)
 </code></pre></p>
 <p>Manage the master key. Data encryption keys for volumes are encrypted by using a master key that must be initialized before encrypted volumes can be created. The master key in
 turn is protected by a passphrase that is set when the master key is created. The passphrase may have to be entered to enable the master key when it is not available, for
@@ -410,13 +431,35 @@ example, after an array reboot.</p>
 <li><strong>id             </strong>: Identifier of the master key.</li>
 <li><strong>name           </strong>: Name of the master key. The only allowed value is "default".</li>
 <li><strong>passphrase     </strong>: Passphrase used to protect the master key, required during creation, enabling/disabling the key and change the passphrase to a new value.</li>
+<li><strong>halfkey        </strong>: When changing the passphrase, this authenticates the change operation, for support use only.</li>
 <li><strong>new_passphrase </strong>: When changing the passphrase, this attribute specifies the new value of the passphrase.</li>
 <li><strong>active         </strong>: Whether the master key is active or not.</li>
 <li><strong>purge_age      </strong>: Default minimum age (in hours) of inactive encryption keys to be purged. '0' indicates to purge keys immediately.</li>
 </ul>
-<h2 id="masterkeylist">MasterKeyList<a class="headerlink" href="#masterkeylist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>MasterKeyList(self, client=None)
+<p><a name="nimbleclient.v1.api.master_key.MasterKey.purge_inactive"></a></p>
+<h4 id="purge_inactive">purge_inactive<a class="headerlink" href="#purge_inactive" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | purge_inactive(**kwargs)
 </code></pre></p>
+<p>Purges encryption keys that have been inactive for the age or longer. If you do not specify an age, the keys will be purged immediately.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id  </strong>: Identifier for the master key.</li>
+<li><strong>age </strong>: Minimum age (in hours) of inactive encryption keys to be purged. '0' indicates to purge the keys immediately.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.master_key.MasterKeyList"></a></p>
+<h2 id="masterkeylist">MasterKeyList<a class="headerlink" href="#masterkeylist" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>class MasterKeyList(Collection)
+</code></pre></p>
+<p><a name="nimbleclient.v1.api.master_key.MasterKeyList.purge_inactive"></a></p>
+<h4 id="purge_inactive_1">purge_inactive<a class="headerlink" href="#purge_inactive_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | purge_inactive(id, **kwargs)
+</code></pre></p>
+<p>Purges encryption keys that have been inactive for the age or longer. If you do not specify an age, the keys will be purged immediately.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id  </strong>: Identifier for the master key.</li>
+<li><strong>age </strong>: Minimum age (in hours) of inactive encryption keys to be purged. '0' indicates to purge the keys immediately.</li>
+</ul>
               
             </div>
           </div>

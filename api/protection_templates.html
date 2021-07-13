@@ -213,13 +213,14 @@
     <a class="current" href="protection_templates.html">protection_templates</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apiprotection_templates">nimbleclient.v1.api.protection_templates</a></li>
     
         <ul>
         
             <li><a class="toctree-l4" href="#protectiontemplate">ProtectionTemplate</a></li>
-        
-            <li><a class="toctree-l4" href="#protectiontemplatelist">ProtectionTemplateList</a></li>
         
         </ul>
     
@@ -269,6 +270,10 @@
                 <li class="">
                     
     <a class="" href="tokens.html">tokens</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
                 </li>
                 <li class="">
                     
@@ -398,9 +403,16 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apiprotection_templates">nimbleclient.v1.api.protection_templates<a class="headerlink" href="#nimbleclientv1apiprotection_templates" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.protection_templates">nimbleclient.v1.api.protection_templates</a></li>
+<li><a href="#nimbleclient.v1.api.protection_templates.ProtectionTemplate">ProtectionTemplate</a></li>
+</ul>
+<p><a name="nimbleclient.v1.api.protection_templates"></a></p>
+<h1 id="nimbleclientv1apiprotection_templates">nimbleclient.v1.api.protection_templates<a class="headerlink" href="#nimbleclientv1apiprotection_templates" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.protection_templates.ProtectionTemplate"></a></p>
 <h2 id="protectiontemplate">ProtectionTemplate<a class="headerlink" href="#protectiontemplate" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>ProtectionTemplate(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class ProtectionTemplate(Resource)
 </code></pre></p>
 <p>Manage protection templates. Protection templates are sets of snapshot schedules, replication schedules, and retention limits that can be used to prefill the protection
 information when creating new volume collections. A volume collection, once created, is not affected by edits to the protection template that was used to create it. All the
@@ -429,9 +441,6 @@ custom protection templates as needed.</p>
 <li><strong>last_modified    </strong>: Time when this protection template was last modified.</li>
 <li><strong>schedule_list    </strong>: List of schedules for this protection policy.</li>
 </ul>
-<h2 id="protectiontemplatelist">ProtectionTemplateList<a class="headerlink" href="#protectiontemplatelist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>ProtectionTemplateList(self, client=None)
-</code></pre></p>
               
             </div>
           </div>

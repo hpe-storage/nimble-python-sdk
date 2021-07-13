@@ -133,13 +133,14 @@
     <a class="current" href="disks.html">disks</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apidisks">nimbleclient.v1.api.disks</a></li>
     
         <ul>
         
             <li><a class="toctree-l4" href="#disk">Disk</a></li>
-        
-            <li><a class="toctree-l4" href="#disklist">DiskList</a></li>
         
         </ul>
     
@@ -272,6 +273,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="user_groups.html">user_groups</a>
                 </li>
                 <li class="">
@@ -398,9 +403,16 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apidisks">nimbleclient.v1.api.disks<a class="headerlink" href="#nimbleclientv1apidisks" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.disks">nimbleclient.v1.api.disks</a></li>
+<li><a href="#nimbleclient.v1.api.disks.Disk">Disk</a></li>
+</ul>
+<p><a name="nimbleclient.v1.api.disks"></a></p>
+<h1 id="nimbleclientv1apidisks">nimbleclient.v1.api.disks<a class="headerlink" href="#nimbleclientv1apidisks" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.disks.Disk"></a></p>
 <h2 id="disk">Disk<a class="headerlink" href="#disk" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>Disk(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class Disk(Resource)
 </code></pre></p>
 <p>Disks are used for storing user data.</p>
 <p><strong>Parameters</strong></p>
@@ -438,9 +450,6 @@
 <li><strong>array_id                  </strong>: ID of array the disk belongs to.</li>
 <li><strong>partial_response_ok       </strong>: Indicate that it is okay to provide partially available response.</li>
 </ul>
-<h2 id="disklist">DiskList<a class="headerlink" href="#disklist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>DiskList(self, client=None)
-</code></pre></p>
               
             </div>
           </div>

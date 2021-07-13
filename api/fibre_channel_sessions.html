@@ -157,13 +157,14 @@
     <a class="current" href="fibre_channel_sessions.html">fibre_channel_sessions</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apifibre_channel_sessions">nimbleclient.v1.api.fibre_channel_sessions</a></li>
     
         <ul>
         
             <li><a class="toctree-l4" href="#fibrechannelsession">FibreChannelSession</a></li>
-        
-            <li><a class="toctree-l4" href="#fibrechannelsessionlist">FibreChannelSessionList</a></li>
         
         </ul>
     
@@ -269,6 +270,10 @@
                 <li class="">
                     
     <a class="" href="tokens.html">tokens</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
                 </li>
                 <li class="">
                     
@@ -398,9 +403,16 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apifibre_channel_sessions">nimbleclient.v1.api.fibre_channel_sessions<a class="headerlink" href="#nimbleclientv1apifibre_channel_sessions" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.fibre_channel_sessions">nimbleclient.v1.api.fibre_channel_sessions</a></li>
+<li><a href="#nimbleclient.v1.api.fibre_channel_sessions.FibreChannelSession">FibreChannelSession</a></li>
+</ul>
+<p><a name="nimbleclient.v1.api.fibre_channel_sessions"></a></p>
+<h1 id="nimbleclientv1apifibre_channel_sessions">nimbleclient.v1.api.fibre_channel_sessions<a class="headerlink" href="#nimbleclientv1apifibre_channel_sessions" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.fibre_channel_sessions.FibreChannelSession"></a></p>
 <h2 id="fibrechannelsession">FibreChannelSession<a class="headerlink" href="#fibrechannelsession" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>FibreChannelSession(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class FibreChannelSession(Resource)
 </code></pre></p>
 <p>Fibre Channel session is created when Fibre Channel initiator connects to this group.</p>
 <p><strong>Parameters</strong></p>
@@ -409,9 +421,6 @@
 <li><strong>initiator_info </strong>: Information about the Fibre Channel initiator.</li>
 <li><strong>target_info    </strong>: Information about the Fibre Channel target.</li>
 </ul>
-<h2 id="fibrechannelsessionlist">FibreChannelSessionList<a class="headerlink" href="#fibrechannelsessionlist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>FibreChannelSessionList(self, client=None)
-</code></pre></p>
               
             </div>
           </div>

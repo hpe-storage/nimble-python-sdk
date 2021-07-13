@@ -129,13 +129,14 @@
     <a class="current" href="controllers.html">controllers</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apicontrollers">nimbleclient.v1.api.controllers</a></li>
     
         <ul>
         
             <li><a class="toctree-l4" href="#controller">Controller</a></li>
-        
-            <li><a class="toctree-l4" href="#controllerlist">ControllerList</a></li>
         
         </ul>
     
@@ -272,6 +273,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="user_groups.html">user_groups</a>
                 </li>
                 <li class="">
@@ -398,9 +403,16 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apicontrollers">nimbleclient.v1.api.controllers<a class="headerlink" href="#nimbleclientv1apicontrollers" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.controllers">nimbleclient.v1.api.controllers</a></li>
+<li><a href="#nimbleclient.v1.api.controllers.Controller">Controller</a></li>
+</ul>
+<p><a name="nimbleclient.v1.api.controllers"></a></p>
+<h1 id="nimbleclientv1apicontrollers">nimbleclient.v1.api.controllers<a class="headerlink" href="#nimbleclientv1apicontrollers" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.controllers.Controller"></a></p>
 <h2 id="controller">Controller<a class="headerlink" href="#controller" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>Controller(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class Controller(Resource)
 </code></pre></p>
 <p>Controller is a redundant collection of hardware capable of running the array software.</p>
 <p><strong>Parameters</strong></p>
@@ -429,9 +441,6 @@
 <li><strong>nvme_cards          </strong>: List of NVMe accelerator cards.</li>
 <li><strong>asup_time           </strong>: Time of the last autosupport by the controller.</li>
 </ul>
-<h2 id="controllerlist">ControllerList<a class="headerlink" href="#controllerlist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>ControllerList(self, client=None)
-</code></pre></p>
               
             </div>
           </div>

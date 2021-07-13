@@ -101,6 +101,9 @@
     <a class="current" href="active_directory_memberships.html">active_directory_memberships</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apiactive_directory_memberships">nimbleclient.v1.api.active_directory_memberships</a></li>
     
         <ul>
@@ -272,6 +275,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="user_groups.html">user_groups</a>
                 </li>
                 <li class="">
@@ -398,13 +405,29 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apiactive_directory_memberships">nimbleclient.v1.api.active_directory_memberships<a class="headerlink" href="#nimbleclientv1apiactive_directory_memberships" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.active_directory_memberships">nimbleclient.v1.api.active_directory_memberships</a></li>
+<li><a href="#nimbleclient.v1.api.active_directory_memberships.ActiveDirectoryMembership">ActiveDirectoryMembership</a><ul>
+<li><a href="#nimbleclient.v1.api.active_directory_memberships.ActiveDirectoryMembership.remove">remove</a></li>
+<li><a href="#nimbleclient.v1.api.active_directory_memberships.ActiveDirectoryMembership.report_status">report_status</a></li>
+<li><a href="#nimbleclient.v1.api.active_directory_memberships.ActiveDirectoryMembership.test_user">test_user</a></li>
+<li><a href="#nimbleclient.v1.api.active_directory_memberships.ActiveDirectoryMembership.test_group">test_group</a></li>
+</ul>
+</li>
+<li><a href="#nimbleclient.v1.api.active_directory_memberships.ActiveDirectoryMembershipList">ActiveDirectoryMembershipList</a><ul>
+<li><a href="#nimbleclient.v1.api.active_directory_memberships.ActiveDirectoryMembershipList.remove">remove</a></li>
+<li><a href="#nimbleclient.v1.api.active_directory_memberships.ActiveDirectoryMembershipList.report_status">report_status</a></li>
+<li><a href="#nimbleclient.v1.api.active_directory_memberships.ActiveDirectoryMembershipList.test_user">test_user</a></li>
+<li><a href="#nimbleclient.v1.api.active_directory_memberships.ActiveDirectoryMembershipList.test_group">test_group</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="nimbleclient.v1.api.active_directory_memberships"></a></p>
+<h1 id="nimbleclientv1apiactive_directory_memberships">nimbleclient.v1.api.active_directory_memberships<a class="headerlink" href="#nimbleclientv1apiactive_directory_memberships" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.active_directory_memberships.ActiveDirectoryMembership"></a></p>
 <h2 id="activedirectorymembership">ActiveDirectoryMembership<a class="headerlink" href="#activedirectorymembership" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>ActiveDirectoryMembership(self,
-                          id,
-                          attrs=None,
-                          client=None,
-                          collection=None)
+<p> <pre><code class=python>class ActiveDirectoryMembership(Resource)
 </code></pre></p>
 <p>Manages the storage array's membership with the Active Directory.</p>
 <p><strong>Parameters</strong></p>
@@ -420,9 +443,92 @@
 <li><strong>password            </strong>: Password for the Active Directory user.</li>
 <li><strong>enabled             </strong>: Active Directory authentication is currently enabled.</li>
 </ul>
-<h2 id="activedirectorymembershiplist">ActiveDirectoryMembershipList<a class="headerlink" href="#activedirectorymembershiplist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>ActiveDirectoryMembershipList(self, client=None)
+<p><a name="nimbleclient.v1.api.active_directory_memberships.ActiveDirectoryMembership.remove"></a></p>
+<h4 id="remove">remove<a class="headerlink" href="#remove" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | remove(password, user, **kwargs)
 </code></pre></p>
+<p>Leaves the Active Directory domain.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id       </strong>: ID of the active directory.</li>
+<li><strong>user     </strong>: Name of the Activer Directory user with the privilege to leave the domain.</li>
+<li><strong>password </strong>: Password for the Active Directory user.</li>
+<li><strong>force    </strong>: Use this option when there is an error when leaving the domain.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.active_directory_memberships.ActiveDirectoryMembership.report_status"></a></p>
+<h4 id="report_status">report_status<a class="headerlink" href="#report_status" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | report_status(**kwargs)
+</code></pre></p>
+<p>Reports the detail status of the Active Directory domain.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the active directory.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.active_directory_memberships.ActiveDirectoryMembership.test_user"></a></p>
+<h4 id="test_user">test_user<a class="headerlink" href="#test_user" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | test_user(name, **kwargs)
+</code></pre></p>
+<p>Tests whether the user exist in the Active Directory. If the user is present, then the user's group and role information is reported.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id   </strong>: ID of the Active Directory.</li>
+<li><strong>name </strong>: Name of the Active Directory user.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.active_directory_memberships.ActiveDirectoryMembership.test_group"></a></p>
+<h4 id="test_group">test_group<a class="headerlink" href="#test_group" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | test_group(name, **kwargs)
+</code></pre></p>
+<p>Tests whether the user group exist in the Active Directory.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id   </strong>: ID of the Active Directory.</li>
+<li><strong>name </strong>: Name of the Active Directory group.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.active_directory_memberships.ActiveDirectoryMembershipList"></a></p>
+<h2 id="activedirectorymembershiplist">ActiveDirectoryMembershipList<a class="headerlink" href="#activedirectorymembershiplist" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>class ActiveDirectoryMembershipList(Collection)
+</code></pre></p>
+<p><a name="nimbleclient.v1.api.active_directory_memberships.ActiveDirectoryMembershipList.remove"></a></p>
+<h4 id="remove_1">remove<a class="headerlink" href="#remove_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | remove(id, password, user, **kwargs)
+</code></pre></p>
+<p>Leaves the Active Directory domain.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id       </strong>: ID of the active directory.</li>
+<li><strong>user     </strong>: Name of the Activer Directory user with the privilege to leave the domain.</li>
+<li><strong>password </strong>: Password for the Active Directory user.</li>
+<li><strong>force    </strong>: Use this option when there is an error when leaving the domain.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.active_directory_memberships.ActiveDirectoryMembershipList.report_status"></a></p>
+<h4 id="report_status_1">report_status<a class="headerlink" href="#report_status_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | report_status(id, **kwargs)
+</code></pre></p>
+<p>Reports the detail status of the Active Directory domain.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the active directory.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.active_directory_memberships.ActiveDirectoryMembershipList.test_user"></a></p>
+<h4 id="test_user_1">test_user<a class="headerlink" href="#test_user_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | test_user(id, name, **kwargs)
+</code></pre></p>
+<p>Tests whether the user exist in the Active Directory. If the user is present, then the user's group and role information is reported.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id   </strong>: ID of the Active Directory.</li>
+<li><strong>name </strong>: Name of the Active Directory user.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.active_directory_memberships.ActiveDirectoryMembershipList.test_group"></a></p>
+<h4 id="test_group_1">test_group<a class="headerlink" href="#test_group_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | test_group(id, name, **kwargs)
+</code></pre></p>
+<p>Tests whether the user group exist in the Active Directory.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id   </strong>: ID of the Active Directory.</li>
+<li><strong>name </strong>: Name of the Active Directory group.</li>
+</ul>
               
             </div>
           </div>

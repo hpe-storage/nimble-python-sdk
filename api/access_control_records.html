@@ -97,13 +97,14 @@
     <a class="current" href="access_control_records.html">access_control_records</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apiaccess_control_records">nimbleclient.v1.api.access_control_records</a></li>
     
         <ul>
         
             <li><a class="toctree-l4" href="#accesscontrolrecord">AccessControlRecord</a></li>
-        
-            <li><a class="toctree-l4" href="#accesscontrolrecordlist">AccessControlRecordList</a></li>
         
         </ul>
     
@@ -272,6 +273,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="user_groups.html">user_groups</a>
                 </li>
                 <li class="">
@@ -398,9 +403,16 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apiaccess_control_records">nimbleclient.v1.api.access_control_records<a class="headerlink" href="#nimbleclientv1apiaccess_control_records" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.access_control_records">nimbleclient.v1.api.access_control_records</a></li>
+<li><a href="#nimbleclient.v1.api.access_control_records.AccessControlRecord">AccessControlRecord</a></li>
+</ul>
+<p><a name="nimbleclient.v1.api.access_control_records"></a></p>
+<h1 id="nimbleclientv1apiaccess_control_records">nimbleclient.v1.api.access_control_records<a class="headerlink" href="#nimbleclientv1apiaccess_control_records" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.access_control_records.AccessControlRecord"></a></p>
 <h2 id="accesscontrolrecord">AccessControlRecord<a class="headerlink" href="#accesscontrolrecord" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>AccessControlRecord(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class AccessControlRecord(Resource)
 </code></pre></p>
 <p>Manage access control records for volumes.</p>
 <p><strong>Parameters</strong></p>
@@ -432,9 +444,6 @@
 <li><strong>last_modified        </strong>: Time when this access control record was last modified.</li>
 <li><strong>access_protocol      </strong>: Access protocol of the volume.</li>
 </ul>
-<h2 id="accesscontrolrecordlist">AccessControlRecordList<a class="headerlink" href="#accesscontrolrecordlist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>AccessControlRecordList(self, client=None)
-</code></pre></p>
               
             </div>
           </div>

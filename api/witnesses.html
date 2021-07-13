@@ -258,6 +258,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="user_groups.html">user_groups</a>
                 </li>
                 <li class="">
@@ -285,6 +289,9 @@
     <a class="current" href="witnesses.html">witnesses</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apiwitnesses">nimbleclient.v1.api.witnesses</a></li>
     
         <ul>
@@ -398,9 +405,23 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apiwitnesses">nimbleclient.v1.api.witnesses<a class="headerlink" href="#nimbleclientv1apiwitnesses" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.witnesses">nimbleclient.v1.api.witnesses</a></li>
+<li><a href="#nimbleclient.v1.api.witnesses.Witness">Witness</a><ul>
+<li><a href="#nimbleclient.v1.api.witnesses.Witness.test">test</a></li>
+</ul>
+</li>
+<li><a href="#nimbleclient.v1.api.witnesses.WitnessList">WitnessList</a><ul>
+<li><a href="#nimbleclient.v1.api.witnesses.WitnessList.test">test</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="nimbleclient.v1.api.witnesses"></a></p>
+<h1 id="nimbleclientv1apiwitnesses">nimbleclient.v1.api.witnesses<a class="headerlink" href="#nimbleclientv1apiwitnesses" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.witnesses.Witness"></a></p>
 <h2 id="witness">Witness<a class="headerlink" href="#witness" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>Witness(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class Witness(Resource)
 </code></pre></p>
 <p>Manage witness host configuration.</p>
 <p><strong>Parameters</strong></p>
@@ -413,9 +434,28 @@
 <li><strong>secure_mode              </strong>: To verify the witness host against CA cert and to apply possible security modes.</li>
 <li><strong>auto_switchover_messages </strong>: List of validation messages for automatic switchover of Group Management. This will be empty when there are no conflicts found.</li>
 </ul>
-<h2 id="witnesslist">WitnessList<a class="headerlink" href="#witnesslist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>WitnessList(self, client=None)
+<p><a name="nimbleclient.v1.api.witnesses.Witness.test"></a></p>
+<h4 id="test">test<a class="headerlink" href="#test" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | test(**kwargs)
 </code></pre></p>
+<p>Tests and validates witness configuration between the array and the witness.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the witness.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.witnesses.WitnessList"></a></p>
+<h2 id="witnesslist">WitnessList<a class="headerlink" href="#witnesslist" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>class WitnessList(Collection)
+</code></pre></p>
+<p><a name="nimbleclient.v1.api.witnesses.WitnessList.test"></a></p>
+<h4 id="test_1">test<a class="headerlink" href="#test_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | test(id, **kwargs)
+</code></pre></p>
+<p>Tests and validates witness configuration between the array and the witness.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the witness.</li>
+</ul>
               
             </div>
           </div>

@@ -181,6 +181,9 @@
     <a class="current" href="key_managers.html">key_managers</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apikey_managers">nimbleclient.v1.api.key_managers</a></li>
     
         <ul>
@@ -269,6 +272,10 @@
                 <li class="">
                     
     <a class="" href="tokens.html">tokens</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
                 </li>
                 <li class="">
                     
@@ -398,9 +405,25 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apikey_managers">nimbleclient.v1.api.key_managers<a class="headerlink" href="#nimbleclientv1apikey_managers" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.key_managers">nimbleclient.v1.api.key_managers</a></li>
+<li><a href="#nimbleclient.v1.api.key_managers.KeyManager">KeyManager</a><ul>
+<li><a href="#nimbleclient.v1.api.key_managers.KeyManager.remove">remove</a></li>
+<li><a href="#nimbleclient.v1.api.key_managers.KeyManager.migrate_keys">migrate_keys</a></li>
+</ul>
+</li>
+<li><a href="#nimbleclient.v1.api.key_managers.KeyManagerList">KeyManagerList</a><ul>
+<li><a href="#nimbleclient.v1.api.key_managers.KeyManagerList.remove">remove</a></li>
+<li><a href="#nimbleclient.v1.api.key_managers.KeyManagerList.migrate_keys">migrate_keys</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="nimbleclient.v1.api.key_managers"></a></p>
+<h1 id="nimbleclientv1apikey_managers">nimbleclient.v1.api.key_managers<a class="headerlink" href="#nimbleclientv1apikey_managers" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.key_managers.KeyManager"></a></p>
 <h2 id="keymanager">KeyManager<a class="headerlink" href="#keymanager" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>KeyManager(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class KeyManager(Resource)
 </code></pre></p>
 <p>Key Manager stores encryption keys for the array volumes / dedupe domains.</p>
 <p><strong>Parameters</strong></p>
@@ -417,9 +440,52 @@
 <li><strong>status      </strong>: Connection status of a given external key manager.</li>
 <li><strong>vendor      </strong>: KMIP vendor name.</li>
 </ul>
-<h2 id="keymanagerlist">KeyManagerList<a class="headerlink" href="#keymanagerlist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>KeyManagerList(self, client=None)
+<p><a name="nimbleclient.v1.api.key_managers.KeyManager.remove"></a></p>
+<h4 id="remove">remove<a class="headerlink" href="#remove" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | remove(**kwargs)
 </code></pre></p>
+<p>Remove external key manager. You must migrate the keys to an inactive external key manager before removing the active key manager. If you remove the active external key
+manager the passphrase is used to enable the internal key manager.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id         </strong>: ID of the external key manager.</li>
+<li><strong>passphrase </strong>: Passphrase used to protect the master key, required during deletion of external key manager.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.key_managers.KeyManager.migrate_keys"></a></p>
+<h4 id="migrate_keys">migrate_keys<a class="headerlink" href="#migrate_keys" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | migrate_keys(**kwargs)
+</code></pre></p>
+<p>Migrate volume encryption keys from the active key manager to the destination id given in the input. After successfully migrating the encryption keys, the destination key
+manager is made the active key manager.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the destination external key manager.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.key_managers.KeyManagerList"></a></p>
+<h2 id="keymanagerlist">KeyManagerList<a class="headerlink" href="#keymanagerlist" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>class KeyManagerList(Collection)
+</code></pre></p>
+<p><a name="nimbleclient.v1.api.key_managers.KeyManagerList.remove"></a></p>
+<h4 id="remove_1">remove<a class="headerlink" href="#remove_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | remove(id, **kwargs)
+</code></pre></p>
+<p>Remove external key manager. You must migrate the keys to an inactive external key manager before removing the active key manager. If you remove the active external key
+manager the passphrase is used to enable the internal key manager.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id         </strong>: ID of the external key manager.</li>
+<li><strong>passphrase </strong>: Passphrase used to protect the master key, required during deletion of external key manager.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.key_managers.KeyManagerList.migrate_keys"></a></p>
+<h4 id="migrate_keys_1">migrate_keys<a class="headerlink" href="#migrate_keys_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | migrate_keys(id, **kwargs)
+</code></pre></p>
+<p>Migrate volume encryption keys from the active key manager to the destination id given in the input. After successfully migrating the encryption keys, the destination key
+manager is made the active key manager.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the destination external key manager.</li>
+</ul>
               
             </div>
           </div>

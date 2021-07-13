@@ -117,6 +117,9 @@
     <a class="current" href="arrays.html">arrays</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apiarrays">nimbleclient.v1.api.arrays</a></li>
     
         <ul>
@@ -272,6 +275,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="user_groups.html">user_groups</a>
                 </li>
                 <li class="">
@@ -398,9 +405,27 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apiarrays">nimbleclient.v1.api.arrays<a class="headerlink" href="#nimbleclientv1apiarrays" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.arrays">nimbleclient.v1.api.arrays</a></li>
+<li><a href="#nimbleclient.v1.api.arrays.Array">Array</a><ul>
+<li><a href="#nimbleclient.v1.api.arrays.Array.failover">failover</a></li>
+<li><a href="#nimbleclient.v1.api.arrays.Array.halt">halt</a></li>
+<li><a href="#nimbleclient.v1.api.arrays.Array.reboot">reboot</a></li>
+</ul>
+</li>
+<li><a href="#nimbleclient.v1.api.arrays.ArrayList">ArrayList</a><ul>
+<li><a href="#nimbleclient.v1.api.arrays.ArrayList.failover">failover</a></li>
+<li><a href="#nimbleclient.v1.api.arrays.ArrayList.halt">halt</a></li>
+<li><a href="#nimbleclient.v1.api.arrays.ArrayList.reboot">reboot</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="nimbleclient.v1.api.arrays"></a></p>
+<h1 id="nimbleclientv1apiarrays">nimbleclient.v1.api.arrays<a class="headerlink" href="#nimbleclientv1apiarrays" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.arrays.Array"></a></p>
 <h2 id="array">Array<a class="headerlink" href="#array" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>Array(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class Array(Resource)
 </code></pre></p>
 <p>Retrieve information of specified arrays. The array is the management and configuration for the underlying physical hardware array box.</p>
 <p><strong>Parameters</strong></p>
@@ -441,7 +466,10 @@
 <li><strong>dedupe_capacity_bytes         </strong>: The dedupe capacity of a hybrid array. Does not apply to all-flash arrays.</li>
 <li><strong>dedupe_usage_bytes            </strong>: The dedupe usage of a hybrid array. Does not apply to all-flash arrays.</li>
 <li><strong>is_fully_dedupe_capable       </strong>: Is array fully capable to dedupe its usable capacity.</li>
+<li><strong>dedupe_disabled               </strong>: Is data deduplication disabled for this array.</li>
 <li><strong>extended_model                </strong>: Extended model of the array.</li>
+<li><strong>oem                           </strong>: OEM brand of the array.</li>
+<li><strong>brand                         </strong>: Brand of the array.</li>
 <li><strong>is_supported_hw_config        </strong>: Whether it is a supported hardware config.</li>
 <li><strong>gig_nic_port_count            </strong>: Count of 1G NIC Ports installed on the array.</li>
 <li><strong>ten_gig_sfp_nic_port_count    </strong>: Count of SFP NIC Ports installed on the array capable of 10G, 25G or 100G speeds.</li>
@@ -459,9 +487,72 @@
 <li><strong>zconf_ipaddrs                 </strong>: List of link-local zero-configuration addresses of the array.</li>
 <li><strong>secondary_mgmt_ip             </strong>: Secondary management IP address for the Group.</li>
 </ul>
-<h2 id="arraylist">ArrayList<a class="headerlink" href="#arraylist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>ArrayList(self, client=None)
+<p><a name="nimbleclient.v1.api.arrays.Array.failover"></a></p>
+<h4 id="failover">failover<a class="headerlink" href="#failover" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | failover(**kwargs)
 </code></pre></p>
+<p>Perform a failover on the specified array.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id    </strong>: ID of the array to perform failover on.</li>
+<li><strong>force </strong>: Initiate failover without performing any precheck.</li>
+<li><strong>job_timeout</strong>: Job timeout in seconds.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.arrays.Array.halt"></a></p>
+<h4 id="halt">halt<a class="headerlink" href="#halt" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | halt(**kwargs)
+</code></pre></p>
+<p>Halt the specified array. Restarting the array will require physically powering it back on.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the array to halt.</li>
+<li><strong>job_timeout</strong>: Job timeout in seconds.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.arrays.Array.reboot"></a></p>
+<h4 id="reboot">reboot<a class="headerlink" href="#reboot" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | reboot(**kwargs)
+</code></pre></p>
+<p>Reboot the specified array.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the array to reboot.</li>
+<li><strong>job_timeout</strong>: Job timeout in seconds.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.arrays.ArrayList"></a></p>
+<h2 id="arraylist">ArrayList<a class="headerlink" href="#arraylist" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>class ArrayList(Collection)
+</code></pre></p>
+<p><a name="nimbleclient.v1.api.arrays.ArrayList.failover"></a></p>
+<h4 id="failover_1">failover<a class="headerlink" href="#failover_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | failover(id, **kwargs)
+</code></pre></p>
+<p>Perform a failover on the specified array.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id    </strong>: ID of the array to perform failover on.</li>
+<li><strong>force </strong>: Initiate failover without performing any precheck.</li>
+<li><strong>job_timeout</strong>: Job timeout in seconds.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.arrays.ArrayList.halt"></a></p>
+<h4 id="halt_1">halt<a class="headerlink" href="#halt_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | halt(id, **kwargs)
+</code></pre></p>
+<p>Halt the specified array. Restarting the array will require physically powering it back on.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the array to halt.</li>
+<li><strong>job_timeout</strong>: Job timeout in seconds.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.arrays.ArrayList.reboot"></a></p>
+<h4 id="reboot_1">reboot<a class="headerlink" href="#reboot_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | reboot(id, **kwargs)
+</code></pre></p>
+<p>Reboot the specified array.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>id </strong>: ID of the array to reboot.</li>
+<li><strong>job_timeout</strong>: Job timeout in seconds.</li>
+</ul>
               
             </div>
           </div>

@@ -161,6 +161,9 @@
     <a class="current" href="folders.html">folders</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apifolders">nimbleclient.v1.api.folders</a></li>
     
         <ul>
@@ -269,6 +272,10 @@
                 <li class="">
                     
     <a class="" href="tokens.html">tokens</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
                 </li>
                 <li class="">
                     
@@ -398,9 +405,23 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apifolders">nimbleclient.v1.api.folders<a class="headerlink" href="#nimbleclientv1apifolders" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.folders">nimbleclient.v1.api.folders</a></li>
+<li><a href="#nimbleclient.v1.api.folders.Folder">Folder</a><ul>
+<li><a href="#nimbleclient.v1.api.folders.Folder.set_dedupe">set_dedupe</a></li>
+</ul>
+</li>
+<li><a href="#nimbleclient.v1.api.folders.FolderList">FolderList</a><ul>
+<li><a href="#nimbleclient.v1.api.folders.FolderList.set_dedupe">set_dedupe</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="nimbleclient.v1.api.folders"></a></p>
+<h1 id="nimbleclientv1apifolders">nimbleclient.v1.api.folders<a class="headerlink" href="#nimbleclientv1apifolders" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.folders.Folder"></a></p>
 <h2 id="folder">Folder<a class="headerlink" href="#folder" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>Folder(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class Folder(Resource)
 </code></pre></p>
 <p>Folders are a way to group volumes, as well as a way to apply space constraints to them.</p>
 <p><strong>Parameters</strong></p>
@@ -470,9 +491,30 @@
                                 will be Fibre Channel. This field is meaningful only to VVol folder.</li>
 <li><strong>tenant_id                     </strong>: Tenant ID of the folder. This is used to determine what tenant context the folder belongs to.</li>
 </ul>
-<h2 id="folderlist">FolderList<a class="headerlink" href="#folderlist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>FolderList(self, client=None)
+<p><a name="nimbleclient.v1.api.folders.Folder.set_dedupe"></a></p>
+<h4 id="set_dedupe">set_dedupe<a class="headerlink" href="#set_dedupe" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | set_dedupe(dedupe_enabled, **kwargs)
 </code></pre></p>
+<p>Set dedupe enabled/disabled for all applicable volumes inside a folder.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>dedupe_enabled </strong>: Enable/disable dedupe.</li>
+<li><strong>id             </strong>: Folder containing the volumes to enable/disable dedupe on.</li>
+</ul>
+<p><a name="nimbleclient.v1.api.folders.FolderList"></a></p>
+<h2 id="folderlist">FolderList<a class="headerlink" href="#folderlist" title="Permanent link">&para;</a></h2>
+<p> <pre><code class=python>class FolderList(Collection)
+</code></pre></p>
+<p><a name="nimbleclient.v1.api.folders.FolderList.set_dedupe"></a></p>
+<h4 id="set_dedupe_1">set_dedupe<a class="headerlink" href="#set_dedupe_1" title="Permanent link">&para;</a></h4>
+<p> <pre><code class=python> | set_dedupe(id, dedupe_enabled, **kwargs)
+</code></pre></p>
+<p>Set dedupe enabled/disabled for all applicable volumes inside a folder.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>dedupe_enabled </strong>: Enable/disable dedupe.</li>
+<li><strong>id             </strong>: Folder containing the volumes to enable/disable dedupe on.</li>
+</ul>
               
             </div>
           </div>

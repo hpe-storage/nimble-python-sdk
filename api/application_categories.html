@@ -109,13 +109,14 @@
     <a class="current" href="application_categories.html">application_categories</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#table_of_contents">Table of Contents</a></li>
+    
+
     <li class="toctree-l3"><a href="#nimbleclientv1apiapplication_categories">nimbleclient.v1.api.application_categories</a></li>
     
         <ul>
         
             <li><a class="toctree-l4" href="#applicationcategory">ApplicationCategory</a></li>
-        
-            <li><a class="toctree-l4" href="#applicationcategorylist">ApplicationCategoryList</a></li>
         
         </ul>
     
@@ -272,6 +273,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="trusted_oauth_issuers.html">trusted_oauth_issuers</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="user_groups.html">user_groups</a>
                 </li>
                 <li class="">
@@ -398,9 +403,16 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="nimbleclientv1apiapplication_categories">nimbleclient.v1.api.application_categories<a class="headerlink" href="#nimbleclientv1apiapplication_categories" title="Permanent link">&para;</a></h1>
+                <h1 id="table_of_contents">Table of Contents<a class="headerlink" href="#table_of_contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#nimbleclient.v1.api.application_categories">nimbleclient.v1.api.application_categories</a></li>
+<li><a href="#nimbleclient.v1.api.application_categories.ApplicationCategory">ApplicationCategory</a></li>
+</ul>
+<p><a name="nimbleclient.v1.api.application_categories"></a></p>
+<h1 id="nimbleclientv1apiapplication_categories">nimbleclient.v1.api.application_categories<a class="headerlink" href="#nimbleclientv1apiapplication_categories" title="Permanent link">&para;</a></h1>
+<p><a name="nimbleclient.v1.api.application_categories.ApplicationCategory"></a></p>
 <h2 id="applicationcategory">ApplicationCategory<a class="headerlink" href="#applicationcategory" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>ApplicationCategory(self, id, attrs=None, client=None, collection=None)
+<p> <pre><code class=python>class ApplicationCategory(Resource)
 </code></pre></p>
 <p>Provides the list of application categories that are available, to classify volumes depending on the applications that use them.</p>
 <p><strong>Parameters</strong></p>
@@ -411,9 +423,6 @@
 <li><strong>creation_time  </strong>: Time when this application category was created.</li>
 <li><strong>last_modified  </strong>: Time when this application category was last modified.</li>
 </ul>
-<h2 id="applicationcategorylist">ApplicationCategoryList<a class="headerlink" href="#applicationcategorylist" title="Permanent link">&para;</a></h2>
-<p> <pre><code class=python>ApplicationCategoryList(self, client=None)
-</code></pre></p>
               
             </div>
           </div>
