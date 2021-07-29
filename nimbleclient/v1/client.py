@@ -14,6 +14,7 @@ from .api.application_servers import ApplicationServerList
 from .api.arrays import ArrayList
 from .api.audit_log import AuditLogList
 from .api.chap_users import ChapUserList
+from .api.client_credentials import ClientCredentialList
 from .api.controllers import ControllerList
 from .api.disks import DiskList
 from .api.events import EventList
@@ -60,8 +61,8 @@ from .api.witnesses import WitnessList
 class NimOSClient:
     """Nimble client for NimOS v1 REST API."""
 
-    def __init__(self, hostname, username, password, app_name=None, job_timeout=60, port=5392):
-        self._client = NimOSAPIClient(hostname, username, password, app_name, job_timeout, port)
+    def __init__(self, hostname, username, password, app_name=None, job_timeout=60, port=5392, tenant_aware=False):
+        self._client = NimOSAPIClient(hostname, username, password, app_name, job_timeout, port, tenant_aware)
 
     @property
     def access_control_records(self):
@@ -94,6 +95,10 @@ class NimOSClient:
     @property
     def chap_users(self):
         return ChapUserList(self._client)
+
+    @property
+    def client_credentials(self):
+        return ClientCredentialList(self._client)
 
     @property
     def controllers(self):

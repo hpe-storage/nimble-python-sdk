@@ -17,6 +17,7 @@ class Token(Resource):
     session_token : Token used for authentication.
     username      : User name for the session.
     password      : Password for the user. A password is required for creating a token.
+    otp_code      : One time password code.
     app_name      : Application name.
     sdk_name      : SDK name.
     source_ip     : IP address from which the session originates.
@@ -36,6 +37,18 @@ class Token(Resource):
 
         return self._collection.report_user_details(
             self.id,
+            **kwargs
+        )
+    def validate_otp(self, otp_code, **kwargs):
+        """Validate a supplied OTP authentication code.
+
+        # Parameters
+        otp_code : Authenticator code to be verified.
+        """
+
+        return self._collection.validate_otp(
+            self.id,
+            otp_code,
             **kwargs
         )
 
@@ -59,6 +72,21 @@ class TokenList(Collection):
             id,
             'report_user_details',
             id=id,
+            **kwargs
+        )
+
+    def validate_otp(self, id, otp_code, **kwargs):
+        """Validate a supplied OTP authentication code.
+
+        # Parameters
+        otp_code : Authenticator code to be verified.
+        """
+
+        return self._client.perform_resource_action(
+            self.resource_type,
+            id,
+            'validate_otp',
+            otp_code=otp_code,
             **kwargs
         )
 
