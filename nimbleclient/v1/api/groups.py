@@ -54,6 +54,7 @@ class Group(Resource):
     syslogd_port                           : Port number for syslogd server.
     syslogd_servers                        : Hostname and/or port of the syslogd servers.
     vvol_enabled                           : Are vvols enabled on this group.
+    setup_progress                         : Progress indicator of complete setup operation.
     iscsi_enabled                          : Whether iSCSI is enabled on this group.
     fc_enabled                             : Whether FC is enabled on this group.
     unique_name_enabled                    : Are new volume and volume collection names transformed on this group.
@@ -82,6 +83,7 @@ class Group(Resource):
     merge_group_name                       : Group that we're being merged with.
     tlsv1_enabled                          : Enable or disable TLSv1.0 and TLSv1.1.
     cc_mode_enabled                        : Enable or disable Common Criteria mode.
+    cert_ips_included                      : Whether to include IPs in group certificate.
     group_snapshot_ttl                     : Snapshot Time-to-live(TTL) configured at group level for automatic deletion of unmanaged snapshots. Value 0 indicates unlimited TTL.
     autoclean_unmanaged_snapshots_ttl_unit : Unit for unmanaged snapshot time to live.
     autoclean_unmanaged_snapshots_enabled  : Whether autoclean unmanaged snapshots feature is enabled.
