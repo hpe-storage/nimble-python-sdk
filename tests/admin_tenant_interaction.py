@@ -34,7 +34,7 @@ test_admin_tenant.test_update_description(
 '''
 READ
 # '''
-vol = test_admin_tenant.get_vol_by_id(admin_vol_id)
+vol = test_admin_tenant.get_vol_by_id(tenant_vol_id)
 folder_id = vol.attrs['folder_id']
 test_admin_tenant.read_test('folder', 'tenant', folder_id)
 test_admin_tenant.read_test('folder', 'admin', folder_id)
