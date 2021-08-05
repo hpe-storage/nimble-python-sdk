@@ -10,10 +10,10 @@ See the [documentation](https://hpe-storage.github.io/nimble-python-sdk) on how 
 ```python
 $ pip install nimble-sdk
 $ python
-Python 3.7.7 (default, Mar 10 2020, 15:43:03) 
-[Clang 11.0.0 (clang-1100.0.33.17)] on darwin 
-Type "help", "copyright", "credits" or "license" for more information. 
->>> from nimbleclient import NimOSClient 
+Python 3.7.7 (default, Mar 10 2020, 15:43:03)
+[Clang 11.0.0 (clang-1100.0.33.17)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from nimbleclient import NimOSClient
 >>> api = NimOSClient("192.168.1.100", "admin", "admin")
 >>> api.
 api.access_control_records           api.fibre_channel_sessions           api.replication_partners
@@ -31,6 +31,13 @@ api.fibre_channel_configs            api.pools                            api.ve
 api.fibre_channel_initiator_aliases  api.protection_schedules             api.volume_collections
 api.fibre_channel_interfaces         api.protection_templates             api.volumes
 api.fibre_channel_ports              api.protocol_endpoints               api.witnesses
+```
+
+The constructor NimOSClient has an optional parameter `tenant_aware` which takes in a boolean value `True` if client is a tenant. The default value for `tenant_aware` is `False`.
+
+```
+// Initialize tenant API
+tenant_api = NimOSClient("192.168.1.100", "tenant", "password", tenant_aware=True)
 ```
 
 # Requirements
