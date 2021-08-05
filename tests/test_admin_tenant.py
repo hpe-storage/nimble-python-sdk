@@ -1,12 +1,30 @@
 from nimbleclient import NimOSClient
-import pprint
+import os
+import sys
 import random
 import string
 
 ACCESS_PROTOCOL = 'iscsi'
-IP = "1.1.1.1"
-tenant_api = NimOSClient(IP, "xxx", "xxx", tenant_aware=True)
-admin_api = NimOSClient(IP, "xxx", "xxx")
+IP = os.getenv("SDK_TARGET_HOST")
+USER = os.getenv("SDK_TARGET_USER")
+PASSWORD = os.getenv("SDK_TARGET_PASSWORD")
+TENANT = os.getenv("SDK_TARGET_TENANT_USER")
+TENANT_PASSWORD = os.getenv("SDK_TARGET_TENANT_PASSWORD")
+TENANT_FOLDER = os.getenv("SDK_TARGET_TENANT_FOLDER")
+
+if IP == None or USER == None or PASSWORD == None or TENANT == None or TENANT_PASSWORD == None or TENANT_FOLDER == None:
+    print("ERROR: Missing one of these environment variables: SDK_TARGET_HOST, SDK_TARGET_USER, SDK_TARGET_PASSWORD, SDK_TARGET_TENANT_USER, SDK_TARGET_TENANT_PASSWORD, SDK_TARGET_TENANT_FOLDER")
+    print("Usage:")
+    print("SDK_TARGET_HOST - Management hostname or IP of array")
+    print("SDK_TARGET_USER - User (non-tenant) username")
+    print("SDK_TARGET_PASSWORD - User (non-tenant) password")
+    print("SDK_TARGET_TENANT_USER - Tenant username")
+    print("SDK_TARGET_TENANT_PASSWORD - Tenant password")
+    print("SDK_TARGET_TENANT_FOLDER - The name of tenant's folder")
+    sys.exit(1)
+
+tenant_api = NimOSClient(IP, TENANT, TENANT_PASSWORD, tenant_aware=True)
+admin_api = NimOSClient(IP, USER, PASSWORD)
 failed_test = {
     "count": 0,
     "methodnames": []
@@ -197,9 +215,10 @@ def create_volume_test(name1: str = "vol1", name2: str = "vol2") -> str:
     try:
         tenant_volume = tenant_api.volumes.get(name=name1)
         if tenant_volume == None:
-            # TODO: replace folder id
+            folder = tenant_api.folders.get(name=TENANT_FOLDER)
+            folder_id = folder.attrs['id']
             tenant_volume = tenant_api.volumes.create(
-                name=name1, size=1024, folder_id="<folderid>")
+                name=name1, size=1024, folder_id=folder_id)
         else:
             print(f"A volume with name {name1} already exists")
     except Exception as e:
