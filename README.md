@@ -10,10 +10,10 @@ See the [documentation](https://hpe-storage.github.io/nimble-python-sdk) on how 
 ```python
 $ pip install nimble-sdk
 $ python
-Python 3.7.7 (default, Mar 10 2020, 15:43:03)
-[Clang 11.0.0 (clang-1100.0.33.17)] on darwin
-Type "help", "copyright", "credits" or "license" for more information.
->>> from nimbleclient import NimOSClient
+Python 3.7.7 (default, Mar 10 2020, 15:43:03) 
+[Clang 11.0.0 (clang-1100.0.33.17)] on darwin 
+Type "help", "copyright", "credits" or "license" for more information. 
+>>> from nimbleclient import NimOSClient 
 >>> api = NimOSClient("192.168.1.100", "admin", "admin")
 >>> api.
 api.access_control_records           api.fibre_channel_sessions           api.replication_partners
